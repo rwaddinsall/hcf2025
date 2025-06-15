@@ -1,5 +1,5 @@
 ---
-import Navigation from '../components/Navigation.astro'
+import Navigation from './Navigation.astro'
 import { DarkMode, SkipLink } from 'accessible-astro-components'
 import { Icon } from 'astro-icon/components'
 
@@ -17,45 +17,49 @@ import { Icon } from 'astro-icon/components'
       <a href="/">Home</a>
     </li>
     <li class="menu-item">
-      <a href="/blog/">Blog</a>
+      <a href="/program/">Program</a>
     </li>
-    <li class="menu-item">
-      <a href="/portfolio/">Portfolio</a>
-    </li>
+    <!-- Info Dropdown -->
     <li class="menu-item has-dropdown">
       <button aria-haspopup="true" aria-expanded="false">
-        Theme features
+        Info
         <Icon name="lucide:chevron-down" size="32" />
       </button>
       <ul class="dropdown-menu">
         <li class="submenu-item">
-          <a href="/accessibility-statement">Accessibility statement</a>
+          <a href="/info/">Festival Info</a>
         </li>
         <li class="submenu-item">
-          <a href="/accessible-components">Accessible components</a>
+          <a href="/info/camping">Camping & Accommodation</a>
         </li>
         <li class="submenu-item">
-          <a href="/color-contrast-checker">Color contrast checker</a>
+          <a href="/info/motor-inn">The Motor Inn</a>
         </li>
         <li class="submenu-item">
-          <a href="/markdown-page/">Markdown page</a>
+          <a href="/info/accessibility">Accessibility</a>
         </li>
         <li class="submenu-item">
-          <a href="/mdx-page/">MDX page</a>
+          <a href="/info/travel">Travel & Entry</a>
         </li>
         <li class="submenu-item">
-          <a href="/404-page">404 page</a>
+          <a href="/info/safety">Arrival, Weather & Safety</a>
+        </li>
+        <li class="submenu-item">
+          <a href="/info/applications">Applications</a>
+        </li>
+        <li class="submenu-item">
+          <a href="/info/tickets">Tickets</a>
+        </li>
+        <li class="submenu-item">
+          <a href="/info/sustainability">Sustainability</a>
+        </li>
+        <li class="submenu-item">
+          <a href="/privacy-policy/">Privacy Policy</a>
         </li>
       </ul>
     </li>
     <li class="menu-item highlight">
-      <a href="https://accessible-astro.incluud.dev/">Docs </a>
-    </li>
-    <li class="menu-item type-icon animate-rotate">
-      <a href="https://github.com/markteekman/accessible-astro-starter">
-        <Icon name="lucide:github" />
-        <span class="sr-only">Go to the GitHub page</span>
-      </a>
+      <a href="#tickets"> Tickets </a>
     </li>
     <li class="menu-item type-icon animate-rotate">
       <DarkMode>
@@ -77,5 +81,8 @@ import { Icon } from 'astro-icon/components'
         block-size: 30px;
       }
     }
+  }
+  main {
+    padding-top: 5rem; // Adjust if sticky nav height changes
   }
 </style>

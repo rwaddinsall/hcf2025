@@ -1,0 +1,87 @@
+---
+// Artists component for Hopkins Creek Festival
+interface ArtistData {
+  name: string;
+  annotation?: string; // [live], [GER], [UK], etc.
+}
+
+const artists: ArtistData[] = [
+  { name: "Aarti Jadu", annotation: "live" },
+  { name: "Alex Albrecht", annotation: "live" },
+  { name: "Babyxann" },
+  { name: "Birdsnake" },
+  { name: "Bumpy" },
+  { name: "C.R.A.I.G" },
+  { name: "Casey" },
+  { name: "Castro Nemo", annotation: "GER" },
+  { name: "Chuleo Club" },
+  { name: "College of Knowledge" },
+  { name: "Cousin", annotation: "live" },
+  { name: "Darcy Justice" },
+  { name: "DITA", annotation: "LDN" },
+  { name: "DJ Kiti" },
+  { name: "DJ No More" },
+  { name: "DJ Shio" },
+  { name: "Dreems" },
+  { name: "Earl Grey" },
+  { name: "Emelyne" },
+  { name: "Ewan Saturdy" },
+  { name: "Folarin" },
+  { name: "Handclap", annotation: "live" },
+  { name: "Hooks Lines and Sinker" },
+  { name: "Intermodd" },
+  { name: "JEEP Sessions" },
+  { name: "Katie Pearson" },
+  { name: "Keanu Nelson" },
+  { name: "Low Flung", annotation: "live" },
+  { name: "Lunacy" },
+  { name: "Magda B" },
+  { name: "Maria Moles", annotation: "live" },
+  { name: "Miki" },
+  { name: "Milou Moon" },
+  { name: "MiNNA", annotation: "UK" },
+  { name: "Mitsuki", annotation: "JAP" },
+  { name: "Myles Mac DJ Possum" },
+  { name: "Noise In My Head" },
+  { name: "Nū", annotation: "live" },
+  { name: "Nuestra Planeta" },
+  { name: "Ones" },
+  { name: "Optimo", annotation: "SCT" },
+  { name: "Our Carlson" },
+  { name: "Owelu Dreamhouse" },
+  { name: "Quality Used Cars" },
+  { name: "R.Ribiero" },
+  { name: "Ryan Berkeley", annotation: "live" },
+  { name: "San Of The Rambutan" },
+  { name: "Seen.Touch" },
+  { name: "Setwun" },
+  { name: "Sleep D Live", annotation: "live" },
+  { name: "Timepoor" },
+  { name: "Walter Majik" },
+  { name: "Wax Nomads" }
+];
+---
+
+<section class="artists-container">
+  <div class="artists-wrapper">
+    <h2 class="artists-title">2025 Artists</h2>
+    
+    <div class="artists-grid">
+      {artists.map((artist) => (
+        <div 
+          class="artist-item"
+          data-artist={artist.name}
+        >
+          <h3>
+            {artist.name}
+            {artist.annotation && (
+              <span class="artist-annotation">
+                [{artist.annotation}]
+              </span>
+            )}
+          </h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

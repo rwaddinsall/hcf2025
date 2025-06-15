@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 
 /**
  * SiteMeta Component
@@ -29,9 +29,9 @@ interface Props {
   author?: string
 }
 
-const { title, description, url, image, author = 'Mark Teekman' } = Astro.props
+const { title, description, url, image, author = 'Hopkins Creek Festival' } = Astro.props
 
-let subtitle = 'Accessible Astro Starter'
+let subtitle = 'Hopkins Creek Festival'
 ---
 
 <!-- general meta -->
@@ -51,4 +51,4 @@ let subtitle = 'Accessible Astro Starter'
 <!-- page title -->
 <title>{title} - {subtitle}</title>
 
-<ViewTransitions />
+<ClientRouter />

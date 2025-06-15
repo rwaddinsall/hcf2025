@@ -3,9 +3,9 @@
   interpolate-size: allow-keywords;
 
   // brand colors (change these to your own brand colors)
-  --brand-primary: #d648ff;
-  --brand-secondary: #00d1b7;
-  --brand-neutral: #b9bec4;
+  --brand-primary: #0066cc; /* Bright blue */
+  --brand-secondary: #ff6b35; /* Vibrant orange */
+  --brand-neutral: #f8f9fa; /* Light gray */
 
   // pallet brand
   --color-primary-100: oklch(from var(--brand-primary) 90% c h);
@@ -31,25 +31,47 @@
   --color-neutral-900: oklch(from var(--brand-neutral) 15% c h);
 
   // color scheme
-  --foreground-color: light-dark(var(--color-neutral-800), var(--color-neutral-100));
-  --background-color: light-dark(var(--color-neutral-100), var(--color-neutral-900));
+  --foreground-color: light-dark(
+    var(--color-neutral-800),
+    var(--color-neutral-100)
+  );
+  --background-color: light-dark(
+    var(--color-neutral-100),
+    var(--color-neutral-900)
+  );
   --icon-color: light-dark(var(--color-neutral-800), var(--color-neutral-100));
-  --link-color: light-dark(var(--color-primary-400), var(--color-secondary-100));
-  --link-hover-color: light-dark(var(--color-primary-300), var(--color-secondary-200));
-  --border-color: light-dark(var(--color-neutral-900), var(--color-neutral-100));
-  --border-color-subtle: light-dark(var(--color-neutral-300), var(--color-neutral-800));
-  --text-decoration-color: light-dark(var(--color-neutral-700), var(--color-neutral-100));
-  --text-decoration-color-hover: light-dark(var(--color-neutral-100), var(--color-neutral-200));
+  --link-color: light-dark(
+    var(--color-primary-400),
+    var(--color-secondary-100)
+  );
+  --link-hover-color: light-dark(
+    var(--color-primary-300),
+    var(--color-secondary-200)
+  );
+  --border-color: light-dark(
+    var(--color-neutral-900),
+    var(--color-neutral-100)
+  );
+  --border-color-subtle: light-dark(
+    var(--color-neutral-300),
+    var(--color-neutral-800)
+  );
+  --text-decoration-color: light-dark(
+    var(--color-neutral-700),
+    var(--color-neutral-100)
+  );
+  --text-decoration-color-hover: light-dark(
+    var(--color-neutral-100),
+    var(--color-neutral-200)
+  );
 
   // theme settings
   --radius-small: 3px;
   --radius-large: 6px;
   --gap-default: 2rem;
   --font-measure: 70ch;
-  --font-family-default: 'Atkinson Hyperlegible', sans-serif;
-  --font-family-special: 'Atkinson Hyperlegible', sans-serif;
-
-  // font families
+  --font-family-default: "Roboto Mono", monospace;
+  --font-family-special: "Milanesa Serif", serif;
   --font-heading: var(--font-family-special);
   --font-body: var(--font-family-default);
 
@@ -86,7 +108,10 @@
   // grid
   // https://utopia.fyi/grid/calculator?c=320,18,1.2,1240,20,1.25,5,2,&s=0.75%7C0.5%7C0.25,1.5%7C2%7C3%7C4%7C6,s-l&g=s,l,xl,12
   --grid-max-width: 90rem;
-  --grid-gutter: var(--space-s-l, clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem));
+  --grid-gutter: var(
+    --space-s-l,
+    clamp(1.125rem, 0.6467rem + 2.3913vw, 2.5rem)
+  );
   --grid-columns: 12;
 
   // border radius
@@ -141,7 +166,10 @@
   // kbd
   --kbd-color-text: light-dark(var(--color-gray-200), var(--color-gray-800));
   --kbd-color-border: light-dark(var(--color-gray-700), var(--color-gray-300));
-  --kbd-color-background: light-dark(var(--color-gray-1000), var(--color-gray-200));
+  --kbd-color-background: light-dark(
+    var(--color-gray-1000),
+    var(--color-gray-200)
+  );
 }
 
 // dark color scheme overrides

@@ -6,7 +6,9 @@
   $underlineOffset: 4px,
   $hoverUnderlineOffset: 2px
 ) {
-  transition: text-decoration, text-underline-offset, text-decoration-color, text-decoration-thickness;
+  transition:
+    text-decoration, text-underline-offset, text-decoration-color,
+    text-decoration-thickness;
   transition-duration: var(--animation-speed-fast);
   transition-timing-function: var(--cubic-bezier);
   text-decoration: underline;

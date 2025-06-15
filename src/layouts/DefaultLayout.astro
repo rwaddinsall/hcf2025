@@ -6,11 +6,11 @@ import Header from '../components/Header.astro'
 import Footer from '../components/Footer.astro'
 
 const {
-  title = 'Astro',
-  description = 'A starter project with accessibility features using Astro static site builder. Contains accessible landmarks, skip links, a dark mode color scheme, better focus outline and keyboard menu navigation.',
+  title = 'Hopkins Creek Festival',
+  description = 'Hopkins Creek Music Festival - A celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists and good vibes.',
   url = Astro.site,
   image = 'social-preview-image.png',
-  author = 'Mark Teekman',
+  author = 'Hopkins Creek Festival',
 } = Astro.props
 ---
 
@@ -27,7 +27,7 @@ const {
   </head>
   <body>
     <Header />
-    <main id="main-content" transition:animate="fade">
+    <main id="main-content">
       <slot />
     </main>
     <Footer />

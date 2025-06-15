@@ -1,24 +1,19 @@
-# Accessible Astro Starter
+# Hopkins Creek Festival
 
 [![Built with Astro](https://astro.badg.es/v2/built-with-astro/small.svg)](https://astro.build)
 
-![accessible-astro-starter](https://github.com/user-attachments/assets/01630a5b-10bb-4765-a291-74725fedc04f)
+Hopkins Creek Music Festival website built with Astro and accessible-astro-components. This project provides an accessible, modern web experience for festival-goers to discover artists, get information, and purchase tickets.
 
-A ready-to-use, SEO and accessibility-focused Astro starter template. Built with modern web standards and WCAG guidelines in mind, it provides a solid foundation for creating inclusive websites. Features Tailwind CSS 4 integration, comprehensive component library, color contrast checker, and typography with Atkinson Hyperlegible font for improved readability. Includes dynamic blog/portfolio pages with social sharing, and full MDX support.
+## About the Festival
 
-[![LIVE DEMO](https://img.shields.io/badge/LIVE_DEMO-4ECCA3?style=for-the-badge&logo=astro&logoColor=black)](https://accessible-astro-starter.incluud.dev/) &nbsp;
-[![DOCUMENTATION](https://img.shields.io/badge/DOCUMENTATION-A682FF?style=for-the-badge&logo=astro&logoColor=black)](https://accessible-astro.incluud.dev/) &nbsp;
-[![Sponsor on Open Collective](https://img.shields.io/badge/Open%20Collective-7FADF2?style=for-the-badge&logo=opencollective&logoColor=white)](https://opencollective.com/incluud) &nbsp;
+Hopkins Creek Music Festival is a celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists, good vibes, and community connection.
 
-## Our mission
+## Technical Features
 
-> Provide developers with accessible, easy-to-use components that make building inclusive web applications simpler and faster, without compromising on customization or performance.
-
-## (Accessibility) Features
-
-- Astro 5.7.5+
-- Tailwind CSS 4 support
-- TypeScript integration with path aliases for easier imports
+- Built with Astro 5.7.5+
+- Tailwind CSS 4 for styling
+- TypeScript integration with path aliases
+- Fully accessible design following WCAG guidelines
 - Prettier integration with `prettier-plugin-astro` and `prettier-plugin-tailwind`
 - ESLint integration with strict accessibility settings for `eslint-plugin-jsx-a11y`
 - Markdown and MDX support with comprehensive examples and components

@@ -1,0 +1,31 @@
+---
+import DefaultLayout from '@layouts/DefaultLayout.astro'
+import PageHeader from '@components/PageHeader.astro'
+import InfoPageContent from '@components/InfoPageContent.astro'
+
+export async function getStaticPaths() {
+  // Fetch all info pages from Strapi
+  const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_URL}/api/info-pages?populate=*`);
+  const data = await response.json();
+  const infoPages = data.data || [];
+
+  // Create a path for each info page
+  return infoPages.map((page) => ({
+    params: { slug: page.attributes.slug },
+    props: { infoPage: page.attributes }
+  }));
+}
+
+const { infoPage } = Astro.props;
+---
+
+<DefaultLayout title={infoPage.title}>
+  <PageHeader 
+    title={infoPage.title}
+    subtitle={infoPage.pageHeader?.subtitle}
+    featuredImage={infoPage.featuredImage?.data?.attributes?.url}
+    bgType="bordered"
+  />
+  
+  <InfoPageContent infoPage={infoPage} />
+</DefaultLayout>

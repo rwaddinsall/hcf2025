@@ -1,0 +1,194 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import { Icon } from 'astro-icon/components';
+import PageHeader from './PageHeader.astro';
+import { Accordion, AccordionItem } from 'accessible-astro-components';
+
+interface InfoLink {
+  text: string;
+  url: string;
+}
+
+interface InfoSection {
+  title: string;
+  content: any[];
+  links?: InfoLink[];
+}
+
+interface Props {
+  pageTitle: string;
+  pageSubtitle?: string;
+  metaDescription?: string;
+  infoSections?: InfoSection[];
+}
+
+const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
+---
+
+<DefaultLayout
+  title={`${pageTitle} - Hopkins Creek Festival`}
+  description={metaDescription}
+>
+  <section class="my-12">
+    <PageHeader title={pageTitle} subtitle={pageSubtitle} />
+
+    <div class="info-content">
+      <div class="container">
+        {
+          infoSections && infoSections.length > 0 && (
+            <div class="info-sections">
+              <Accordion>
+                {infoSections.map((section) => (
+                  <AccordionItem header={section.title}>
+                    <div class="section-content">
+                      {section.content.map((block) => {
+                        if (block.type === 'paragraph') {
+                          return (
+                            <p>
+                              {block.children.map((child: any) => {
+                                if (
+                                  child.marks &&
+                                  child.marks.some(
+                                    (mark: any) => mark.type === 'link',
+                                  )
+                                ) {
+                                  const linkMark = child.marks.find(
+                                    (mark: any) => mark.type === 'link',
+                                  );
+                                  return (
+                                    <a href={linkMark.attrs.href}>
+                                      {child.text}
+                                    </a>
+                                  );
+                                }
+                                return child.text;
+                              })}
+                            </p>
+                          );
+                        } else if (block.type === 'list') {
+                          return (
+                            <ul>
+                              {block.children.map((item: any) => (
+                                <li>
+                                  {item.children
+                                    .map((child: any) => child.text)
+                                    .join('')}
+                                </li>
+                              ))}
+                            </ul>
+                          );
+                        }
+                        return null;
+                      })}
+                    </div>
+
+                    {section.links && section.links.length > 0 && (
+                      <div class="section-links">
+                        {section.links.map((link) => (
+                          <a
+                            href={link.url}
+                            class="info-link"
+                            target={
+                              link.url.startsWith('http') ? '_blank' : undefined
+                            }
+                            rel={
+                              link.url.startsWith('http')
+                                ? 'noopener noreferrer'
+                                : undefined
+                            }
+                          >
+                            {link.text}
+                            {link.url.startsWith('http') && (
+                              <Icon name="lucide:external-link" size={16} />
+                            )}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </AccordionItem>
+                ))}
+              </Accordion>
+            </div>
+          )
+        }
+
+        <slot />
+      </div>
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  @use '../../assets/scss/base/mixins' as *;
+  @use '../../assets/scss/base/breakpoint' as *;
+
+  .info-content {
+    padding: var(--space-xl) 0;
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+
+  .info-sections {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-content {
+    p {
+      margin-bottom: var(--space-s);
+      line-height: var(--line-height-relaxed);
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    ul {
+      margin: var(--space-s) 0;
+      padding-left: var(--space-m);
+
+      li {
+        margin-bottom: var(--space-2xs);
+        line-height: var(--line-height-relaxed);
+      }
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--color-primary-dark);
+      }
+    }
+  }
+
+  .section-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    margin-top: var(--space-m);
+    padding-top: var(--space-m);
+    border-top: 1px solid var(--border-color-subtle);
+  }
+
+  .info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    color: var(--color-primary);
+    text-decoration: underline;
+    transition: color var(--animation-speed-fast) var(--cubic-bezier);
+
+    &:hover,
+    &:focus {
+      color: var(--color-primary-dark);
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+</style>

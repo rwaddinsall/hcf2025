@@ -1,0 +1,153 @@
+---
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
+
+const pageTitle = 'Food & Beverages';
+const pageSubtitle =
+  'Delicious local food vendors, dietary options, and refreshing beverages. Support local businesses while enjoying amazing festival fare.';
+const metaDescription =
+  'Food vendors, dining options, and beverage information at Hopkins Creek Festival.';
+
+const infoSections = [
+  {
+    title: 'Food Vendors',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Carefully curated local food vendors offering everything from gourmet burgers to authentic Asian cuisine. All vendors are selected for quality, sustainability, and variety.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Dietary Requirements',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Vegetarian, vegan, and gluten-free options available at multiple vendors. All stalls clearly label their offerings and ingredients. Staff are trained to help with dietary queries.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Beverages',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Licensed bars throughout the festival site serving craft beer, wine, spirits, and non-alcoholic alternatives. Water refill stations available free of charge.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'BYO Policy',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Limited BYO alcohol permitted in camping areas only. No glass containers. No BYO food or drinks in performance areas. Full details on restricted and permitted items available in your ticket confirmation.',
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<InfoPageLayout
+  pageTitle={pageTitle}
+  pageSubtitle={pageSubtitle}
+  metaDescription={metaDescription}
+  infoSections={infoSections}
+>
+  <div class="vendor-highlights">
+    <h3>Featured Vendors</h3>
+    <p>
+      This year's lineup includes some incredible local food businesses
+      committed to sustainability and amazing taste.
+    </p>
+
+    <div class="sustainability-note">
+      <h4>🌱 Sustainability Commitment</h4>
+      <p>
+        All vendors use compostable packaging, source locally where possible,
+        and participate in our waste reduction program. Look for the Hopkins
+        Creek sustainability seal!
+      </p>
+    </div>
+
+    <div class="pricing-info">
+      <h4>💰 Pricing</h4>
+      <p>
+        Most meals range from $8-18. Card payments accepted at all vendors. ATMs
+        available on-site with reasonable fees.
+      </p>
+    </div>
+  </div>
+</InfoPageLayout>
+
+<style lang="scss">
+  .vendor-highlights {
+    margin-top: var(--space-xl);
+
+    h3 {
+      margin-bottom: var(--space-m);
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+    }
+
+    > p {
+      margin-bottom: var(--space-l);
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+    }
+  }
+
+  .sustainability-note,
+  .pricing-info {
+    margin-top: var(--space-l);
+    padding: var(--space-m);
+    border-radius: var(--radius-m);
+
+    h4 {
+      margin-bottom: var(--space-s);
+      font-size: var(--font-size-lg);
+    }
+
+    p {
+      margin: 0;
+      line-height: var(--line-height-relaxed);
+    }
+  }
+
+  .sustainability-note {
+    background: var(--color-success-bg);
+    border: 1px solid var(--color-success);
+
+    h4 {
+      color: var(--color-success-dark);
+    }
+  }
+
+  .pricing-info {
+    background: var(--background-color-subtle);
+    border: 1px solid var(--border-color-subtle);
+
+    h4 {
+      color: var(--color-primary);
+    }
+  }
+</style>

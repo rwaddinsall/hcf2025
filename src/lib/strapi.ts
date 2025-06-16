@@ -19,7 +19,7 @@ export default async function fetchApi<T>({
   wrappedByKey,
   wrappedByList,
 }: Props): Promise<T> {
-  if (endpoint.startsWith("/")) {
+  if (endpoint.startsWith('/')) {
     endpoint = endpoint.slice(1);
   }
 
@@ -31,7 +31,7 @@ export default async function fetchApi<T>({
     });
   }
 
-  console.log("Fetching from URL:", url.toString()); // Debug log
+  console.log('Fetching from URL:', url.toString()); // Debug log
 
   const res = await fetch(url.toString());
 
@@ -45,7 +45,7 @@ export default async function fetchApi<T>({
   }
 
   let data = await res.json();
-  console.log("Raw response data:", data); // Debug log
+  console.log('Raw response data:', data); // Debug log
 
   if (wrappedByKey) {
     data = data[wrappedByKey];
@@ -62,16 +62,16 @@ export default async function fetchApi<T>({
  * Fetches a single info page by slug from Strapi
  */
 export async function fetchInfoPageBySlug(slug: string) {
-  return fetchApi<import("../interfaces/strapi").SingleInfoPageResponse>({
-    endpoint: "info-pages",
+  return fetchApi<import('../interfaces/strapi').SingleInfoPageResponse>({
+    endpoint: 'info-pages',
     query: {
-      "filters[slug][$eq]": slug,
-      "filters[publishedAt][$notNull]": "true",
-      "populate[pageHeader][populate]": "*",
-      "populate[faqs][populate]": "*",
-      "populate[faqs][sort]": "displayOrder:asc",
+      'filters[slug][$eq]': slug,
+      'filters[publishedAt][$notNull]': 'true',
+      'populate[pageHeader][populate]': '*',
+      'populate[faqs][populate]': '*',
+      'populate[faqs][sort]': 'displayOrder:asc',
     },
-    wrappedByKey: "data",
+    wrappedByKey: 'data',
     wrappedByList: true,
   });
 }

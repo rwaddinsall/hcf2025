@@ -37,6 +37,7 @@ export default [
     files: ['**/*.js'],
     rules: {
       'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+      quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     },
   },
 
@@ -57,6 +58,7 @@ export default [
       ...astro.configs.recommended.rules,
       ...astro.configs['jsx-a11y-strict'].rules,
       'no-mixed-spaces-and-tabs': ['error', 'smart-tabs'],
+      quotes: ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     },
   },
 
@@ -73,6 +75,7 @@ export default [
       ...tseslint.configs.recommended.rules,
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' }],
       '@typescript-eslint/no-non-null-assertion': 'off',
+      '@typescript-eslint/quotes': ['error', 'single', { avoidEscape: true, allowTemplateLiterals: true }],
     },
   },
 

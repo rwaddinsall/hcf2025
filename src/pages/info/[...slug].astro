@@ -1,17 +1,17 @@
 ---
-import DefaultLayout from "@layouts/DefaultLayout.astro";
-import PageHeader from "@components/PageHeader.astro";
+import DefaultLayout from '@layouts/DefaultLayout.astro';
+import PageHeader from '@components/PageHeader.astro';
 
 export async function getStaticPaths() {
   try {
     // Fetch all info pages from Strapi
     const response = await fetch(
-      `${import.meta.env.PUBLIC_STRAPI_URL}/api/info-pages?populate=*`
+      `${import.meta.env.PUBLIC_STRAPI_URL}/api/info-pages?populate=*`,
     );
 
     if (!response.ok) {
       console.error(
-        `Failed to fetch info pages: ${response.status} ${response.statusText}`
+        `Failed to fetch info pages: ${response.status} ${response.statusText}`,
       );
       return [];
     }
@@ -21,13 +21,13 @@ export async function getStaticPaths() {
 
     // Create a path for each info page, excluding the main info page
     return infoPages
-      .filter((page: any) => page.attributes.slug !== "main")
+      .filter((page: any) => page.attributes.slug !== 'main')
       .map((page: any) => ({
         params: { slug: page.attributes.slug },
         props: { infoPage: page.attributes },
       }));
   } catch (error) {
-    console.error("Error fetching info pages:", error);
+    console.error('Error fetching info pages:', error);
     return [];
   }
 }
@@ -39,9 +39,9 @@ interface Props {
 const { infoPage } = Astro.props as Props;
 ---
 
-<DefaultLayout title={infoPage?.title || "Info"}>
+<DefaultLayout title={infoPage?.title || 'Info'}>
   <PageHeader
-    title={infoPage?.title || "Information"}
+    title={infoPage?.title || 'Information'}
     subtitle={infoPage?.pageHeader?.subtitle}
   />
 

@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
+import { Icon } from 'astro-icon/components';
 
 /**
  * Feature Component
@@ -10,14 +10,14 @@ interface Props {
   /**
    * The icon to display
    */
-  icon: string
+  icon: string;
   /**
    * The title to display
    */
-  title: string
+  title: string;
 }
 
-const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
+const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props;
 ---
 
 <div class="feature">
@@ -57,7 +57,11 @@ const { icon = 'mdi:rocket', title = 'Title' }: Props = Astro.props
       width: 60px;
       height: 60px;
       border-radius: var(--radius-m);
-      background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+      background: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-secondary)
+      );
       color: var(--color-neutral-100);
 
       svg {

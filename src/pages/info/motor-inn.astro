@@ -1,0 +1,107 @@
+---
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
+
+const pageTitle = 'The Motor Inn';
+const pageSubtitle =
+  'Welcoming weary travellers, lone rangers, honeymooners, wayfarers and wide-eyed roamers. Lay your head beneath the sky at the Hopkins Creek Motor Inn — our version of luxury, comfort, and low-maintenance setup.';
+const metaDescription =
+  'Experience luxury camping at Hopkins Creek Motor Inn with our three accommodation packages.';
+
+const infoSections = [
+  {
+    title: 'Luxury Package – Executive Suite',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'A 5m water-resistant canvas bell tent that feels like a bushland hotel suite. It comes with a foam or air camp mattress, fresh linen and quality bedding, cushions, rugs, and furnishings, plus extras like a lantern, mirror, front doormat and an outdoor solar light. Available in 2, 3 and 4-person options. Perfect if you want to arrive, drop your bag, and start dancing.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Simple Package – Standard Suite',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "Same sturdy 5m tent — but stripped back. You get self-inflating mattresses and a solar light. The rest is up to you. BYO linen, cushions, vibes. A solid option if you want convenience but don't mind rolling your own swag.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Good In-Tent-ions – Enviro Saver Suite',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "In partnership with Good Intentions Camping — legends who collect and reuse abandoned gear, giving it a second spin. Pre-loved, low-impact, and ready for action. Perfect if you're flying in or packing light. Not fancy, but functional — and a whole lot better than landfill.",
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<InfoPageLayout
+  pageTitle={pageTitle}
+  pageSubtitle={pageSubtitle}
+  metaDescription={metaDescription}
+  infoSections={infoSections}
+>
+  <div class="package-info">
+    <h3>Choose from three packages:</h3>
+    <p>
+      Each package is designed to suit different needs and budgets, ensuring
+      everyone can enjoy the Motor Inn experience that's right for them.
+    </p>
+
+    <div class="booking-note">
+      <p>
+        <strong>Note:</strong> Motor Inn packages are limited and tend to sell out
+        quickly. Book early to secure your preferred accommodation.
+      </p>
+    </div>
+  </div>
+</InfoPageLayout>
+
+<style lang="scss">
+  .package-info {
+    margin-top: var(--space-xl);
+
+    h3 {
+      margin-bottom: var(--space-m);
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+    }
+
+    p {
+      margin-bottom: var(--space-m);
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+    }
+  }
+
+  .booking-note {
+    margin-top: var(--space-l);
+    padding: var(--space-m);
+    background: var(--color-warning-bg);
+    border: 1px solid var(--color-warning);
+    border-radius: var(--radius-m);
+
+    p {
+      margin: 0;
+      color: var(--color-warning-dark);
+    }
+  }
+</style>

@@ -8,11 +8,11 @@
  */
 
 export interface Props {
-  variant?: "hero" | "header";
+  variant?: 'hero' | 'header';
   className?: string;
 }
 
-const { variant = "hero", className = "" } = Astro.props;
+const { variant = 'hero', className = '' } = Astro.props;
 ---
 
 <div class={`datetime ${variant} ${className}`}>
@@ -32,7 +32,7 @@ const { variant = "hero", className = "" } = Astro.props;
 
   .datetime::before,
   .datetime::after {
-    content: "";
+    content: '';
     flex: 1;
     height: 1px;
     background-color: var(--foreground-color);

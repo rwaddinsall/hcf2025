@@ -1,5 +1,5 @@
 ---
-import { Media } from 'accessible-astro-components'
+import { Media } from 'accessible-astro-components';
 
 /**
  * ContentMedia Component
@@ -10,15 +10,15 @@ interface Props {
   /**
    * The source URL for the image
    */
-  imgSrc: string
+  imgSrc: string;
   /**
    * Whether to display the image on the right side instead of the left
    * @default false
    */
-  reverseImg?: boolean
+  reverseImg?: boolean;
 }
 
-const { imgSrc, reverseImg = false }: Props = Astro.props
+const { imgSrc, reverseImg = false }: Props = Astro.props;
 ---
 
 <section class="my-64">

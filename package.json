@@ -9,7 +9,11 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "format": "prettier --write \"**/*.{astro,js,ts,json,scss,css}\"",
+    "lint": "eslint . --ext .js,.ts,.astro",
+    "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
+    "format:check": "prettier --check \"**/*.{astro,js,ts,json,scss,css}\""
   },
   "keywords": [
     "astro",

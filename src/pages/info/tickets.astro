@@ -1,0 +1,128 @@
+---
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
+
+const pageTitle = 'Tickets & Pricing';
+const pageSubtitle =
+  'Early bird specials, group discounts, and payment plans available. Get your tickets now and secure your spot at Hopkins Creek Festival.';
+const metaDescription =
+  'Hopkins Creek Festival ticket information, pricing, and booking details.';
+
+const infoSections = [
+  {
+    title: 'General Admission',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Your passport to the full Hopkins Creek experience. Includes access to all stages, camping areas, and festival facilities.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Early Bird Pricing',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "Limited early bird tickets available with significant savings. These typically sell out quickly, so don't wait!",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Group Discounts',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Bringing the crew? Groups of 6+ can save on tickets. Contact us for group booking information and special rates.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Payment Plans',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Split your ticket cost over multiple payments. Available for purchases over $200. Select the payment plan option at checkout.',
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<InfoPageLayout
+  pageTitle={pageTitle}
+  pageSubtitle={pageSubtitle}
+  metaDescription={metaDescription}
+  infoSections={infoSections}
+>
+  <div class="booking-info">
+    <h3>Ready to Book?</h3>
+    <p>
+      Tickets are available through our official ticketing partner. All tickets
+      are non-transferable and require photo ID for entry.
+    </p>
+
+    <div class="important-info">
+      <h4>Important Notes:</h4>
+      <ul>
+        <li>All sales are final - no refunds</li>
+        <li>Tickets are strictly age-verified (18+)</li>
+        <li>Valid photo ID required for entry</li>
+        <li>Camping passes sold separately</li>
+        <li>Car passes required for all vehicles</li>
+      </ul>
+    </div>
+  </div>
+</InfoPageLayout>
+
+<style lang="scss">
+  .booking-info {
+    margin-top: var(--space-xl);
+
+    h3 {
+      margin-bottom: var(--space-m);
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+    }
+  }
+
+  .important-info {
+    margin-top: var(--space-l);
+    padding: var(--space-m);
+    background: var(--background-color-subtle);
+    border-radius: var(--radius-m);
+
+    h4 {
+      margin-bottom: var(--space-s);
+      color: var(--color-warning-dark);
+    }
+
+    ul {
+      margin: 0;
+      padding-left: var(--space-m);
+
+      li {
+        margin-bottom: var(--space-2xs);
+        line-height: var(--line-height-relaxed);
+      }
+    }
+  }
+</style>

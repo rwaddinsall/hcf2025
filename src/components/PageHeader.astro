@@ -1,7 +1,7 @@
 ---
-import { Breadcrumbs, BreadcrumbsItem } from "accessible-astro-components";
-import { Image } from "astro:assets";
-import sanitizeHtml from "sanitize-html";
+import { Breadcrumbs, BreadcrumbsItem } from 'accessible-astro-components';
+import { Image } from 'astro:assets';
+import sanitizeHtml from 'sanitize-html';
 
 /**
  * PageHeader Component
@@ -41,15 +41,15 @@ const {
   featuredImage,
   title,
   subtitle,
-  backgroundColor = "var(--background-color)",
-  textColor = "var(--foreground-color)",
+  backgroundColor = 'var(--background-color)',
+  textColor = 'var(--foreground-color)',
 } = Astro.props;
 
 const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
 ---
 
 <section
-  class:list={[className, "page-header"]}
+  class:list={[className, 'page-header']}
   style={`background-color: ${backgroundColor}; color: ${textColor};`}
 >
   <div class="container">
@@ -86,8 +86,8 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
 </section>
 
 <style lang="scss">
-  @use "../assets/scss/base/mixins" as *;
-  @use "../assets/scss/base/breakpoint" as *;
+  @use '../assets/scss/base/mixins' as *;
+  @use '../assets/scss/base/breakpoint' as *;
 
   .page-header {
     padding: var(--space-l) 0;
@@ -104,7 +104,7 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
       z-index: 2;
       position: relative;
 
-      @include breakpoint("l") {
+      @include breakpoint('lg') {
         grid-template-columns: 2fr 1fr;
         align-items: center;
       }
@@ -123,11 +123,11 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
         line-height: var(--line-height-tight);
         margin: 0;
 
-        @include breakpoint("m") {
+        @include breakpoint('md') {
           font-size: var(--font-size-5xl);
         }
 
-        @include breakpoint("l") {
+        @include breakpoint('lg') {
           font-size: var(--font-size-6xl);
         }
       }
@@ -138,7 +138,7 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
         margin-top: var(--space-s);
         opacity: 0.9;
 
-        @include breakpoint("md") {
+        @include breakpoint('md') {
           font-size: var(--font-size-xl);
         }
       }
@@ -156,14 +156,14 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined;
         object-fit: cover;
       }
 
-      @include breakpoint("l") {
+      @include breakpoint('lg') {
         max-height: 400px;
       }
     }
 
     // Optional: Add background pattern or texture
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;

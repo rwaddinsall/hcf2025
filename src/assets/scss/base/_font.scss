@@ -1,14 +1,14 @@
-@use "breakpoint" as *;
+@use 'breakpoint' as *;
 
 // Milanesa Serif font faces
 @font-face {
   font-style: normal;
   font-weight: 100;
   src:
-    local("Milanesa Serif Thin"),
-    local("MilanesaSerif-Thin"),
-    url("/fonts/MilanesaSerif-Thin.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif Thin'),
+    local('MilanesaSerif-Thin'),
+    url('/fonts/MilanesaSerif-Thin.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -16,10 +16,10 @@
   font-style: normal;
   font-weight: 300;
   src:
-    local("Milanesa Serif Light"),
-    local("MilanesaSerif-Light"),
-    url("/fonts/MilanesaSerif-Light.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif Light'),
+    local('MilanesaSerif-Light'),
+    url('/fonts/MilanesaSerif-Light.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -27,10 +27,10 @@
   font-style: normal;
   font-weight: 400;
   src:
-    local("Milanesa Serif Regular"),
-    local("MilanesaSerif-Regular"),
-    url("/fonts/MilanesaSerif-Regular.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif Regular'),
+    local('MilanesaSerif-Regular'),
+    url('/fonts/MilanesaSerif-Regular.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -38,10 +38,10 @@
   font-style: normal;
   font-weight: 600;
   src:
-    local("Milanesa Serif DemiBold"),
-    local("MilanesaSerif-DemiBold"),
-    url("/fonts/MilanesaSerif-DemiBold.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif DemiBold'),
+    local('MilanesaSerif-DemiBold'),
+    url('/fonts/MilanesaSerif-DemiBold.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -49,10 +49,10 @@
   font-style: normal;
   font-weight: 700;
   src:
-    local("Milanesa Serif Bold"),
-    local("MilanesaSerif-Bold"),
-    url("/fonts/MilanesaSerif-Bold.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif Bold'),
+    local('MilanesaSerif-Bold'),
+    url('/fonts/MilanesaSerif-Bold.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -60,10 +60,10 @@
   font-style: normal;
   font-weight: 800;
   src:
-    local("Milanesa Serif ExtraBold"),
-    local("MilanesaSerif-ExtraBold"),
-    url("/fonts/MilanesaSerif-ExtraBold.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif ExtraBold'),
+    local('MilanesaSerif-ExtraBold'),
+    url('/fonts/MilanesaSerif-ExtraBold.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -71,10 +71,10 @@
   font-style: normal;
   font-weight: 900;
   src:
-    local("Milanesa Serif Black"),
-    local("MilanesaSerif-Black"),
-    url("/fonts/MilanesaSerif-Black.otf") format("opentype");
-  font-family: "Milanesa Serif";
+    local('Milanesa Serif Black'),
+    local('MilanesaSerif-Black'),
+    url('/fonts/MilanesaSerif-Black.otf') format('opentype');
+  font-family: 'Milanesa Serif';
   font-display: swap;
 }
 
@@ -83,10 +83,10 @@
   font-style: normal;
   font-weight: 400;
   src:
-    local("Roboto Mono Regular"),
-    local("RobotoMono-Regular"),
-    url("/fonts/RobotoMono-Regular.ttf") format("truetype");
-  font-family: "Roboto Mono";
+    local('Roboto Mono Regular'),
+    local('RobotoMono-Regular'),
+    url('/fonts/RobotoMono-Regular.ttf') format('truetype');
+  font-family: 'Roboto Mono';
   font-display: swap;
 }
 
@@ -94,10 +94,10 @@
   font-style: italic;
   font-weight: 500;
   src:
-    local("Roboto Mono Medium Italic"),
-    local("RobotoMono-MediumItalic"),
-    url("/fonts/RobotoMono-MediumItalic.ttf") format("truetype");
-  font-family: "Roboto Mono";
+    local('Roboto Mono Medium Italic'),
+    local('RobotoMono-MediumItalic'),
+    url('/fonts/RobotoMono-MediumItalic.ttf') format('truetype');
+  font-family: 'Roboto Mono';
   font-display: swap;
 }
 
@@ -105,10 +105,10 @@
   font-style: normal;
   font-weight: 600;
   src:
-    local("Roboto Mono SemiBold"),
-    local("RobotoMono-SemiBold"),
-    url("/fonts/RobotoMono-SemiBold.ttf") format("truetype");
-  font-family: "Roboto Mono";
+    local('Roboto Mono SemiBold'),
+    local('RobotoMono-SemiBold'),
+    url('/fonts/RobotoMono-SemiBold.ttf') format('truetype');
+  font-family: 'Roboto Mono';
   font-display: swap;
 }
 
@@ -116,10 +116,10 @@
   font-style: italic;
   font-weight: 600;
   src:
-    local("Roboto Mono SemiBold Italic"),
-    local("RobotoMono-SemiBoldItalic"),
-    url("/fonts/RobotoMono-SemiBoldItalic.ttf") format("truetype");
-  font-family: "Roboto Mono";
+    local('Roboto Mono SemiBold Italic'),
+    local('RobotoMono-SemiBoldItalic'),
+    url('/fonts/RobotoMono-SemiBoldItalic.ttf') format('truetype');
+  font-family: 'Roboto Mono';
   font-display: swap;
 }
 
@@ -140,7 +140,7 @@
 
   h1,
   h2 {
-    font-weight: 700;
+    font-weight: 600;
   }
 
   h3,

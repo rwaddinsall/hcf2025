@@ -1,0 +1,117 @@
+---
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
+
+const pageTitle = 'Camping & Accommodation';
+const pageSubtitle =
+  "There's nothing like the great outdoors. Come get acquainted with the stars, the gumtrees, and the quiet hum of tents settling in.";
+const metaDescription =
+  'Everything you need to know about camping and accommodation options at Hopkins Creek Festival.';
+
+const infoSections = [
+  {
+    title: 'Uptown',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "Ideal for vans, rooftop rigs, or anyone chasing a sunrise. First in, best dressed. Uptown offers more space and stunning views closer to the action, perfect if you're keen on a little serenity before the bass kicks in.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Downtown',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "Further from the action. A classic camp zone for those who like to be a little further from the heartbeat. Tents pop up shoulder-to-shoulder, creating a community vibe that's always buzzing with movement and music.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Vehicle Camping',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "A limited number of vehicle camping spots are available. These sell out fast and are strictly limited. If you're planning to camp in or near your car, make sure you grab a valid car camping pass. But remember: every vehicle on site needs a car pass — whether you're sleeping in it or not.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Pack It In, Pack It Out',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: "Some festivals end in a landfill. We do not. If your neighbour's ghosting their gear, let us know. If it's yours — sort it out. Bringing a couch or marquee? You'll need to leave a $50 deposit with the ticketing crew. You'll get it back when you leave with that same item. This place doesn't clean itself — and we want to keep coming back. Respect the land. Leave no trace.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Car Passes',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Every car needs a pass to enter the site. No pass, no entry. Car passes help us manage traffic and reduce our environmental impact — and 100% of proceeds go back into sustainability projects like composting, reusable systems, and emissions offsets.',
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<InfoPageLayout
+  pageTitle={pageTitle}
+  pageSubtitle={pageSubtitle}
+  metaDescription={metaDescription}
+  infoSections={infoSections}
+>
+  <div class="additional-content">
+    <h3>Hopkins Creek offers two main camping areas: Uptown and Downtown.</h3>
+    <p>
+      Choose the vibe that suits you best and get ready for an unforgettable
+      weekend under the stars.
+    </p>
+  </div>
+</InfoPageLayout>
+
+<style lang="scss">
+  .additional-content {
+    margin-top: var(--space-xl);
+    padding: var(--space-l);
+    background: var(--background-color-subtle);
+    border-radius: var(--radius-l);
+
+    h3 {
+      margin-bottom: var(--space-m);
+      color: var(--color-primary);
+    }
+
+    p {
+      margin: 0;
+      font-size: var(--font-size-lg);
+      line-height: var(--line-height-relaxed);
+    }
+  }
+</style>

@@ -4,8 +4,8 @@
  *
  * @description A component that displays the navigation menu for the website
  */
-import Logo from "./Logo.astro";
-import ResponsiveToggle from "./ResponsiveToggle.astro";
+import Logo from './Logo.astro';
+import ResponsiveToggle from './ResponsiveToggle.astro';
 ---
 
 <div id="main-navigation" class="py-8">
@@ -28,46 +28,46 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
 </div>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
+  document.addEventListener('astro:page-load', () => {
     // variables
     const mainNav = document.querySelector(
-      "#main-navigation"
+      '#main-navigation',
     ) as HTMLElement | null;
     if (!mainNav) return;
 
-    const mainMenu = mainNav.querySelector("ul") as HTMLUListElement | null;
+    const mainMenu = mainNav.querySelector('ul') as HTMLUListElement | null;
     const dropdownMenus = [
-      ...document.querySelectorAll(".has-dropdown button"),
+      ...document.querySelectorAll('.has-dropdown button'),
     ] as HTMLButtonElement[];
 
     // functions
     const setActiveMenuItem = (): void => {
-      const mobileDesktopMenus = mainNav.querySelectorAll("nav > ul");
+      const mobileDesktopMenus = mainNav.querySelectorAll('nav > ul');
       const currentPathname = window.location.pathname;
 
       mobileDesktopMenus.forEach((menu) => {
         const menuItems = [
-          ...menu.querySelectorAll(".menu-item"),
+          ...menu.querySelectorAll('.menu-item'),
         ] as HTMLLIElement[];
 
         menuItems.forEach((menuItem) => {
           const menuLink = menuItem.querySelector(
-            'a:not([rel*="external"])'
+            'a:not([rel*="external"])',
           ) as HTMLAnchorElement;
           if (!menuLink) return;
 
           if (
-            currentPathname.includes(menuLink.pathname.replaceAll("/", "")) &&
-            menuLink.textContent !== "Home"
+            currentPathname.includes(menuLink.pathname.replaceAll('/', '')) &&
+            menuLink.textContent !== 'Home'
           ) {
-            menuLink.classList.add("is-active");
-            menuLink.setAttribute("aria-current", "page");
+            menuLink.classList.add('is-active');
+            menuLink.setAttribute('aria-current', 'page');
           } else if (
-            menuLink.textContent === "Home" &&
-            currentPathname === "/"
+            menuLink.textContent === 'Home' &&
+            currentPathname === '/'
           ) {
-            menuLink.classList.add("is-active");
-            menuLink.setAttribute("aria-current", "page");
+            menuLink.classList.add('is-active');
+            menuLink.setAttribute('aria-current', 'page');
           }
         });
       });
@@ -83,21 +83,21 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
 
     const openDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
       const dropdownList = dropdownMenu.parentNode?.querySelector(
-        "ul"
+        'ul',
       ) as HTMLUListElement | null;
       if (!dropdownList) return;
 
-      dropdownMenu.classList.add("show");
-      dropdownMenu.setAttribute("aria-expanded", "true");
+      dropdownMenu.classList.add('show');
+      dropdownMenu.setAttribute('aria-expanded', 'true');
 
       if (isOutOfViewport(dropdownList)) {
-        dropdownList.style.left = "auto";
+        dropdownList.style.left = 'auto';
       }
     };
 
     const closeDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
-      dropdownMenu.classList.remove("show");
-      dropdownMenu.setAttribute("aria-expanded", "false");
+      dropdownMenu.classList.remove('show');
+      dropdownMenu.setAttribute('aria-expanded', 'false');
     };
 
     const closeAllDropdownMenus = (): void => {
@@ -108,7 +108,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
 
     const toggleDropdownMenu = (event: MouseEvent): void => {
       const target = event.target as HTMLButtonElement;
-      if (target.getAttribute("aria-expanded") === "false") {
+      if (target.getAttribute('aria-expanded') === 'false') {
         closeAllDropdownMenus();
         openDropdownMenu(target);
       } else {
@@ -118,17 +118,17 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
 
     // execution
     mainMenu &&
-      mainMenu.addEventListener("keydown", (event: KeyboardEvent) => {
+      mainMenu.addEventListener('keydown', (event: KeyboardEvent) => {
         const element = event.target as Element;
-        const currentMenuItem = element.closest("li");
+        const currentMenuItem = element.closest('li');
         const menuItems = [
-          ...mainMenu.querySelectorAll(".menu-item"),
+          ...mainMenu.querySelectorAll('.menu-item'),
         ] as HTMLLIElement[];
         const currentDropdownMenu = element.closest(
-          ".has-dropdown button"
+          '.has-dropdown button',
         ) as HTMLButtonElement | null;
         const currentDropdownMenuItem = element.closest(
-          ".has-dropdown li"
+          '.has-dropdown li',
         ) as HTMLLIElement | null;
         const currentIndex = currentMenuItem
           ? menuItems.findIndex((item) => item === currentMenuItem)
@@ -137,7 +137,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
         const key = event.key;
         let targetItem: Element | null = null;
 
-        if (key === "ArrowRight") {
+        if (key === 'ArrowRight') {
           if (
             currentMenuItem &&
             menuItems.indexOf(currentMenuItem as HTMLLIElement) ===
@@ -149,7 +149,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
           }
         }
 
-        if (key === "ArrowLeft") {
+        if (key === 'ArrowLeft') {
           if (
             currentMenuItem &&
             menuItems.indexOf(currentMenuItem as HTMLLIElement) === 0
@@ -160,7 +160,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
           }
         }
 
-        if (key === "Escape") {
+        if (key === 'Escape') {
           targetItem = menuItems[0];
         }
 
@@ -168,16 +168,16 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
           const nextElement =
             currentDropdownMenu.nextElementSibling as Element | null;
           if (nextElement) {
-            const firstDropdownItem = nextElement.querySelector("li");
+            const firstDropdownItem = nextElement.querySelector('li');
 
-            if (key === "ArrowDown") {
+            if (key === 'ArrowDown') {
               event.preventDefault();
               openDropdownMenu(currentDropdownMenu);
               targetItem = firstDropdownItem;
             }
           }
 
-          if (key === "Escape") {
+          if (key === 'Escape') {
             closeDropdownMenu(currentDropdownMenu);
           }
         }
@@ -187,13 +187,13 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
             currentDropdownMenuItem.parentNode as Element | null;
           if (currentDropdownList) {
             const dropdownMenuItems = [
-              ...currentDropdownList.querySelectorAll("li"),
+              ...currentDropdownList.querySelectorAll('li'),
             ] as HTMLLIElement[];
             const currentIndex = dropdownMenuItems.findIndex(
-              (item) => item === currentDropdownMenuItem
+              (item) => item === currentDropdownMenuItem,
             );
 
-            if (key === "ArrowDown") {
+            if (key === 'ArrowDown') {
               event.preventDefault();
 
               if (
@@ -206,7 +206,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
               }
             }
 
-            if (key === "ArrowUp") {
+            if (key === 'ArrowUp') {
               event.preventDefault();
 
               if (dropdownMenuItems.indexOf(currentDropdownMenuItem) === 0) {
@@ -216,7 +216,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
               }
             }
 
-            if (key === "Escape") {
+            if (key === 'Escape') {
               const currentDropdownMenu =
                 currentDropdownList.previousElementSibling as HTMLButtonElement | null;
               if (currentDropdownMenu) {
@@ -225,7 +225,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
               }
             }
 
-            if (key === "Tab") {
+            if (key === 'Tab') {
               const currentDropdownMenu =
                 currentDropdownList.previousElementSibling as HTMLButtonElement | null;
               if (currentDropdownMenu) {
@@ -242,7 +242,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
 
         if (targetItem) {
           const focusableElement = targetItem.querySelector(
-            "a, button, input"
+            'a, button, input',
           ) as HTMLElement | null;
           if (focusableElement) {
             focusableElement.focus();
@@ -253,17 +253,17 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
     dropdownMenus &&
       dropdownMenus.forEach((dropdownMenu) => {
         dropdownMenu.addEventListener(
-          "click",
-          toggleDropdownMenu as EventListener
+          'click',
+          toggleDropdownMenu as EventListener,
         );
       });
 
     setActiveMenuItem();
-    window.addEventListener("click", (event: MouseEvent) => {
+    window.addEventListener('click', (event: MouseEvent) => {
       const element = event.target as Element;
       if (
-        !element.hasAttribute("aria-haspopup") &&
-        !element.classList.contains("submenu-item")
+        !element.hasAttribute('aria-haspopup') &&
+        !element.classList.contains('submenu-item')
       ) {
         closeAllDropdownMenus();
       }
@@ -272,19 +272,19 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
     // Sticky nav shadow toggle
     const handleSticky = () => {
       if (window.scrollY > 0) {
-        mainNav.classList.add("sticky");
+        mainNav.classList.add('sticky');
       } else {
-        mainNav.classList.remove("sticky");
+        mainNav.classList.remove('sticky');
       }
     };
-    window.addEventListener("scroll", handleSticky, { passive: true });
+    window.addEventListener('scroll', handleSticky, { passive: true });
     handleSticky(); // Initial check
   });
 </script>
 
 <style lang="scss" is:global>
-  @use "../assets/scss/base/mixins" as *;
-  @use "../assets/scss/base/breakpoint" as *;
+  @use '../assets/scss/base/mixins' as *;
+  @use '../assets/scss/base/breakpoint' as *;
 
   #main-navigation {
     position: sticky;
@@ -329,7 +329,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
     }
 
     // Desktop: switch to desktop menu at nav breakpoint
-    @include breakpoint("nav") {
+    @include breakpoint('nav') {
       .mobile-menu {
         display: none;
       }
@@ -367,7 +367,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
         a:hover,
         a:focus-visible,
         .is-active,
-        button[aria-expanded="true"],
+        button[aria-expanded='true'],
         .has-dropdown > button:hover,
         .has-dropdown > button:focus-visible {
           text-decoration: underline;
@@ -486,7 +486,7 @@ import ResponsiveToggle from "./ResponsiveToggle.astro";
       border: none;
       padding: 0;
 
-      @include breakpoint("nav") {
+      @include breakpoint('nav') {
         // Align with the menu items
         margin-block-start: 7px;
       }

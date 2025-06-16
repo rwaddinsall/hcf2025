@@ -1,0 +1,145 @@
+---
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
+
+const pageTitle = 'Getting There';
+const pageSubtitle =
+  'Located in the heart of nature, easily accessible by car with ample parking. Shuttle services and rideshare options available from nearby towns.';
+const metaDescription =
+  'Travel information and directions to Hopkins Creek Festival.';
+
+const infoSections = [
+  {
+    title: 'By Car',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Hopkins Creek is easily accessible by car via sealed roads. Ample parking is available on-site. Remember: every vehicle requires a car pass for entry - no exceptions.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Public Transport & Shuttles',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Shuttle services operate from key locations including Melbourne, Geelong, and surrounding towns. Pre-booking essential as these fill up quickly.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Rideshare & Taxis',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Uber and other rideshare services operate to the festival. Designated pickup/drop-off zones available. Expect higher demand during peak arrival and departure times.',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Flying In',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Melbourne Airport is the closest major airport, approximately 2 hours drive. Car rental available at the airport, or catch the shuttle service from Melbourne.',
+          },
+        ],
+      },
+    ],
+  },
+];
+---
+
+<InfoPageLayout
+  pageTitle={pageTitle}
+  pageSubtitle={pageSubtitle}
+  metaDescription={metaDescription}
+  infoSections={infoSections}
+>
+  <div class="travel-tips">
+    <h3>Travel Tips</h3>
+    <div class="tips-grid">
+      <div class="tip">
+        <h4>🚗 Driving</h4>
+        <p>
+          Allow extra time for festival traffic. Arrive during off-peak hours if
+          possible.
+        </p>
+      </div>
+      <div class="tip">
+        <h4>🚌 Shuttles</h4>
+        <p>
+          Book early - shuttle tickets often sell out before general admission.
+        </p>
+      </div>
+      <div class="tip">
+        <h4>📱 Apps</h4>
+        <p>
+          Download offline maps before you go. Mobile reception can be patchy.
+        </p>
+      </div>
+      <div class="tip">
+        <h4>⏰ Timing</h4>
+        <p>
+          Gates open Friday 2pm. Avoid the rush by arriving early afternoon.
+        </p>
+      </div>
+    </div>
+  </div>
+</InfoPageLayout>
+
+<style lang="scss">
+  .travel-tips {
+    margin-top: var(--space-xl);
+
+    h3 {
+      margin-bottom: var(--space-l);
+      color: var(--color-primary);
+      font-size: var(--font-size-2xl);
+      text-align: center;
+    }
+  }
+
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-m);
+
+    .tip {
+      padding: var(--space-m);
+      background: var(--background-color-subtle);
+      border-radius: var(--radius-m);
+      text-align: center;
+
+      h4 {
+        margin-bottom: var(--space-s);
+        font-size: var(--font-size-lg);
+        color: var(--foreground-color);
+      }
+
+      p {
+        margin: 0;
+        font-size: var(--font-size-sm);
+        line-height: var(--line-height-relaxed);
+        color: var(--foreground-color-muted);
+      }
+    }
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-import { Icon } from "astro-icon/components";
+import { Icon } from 'astro-icon/components';
 
 /**
  * CallToAction Component
@@ -22,9 +22,9 @@ interface Props {
 }
 
 const {
-  title = "This is a call to action",
-  link = "#tickets",
-  linkText = "Button",
+  title = 'This is a call to action',
+  link = '#tickets',
+  linkText = 'Button',
 } = Astro.props;
 ---
 
@@ -41,7 +41,7 @@ const {
 </div>
 
 <style lang="scss">
-  @use "../assets/scss/base/mixins" as *;
+  @use '../assets/scss/base/mixins' as *;
 
   .call-to-action {
     position: relative;

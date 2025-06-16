@@ -79,8 +79,9 @@ const sanitizedSubtitle = subtitle ? sanitizeHtml(subtitle) : undefined
 </section>
 
 <style lang="scss">
-  @use '../../assets/scss/base/mixins' as *;
-  @use '../../assets/scss/base/breakpoint' as *;
+@use '../assets/scss/base/mixins' as *;
+@use '../assets/scss/base/variables' as *;
+@use '../assets/scss/base/breakpoints' as *;
 
   .page-header {
     padding: var(--space-l) 0;

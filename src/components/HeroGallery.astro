@@ -1,0 +1,245 @@
+---
+import { Image } from 'astro:assets';
+import heroGalleryImage from '@assets/images/projects/HeroGallery.jpg';
+
+/**
+ * Hero Gallery Component
+ *
+ * @description A component that displays the main hero gallery image with optimized loading and responsive design
+ */
+
+interface Props {
+  /**
+   * Alternative text for the hero gallery image
+   */
+  alt?: string;
+  /**
+   * Additional CSS classes to apply to the gallery container
+   */
+  class?: string;
+  /**
+   * Loading strategy for the image
+   */
+  loading?: 'lazy' | 'eager';
+  /**
+   * Image quality (0-100 or preset)
+   */
+  quality?: number | 'low' | 'mid' | 'high' | 'max';
+}
+
+const { 
+  alt = 'Hopkins Creek Festival gallery showcase',
+  class: className = '',
+  loading = 'eager',
+  quality = 'high'
+} = Astro.props;
+---
+
+<section class={`hero-gallery ${className}`} aria-labelledby="gallery-heading">
+  <div class="hero-gallery__container">
+    <h2 id="gallery-heading" class="visually-hidden">Festival Gallery</h2>
+    
+    <div class="hero-gallery__image-wrapper">
+      <Image
+        src={heroGalleryImage}
+        alt={alt}
+        loading={loading}
+        quality={quality}
+        widths={[320, 640, 768, 1024, 1280, 1600]}
+        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1200px"
+        class="hero-gallery__image"
+        format="webp"
+      />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  // Design tokens
+  $breakpoint-mobile: 480px;
+  $breakpoint-tablet: 768px;
+  $breakpoint-desktop: 1024px;
+  $breakpoint-large: 1200px;
+
+  $spacing-sm: 1rem;
+  $spacing-md: 2rem;
+  $spacing-lg: 4rem;
+  $spacing-xl: 6rem;
+
+  $border-radius: 12px;
+  $box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.1);
+  $box-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15);
+  
+  $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Utility class for screen readers
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .hero-gallery {
+    padding: $spacing-lg $spacing-md;
+    
+    @media (max-width: $breakpoint-tablet) {
+      padding: $spacing-md $spacing-sm;
+    }
+
+    &__container {
+      max-width: $breakpoint-large;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    &__image-wrapper {
+      position: relative;
+      border-radius: $border-radius;
+      overflow: hidden;
+      box-shadow: $box-shadow-subtle;
+      transition: $transition-smooth;
+      
+      // Focus styles for accessibility
+      &:focus-within {
+        outline: 3px solid currentColor;
+        outline-offset: 4px;
+      }
+      
+      // Hover effects
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: $box-shadow-elevated;
+      }
+      
+      @media (max-width: $breakpoint-tablet) {
+        border-radius: calc($border-radius * 0.75);
+        
+        &:hover {
+          transform: translateY(-2px);
+        }
+      }
+      
+      @media (max-width: $breakpoint-mobile) {
+        border-radius: calc($border-radius * 0.5);
+        
+        &:hover {
+          transform: none;
+          box-shadow: $box-shadow-subtle;
+        }
+      }
+    }
+
+    &__image {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: $transition-smooth;
+      
+      // Ensure crisp rendering
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      
+      // Aspect ratio container for consistent layout
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      object-position: center;
+      
+      @media (max-width: $breakpoint-tablet) {
+        aspect-ratio: 4 / 3;
+      }
+      
+      @media (max-width: $breakpoint-mobile) {
+        aspect-ratio: 3 / 2;
+      }
+      
+      // Loading state
+      &[data-loading] {
+        background: linear-gradient(
+          90deg,
+          #f0f0f0 25%,
+          #e0e0e0 50%,
+          #f0f0f0 75%
+        );
+        background-size: 200% 100%;
+        animation: shimmer 1.5s infinite;
+      }
+    }
+  }
+
+  // Animations
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .hero-gallery__image-wrapper {
+      transition: none;
+      
+      &:hover {
+        transform: none;
+      }
+    }
+    
+    .hero-gallery__image {
+      transition: none;
+      
+      &[data-loading] {
+        animation: none;
+      }
+    }
+  }
+
+  // High contrast mode support
+  @media (prefers-contrast: high) {
+    .hero-gallery__image-wrapper {
+      border: 2px solid currentColor;
+    }
+  }
+
+  // Dark mode support (if applicable)
+  @media (prefers-color-scheme: dark) {
+    .hero-gallery__image-wrapper {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      
+      &:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      }
+    }
+  }
+
+  // Print styles
+  @media print {
+    .hero-gallery {
+      break-inside: avoid;
+      page-break-inside: avoid;
+    }
+    
+    .hero-gallery__image-wrapper {
+      box-shadow: none;
+      transform: none !important;
+    }
+  }
+
+  // Large screens optimization
+  @media (min-width: $breakpoint-large) {
+    .hero-gallery {
+      padding: $spacing-xl $spacing-lg;
+    }
+    
+    .hero-gallery__image-wrapper {
+      border-radius: calc($border-radius * 1.25);
+    }
+  }
+</style> 

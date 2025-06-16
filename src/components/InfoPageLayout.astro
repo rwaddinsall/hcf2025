@@ -29,7 +29,7 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
   title={`${pageTitle} - Hopkins Creek Festival`}
   description={metaDescription}
 >
-  <section class="my-12">
+  <section class="info-page">
     <PageHeader title={pageTitle} subtitle={pageSubtitle} />
 
     <div class="info-content">
@@ -37,47 +37,57 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
         {
           infoSections && infoSections.length > 0 && (
             <div class="info-sections">
-              <Accordion>
-                {infoSections.map((section) => (
-                  <AccordionItem header={section.title}>
+              <Accordion class="info-accordion">
+                {infoSections.map((section, index) => (
+                  <AccordionItem 
+                    title={section.title}
+                    variant="chevron"
+                    name="info-accordion"
+                    open={index === 0}
+                    class="info-accordion-item"
+                  >
                     <div class="section-content">
+                      {/* 
+                        Render structured content blocks from CMS data
+                        Handles paragraphs with inline links and unordered lists
+                      */}
                       {section.content.map((block) => {
+                        // Render paragraph blocks with potential inline links
                         if (block.type === 'paragraph') {
                           return (
                             <p>
                               {block.children.map((child: any) => {
-                                if (
-                                  child.marks &&
-                                  child.marks.some(
-                                    (mark: any) => mark.type === 'link',
-                                  )
-                                ) {
-                                  const linkMark = child.marks.find(
-                                    (mark: any) => mark.type === 'link',
-                                  );
+                                const hasLink = child.marks?.some((mark: any) => mark.type === 'link');
+                                
+                                if (hasLink) {
+                                  const linkMark = child.marks.find((mark: any) => mark.type === 'link');
                                   return (
-                                    <a href={linkMark.attrs.href}>
+                                    <a href={linkMark.attrs.href} class="content-link">
                                       {child.text}
                                     </a>
                                   );
                                 }
+                                
                                 return child.text;
                               })}
                             </p>
                           );
-                        } else if (block.type === 'list') {
+                        }
+                        
+                        // Render list blocks with simple text items
+                        if (block.type === 'list') {
                           return (
-                            <ul>
+                            <ul class="content-list">
                               {block.children.map((item: any) => (
                                 <li>
-                                  {item.children
-                                    .map((child: any) => child.text)
-                                    .join('')}
+                                  {item.children.map((child: any) => child.text).join('')}
                                 </li>
                               ))}
                             </ul>
                           );
                         }
+                        
+                        // Skip unsupported block types
                         return null;
                       })}
                     </div>
@@ -120,47 +130,126 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
 
 <style lang="scss">
   @use '../assets/scss/base/mixins' as *;
-@use '../assets/scss/base/mixins' as *;
+
+  .info-page {
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
 
   .info-content {
-    padding: var(--space-xl) 0;
-
     .container {
-      max-width: 800px;
+      max-width: min(70ch, calc(100vw - var(--space-l) * 2));
       margin: 0 auto;
+      padding: 0 var(--space-m);
     }
   }
 
   .info-sections {
-    margin-bottom: var(--space-xl);
+    margin-top: var(--space-xl);
+  }
+
+  // Custom styling for accessible-astro-components Accordion
+  :global(.info-accordion) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+    
+    // Remove default margins and improve spacing
+    > * + * {
+      margin-top: 0;
+    }
+  }
+
+  :global(.info-accordion-item) {
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--background-color);
+    box-shadow: var(--elevation-1);
+    transition: 
+      box-shadow var(--animation-speed-fast) var(--cubic-bezier),
+      border-color var(--animation-speed-fast) var(--cubic-bezier);
+
+    &:hover {
+      box-shadow: var(--elevation-2);
+      border-color: var(--border-color);
+    }
+
+    // Style the summary/header
+    summary {
+      padding: var(--space-m) var(--space-l);
+      font-family: var(--font-heading);
+      font-size: var(--font-size-1);
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--foreground-color);
+      cursor: pointer;
+      transition: 
+        background-color var(--animation-speed-fast) var(--cubic-bezier),
+        color var(--animation-speed-fast) var(--cubic-bezier);
+      
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-neutral-200);
+      }
+      
+      &:focus-visible {
+        outline: 2px solid var(--link-color);
+        outline-offset: -2px;
+      }
+
+      // Remove default list styling
+      list-style: none;
+      
+      &::-webkit-details-marker {
+        display: none;
+      }
+    }
+
+    // Style the content area
+    > div:not(summary) {
+      border-top: 1px solid var(--border-color-subtle);
+    }
   }
 
   .section-content {
+    padding: var(--space-l);
+    
     p {
-      margin-bottom: var(--space-s);
+      margin-bottom: var(--space-m);
       line-height: var(--line-height-relaxed);
+      color: var(--foreground-color);
 
-      &:last-child {
+      &:last-child:not(:only-child) {
         margin-bottom: 0;
       }
     }
 
-    ul {
-      margin: var(--space-s) 0;
-      padding-left: var(--space-m);
-
+    .content-list {
+      margin: var(--space-m) 0;
+      padding-left: var(--space-l);
+      
       li {
-        margin-bottom: var(--space-2xs);
+        margin-bottom: var(--space-s);
         line-height: var(--line-height-relaxed);
+        color: var(--foreground-color);
+        
+        &::marker {
+          color: var(--link-color);
+        }
       }
     }
 
-    a {
-      color: var(--color-primary);
-      text-decoration: underline;
-
-      &:hover {
-        color: var(--color-primary-dark);
+    .content-link {
+      @include text-decoration(
+        var(--link-color),
+        var(--link-hover-color)
+      );
+      color: var(--link-color);
+      font-weight: 500;
+      
+      &:hover,
+      &:focus-visible {
+        color: var(--link-hover-color);
       }
     }
   }
@@ -169,26 +258,74 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     display: flex;
     flex-direction: column;
     gap: var(--space-s);
-    margin-top: var(--space-m);
-    padding-top: var(--space-m);
+    padding: var(--space-m) var(--space-l) var(--space-l);
     border-top: 1px solid var(--border-color-subtle);
+    background-color: var(--color-neutral-100);
   }
 
   .info-link {
     display: inline-flex;
     align-items: center;
-    gap: var(--space-2xs);
-    color: var(--color-primary);
-    text-decoration: underline;
-    transition: color var(--animation-speed-fast) var(--cubic-bezier);
+    gap: var(--space-xs);
+    padding: var(--space-s) var(--space-m);
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color-subtle);
+    border-radius: var(--radius-s);
+    color: var(--link-color);
+    font-weight: 500;
+    text-decoration: none;
+    transition: 
+      background-color var(--animation-speed-fast) var(--cubic-bezier),
+      border-color var(--animation-speed-fast) var(--cubic-bezier),
+      color var(--animation-speed-fast) var(--cubic-bezier),
+      transform var(--animation-speed-fast) var(--cubic-bezier);
 
     &:hover,
-    &:focus {
-      color: var(--color-primary-dark);
+    &:focus-visible {
+      background-color: var(--link-color);
+      border-color: var(--link-color);
+      color: var(--background-color);
+      transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--link-color);
+      outline-offset: 2px;
     }
 
     svg {
       flex-shrink: 0;
+      width: 1rem;
+      height: 1rem;
+    }
+  }
+
+  // Responsive adjustments
+  @media (max-width: 48rem) {
+    .info-page {
+      padding: var(--space-l) 0 var(--space-xl);
+    }
+
+    .info-content .container {
+      padding: 0 var(--space-s);
+    }
+
+    :global(.info-accordion-item summary) {
+      padding: var(--space-m);
+      font-size: var(--font-size-0);
+    }
+
+    .section-content {
+      padding: var(--space-m);
+    }
+
+    .section-links {
+      padding: var(--space-m);
+    }
+
+    .info-link {
+      padding: var(--space-s);
+      font-size: var(--font-size--1);
     }
   }
 </style>

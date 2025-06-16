@@ -1,136 +1,47 @@
 ---
-import DateTime from './DateTime.astro';
 
-/**
- * Hero Component
- *
- * @description A component that displays a hero section with a title, description, and image
- */
+import HeroHeading from '@assets/images/projects/HeroHeading.svg';
+import HerooGallery from '@assets/images/projects/HeroGallery.jpg';
+
+import Image from 'astro/components/Image.astro';
+
 ---
+<section class='container m-12'>
+<Image
+    src={HeroHeading}
+    alt="Hopkins Creek Festival logo"
+    loading="eager"
+    quality="high"
+    class="hero-heading"
+    />
+<Image
+class='p-4 my-8'
+    src={HerooGallery}
+    alt="Hopkins Creek Festival logo"
+    loading="eager"
+    quality="high"
 
-<section class="px-6 py-16">
-  <div class="container">
-    <div class="flex flex-col">
-      <h1 class="w-full justify-stretch">
-        <slot>Hopkins Creek</slot>
-      </h1>
-      <DateTime variant="hero" />
-
-      <!-- Hero Image Collage -->
-      <div class="hero-image-collage">
-        <div class="image-panel panel-1">
-          <div class="placeholder-skeleton"></div>
-        </div>
-        <div class="image-panel panel-2">
-          <div class="placeholder-skeleton"></div>
-        </div>
-        <div class="image-panel panel-3">
-          <div class="placeholder-skeleton"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+    />
 </section>
 
 <style>
-  h1 {
-    /* use font demibold */
-    font-family: 'Milanesa DemiBold', var(--font-heading);
-    text-transform: uppercase;
-    line-height: 1.2;
-    font-size: 8rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .hero-image-collage {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0;
-    margin-top: 8rem;
-    height: 300px;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .image-panel {
-    position: relative;
+  .container {
+    gap: var(--space-l);
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 300px;
-    min-width: 300px;
-    transition: background 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
 
-  .panel-1 {
-    background: #e5e5e5;
-  }
+  .hero-heading,
+.hero-gallery {
+  margin: 0;
+  padding: 0;
+}
 
-  .panel-2 {
-    background: #d0d0d0;
-  }
-
-  .panel-3 {
-    background: #b8b8b8;
-  }
-
-  .placeholder-skeleton {
-    width: 100%;
-    height: 100%;
-    background: inherit;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .placeholder-skeleton::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.3),
-      transparent
-    );
-    animation: shimmer 2s infinite;
-  }
-
-  @keyframes shimmer {
-    0% {
-      left: -100%;
-    }
-    100% {
-      left: 100%;
-    }
-  }
-
-  @media (max-width: 768px) {
-    .hero-image-collage {
-      grid-template-columns: 1fr;
-      height: auto;
-      gap: 2px;
-    }
-
-    .image-panel {
-      min-height: 200px;
-    }
-
-    h1 {
-      font-size: 4rem;
-    }
-  }
-
-  @media (max-width: 480px) {
-    h1 {
-      font-size: 3rem;
-    }
-
-    .image-panel {
-      min-height: 150px;
-    }
-  }
+.hero-heading svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 </style>

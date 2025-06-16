@@ -1,32 +1,37 @@
 ---
-import DefaultLayout from '@layouts/DefaultLayout.astro'
-import PageHeader from '@components/PageHeader.astro'
-import InfoPageContent from '@components/InfoPageContent.astro'
+import DefaultLayout from "@layouts/DefaultLayout.astro";
+import PageHeader from "@components/PageHeader.astro";
 
 // Fetch main info page data from Strapi
-const response = await fetch(`${import.meta.env.PUBLIC_STRAPI_URL}/api/info-pages?filters[slug]=main&populate=*`);
+const response = await fetch(
+  `${import.meta.env.PUBLIC_STRAPI_URL}/api/info-pages?filters[slug]=main&populate=*`
+);
 const data = await response.json();
-const infoPage = data.data && data.data.length > 0 ? data.data[0].attributes : null;
+const infoPage =
+  data.data && data.data.length > 0 ? data.data[0].attributes : null;
 
 // Fallback content if no data is found
-const pageTitle = infoPage?.title || 'Festival Information';
-const pageSubtitle = infoPage?.pageHeader?.subtitle || 'Everything you need to know about Hopkins Creek Festival';
+const pageTitle = infoPage?.title || "Festival Information";
+const pageSubtitle =
+  infoPage?.pageHeader?.subtitle ||
+  "Everything you need to know about Hopkins Creek Festival";
 ---
 
 <DefaultLayout title={pageTitle}>
-  <PageHeader 
-    title={pageTitle}
-    subtitle={pageSubtitle}
-    bgType="bordered"
-  />
-  
-  {infoPage ? (
-    <InfoPageContent infoPage={infoPage} />
-  ) : (
-    <section class="my-12">
-      <div class="container space-content">
-        <p class="text-2xl">Information content is currently being updated. Please check back soon.</p>
-      </div>
-    </section>
-  )}
+  <PageHeader title={pageTitle} subtitle={pageSubtitle} />
+
+  {
+    infoPage ? (
+      <InfoPageContent infoPage={infoPage} />
+    ) : (
+      <section class="my-12">
+        <div class="container space-content">
+          <p class="text-2xl">
+            Information content is currently being updated. Please check back
+            soon.
+          </p>
+        </div>
+      </section>
+    )
+  }
 </DefaultLayout>

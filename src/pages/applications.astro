@@ -1,11 +1,11 @@
 ---
 // import DefaultLayout from '../../layouts/DefaultLayout.astro'
 // Update the import path below if the layout file exists elsewhere:
-import PageHeader from '../components/PageHeader.astro'
-import DefaultLayout from '../layouts/DefaultLayout.astro'
-import { Icon } from 'astro-icon/components'
-// import PageHeader from '../../components/PageHeader.astro'
-import { Accordion, AccordionItem } from 'accessible-astro-components'
+import PageHeader from "../components/PageHeader.astro";
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import { Icon } from "astro-icon/components";
+
+import { Accordion, AccordionItem } from "accessible-astro-components";
 ---
 
 <DefaultLayout title="Applications - Hopkins Creek Festival">
@@ -13,15 +13,17 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
     <PageHeader
       title="Applications"
       subtitle="Information about workshop applications, visual artist applications, and volunteer opportunities."
-      bgType="bordered"
     />
   </section>
-  
+
   <section class="my-12">
     <div class="container">
       <div class="space-content">
         <div class="mb-8">
-          <a href="/info" class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600">
+          <a
+            href="/info"
+            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
+          >
             <Icon name="lucide:arrow-left" size="20" />
             Back to Festival Info
           </a>
@@ -31,7 +33,8 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
           <AccordionItem title="Workshops (Deadline: Sept 23)">
             <div class="space-content">
               <p>
-                Apply to lead workshops and educational sessions at Hopkins Creek Festival.
+                Apply to lead workshops and educational sessions at Hopkins
+                Creek Festival.
               </p>
               <h4>Workshop Types:</h4>
               <ul class="list-disc list-inside">
@@ -50,7 +53,8 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
               </ul>
               <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
                 <p class="text-red-800">
-                  <strong>Deadline:</strong> All workshop applications must be submitted by September 23, 2024.
+                  <strong>Deadline:</strong> All workshop applications must be submitted
+                  by September 23, 2024.
                 </p>
               </div>
             </div>
@@ -59,7 +63,8 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
           <AccordionItem title="Visual Artists (Deadline: Sept 23)">
             <div class="space-content">
               <p>
-                Join our visual arts program and showcase your work at the festival.
+                Join our visual arts program and showcase your work at the
+                festival.
               </p>
               <h4>Art Categories:</h4>
               <ul class="list-disc list-inside">
@@ -78,7 +83,8 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
               </ul>
               <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
                 <p class="text-red-800">
-                  <strong>Deadline:</strong> Visual artist applications close September 23, 2024.
+                  <strong>Deadline:</strong> Visual artist applications close September
+                  23, 2024.
                 </p>
               </div>
             </div>
@@ -87,17 +93,22 @@ import { Accordion, AccordionItem } from 'accessible-astro-components'
           <AccordionItem title="Volunteers (Closed)">
             <div class="space-content">
               <p>
-                Thank you for your interest in volunteering at Hopkins Creek Festival.
+                Thank you for your interest in volunteering at Hopkins Creek
+                Festival.
               </p>
               <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
                 <p class="text-gray-800">
-                  <strong>Status:</strong> Volunteer applications for this year's festival are now closed. We have received an overwhelming response and have filled all available positions.
+                  <strong>Status:</strong> Volunteer applications for this year's
+                  festival are now closed. We have received an overwhelming response
+                  and have filled all available positions.
                 </p>
               </div>
               <h4>Next Year:</h4>
               <ul class="list-disc list-inside">
                 <li>Volunteer applications for 2026 will open in early 2025</li>
-                <li>Join our mailing list to be notified when applications open</li>
+                <li>
+                  Join our mailing list to be notified when applications open
+                </li>
                 <li>Follow us on social media for updates</li>
               </ul>
               <h4>Volunteer Benefits (for future reference):</h4>

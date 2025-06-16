@@ -1,0 +1,85 @@
+---
+/**
+ * DateTime Component
+ *
+ * @description A reusable component that displays the festival date and location
+ * @param variant - The display variant ('hero' or 'header')
+ * @param className - Additional CSS classes
+ */
+
+export interface Props {
+  variant?: "hero" | "header";
+  className?: string;
+}
+
+const { variant = "hero", className = "" } = Astro.props;
+---
+
+<div class={`datetime ${variant} ${className}`}>
+  <time datetime="2025-11-07/2025-11-09"
+    >7<sup>th</sup> - 9<sup>th</sup> Nov '25</time
+  >
+</div>
+
+<style>
+  .datetime {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .datetime::before,
+  .datetime::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--foreground-color);
+    max-width: 120px;
+  }
+
+  time {
+    font-family: var(--font-body);
+    font-style: italic;
+    color: var(--foreground-color);
+    margin: 0;
+    white-space: nowrap;
+    font-size: var(--font-size-0);
+  }
+
+  sup {
+    font-size: 0.75em;
+    vertical-align: super;
+  }
+
+  .datetime.header {
+    gap: 0.5rem;
+    font-size: var(--font-size--1);
+  }
+
+  .datetime.header::before,
+  .datetime.header::after {
+    max-width: 60px;
+  }
+
+  .datetime.header time {
+    font-size: inherit;
+  }
+
+  @media (max-width: 768px) {
+    .datetime::before,
+    .datetime::after {
+      max-width: 60px;
+    }
+
+    .datetime.header {
+      gap: 0.25rem;
+    }
+
+    .datetime.header::before,
+    .datetime.header::after {
+      max-width: 30px;
+    }
+  }
+</style>

@@ -1,6 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components'
-
+import { Icon } from "astro-icon/components";
 
 /**
  * CallToAction Component
@@ -11,26 +10,28 @@ interface Props {
   /**
    * The title text to display
    */
-  title?: string
+  title?: string;
   /**
    * The URL the button should link to
    */
-  link?: string
+  link?: string;
   /**
    * The text to display on the button
    */
-  linkText?: string
+  linkText?: string;
 }
 
 const {
-  title = 'Ready for Hopkins Creek Festival?',
-  link = '#tickets',
-  linkText = 'Get Your Tickets',
-} = Astro.props
+  title = "This is a call to action",
+  link = "#tickets",
+  linkText = "Button",
+} = Astro.props;
 ---
 
 <div class="container">
-  <div class="flex flex-col items-center gap-12 px-12 py-20 mt-24 mb-32 call-to-action rounded-xl md:px-24">
+  <div
+    class="flex flex-col items-center gap-12 px-12 py-20 mt-24 mb-32 call-to-action rounded-xl md:px-24"
+  >
     <h2 class="text-3xl text-center md:text-6xl">{title}</h2>
     <a href={link} class="text-2xl text-center">
       {linkText}
@@ -40,12 +41,10 @@ const {
 </div>
 
 <style lang="scss">
-@use '../assets/scss/base/mixins' as *;
+  @use "../assets/scss/base/mixins" as *;
 
   .call-to-action {
     position: relative;
-   
-    
 
     color: var(--color-neutral-900);
   }

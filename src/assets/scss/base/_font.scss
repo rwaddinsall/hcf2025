@@ -1,14 +1,14 @@
 @use 'breakpoint' as *;
 
-// Milanesa Serif font faces
+// ABC Diatype Semi Mono font faces
 @font-face {
   font-style: normal;
-  font-weight: 100;
+  font-weight: 400;
   src:
-    local('Milanesa Serif Thin'),
-    local('MilanesaSerif-Thin'),
-    url('/fonts/MilanesaSerif-Thin.otf') format('opentype');
-  font-family: 'Milanesa Serif';
+    local('ABC Diatype Semi Mono Regular'),
+    local('ABCDiatypeSemi-Mono-Regular'),
+    url('/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf') format('opentype');
+  font-family: 'ABC Diatype Semi Mono';
   font-display: swap;
 }
 
@@ -16,21 +16,21 @@
   font-style: normal;
   font-weight: 300;
   src:
-    local('Milanesa Serif Light'),
-    local('MilanesaSerif-Light'),
-    url('/fonts/MilanesaSerif-Light.otf') format('opentype');
-  font-family: 'Milanesa Serif';
+    local('ABC Diatype Semi Mono Light'),
+    local('ABCDiatypeSemi-Mono-Light'),
+    url('/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf') format('opentype');
+  font-family: 'ABC Diatype Semi Mono';
   font-display: swap;
 }
 
 @font-face {
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   src:
-    local('Milanesa Serif Regular'),
-    local('MilanesaSerif-Regular'),
-    url('/fonts/MilanesaSerif-Regular.otf') format('opentype');
-  font-family: 'Milanesa Serif';
+    local('ABC Diatype Semi Mono Medium'),
+    local('ABCDiatypeSemi-Mono-Medium'),
+    url('/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf') format('opentype');
+  font-family: 'ABC Diatype Semi Mono';
   font-display: swap;
 }
 
@@ -38,10 +38,10 @@
   font-style: normal;
   font-weight: 600;
   src:
-    local('Milanesa Serif DemiBold'),
-    local('MilanesaSerif-DemiBold'),
-    url('/fonts/MilanesaSerif-DemiBold.otf') format('opentype');
-  font-family: 'Milanesa Serif';
+    local('ABC Diatype Semi Mono SemiBold'),
+    local('ABCDiatypeSemi-Mono-SemiBold'),
+    url('/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf') format('opentype');
+  font-family: 'ABC Diatype Semi Mono';
   font-display: swap;
 }
 
@@ -49,44 +49,33 @@
   font-style: normal;
   font-weight: 700;
   src:
-    local('Milanesa Serif Bold'),
-    local('MilanesaSerif-Bold'),
-    url('/fonts/MilanesaSerif-Bold.otf') format('opentype');
-  font-family: 'Milanesa Serif';
+    local('ABC Diatype Semi Mono Bold'),
+    local('ABCDiatypeSemi-Mono-Bold'),
+    url('/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf') format('opentype');
+  font-family: 'ABC Diatype Semi Mono';
   font-display: swap;
 }
 
+// ABC Marist font faces
 @font-face {
-  font-style: normal;
-  font-weight: 800;
-  src:
-    local('Milanesa Serif ExtraBold'),
-    local('MilanesaSerif-ExtraBold'),
-    url('/fonts/MilanesaSerif-ExtraBold.otf') format('opentype');
-  font-family: 'Milanesa Serif';
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 900;
-  src:
-    local('Milanesa Serif Black'),
-    local('MilanesaSerif-Black'),
-    url('/fonts/MilanesaSerif-Black.otf') format('opentype');
-  font-family: 'Milanesa Serif';
-  font-display: swap;
-}
-
-// Roboto Mono font faces
-@font-face {
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
   src:
-    local('Roboto Mono Regular'),
-    local('RobotoMono-Regular'),
-    url('/fonts/RobotoMono-Regular.ttf') format('truetype');
-  font-family: 'Roboto Mono';
+    local('ABC Marist Book Italic'),
+    local('ABCMarist-BookItalic'),
+    url('/fonts/ABCMarist-BookItalic-Trial.otf') format('opentype');
+  font-family: 'ABC Marist';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: italic;
+  font-weight: 300;
+  src:
+    local('ABC Marist Light Italic'),
+    local('ABCMarist-LightItalic'),
+    url('/fonts/ABCMarist-BookItalic-Trial.otf') format('opentype');
+  font-family: 'ABC Marist';
   font-display: swap;
 }
 
@@ -94,21 +83,10 @@
   font-style: italic;
   font-weight: 500;
   src:
-    local('Roboto Mono Medium Italic'),
-    local('RobotoMono-MediumItalic'),
-    url('/fonts/RobotoMono-MediumItalic.ttf') format('truetype');
-  font-family: 'Roboto Mono';
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 600;
-  src:
-    local('Roboto Mono SemiBold'),
-    local('RobotoMono-SemiBold'),
-    url('/fonts/RobotoMono-SemiBold.ttf') format('truetype');
-  font-family: 'Roboto Mono';
+    local('ABC Marist Medium Italic'),
+    local('ABCMarist-MediumItalic'),
+    url('/fonts/ABCMarist-BookItalic-Trial.otf') format('opentype');
+  font-family: 'ABC Marist';
   font-display: swap;
 }
 
@@ -116,10 +94,21 @@
   font-style: italic;
   font-weight: 600;
   src:
-    local('Roboto Mono SemiBold Italic'),
-    local('RobotoMono-SemiBoldItalic'),
-    url('/fonts/RobotoMono-SemiBoldItalic.ttf') format('truetype');
-  font-family: 'Roboto Mono';
+    local('ABC Marist SemiBold Italic'),
+    local('ABCMarist-SemiBoldItalic'),
+    url('/fonts/ABCMarist-BookItalic-Trial.otf') format('opentype');
+  font-family: 'ABC Marist';
+  font-display: swap;
+}
+
+@font-face {
+  font-style: italic;
+  font-weight: 700;
+  src:
+    local('ABC Marist Bold Italic'),
+    local('ABCMarist-BoldItalic'),
+    url('/fonts/ABCMarist-BookItalic-Trial.otf') format('opentype');
+  font-family: 'ABC Marist';
   font-display: swap;
 }
 

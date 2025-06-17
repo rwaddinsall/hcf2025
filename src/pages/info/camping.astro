@@ -37,6 +37,20 @@ const infoSections = [
     ],
   },
   {
+    title: 'The Motor Inn',
+    content: [
+      {
+        type: 'paragraph',
+        children: [
+          {
+            type: 'text',
+            text: 'Hopkins Creek offers two main camping areas: Uptown and Downtown. Choose the vibe that suits you best and get ready for an unforgettable weekend under the stars.',
+          },
+        ],
+      },
+    ],
+  },
+  {
     title: 'Vehicle Camping',
     content: [
       {
@@ -87,31 +101,17 @@ const infoSections = [
   metaDescription={metaDescription}
   infoSections={infoSections}
 >
-  <div class="additional-content">
-    <h3>Hopkins Creek offers two main camping areas: Uptown and Downtown.</h3>
-    <p>
-      Choose the vibe that suits you best and get ready for an unforgettable
-      weekend under the stars.
-    </p>
-  </div>
 </InfoPageLayout>
 
 <style lang="scss">
-  .additional-content {
-    margin-top: var(--space-xl);
-    padding: var(--space-l);
-    background: var(--background-color-subtle);
-    border-radius: var(--radius-l);
+  h3 {
+    margin-bottom: var(--space-m);
+    color: var(--color-primary);
+  }
 
-    h3 {
-      margin-bottom: var(--space-m);
-      color: var(--color-primary);
-    }
-
-    p {
-      margin: 0;
-      font-size: var(--font-size-lg);
-      line-height: var(--line-height-relaxed);
-    }
+  p {
+    margin: 0;
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
   }
 </style>

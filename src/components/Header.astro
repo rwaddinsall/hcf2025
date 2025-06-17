@@ -23,7 +23,7 @@ import { Icon } from 'astro-icon/components';
     <li class="menu-item has-dropdown">
       <button aria-haspopup="true" aria-expanded="false">
         Info
-        <Icon name="lucide:chevron-down" size="32" />
+        <Icon name="lucide:chevron-down" size="16" />
       </button>
       <ul class="dropdown-menu">
         <li class="submenu-item">
@@ -59,12 +59,12 @@ import { Icon } from 'astro-icon/components';
       </ul>
     </li>
     <li class="menu-item highlight">
-      <a href="#tickets"> Tickets </a>
+      <a href="#tickets">Tickets</a>
     </li>
-    <li class="menu-item type-icon animate-rotate">
+    <li class="menu-item type-icon">
       <DarkMode>
-        <Icon name="lucide:moon" slot="light" />
-        <Icon name="lucide:sun" slot="dark" />
+        <Icon name="lucide:moon" slot="light" size="24" />
+        <Icon name="lucide:sun" slot="dark" size="24" />
       </DarkMode>
     </li>
   </Navigation>
@@ -73,16 +73,19 @@ import { Icon } from 'astro-icon/components';
 <style lang="scss" is:global>
   header {
     .type-icon {
-      display: block;
-      margin-inline: -7px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       svg {
-        inline-size: 30px;
-        block-size: 30px;
+        width: 24px;
+        height: 24px;
       }
     }
   }
+
+  // Ensure main content doesn't get hidden behind sticky nav
   main {
-    padding-top: 5rem; // Adjust if sticky nav height changes
+    padding-top: 0; // Remove fixed padding since nav is sticky
   }
 </style>

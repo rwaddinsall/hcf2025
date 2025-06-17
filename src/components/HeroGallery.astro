@@ -27,18 +27,18 @@ interface Props {
   quality?: number | 'low' | 'mid' | 'high' | 'max';
 }
 
-const { 
+const {
   alt = 'Hopkins Creek Festival gallery showcase',
   class: className = '',
   loading = 'eager',
-  quality = 'high'
+  quality = 'high',
 } = Astro.props;
 ---
 
 <section class={`hero-gallery ${className}`} aria-labelledby="gallery-heading">
   <div class="hero-gallery__container">
     <h2 id="gallery-heading" class="visually-hidden">Festival Gallery</h2>
-    
+
     <div class="hero-gallery__image-wrapper">
       <Image
         src={heroGalleryImage}
@@ -69,7 +69,7 @@ const {
   $border-radius: 12px;
   $box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.1);
   $box-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15);
-  
+
   $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
   // Utility class for screen readers
@@ -79,7 +79,7 @@ const {
     height: 1px;
     padding: 0;
     margin: -1px;
-    overflow: hidden;
+    // overflow: hidden;
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
@@ -87,7 +87,7 @@ const {
 
   .hero-gallery {
     padding: $spacing-lg $spacing-md;
-    
+
     @media (max-width: $breakpoint-tablet) {
       padding: $spacing-md $spacing-sm;
     }
@@ -101,33 +101,33 @@ const {
     &__image-wrapper {
       position: relative;
       border-radius: $border-radius;
-      overflow: hidden;
+      // overflow: hidden;
       box-shadow: $box-shadow-subtle;
       transition: $transition-smooth;
-      
+
       // Focus styles for accessibility
       &:focus-within {
         outline: 3px solid currentColor;
         outline-offset: 4px;
       }
-      
+
       // Hover effects
       &:hover {
         transform: translateY(-4px);
         box-shadow: $box-shadow-elevated;
       }
-      
+
       @media (max-width: $breakpoint-tablet) {
         border-radius: calc($border-radius * 0.75);
-        
+
         &:hover {
           transform: translateY(-2px);
         }
       }
-      
+
       @media (max-width: $breakpoint-mobile) {
         border-radius: calc($border-radius * 0.5);
-        
+
         &:hover {
           transform: none;
           box-shadow: $box-shadow-subtle;
@@ -140,24 +140,24 @@ const {
       height: auto;
       display: block;
       transition: $transition-smooth;
-      
+
       // Ensure crisp rendering
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
-      
+
       // Aspect ratio container for consistent layout
       aspect-ratio: 16 / 9;
       object-fit: cover;
       object-position: center;
-      
+
       @media (max-width: $breakpoint-tablet) {
         aspect-ratio: 4 / 3;
       }
-      
+
       @media (max-width: $breakpoint-mobile) {
         aspect-ratio: 3 / 2;
       }
-      
+
       // Loading state
       &[data-loading] {
         background: linear-gradient(
@@ -186,15 +186,15 @@ const {
   @media (prefers-reduced-motion: reduce) {
     .hero-gallery__image-wrapper {
       transition: none;
-      
+
       &:hover {
         transform: none;
       }
     }
-    
+
     .hero-gallery__image {
       transition: none;
-      
+
       &[data-loading] {
         animation: none;
       }
@@ -212,7 +212,7 @@ const {
   @media (prefers-color-scheme: dark) {
     .hero-gallery__image-wrapper {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      
+
       &:hover {
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
       }
@@ -225,7 +225,7 @@ const {
       break-inside: avoid;
       page-break-inside: avoid;
     }
-    
+
     .hero-gallery__image-wrapper {
       box-shadow: none;
       transform: none !important;
@@ -237,9 +237,9 @@ const {
     .hero-gallery {
       padding: $spacing-xl $spacing-lg;
     }
-    
+
     .hero-gallery__image-wrapper {
       border-radius: calc($border-radius * 1.25);
     }
   }
-</style> 
+</style>

@@ -39,6 +39,10 @@
     var(--color-neutral-100),
     var(--color-neutral-900)
   );
+  --background-color-solid: light-dark(
+    rgb(from var(--color-neutral-100) r g b),
+    rgb(from var(--color-neutral-900) r g b)
+  );
   --icon-color: light-dark(var(--color-neutral-800), var(--color-neutral-100));
   --link-color: light-dark(
     var(--color-primary-400),

@@ -82,7 +82,7 @@
 }
 
 .truncate {
-  overflow: clip;
+  // overflow: clip;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -100,7 +100,7 @@
 
 .sr-only {
   position: absolute;
-  overflow: clip;
+  // overflow: clip;
   clip: rect(0 0 0 0);
   margin: 0;
   border: 0;

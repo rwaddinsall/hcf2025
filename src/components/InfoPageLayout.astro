@@ -37,14 +37,13 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
         {
           infoSections && infoSections.length > 0 && (
             <div class="info-sections">
-              <Accordion class="info-accordion">
+              <Accordion>
                 {infoSections.map((section, index) => (
                   <AccordionItem 
                     title={section.title}
                     variant="chevron"
                     name="info-accordion"
                     open={index === 0}
-                    class="info-accordion-item"
                   >
                     <div class="section-content">
                       {/* 
@@ -147,70 +146,6 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     margin-top: var(--space-xl);
   }
 
-  // Custom styling for accessible-astro-components Accordion
-  :global(.info-accordion) {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-    
-    // Remove default margins and improve spacing
-    > * + * {
-      margin-top: 0;
-    }
-  }
-
-  :global(.info-accordion-item) {
-    border: 1px solid var(--border-color-subtle);
-    border-radius: var(--radius-m);
-    overflow: hidden;
-    background: var(--background-color);
-    box-shadow: var(--elevation-1);
-    transition: 
-      box-shadow var(--animation-speed-fast) var(--cubic-bezier),
-      border-color var(--animation-speed-fast) var(--cubic-bezier);
-
-    &:hover {
-      box-shadow: var(--elevation-2);
-      border-color: var(--border-color);
-    }
-
-    // Style the summary/header
-    summary {
-      padding: var(--space-m) var(--space-l);
-      font-family: var(--font-heading);
-      font-size: var(--font-size-1);
-      font-weight: 600;
-      line-height: 1.4;
-      color: var(--foreground-color);
-      cursor: pointer;
-      transition: 
-        background-color var(--animation-speed-fast) var(--cubic-bezier),
-        color var(--animation-speed-fast) var(--cubic-bezier);
-      
-      &:hover,
-      &:focus-visible {
-        background-color: var(--color-neutral-200);
-      }
-      
-      &:focus-visible {
-        outline: 2px solid var(--link-color);
-        outline-offset: -2px;
-      }
-
-      // Remove default list styling
-      list-style: none;
-      
-      &::-webkit-details-marker {
-        display: none;
-      }
-    }
-
-    // Style the content area
-    > div:not(summary) {
-      border-top: 1px solid var(--border-color-subtle);
-    }
-  }
-
   .section-content {
     padding: var(--space-l);
     
@@ -308,11 +243,6 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
 
     .info-content .container {
       padding: 0 var(--space-s);
-    }
-
-    :global(.info-accordion-item summary) {
-      padding: var(--space-m);
-      font-size: var(--font-size-0);
     }
 
     .section-content {

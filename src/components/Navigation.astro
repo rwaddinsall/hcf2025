@@ -29,256 +29,156 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
 
 <script>
   document.addEventListener('astro:page-load', () => {
-    // variables
     const mainNav = document.querySelector(
-      '#main-navigation',
+      '#main-navigation'
     ) as HTMLElement | null;
     if (!mainNav) return;
 
-    const mainMenu = mainNav.querySelector('ul') as HTMLUListElement | null;
-    const dropdownMenus = [
-      ...document.querySelectorAll('.has-dropdown button'),
+    const dropdownButtons = [
+      ...mainNav.querySelectorAll('.has-dropdown button'),
     ] as HTMLButtonElement[];
 
-    // functions
+    /**
+     * Sets active menu item based on current pathname
+     */
     const setActiveMenuItem = (): void => {
-      const mobileDesktopMenus = mainNav.querySelectorAll('nav > ul');
-      const currentPathname = window.location.pathname;
+      const menus = mainNav.querySelectorAll('nav > ul');
+      const currentPath = window.location.pathname;
 
-      mobileDesktopMenus.forEach((menu) => {
+      menus.forEach((menu) => {
         const menuItems = [
           ...menu.querySelectorAll('.menu-item'),
         ] as HTMLLIElement[];
 
-        menuItems.forEach((menuItem) => {
-          const menuLink = menuItem.querySelector(
-            'a:not([rel*="external"])',
+        menuItems.forEach((item) => {
+          const link = item.querySelector(
+            'a:not([rel*="external"])'
           ) as HTMLAnchorElement;
-          if (!menuLink) return;
+          if (!link) return;
 
-          if (
-            currentPathname.includes(menuLink.pathname.replaceAll('/', '')) &&
-            menuLink.textContent !== 'Home'
-          ) {
-            menuLink.classList.add('is-active');
-            menuLink.setAttribute('aria-current', 'page');
-          } else if (
-            menuLink.textContent === 'Home' &&
-            currentPathname === '/'
-          ) {
-            menuLink.classList.add('is-active');
-            menuLink.setAttribute('aria-current', 'page');
+          // Remove existing active states
+          link.classList.remove('is-active');
+          link.removeAttribute('aria-current');
+
+          // Set active state
+          const isHome =
+            link.textContent?.trim() === 'Home' && currentPath === '/';
+          const isCurrentPage =
+            currentPath.includes(link.pathname.replaceAll('/', '')) &&
+            link.textContent?.trim() !== 'Home';
+
+          if (isHome || isCurrentPage) {
+            link.classList.add('is-active');
+            link.setAttribute('aria-current', 'page');
           }
         });
       });
     };
 
+    /**
+     * Checks if dropdown would overflow viewport
+     */
     const isOutOfViewport = (element: Element): boolean => {
-      const elementBounds = element.getBoundingClientRect();
+      const bounds = element.getBoundingClientRect();
       return (
-        elementBounds.right >
+        bounds.right >
         (window.innerWidth || document.documentElement.clientWidth)
       );
     };
 
-    const openDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
-      const dropdownList = dropdownMenu.parentNode?.querySelector(
-        'ul',
+    /**
+     * Opens a dropdown menu
+     */
+    const openDropdown = (button: HTMLButtonElement): void => {
+      const dropdown = button.parentNode?.querySelector(
+        'ul'
       ) as HTMLUListElement | null;
-      if (!dropdownList) return;
+      if (!dropdown) return;
 
-      dropdownMenu.classList.add('show');
-      dropdownMenu.setAttribute('aria-expanded', 'true');
+      button.classList.add('show');
+      button.setAttribute('aria-expanded', 'true');
 
-      if (isOutOfViewport(dropdownList)) {
-        dropdownList.style.left = 'auto';
+      // Adjust position if needed
+      if (isOutOfViewport(dropdown)) {
+        dropdown.style.left = 'auto';
+        dropdown.style.right = '0';
       }
     };
 
-    const closeDropdownMenu = (dropdownMenu: HTMLButtonElement): void => {
-      dropdownMenu.classList.remove('show');
-      dropdownMenu.setAttribute('aria-expanded', 'false');
-    };
+    /**
+     * Closes a dropdown menu
+     */
+    const closeDropdown = (button: HTMLButtonElement): void => {
+      button.classList.remove('show');
+      button.setAttribute('aria-expanded', 'false');
 
-    const closeAllDropdownMenus = (): void => {
-      for (let i = 0; i < dropdownMenus.length; i++) {
-        closeDropdownMenu(dropdownMenus[i]);
+      const dropdown = button.parentNode?.querySelector(
+        'ul'
+      ) as HTMLUListElement | null;
+      if (dropdown) {
+        dropdown.style.left = '';
+        dropdown.style.right = '';
       }
     };
 
-    const toggleDropdownMenu = (event: MouseEvent): void => {
-      const target = event.target as HTMLButtonElement;
-      if (target.getAttribute('aria-expanded') === 'false') {
-        closeAllDropdownMenus();
-        openDropdownMenu(target);
-      } else {
-        closeDropdownMenu(target);
+    /**
+     * Closes all open dropdowns
+     */
+    const closeAllDropdowns = (): void => {
+      dropdownButtons.forEach(closeDropdown);
+    };
+
+    /**
+     * Toggles dropdown open/closed state
+     */
+    const toggleDropdown = (event: Event): void => {
+      event.preventDefault();
+      const button = event.target as HTMLButtonElement;
+      const isOpen = button.getAttribute('aria-expanded') === 'true';
+
+      closeAllDropdowns();
+
+      if (!isOpen) {
+        openDropdown(button);
       }
     };
 
-    // execution
-    mainMenu &&
-      mainMenu.addEventListener('keydown', (event: KeyboardEvent) => {
-        const element = event.target as Element;
-        const currentMenuItem = element.closest('li');
-        const menuItems = [
-          ...mainMenu.querySelectorAll('.menu-item'),
-        ] as HTMLLIElement[];
-        const currentDropdownMenu = element.closest(
-          '.has-dropdown button',
-        ) as HTMLButtonElement | null;
-        const currentDropdownMenuItem = element.closest(
-          '.has-dropdown li',
-        ) as HTMLLIElement | null;
-        const currentIndex = currentMenuItem
-          ? menuItems.findIndex((item) => item === currentMenuItem)
-          : -1;
-
-        const key = event.key;
-        let targetItem: Element | null = null;
-
-        if (key === 'ArrowRight') {
-          if (
-            currentMenuItem &&
-            menuItems.indexOf(currentMenuItem as HTMLLIElement) ===
-              menuItems.length - 1
-          ) {
-            targetItem = menuItems[0];
-          } else if (currentMenuItem) {
-            targetItem = menuItems[currentIndex + 1];
-          }
-        }
-
-        if (key === 'ArrowLeft') {
-          if (
-            currentMenuItem &&
-            menuItems.indexOf(currentMenuItem as HTMLLIElement) === 0
-          ) {
-            targetItem = menuItems[menuItems.length - 1];
-          } else if (currentMenuItem) {
-            targetItem = menuItems[currentIndex - 1];
-          }
-        }
-
-        if (key === 'Escape') {
-          targetItem = menuItems[0];
-        }
-
-        if (currentDropdownMenu) {
-          const nextElement =
-            currentDropdownMenu.nextElementSibling as Element | null;
-          if (nextElement) {
-            const firstDropdownItem = nextElement.querySelector('li');
-
-            if (key === 'ArrowDown') {
-              event.preventDefault();
-              openDropdownMenu(currentDropdownMenu);
-              targetItem = firstDropdownItem;
-            }
-          }
-
-          if (key === 'Escape') {
-            closeDropdownMenu(currentDropdownMenu);
-          }
-        }
-
-        if (currentDropdownMenuItem) {
-          const currentDropdownList =
-            currentDropdownMenuItem.parentNode as Element | null;
-          if (currentDropdownList) {
-            const dropdownMenuItems = [
-              ...currentDropdownList.querySelectorAll('li'),
-            ] as HTMLLIElement[];
-            const currentIndex = dropdownMenuItems.findIndex(
-              (item) => item === currentDropdownMenuItem,
-            );
-
-            if (key === 'ArrowDown') {
-              event.preventDefault();
-
-              if (
-                dropdownMenuItems.indexOf(currentDropdownMenuItem) ===
-                dropdownMenuItems.length - 1
-              ) {
-                targetItem = dropdownMenuItems[0];
-              } else {
-                targetItem = dropdownMenuItems[currentIndex + 1];
-              }
-            }
-
-            if (key === 'ArrowUp') {
-              event.preventDefault();
-
-              if (dropdownMenuItems.indexOf(currentDropdownMenuItem) === 0) {
-                targetItem = dropdownMenuItems[dropdownMenuItems.length - 1];
-              } else {
-                targetItem = dropdownMenuItems[currentIndex - 1];
-              }
-            }
-
-            if (key === 'Escape') {
-              const currentDropdownMenu =
-                currentDropdownList.previousElementSibling as HTMLButtonElement | null;
-              if (currentDropdownMenu) {
-                targetItem = currentDropdownMenu.parentElement;
-                closeAllDropdownMenus();
-              }
-            }
-
-            if (key === 'Tab') {
-              const currentDropdownMenu =
-                currentDropdownList.previousElementSibling as HTMLButtonElement | null;
-              if (currentDropdownMenu) {
-                if (
-                  dropdownMenuItems.indexOf(currentDropdownMenuItem) ===
-                  dropdownMenuItems.length - 1
-                ) {
-                  closeDropdownMenu(currentDropdownMenu);
-                }
-              }
-            }
-          }
-        }
-
-        if (targetItem) {
-          const focusableElement = targetItem.querySelector(
-            'a, button, input',
-          ) as HTMLElement | null;
-          if (focusableElement) {
-            focusableElement.focus();
-          }
-        }
-      });
-
-    dropdownMenus &&
-      dropdownMenus.forEach((dropdownMenu) => {
-        dropdownMenu.addEventListener(
-          'click',
-          toggleDropdownMenu as EventListener,
-        );
-      });
-
-    setActiveMenuItem();
-    window.addEventListener('click', (event: MouseEvent) => {
-      const element = event.target as Element;
-      if (
-        !element.hasAttribute('aria-haspopup') &&
-        !element.classList.contains('submenu-item')
-      ) {
-        closeAllDropdownMenus();
-      }
-    });
-
-    // Sticky nav shadow toggle
-    const handleSticky = () => {
-      if (window.scrollY > 0) {
+    /**
+     * Handles sticky navigation shadow effect
+     */
+    const handleStickyNav = (): void => {
+      if (window.scrollY > 10) {
+        // Changed from 0 to 10 for better trigger
         mainNav.classList.add('sticky');
       } else {
         mainNav.classList.remove('sticky');
       }
     };
-    window.addEventListener('scroll', handleSticky, { passive: true });
-    handleSticky(); // Initial check
+
+    // Event Listeners
+    dropdownButtons.forEach((button) => {
+      button.addEventListener('click', toggleDropdown);
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (event: Event) => {
+      const target = event.target as Element;
+      if (!target.closest('.has-dropdown')) {
+        closeAllDropdowns();
+      }
+    });
+
+    // Close dropdowns on Escape key
+    document.addEventListener('keydown', (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeAllDropdowns();
+      }
+    });
+
+    // Initialize
+    setActiveMenuItem();
+    window.addEventListener('scroll', handleStickyNav, { passive: true });
+    handleStickyNav(); // Initial check
   });
 </script>
 
@@ -289,19 +189,24 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
   #main-navigation {
     position: sticky;
     top: 0;
-    z-index: 1000;
-    background: var(--background-color);
-    transition: box-shadow 0.3s var(--cubic-bezier);
-    box-shadow: none;
 
-    @media (min-width: 0px) {
-      &.sticky {
-        box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.07);
+    transition: box-shadow 0.3s var(--cubic-bezier);
+
+    &.sticky {
+      box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.15);
+      border-bottom: 1px solid var(--border-color-subtle);
+    }
+
+    // Fallback for browsers that don't support position: sticky
+    @supports not (position: sticky) {
+      position: fixed;
+      width: 100%;
+
+      & + * {
+        margin-top: calc(var(--space-xl) + var(--space-l));
       }
     }
-  }
 
-  #main-navigation {
     > .container {
       display: flex;
       flex-wrap: wrap;
@@ -332,6 +237,10 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     @include breakpoint('nav') {
       .mobile-menu {
         display: none;
+
+        &.show {
+          display: none;
+        }
       }
 
       .responsive-toggle {
@@ -359,6 +268,8 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         display: flex;
         gap: var(--space-m);
         list-style-type: none;
+        margin: 0;
+        padding: 0;
 
         li {
           align-content: center;
@@ -432,15 +343,16 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         align-items: center;
         gap: var(--space-4xs);
         margin-block-start: -1px;
+        background: none;
+        border: none;
+        cursor: pointer;
 
         svg {
-          transition: all var(--animation-speed-instant) var(--cubic-bezier);
+          transition: transform var(--animation-speed-fast) var(--cubic-bezier);
         }
 
-        &.show {
-          svg {
-            scale: -1;
-          }
+        &.show svg {
+          transform: rotate(180deg);
         }
       }
 
@@ -449,36 +361,25 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         position: absolute;
         flex-direction: column;
         gap: var(--space-2xs);
-        translate: 0 1rem;
-        opacity: 0;
+        top: 100%;
+        left: 0;
+        right: 0;
         z-index: 100;
-        inset-block-start: 125%;
-        inset-inline-end: 0;
-        inset-inline-start: 0;
-        box-shadow: var(--elevation-4);
+        background-color: var(--background-color);
         border: 2px solid var(--border-color-subtle);
         border-radius: var(--radius-l);
-        background-color: var(--background-color);
+        box-shadow: var(--elevation-4);
         padding: var(--space-m);
-        min-inline-size: 275px;
+        min-width: 275px;
+        margin-top: var(--space-xs);
 
         @media (prefers-reduced-motion: no-preference) {
-          transition-behavior: allow-discrete;
-          transition-duration: var(--animation-speed-fast);
-          transition-property: display, opacity, translate;
-          transition-timing-function: var(--cubic-bezier);
+          transition: opacity var(--animation-speed-fast) var(--cubic-bezier);
         }
       }
 
       > button.show ~ ul {
         display: flex;
-        translate: 0;
-        opacity: 1;
-
-        @starting-style {
-          translate: 0 1rem;
-          opacity: 0;
-        }
       }
     }
 
@@ -487,7 +388,6 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
       padding: 0;
 
       @include breakpoint('nav') {
-        // Align with the menu items
         margin-block-start: 7px;
       }
 
@@ -509,5 +409,15 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         }
       }
     }
+  }
+
+  // Ensure body doesn't have unnecessary top margin that could interfere
+  body {
+    margin: 0;
+  }
+
+  // Smooth scroll behavior when jumping to anchors past sticky nav
+  html {
+    scroll-padding-top: calc(var(--space-xl) + var(--space-l));
   }
 </style>

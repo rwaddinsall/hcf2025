@@ -46,30 +46,13 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
       const currentPath = window.location.pathname;
 
       menus.forEach((menu) => {
-        const menuItems = [
-          ...menu.querySelectorAll('.menu-item'),
-        ] as HTMLLIElement[];
-
-        menuItems.forEach((item) => {
-          const link = item.querySelector(
-            'a:not([rel*="external"])'
-          ) as HTMLAnchorElement;
-          if (!link) return;
-
-          // Remove existing active states
-          link.classList.remove('is-active');
-          link.removeAttribute('aria-current');
-
-          // Set active state
-          const isHome =
-            link.textContent?.trim() === 'Home' && currentPath === '/';
-          const isCurrentPage =
-            currentPath.includes(link.pathname.replaceAll('/', '')) &&
-            link.textContent?.trim() !== 'Home';
-
-          if (isHome || isCurrentPage) {
-            link.classList.add('is-active');
-            link.setAttribute('aria-current', 'page');
+        const links = menu.querySelectorAll('a');
+        links.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href === currentPath) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
           }
         });
       });
@@ -81,8 +64,7 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     const isOutOfViewport = (element: Element): boolean => {
       const bounds = element.getBoundingClientRect();
       return (
-        bounds.right >
-        (window.innerWidth || document.documentElement.clientWidth)
+        bounds.right > (window.innerWidth || document.documentElement.clientWidth)
       );
     };
 
@@ -148,7 +130,6 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
      */
     const handleStickyNav = (): void => {
       if (window.scrollY > 10) {
-        // Changed from 0 to 10 for better trigger
         mainNav.classList.add('sticky');
       } else {
         mainNav.classList.remove('sticky');
@@ -189,6 +170,8 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
   #main-navigation {
     position: sticky;
     top: 0;
+    z-index: 1000;
+    background-color: var(--background-color);
 
     transition: box-shadow 0.3s var(--cubic-bezier);
 
@@ -201,9 +184,10 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     @supports not (position: sticky) {
       position: fixed;
       width: 100%;
+      z-index: 1000;
 
       & + * {
-        margin-top: calc(var(--space-xl) + var(--space-l));
+        margin-top: var(--space-xl);
       }
     }
 
@@ -219,7 +203,8 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
       display: none;
 
       &.show {
-        display: block;
+        display: flex;
+        flex-direction: column;
       }
     }
 
@@ -236,11 +221,7 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     // Desktop: switch to desktop menu at nav breakpoint
     @include breakpoint('nav') {
       .mobile-menu {
-        display: none;
-
-        &.show {
-          display: none;
-        }
+        display: none !important;
       }
 
       .responsive-toggle {
@@ -248,7 +229,7 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
       }
 
       .desktop-menu {
-        display: block;
+        display: flex;
       }
     }
 
@@ -266,47 +247,11 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     nav {
       > ul {
         display: flex;
+        flex-wrap: wrap;
         gap: var(--space-m);
-        list-style-type: none;
+        list-style: none;
         margin: 0;
         padding: 0;
-
-        li {
-          align-content: center;
-        }
-
-        a:hover,
-        a:focus-visible,
-        .is-active,
-        button[aria-expanded='true'],
-        .has-dropdown > button:hover,
-        .has-dropdown > button:focus-visible {
-          text-decoration: underline;
-          text-decoration-style: wavy;
-          text-decoration-thickness: 1px;
-          text-underline-offset: 7px;
-        }
-
-        .is-active {
-          font-weight: bold;
-        }
-
-        .highlight a {
-          display: inline-flex;
-          align-items: center;
-          gap: var(--space-2xs);
-          transition: all var(--animation-speed-fast) var(--cubic-bezier);
-          margin-block-start: calc(var(--space-4xs) * -1);
-          border: 1px solid var(--foreground-color);
-          border-radius: var(--radius-large);
-          padding: var(--space-4xs) var(--space-2xs);
-          text-decoration: none;
-
-          &:where(:hover, :focus-visible) {
-            background-color: var(--foreground-color);
-            color: var(--background-color) !important;
-          }
-        }
       }
     }
 
@@ -319,19 +264,16 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
 
       > ul {
         flex-direction: column;
-        align-items: flex-start;
-
-        ul {
-          position: relative;
-          margin-block-start: var(--space-m);
-        }
+        gap: var(--space-s);
       }
 
       a,
       button {
-        display: block;
-        padding: var(--space-2xs) 0;
-        inline-size: 100%;
+        text-decoration: none;
+        color: var(--foreground-color);
+        font-size: var(--font-size-m);
+        line-height: var(--line-height-m);
+        font-weight: var(--font-weight-medium);
       }
     }
 
@@ -341,11 +283,15 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
       > button {
         display: flex;
         align-items: center;
-        gap: var(--space-4xs);
-        margin-block-start: -1px;
+        gap: var(--space-2xs);
         background: none;
         border: none;
+        padding: 0;
+        font-size: inherit;
+        font-weight: inherit;
         cursor: pointer;
+        text-decoration: none;
+        font-family: inherit;
 
         svg {
           transition: transform var(--animation-speed-fast) var(--cubic-bezier);
@@ -364,7 +310,7 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         top: 100%;
         left: 0;
         right: 0;
-        z-index: 100;
+        z-index: 9999;
         background-color: var(--background-color);
         border: 2px solid var(--border-color-subtle);
         border-radius: var(--radius-l);
@@ -376,6 +322,25 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
         @media (prefers-reduced-motion: no-preference) {
           transition: opacity var(--animation-speed-fast) var(--cubic-bezier);
         }
+
+        li {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        a {
+          display: block;
+          padding: var(--space-xs) var(--space-s);
+          text-decoration: none;
+          border-radius: var(--radius-s);
+          transition: background-color var(--animation-speed-fast) var(--cubic-bezier);
+
+          &:hover,
+          &:focus {
+            background-color: var(--color-neutral-200);
+          }
+        }
       }
 
       > button.show ~ ul {
@@ -384,30 +349,8 @@ import ResponsiveToggle from './ResponsiveToggle.astro';
     }
 
     .darkmode-toggle {
-      border: none;
       padding: 0;
-
-      @include breakpoint('nav') {
-        margin-block-start: 7px;
-      }
-
-      .icon {
-        inline-size: 30px;
-        block-size: 30px;
-      }
-
-      &:where(:hover, :focus-visible) {
-        box-shadow: none;
-      }
-
-      &:focus {
-        @include outline;
-
-        &:not(:focus-visible) {
-          outline: none;
-          box-shadow: none;
-        }
-      }
+      border: none;
     }
   }
 

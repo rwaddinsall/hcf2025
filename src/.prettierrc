@@ -11,3 +11,7 @@
     }
   ]
 }
+{
+  "printWidth": 40,
+  "htmlWhitespaceSensitivity": "ignore"
+  },

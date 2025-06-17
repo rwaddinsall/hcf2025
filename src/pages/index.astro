@@ -2,7 +2,8 @@
 import DefaultLayout from '@layouts/DefaultLayout.astro';
 import Hero from '@components/Hero.astro';
 import Lineup from '@components/Lineup.astro';
-
+import PageHeader from '@components/PageHeader.astro';
+import Feature from '@components/Feature.astro';
 ---
 
 <DefaultLayout title="Hopkins Creek Festival">
@@ -12,4 +13,139 @@ import Lineup from '@components/Lineup.astro';
   <section class="">
     <Lineup />
   </section>
+  
+  <!-- Festival Information Section -->
+  <section class="my-12">
+    <div class="container">
+      <PageHeader 
+        title="Festival Information" 
+        subtitle="Everything you need to know about Hopkins Creek Festival" 
+      />
+      
+      <div class="info-grid">
+        <Feature title="Camping & Accommodation">
+          <p>
+            There's nothing like the great outdoors. Come get acquainted with
+            the stars, the gumtrees, and the quiet hum of tents settling in.
+          </p>
+          <p>
+            Hopkins Creek offers two main camping areas: <strong>Uptown</strong>
+            and <strong>Downtown</strong>.
+          </p>
+          <p>
+            <a href="/info/camping" class="feature-link"
+              >Learn more about camping →</a
+            >
+          </p>
+        </Feature>
+
+        <Feature icon="mdi:bed" title="The Motor Inn">
+          <p>
+            Welcoming weary travellers, lone rangers, honeymooners, wayfarers
+            and wide-eyed roamers.
+          </p>
+          <p>
+            Lay your head beneath the sky at the Hopkins Creek Motor Inn — our
+            version of luxury, comfort, and low-maintenance setup.
+          </p>
+          <p>
+            <a href="/info/motor-inn" class="feature-link"
+              >Explore Motor Inn packages →</a
+            >
+          </p>
+        </Feature>
+
+        <Feature icon="mdi:wheelchair-accessibility" title="Accessibility">
+          <p>
+            Hopkins Creek is committed to creating an inclusive and accessible
+            event for all attendees.
+          </p>
+          <p>
+            We're currently working on making the festival experience safer,
+            easier and more enjoyable for everyone.
+          </p>
+          <p>
+            <a href="/info/accessibility" class="feature-link"
+              >View accessibility info →</a
+            >
+          </p>
+        </Feature>
+
+        <Feature icon="mdi:ticket" title="Tickets & Pricing">
+          <p>
+            Early bird specials, group discounts, and payment plans available.
+          </p>
+          <p>
+            Get your tickets now and secure your spot at Hopkins Creek Festival.
+          </p>
+          <p>
+            <a href="/info/tickets" class="feature-link"
+              >View ticket options →</a
+            >
+          </p>
+        </Feature>
+
+        <Feature icon="mdi:car" title="Getting There">
+          <p>
+            Located in the heart of nature, easily accessible by car with ample
+            parking.
+          </p>
+          <p>
+            Shuttle services and rideshare options available from nearby towns.
+          </p>
+          <p>
+            <a href="/info/getting-there" class="feature-link"
+              >Plan your journey →</a
+            >
+          </p>
+        </Feature>
+
+        <Feature icon="mdi:food" title="Food & Beverages">
+          <p>
+            Delicious local food vendors, dietary options, and refreshing
+            beverages.
+          </p>
+          <p>Support local businesses while enjoying amazing festival fare.</p>
+          <p>
+            <a href="/info/food-beverages" class="feature-link"
+              >Explore food options →</a
+            >
+          </p>
+        </Feature>
+      </div>
+    </div>
+  </section>
 </DefaultLayout>
+
+<style lang="scss">
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-l);
+    margin-top: var(--space-xl);
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  :global(.feature-link) {
+    display: inline-flex;
+    align-items: center;
+    margin-top: var(--space-s);
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+
+    &:hover {
+      color: var(--color-primary-dark);
+      transform: translateX(4px);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+  }
+</style>

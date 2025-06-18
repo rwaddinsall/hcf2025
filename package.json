@@ -61,6 +61,7 @@
     "@heroui/system": "^2.4.17",
     "@heroui/theme": "^2.4.17",
     "@iconify-json/mdi": "^1.2.3",
+    "@strapi/client": "^1.4.0",
     "@tailwindcss/vite": "^4.1.7",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",

@@ -140,6 +140,26 @@ export async function fetchArtists() {
 }
 
 /**
+ * Fetches scrolling header text
+ */
+export async function fetchScrollingHeaderText() {
+  return fetchApi<import("../interfaces/strapi").ScrollingHeaderText>({
+    endpoint: "scrolling-header-text",
+    wrappedByKey: "data",
+  });
+}
+
+/**
+ * Fetches acknowledgement of country text
+ */
+export async function fetchAcknowledgementOfCountry() {
+  return fetchApi<import("../interfaces/strapi").AcknowledgementOfCountry>({
+    endpoint: "acknowledgement-of-country",
+    wrappedByKey: "data",
+  });
+}
+
+/**
  * Helper function to construct Strapi media URLs
  */
 export function getStrapiImageUrl(image: any): string | null {
@@ -175,9 +195,9 @@ export function formatStrapiDate(dateString: string): string {
  */
 export async function fetchCTAData() {
   return fetchApi<any>({
-    endpoint: "global-settings", // or whatever your CTA endpoint is called
+    endpoint: "big-link",
     query: {
-      "populate[ctaButtons][populate]": "*",
+      "populate[BigTicketLink]": "*",
     },
     wrappedByKey: "data",
   });

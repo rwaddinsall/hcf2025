@@ -5,11 +5,20 @@
  * @description An accessible marquee/scrolling text component with smooth animation
  * Inspired by traditional acknowledgment scrollers but built for modern web
  */
+import {
+  fetchScrollingHeaderText,
+  fetchAcknowledgementOfCountry,
+} from "../lib/strapi";
+
 interface Props {
   /**
-   * The text content to scroll
+   * The text content to scroll (optional if using strapiType)
    */
-  text: string;
+  text?: string;
+  /**
+   * Fetch text from Strapi content type
+   */
+  strapiType?: "header" | "acknowledgement-of-country";
   /**
    * Animation duration in seconds
    */
@@ -31,27 +40,67 @@ interface Props {
    */
   ariaLabel?: string;
   /**
-   * Gradient fade on edges
-   */
-  showGradient?: boolean;
-  /**
    * Fixed width for the scrolling container (CSS value)
    */
   width?: string;
   /**
-   * Variant for different contexts (nav, footer, inline)
+   * Variant for different contexts (nav, acknowledgement-of-country, inline)
    */
-  variant?: "nav" | "footer" | "inline";
+  variant?: "nav" | "acknowledgement-of-country" | "inline";
+}
+
+// Fetch scrolling text from Strapi if strapiType is specified
+let strapiScrollingText:
+  | import("../interfaces/strapi").ScrollingHeaderText
+  | import("../interfaces/strapi").AcknowledgementOfCountry
+  | null = null;
+
+// Default fallback texts for when Strapi content is not available
+const defaultTexts = {
+  header:
+    "Welcome to Hopkins Creek Festival 2025 • Early Bird Tickets Available Now • Artists Announcement Coming Soon",
+  "acknowledgement-of-country":
+    "Hopkins Creek Festival 2025 • Follow us for updates • See you at the creek",
+};
+
+if (Astro.props.strapiType) {
+  try {
+    if (Astro.props.strapiType === "header") {
+      strapiScrollingText = await fetchScrollingHeaderText();
+    } else if (Astro.props.strapiType === "acknowledgement-of-country") {
+      strapiScrollingText = await fetchAcknowledgementOfCountry();
+    }
+  } catch (error) {
+    console.warn(
+      `Failed to fetch ${Astro.props.strapiType} scrolling text from Strapi. Using fallback text.`,
+      error instanceof Error ? error.message : String(error)
+    );
+    // Gracefully handle error - component will use fallback text
+  }
+}
+
+// Determine the text to display with intelligent fallbacks
+// Handle the simple Text field from Strapi schema
+let displayText = "";
+
+if (strapiScrollingText?.Text) {
+  // Use the Text field directly from Strapi
+  displayText = strapiScrollingText.Text;
+} else {
+  // Fallback to props or default text
+  displayText =
+    Astro.props.text ||
+    (Astro.props.strapiType ? defaultTexts[Astro.props.strapiType] : "") ||
+    "Welcome • Stay tuned for updates";
 }
 
 const {
-  text,
-  duration = 15, // Faster default speed
+  text = displayText,
+  duration = 15, // Hardcoded duration
   pauseOnHover = false, // No pause on hover by default
   pauseOnClick = false, // No pause on click by default
   class: className = "",
   ariaLabel = "Scrolling announcement",
-  showGradient = false, // Disabled by default
   width = "50%", // Default width
   variant = "inline", // Default variant
 } = Astro.props;
@@ -198,19 +247,19 @@ const {
       z-index: 1;
       pointer-events: none;
       opacity: 0.6;
-      font-size: 0.9rem;
+
       width: 100%;
     }
 
-    &--footer {
+    &--acknowledgement-of-country {
       width: 100%;
-      margin: 1rem 0;
-      padding: 0.75rem 0;
-      border-top: 1px solid var(--border-color-subtle);
-      border-bottom: 1px solid var(--border-color-subtle);
-      background: rgba(var(--foreground-color-rgb), 0.02);
-      font-size: 0.875rem;
-      opacity: 0.8;
+      opacity: 0.6;
+
+      // Make acknowledgement of country text bold using design system font weights
+      .scrolling-text__item {
+        font-weight: 600; // Using semibold from your design system
+        font-family: var(--font-body); // Using the body font
+      }
     }
 
     &--inline {

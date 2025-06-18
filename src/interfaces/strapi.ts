@@ -121,6 +121,25 @@ export type SingleArticleResponse = StrapiResponse<Article>;
 export type ArtistResponse = StrapiResponse<Artist[]>;
 export type SingleArtistResponse = StrapiResponse<Artist>;
 
+// UI Components
+export interface ScrollingTextComponent {
+  id: number;
+  text: string;
+}
+
+// Scrolling text interfaces
+export interface ScrollingHeaderText extends StrapiEntity {
+  Text: string;
+}
+
+export interface AcknowledgementOfCountry extends StrapiEntity {
+  Text: string;
+}
+
+export type ScrollingHeaderTextResponse = StrapiResponse<ScrollingHeaderText>;
+export type AcknowledgementOfCountryResponse =
+  StrapiResponse<AcknowledgementOfCountry>;
+
 // General purpose interfaces for dynamic content
 export interface MediaFormat {
   name: string;

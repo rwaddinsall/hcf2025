@@ -8,16 +8,18 @@
 import Logo from "./Logo.astro";
 import { Icon } from "astro-icon/components";
 import { SkipLink } from "accessible-astro-components";
+import ScrollingText from "./ScrollingText.astro";
 ---
 
 <header class="hopkins-header">
   <SkipLink />
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
+    <!-- Scrolling text positioned absolutely to start from container edge -->
+
     <div class="nav-container">
       <!-- Logo Section -->
-      <div class="nav-brand">
-        <Logo />
-      </div>
+      <div class="nav-brand"></div>
+      <ScrollingText text="November 7 - 9. Tarrrarang, VIC" />
 
       <!-- Desktop Navigation -->
       <div class="nav-menu" id="nav-menu">
@@ -510,6 +512,7 @@ import { SkipLink } from "accessible-astro-components";
     border-bottom: 1px solid transparent;
     transition: var(--nav-transition);
     min-height: var(--nav-height);
+    position: relative;
 
     &.nav-scrolled {
       background: var(--nav-bg-scrolled);
@@ -526,6 +529,8 @@ import { SkipLink } from "accessible-astro-components";
     align-items: center;
     justify-content: space-between;
     height: var(--nav-height);
+    position: relative;
+    z-index: 2; // Above scrolling text
   }
 
   .nav-brand {

@@ -1,5 +1,6 @@
 ---
 import Logo from "./Logo.astro";
+import ScrollingText from "./ScrollingText.astro";
 
 /**
  * Footer Component
@@ -39,9 +40,10 @@ const currentYear = new Date().getFullYear();
       </div>
       <div class="flex flex-col gap-4">
         <Logo loading="lazy" />
-        <p class="leading-[1.75]">
-          Hopkins Creek Festival - A celebration of music, art, and community.
-        </p>
+        <ScrollingText
+          text="Hopkins Creek Festival is a celebration of music, art, and community."
+          width="100%"
+        />
       </div>
     </div>
   </section>

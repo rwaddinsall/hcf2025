@@ -1,0 +1,303 @@
+---
+/**
+ * ScrollingText Component
+ *
+ * @description An accessible marquee/scrolling text component with smooth animation
+ * Inspired by traditional acknowledgment scrollers but built for modern web
+ */
+interface Props {
+  /**
+   * The text content to scroll
+   */
+  text: string;
+  /**
+   * Animation duration in seconds
+   */
+  duration?: number;
+  /**
+   * Whether to pause on hover
+   */
+  pauseOnHover?: boolean;
+  /**
+   * Whether to pause on click/tap
+   */
+  pauseOnClick?: boolean;
+  /**
+   * Additional CSS classes
+   */
+  class?: string;
+  /**
+   * ARIA label for the scrolling region
+   */
+  ariaLabel?: string;
+  /**
+   * Gradient fade on edges
+   */
+  showGradient?: boolean;
+  /**
+   * Fixed width for the scrolling container (CSS value)
+   */
+  width?: string;
+  /**
+   * Variant for different contexts (nav, footer, inline)
+   */
+  variant?: "nav" | "footer" | "inline";
+}
+
+const {
+  text,
+  duration = 15, // Faster default speed
+  pauseOnHover = false, // No pause on hover by default
+  pauseOnClick = false, // No pause on click by default
+  class: className = "",
+  ariaLabel = "Scrolling announcement",
+  showGradient = false, // Disabled by default
+  width = "50%", // Default width
+  variant = "inline", // Default variant
+} = Astro.props;
+---
+
+<div
+  class={`scrolling-text-container scrolling-text-container--${variant} ${className}`}
+  data-pause-hover={pauseOnHover}
+  data-pause-click={pauseOnClick}
+  style={`--scroll-duration: ${duration}s; --container-width: ${width}`}
+>
+  <div
+    class="scrolling-text-wrapper"
+    role="region"
+    aria-label={ariaLabel}
+    aria-live="off"
+  >
+    <!-- Accessible static version for screen readers -->
+    <div class="sr-only" aria-atomic="true">
+      {text}
+    </div>
+
+    <!-- Visual scrolling content -->
+    <div class="scrolling-text" aria-hidden="true">
+      <span class="scrolling-text__item">{text}</span>
+      <span class="scrolling-text__item">{text}</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const containers = document.querySelectorAll(".scrolling-text-container");
+
+    containers.forEach((container) => {
+      const pauseOnHover =
+        container.getAttribute("data-pause-hover") === "true";
+      const pauseOnClick =
+        container.getAttribute("data-pause-click") === "true";
+      const scrollingElement = container.querySelector(
+        ".scrolling-text"
+      ) as HTMLElement;
+
+      if (!scrollingElement) return;
+
+      let isPaused = false;
+
+      // Pause on hover functionality
+      if (pauseOnHover) {
+        container.addEventListener("mouseenter", () => {
+          scrollingElement.style.animationPlayState = "paused";
+        });
+
+        container.addEventListener("mouseleave", () => {
+          if (!isPaused) {
+            scrollingElement.style.animationPlayState = "running";
+          }
+        });
+      }
+
+      // Pause on click functionality
+      if (pauseOnClick) {
+        container.addEventListener("click", () => {
+          isPaused = !isPaused;
+          scrollingElement.style.animationPlayState = isPaused
+            ? "paused"
+            : "running";
+
+          // Announce state change to screen readers
+          const announcement = isPaused
+            ? "Scrolling paused"
+            : "Scrolling resumed";
+          const liveRegion = document.createElement("div");
+          liveRegion.setAttribute("role", "status");
+          liveRegion.setAttribute("aria-live", "polite");
+          liveRegion.className = "sr-only";
+          liveRegion.textContent = announcement;
+          document.body.appendChild(liveRegion);
+
+          setTimeout(() => {
+            document.body.removeChild(liveRegion);
+          }, 1000);
+        });
+
+        // Add keyboard support
+        container.setAttribute("tabindex", "0");
+        container.setAttribute("role", "button");
+        container.setAttribute(
+          "aria-label",
+          "Click to pause or resume scrolling"
+        );
+
+        container.addEventListener("keydown", (e) => {
+          if (
+            (e as KeyboardEvent).key === "Enter" ||
+            (e as KeyboardEvent).key === " "
+          ) {
+            e.preventDefault();
+            (container as HTMLElement).click();
+          }
+        });
+      }
+    });
+  });
+</script>
+
+<style lang="scss">
+  @use "../assets/scss/base/breakpoint" as *;
+  @use "../assets/scss/base/mixins" as *;
+
+  // CSS Custom Properties for easy customization
+  .scrolling-text-container {
+    --scroll-duration: 15s; // Faster default
+    --container-width: 50%; // Default width
+    --gradient-width: 50px;
+    --gradient-color-start: var(--background-color);
+    --gradient-color-end: transparent;
+
+    position: relative;
+    width: var(--container-width);
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: block;
+    contain: layout style; // Prevent layout bleeding
+
+    // Only show pointer cursor if click is enabled
+    &[data-pause-click="true"] {
+      cursor: pointer;
+    }
+
+    // Focus styles for keyboard navigation using project mixin
+    &:focus-visible {
+      @include outline;
+      border-radius: var(--radius-s);
+    }
+
+    // Variant-specific styles
+    &--nav {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.6;
+      font-size: 0.9rem;
+      width: 100%;
+    }
+
+    &--footer {
+      width: 100%;
+      margin: 1rem 0;
+      padding: 0.75rem 0;
+      border-top: 1px solid var(--border-color-subtle);
+      border-bottom: 1px solid var(--border-color-subtle);
+      background: rgba(var(--foreground-color-rgb), 0.02);
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    &--inline {
+      // Default inline behavior - no special positioning
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+
+  // Wrapper for the scrolling content
+  .scrolling-text-wrapper {
+    position: relative;
+    width: 100%;
+    height: 1.5em; // Fixed height to prevent layout shift
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+  }
+
+  // The actual scrolling element
+  .scrolling-text {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    align-items: center;
+    animation: scroll var(--scroll-duration) linear infinite;
+
+    // Smooth font rendering during animation
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .scrolling-text__item {
+    display: inline-block;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-right: var(--space-xl);
+
+    // Adjust spacing on mobile - using direct media query since breakpoint mixin only supports min-width
+    @media (max-width: 480px) {
+      padding-right: var(--space-l);
+    }
+  }
+
+  // Keyframe animation for scrolling
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      // Move by exactly 50% since we have 2 copies of the text
+      transform: translateX(-50%);
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .scrolling-text {
+      animation: none;
+
+      // Show ellipsis for truncated text
+      .scrolling-text__item:not(:first-child) {
+        display: none;
+      }
+
+      .scrolling-text__item:first-child {
+        padding-right: 0;
+
+        &::after {
+          content: "...";
+          padding-left: var(--space-xs);
+        }
+      }
+    }
+  }
+
+  // High contrast mode adjustments
+  @media (prefers-contrast: high) {
+    .scrolling-text-container {
+      border: 1px solid currentColor;
+      padding: var(--space-2xs) 0;
+    }
+  }
+
+  // Dark mode adjustments handled automatically via CSS custom properties
+</style>

@@ -1,215 +1,203 @@
-# COPILOT EDITS OPERATIONAL GUIDELINES
+# GITHUB COPILOT OPERATIONAL GUIDELINES
 
-## PRIME DIRECTIVE
+## PROJECT STACK
 
-    Avoid working on more than one file at a time.
-    Multiple simultaneous edits to a file will cause corruption.
-    Be chatting and teach about what you are doing while coding.
+- **Frontend**: Astro 5 + Sass + Tailwind CSS
+- **CMS**: Strapi (headless)
+- **Key Pattern**: Static generation with dynamic CMS content
 
-## LARGE FILE & COMPLEX CHANGE PROTOCOL
+## CORE PRINCIPLES
 
-### MANDATORY PLANNING PHASE
+- **One file at a time**: Focus on single file edits to prevent corruption
+- **Teach while coding**: Explain what I'm doing and why
+- **Plan before executing**: Always outline complex changes before implementation
+- **Respect existing patterns**: Always check project's design system and styles before creating new ones
 
-    When working with large files (>300 lines) or complex changes:
-    	1. ALWAYS start by creating a detailed plan BEFORE making any edits
-            2. Your plan MUST include:
-                   - All functions/sections that need modification
-                   - The order in which changes should be applied
-                   - Dependencies between changes
-                   - Estimated number of separate edits required
+## EDIT WORKFLOW
 
-            3. Format your plan as:
+### For Large Files (>300 lines) or Complex Changes
 
-## PROPOSED EDIT PLAN
+1. **CREATE DETAILED PLAN FIRST**
 
-    Working with: [filename]
-    Total planned edits: [number]
+   ```
+   ## PROPOSED EDIT PLAN
+   Working with: [filename]
+   Total planned edits: [number]
 
-### MAKING EDITS
+   Edit sequence:
+   1. [Specific change] - Purpose: [why]
+   2. [Next change] - Purpose: [why]
 
-    - Focus on one conceptual change at a time
-    - Show clear "before" and "after" snippets when proposing changes
-    - Include concise explanations of what changed and why
-    - Always check if the edit maintains the project's coding style
+   Do you approve this plan?
+   ```
 
-### Edit sequence:
+2. **WAIT FOR CONFIRMATION** before making any edits
 
-    1. [First specific change] - Purpose: [why]
-    2. [Second specific change] - Purpose: [why]
-    3. Do you approve this plan? I'll proceed with Edit [number] after your confirmation.
-    4. WAIT for explicit user confirmation before making ANY edits when user ok edit [number]
+3. **EXECUTE ONE EDIT AT A TIME**
+   - Show clear before/after snippets
+   - Explain what changed and why
+   - Mark progress: "✅ Completed edit [#] of [total]"
 
-### EXECUTION PHASE
+### For Simple Changes
 
-    - After each individual edit, clearly indicate progress:
-    	"✅ Completed edit [#] of [total]. Ready for next edit?"
-    - If you discover additional needed changes during editing:
-    - STOP and update the plan
-    - Get approval before continuing
+- Proceed directly with explanation
+- Still explain the reasoning behind changes
 
-### REFACTORING GUIDANCE
+## DESIGN SYSTEM & STYLING PROTOCOL
 
-    When refactoring large files:
-    - Break work into logical, independently functional chunks
-    - Ensure each intermediate state maintains functionality
-    - Consider temporary duplication as a valid interim step
-    - Always indicate the refactoring pattern being applied
+### BEFORE Making Styling Decisions
 
-### RATE LIMIT AVOIDANCE
+1. **Check for existing design system files:**
 
-    - For very large files, suggest splitting changes across multiple sessions
-    - Prioritize changes that are logically complete units
-    - Always provide clear stopping points
+   - Look for `/styles/`, `/css/`, `/scss/`, `/design-system/` directories
+   - Check for `tokens.css`, `variables.css`, `design-tokens.json`, or similar
+   - Review component libraries in `/components/` or `/ui/`
+   - Look for style guides, README files, or documentation
+   - **Check Tailwind config and custom utilities**
+   - **Review Sass partials and mixins**
 
-## General Requirements
+2. **Identify existing patterns:**
 
-    Use modern technologies as described below for all code suggestions. Prioritize clean, maintainable code with appropriate comments.
+   - Tailwind utility classes and custom configurations
+   - Sass variables, mixins, and functions
+   - Color variables and themes
+   - Typography scales and font families
+   - Spacing/sizing systems (margins, padding, grid systems)
+   - Component naming conventions
+
+3. **When adding new styles:**
+
+   - **FIRST**: Use Tailwind utilities when possible
+   - **SECOND**: Check existing Sass variables/mixins
+   - **THIRD**: Follow established naming conventions
+   - **LAST**: Only create new styles if truly necessary
+
+4. **Document design decisions:**
+   - Explain why existing styles don't meet the need
+   - Reference which existing patterns influenced new styles
+   - Suggest where new styles should be documented
+
+### Example Approach:
+
+```
+"I notice you need a button component. Let me check:
+- Existing button styles in `/components/Button/`
+- Tailwind config for custom colors/spacing
+- Sass variables in `/styles/_variables.scss`
+
+Based on the existing system, I'll use Tailwind's `bg-primary-500` and the existing `$button-padding` Sass variable rather than hardcoding values."
+```
+
+## TECHNOLOGY STANDARDS
+
+### Astro 5
+
+- Prefer static rendering for performance
+- Use islands architecture for JavaScript interactivity
+- Leverage built-in optimizations (images, ViewTransitions)
+- **Check for existing Astro component patterns before creating new ones**
+- Use content collections for structured data
+- Implement proper SEO with Astro's built-in features
+
+### Sass (SCSS)
+
+- Use modern Sass features: `@use`, `@forward`, modules
+- Avoid `@import` (deprecated)
+- Organize with partials: `_variables.scss`, `_mixins.scss`, `_components.scss`
+- Use BEM methodology for component styling
+- **Leverage existing mixins and functions before creating new ones**
+
+### Tailwind CSS
+
+- Prefer utility-first approach
+- Use `@apply` sparingly, only for complex component patterns
+- Leverage Tailwind's design tokens (spacing, colors, typography)
+- Use responsive prefixes and state variants
+- **Check tailwind.config.js for custom utilities and theme extensions**
+- Combine with Sass for complex calculations and dynamic values
+
+### Strapi CMS Integration
+
+- Use Astro's fetch for API calls
+- Implement proper error handling for CMS requests
+- Cache CMS responses appropriately
+- Type CMS responses with TypeScript interfaces
+- Handle missing/optional CMS content gracefully
+- Use environment variables for API endpoints
+
+### PHP (8.1+)
+
+- Use modern features: constructor property promotion, union types, match expressions, enums
+- Include `declare(strict_types=1);`
+- Follow PSR-12 standards
+- Add PHPDoc for static analysis
+
+### JavaScript (ES2020+)
+
+- Use: async/await, optional chaining, nullish coalescing, arrow functions
+- Avoid: `var`, jQuery, callback patterns
+- Include proper error handling with try-catch
+- Use ES modules
+
+### HTML/CSS
+
+- **FIRST**: Check existing Tailwind utilities and Sass patterns
+- Semantic HTML5 elements
+- WCAG 2.1 AA compliance minimum
+- Modern CSS: Grid, Flexbox, custom properties, logical properties
+- Responsive design with Tailwind's responsive system
+- Dark mode support using Tailwind's dark: variant
+- **Combine Tailwind utilities with Sass when needed for complex styling**
+
+## CODE QUALITY REQUIREMENTS
 
 ### Accessibility
 
-    - Ensure compliance with **WCAG 2.1** AA level minimum, AAA whenever feasible.
-    - Always suggest:
-    - Labels for form fields.
-    - Proper **ARIA** roles and attributes.
-    - Adequate color contrast.
-    - Alternative texts (`alt`, `aria-label`) for media elements.
-    - Semantic HTML for clear structure.
-    - Tools like **Lighthouse** for audits.
+- Always include ARIA labels and roles
+- Ensure keyboard navigation
+- Provide alt text for images
+- Use semantic markup
+- Test with Tailwind's focus: and sr-only utilities
 
-## Browser Compatibility
+### Performance
 
-    - Prioritize feature detection (`if ('fetch' in window)` etc.).
-        - Support latest two stable releases of major browsers:
-    - Firefox, Chrome, Edge, Safari (macOS/iOS)
-        - Emphasize progressive enhancement with polyfills or bundlers (e.g., **Babel**, **Vite**) as needed.
+- Optimize images with Astro's Image component
+- Use code splitting for JavaScript islands
+- Implement responsive images with srcset
+- Leverage Astro's static generation for fast loading
+- Purge unused Tailwind classes in production
 
-## PHP Requirements
+### Security
 
-    - **Target Version**: PHP 8.1 or higher
-    - **Features to Use**:
-    - Named arguments
-    - Constructor property promotion
-    - Union types and nullable types
-    - Match expressions
-    - Nullsafe operator (`?->`)
-    - Attributes instead of annotations
-    - Typed properties with appropriate type declarations
-    - Return type declarations
-    - Enumerations (`enum`)
-    - Readonly properties
-    - Emphasize strict property typing in all generated code.
-    - **Coding Standards**:
-    - Follow PSR-12 coding standards
-    - Use strict typing with `declare(strict_types=1);`
-    - Prefer composition over inheritance
-    - Use dependency injection
-    - **Static Analysis:**
-    - Include PHPDoc blocks compatible with PHPStan or Psalm for static analysis
-    - **Error Handling:**
-    - Use exceptions consistently for error handling and avoid suppressing errors.
-    - Provide meaningful, clear exception messages and proper exception types.
+- Sanitize all inputs from Strapi CMS
+- Use parameterized queries
+- Implement CSP headers
+- Secure cookie settings
+- Validate CMS content before rendering
 
-## HTML/CSS Requirements
+### Error Handling
 
-    - **HTML**:
-    - Use HTML5 semantic elements (`<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`, `<search>`, etc.)
-    - Include appropriate ARIA attributes for accessibility
-    - Ensure valid markup that passes W3C validation
-    - Use responsive design practices
-    - Optimize images using modern formats (`WebP`, `AVIF`)
-    - Include `loading="lazy"` on images where applicable
-    - Generate `srcset` and `sizes` attributes for responsive images when relevant
-    - Prioritize SEO-friendly elements (`<title>`, `<meta description>`, Open Graph tags)
+- Handle Strapi API failures gracefully
+- Distinguish between network, business logic, and runtime errors
+- Provide user-friendly messages for CMS content issues
+- Log technical details appropriately
+- Handle promise rejections explicitly
 
-    - **CSS**:
-    - Use modern CSS features including:
-    - CSS Grid and Flexbox for layouts
-    - CSS Custom Properties (variables)
-    - CSS animations and transitions
-    - Media queries for responsive design
-    - Logical properties (`margin-inline`, `padding-block`, etc.)
-    - Modern selectors (`:is()`, `:where()`, `:has()`)
-    - Follow BEM or similar methodology for class naming
-    - Use CSS nesting where appropriate
-    - Include dark mode support with `prefers-color-scheme`
-    - Prioritize modern, performant fonts and variable fonts for smaller file sizes
-    - Use modern units (`rem`, `vh`, `vw`) instead of traditional pixels (`px`) for better responsiveness
+## DOCUMENTATION
 
-## Astro 5 REQUIREMENTS
+- Include JSDoc comments for functions
+- Document Strapi content type relationships
+- Document complex Sass mixins and functions
+- Provide clear parameter and return types
+- Add security considerations where relevant
+- **Document any new design patterns or deviations from existing styles**
+- Document Tailwind config customizations
 
-    Component Design
-    astro
-    ---
-    // Static rendering preferred
-    ---
-    <slot name="header" />
+## RESPONSE FORMAT
 
-    {/* Client-side hydration */}
-    <Search client:load />
-    Performance Features
-    Built-in image optimization
-
-    ViewTransitions for SPA navigation
-
-    Content collections for structured data
-
-    Asset handling for fonts/media
-
-    Islands architecture for JavaScript
-
-## JavaScript Requirements
-
-    - **Minimum Compatibility**: ECMAScript 2020 (ES11) or higher
-    - **Features to Use**:
-    - Arrow functions
-    - Template literals
-    - Destructuring assignment
-    - Spread/rest operators
-    - Async/await for asynchronous code
-    - Classes with proper inheritance when OOP is needed
-    - Object shorthand notation
-    - Optional chaining (`?.`)
-    - Nullish coalescing (`??`)
-    - Dynamic imports
-    - BigInt for large integers
-    - `Promise.allSettled()`
-    - `String.prototype.matchAll()`
-    - `globalThis` object
-    - Private class fields and methods
-    - Export * as namespace syntax
-    - Array methods (`map`, `filter`, `reduce`, `flatMap`, etc.)
-    - **Avoid**:
-    - `var` keyword (use `const` and `let`)
-    - jQuery or any external libraries
-    - Callback-based asynchronous patterns when promises can be used
-    - Internet Explorer compatibility
-    - Legacy module formats (use ES modules)
-    - Limit use of `eval()` due to security risks
-    - **Performance Considerations:**
-    - Recommend code splitting and dynamic imports for lazy loading
-    **Error Handling**:
-    - Use `try-catch` blocks **consistently** for asynchronous and API calls, and handle promise rejections explicitly.
-    - Differentiate among:
-    - **Network errors** (e.g., timeouts, server errors, rate-limiting)
-    - **Functional/business logic errors** (logical missteps, invalid user input, validation failures)
-    - **Runtime exceptions** (unexpected errors such as null references)
-    - Provide **user-friendly** error messages (e.g., “Something went wrong. Please try again shortly.”) and log more technical details to dev/ops (e.g., via a logging service).
-    - Consider a central error handler function or global event (e.g., `window.addEventListener('unhandledrejection')`) to consolidate reporting.
-    - Carefully handle and validate JSON responses, incorrect HTTP status codes, etc.
-
-## Documentation Requirements
-
-    - Include JSDoc comments for JavaScript/TypeScript.
-    - Document complex functions with clear examples.
-    - Maintain concise Markdown documentation.
-    - Minimum docblock info: `param`, `return`, `throws`, `author`
-
-## Security Considerations
-
-    - Sanitize all user inputs thoroughly.
-    - Parameterize database queries.
-    - Enforce strong Content Security Policies (CSP).
-    - Use CSRF protection where applicable.
-    - Ensure secure cookies (`HttpOnly`, `Secure`, `SameSite=Strict`).
-    - Limit privileges and enforce role-based access control.
-    - Implement detailed internal logging and monitoring.
+- Use 4 backticks for code blocks with language identifier
+- Include filepath comments for specific file modifications
+- Use `...existing code...` to indicate unchanged sections
+- Explain changes in Markdown outside code blocks
+- **When making styling changes, explain which existing patterns were referenced**
+- **Specify whether using Tailwind utilities, Sass, or combination**

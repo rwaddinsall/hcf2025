@@ -1,0 +1,131 @@
+# Netlify Configuration for Hopkins Creek Festival
+# Astro 5 + Strapi CMS deployment settings
+
+[build]
+  # Build command - Astro static site generation
+  command = "npm run build"
+  
+  # Output directory after build
+  publish = "dist"
+  
+  # Node.js version (use LTS for stability)
+  node_version = "20"
+
+[build.environment]
+  # Enable legacy bundle for compatibility
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--production=false"
+
+# Build processing settings
+[build.processing]
+  # Skip CSS processing (Astro handles this)
+  skip_processing = false
+
+[build.processing.css]
+  # Let Astro handle CSS optimization
+  bundle = false
+  minify = false
+
+[build.processing.js]
+  # Let Astro handle JS optimization
+  bundle = false
+  minify = false
+
+[build.processing.html]
+  # Let Astro handle HTML optimization
+  pretty_urls = true
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Performance headers
+    Cache-Control = "public, max-age=31536000, immutable"
+    
+    # Content Security Policy - adjust based on your needs
+    Content-Security-Policy = """
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.netlify.app https://*.netlify.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://*.strapi.io https://*.herokuapp.com https://*.railway.app;
+      media-src 'self' https:;
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+      upgrade-insecure-requests;
+    """
+
+# Cache static assets longer
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Handle SPA routing - redirect all requests to index.html for client-side routing
+# Uncomment if you need SPA functionality
+# [[redirects]]
+#   from = "/*"
+#   to = "/index.html"
+#   status = 200
+#   conditions = {Role = ["admin"]}
+
+# Handle 404s gracefully
+[[redirects]]
+  from = "/404"
+  to = "/404.html"
+  status = 404
+
+# Functions settings (if needed for serverless functions)
+[functions]
+  # Directory for serverless functions
+  directory = "netlify/functions"
+  
+  # Node.js runtime for functions
+  node_bundler = "esbuild"
+
+# Plugin settings
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs.thresholds]
+    performance = 0.8
+    accessibility = 0.9
+    best_practices = 0.8
+    seo = 0.9
+
+# Preview settings
+[context.deploy-preview]
+  command = "npm run build"
+  
+[context.branch-deploy]
+  command = "npm run build"
+
+# Development settings
+[dev]
+  command = "npm run dev"
+  port = 4321
+  publish = "dist"

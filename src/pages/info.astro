@@ -1,11 +1,11 @@
 ---
-import DefaultLayout from '../layouts/DefaultLayout.astro';
-import PageHeader from '../components/PageHeader.astro';
-import Feature from '../components/Feature.astro';
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Feature from "../components/Feature.astro";
 
 // Demo data - replace with Strapi data when available
-const pageTitle = 'Festival Information';
-const pageSubtitle = 'Everything you need to know about Hopkins Creek Festival';
+const pageTitle = "Festival Information";
+const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
 ---
 
 <DefaultLayout title={pageTitle}>
@@ -14,7 +14,7 @@ const pageSubtitle = 'Everything you need to know about Hopkins Creek Festival';
   <section class="my-12">
     <div class="container">
       <div class="info-grid">
-        <Feature title="Camping & Accommodation">
+        <Feature icon="lucide:tent" title="Camping & Accommodation">
           <p>
             There's nothing like the great outdoors. Come get acquainted with
             the stars, the gumtrees, and the quiet hum of tents settling in.
@@ -29,8 +29,6 @@ const pageSubtitle = 'Everything you need to know about Hopkins Creek Festival';
             >
           </p>
         </Feature>
-
-        
 
         <Feature icon="mdi:bed" title="The Motor Inn">
           <p>

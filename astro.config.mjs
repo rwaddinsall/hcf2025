@@ -8,7 +8,9 @@ import { fileURLToPath } from 'url'
 // https://astro.build/config
 export default defineConfig({
   compressHTML: true,
-  site: 'https://accessible-astro-starter.incluud.dev',
+  // Use environment variable for site URL, fallback to localhost for development
+  site: process.env.PUBLIC_SITE_URL || 'http://localhost:4321',
+  output: 'static', // Explicitly set static output for Netlify
   integrations: [mdx(), icon(), compress()],
   vite: {
     css: {

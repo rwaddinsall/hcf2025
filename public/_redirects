@@ -1,0 +1,78 @@
+# Netlify redirects file for Hopkins Creek Festival
+
+# https://docs.netlify.com/routing/redirects/
+
+# ================================
+
+# REDIRECT RULES
+
+# ================================
+
+# Redirect common typos and variations
+
+/home / 301
+/index.html / 301
+/index / 301
+
+# Redirect old paths to new structure (if migrating from another site)
+
+# /old-info /info 301
+
+# /lineup /program 301
+
+# /artists /program 301
+
+# Handle trailing slashes consistently
+
+/info/ /info 301
+/program/ /program 301
+/applications/ /applications 301
+
+# ================================
+
+# SPA ROUTING FALLBACK
+
+# ================================
+
+# For any unmatched routes, serve the 404 page
+
+# This ensures proper 404 status codes for SEO
+
+/\* /404.html 404
+
+# ================================
+
+# SECURITY REDIRECTS
+
+# ================================
+
+# Block access to sensitive files
+
+/.env /404.html 404
+/.env._ /404.html 404
+/config/_ /404.html 404
+/admin/_ /404.html 404
+/.git/_ /404.html 404
+/node_modules/\* /404.html 404
+
+# ================================
+
+# FORCE HTTPS (handled by Netlify by default)
+
+# ================================
+
+# Force HTTPS for custom domains
+
+# http://hopkinscreekfestival.com/* https://hopkinscreekfestival.com/:splat 301!
+
+# http://www.hopkinscreekfestival.com/* https://hopkinscreekfestival.com/:splat 301!
+
+# ================================
+
+# PROXY RULES (if needed)
+
+# ================================
+
+# Proxy API requests to Strapi (if needed for CORS)
+
+# /api/\* https://your-strapi-cms.herokuapp.com/api/:splat 200

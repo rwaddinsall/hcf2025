@@ -9,11 +9,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "build:check": "astro check",
     "preview": "astro preview",
     "format": "prettier --write \"**/*.{astro,js,ts,json,scss,css}\"",
     "lint": "eslint . --ext .js,.ts,.astro",
     "lint:fix": "eslint . --ext .js,.ts,.astro --fix",
-    "format:check": "prettier --check \"**/*.{astro,js,ts,json,scss,css}\""
+    "format:check": "prettier --check \"**/*.{astro,js,ts,json,scss,css}\"",
+    "deploy:prepare": "./scripts/deploy.sh",
+    "deploy:build": "npm run format && npm run lint:fix && npm run build",
+    "deploy:preview": "npm run deploy:build && npm run preview"
   },
   "keywords": [
     "astro",
@@ -32,6 +36,7 @@
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.27.0",
     "@iconify-json/lucide": "^1.2.44",
+    "@netlify/functions": "^2.8.2",
     "@types/sanitize-html": "^2.16.0",
     "@typescript-eslint/eslint-plugin": "^8.32.1",
     "@typescript-eslint/parser": "^8.32.1",

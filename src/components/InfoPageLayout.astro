@@ -1,8 +1,7 @@
 ---
-import DefaultLayout from '../layouts/DefaultLayout.astro';
-import { Icon } from 'astro-icon/components';
-import PageHeader from './PageHeader.astro';
-import { Accordion, AccordionItem } from 'accessible-astro-components';
+import DefaultLayout from "../layouts/DefaultLayout.astro";
+import PageHeader from "./PageHeader.astro";
+import { Accordion, AccordionItem } from "accessible-astro-components";
 
 interface InfoLink {
   text: string;
@@ -39,7 +38,7 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
             <div class="info-sections">
               <Accordion>
                 {infoSections.map((section, index) => (
-                  <AccordionItem 
+                  <AccordionItem
                     title={section.title}
                     variant="chevron"
                     name="info-accordion"
@@ -52,40 +51,49 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
                       */}
                       {section.content.map((block) => {
                         // Render paragraph blocks with potential inline links
-                        if (block.type === 'paragraph') {
+                        if (block.type === "paragraph") {
                           return (
                             <p>
                               {block.children.map((child: any) => {
-                                const hasLink = child.marks?.some((mark: any) => mark.type === 'link');
-                                
+                                const hasLink = child.marks?.some(
+                                  (mark: any) => mark.type === "link"
+                                );
+
                                 if (hasLink) {
-                                  const linkMark = child.marks.find((mark: any) => mark.type === 'link');
+                                  const linkMark = child.marks.find(
+                                    (mark: any) => mark.type === "link"
+                                  );
                                   return (
-                                    <a href={linkMark.attrs.href} class="content-link">
+                                    <a
+                                      href={linkMark.attrs.href}
+                                      class="content-link"
+                                    >
                                       {child.text}
                                     </a>
                                   );
                                 }
-                                
+
                                 return child.text;
                               })}
                             </p>
                           );
                         }
-                        
+
                         // Render list blocks with simple text items
-                        if (block.type === 'list') {
+                        if (block.type === "list") {
                           return (
                             <ul class="content-list">
                               {block.children.map((item: any) => (
                                 <li>
-                                  {item.children.map((child: any) => child.text).join('')}
+                                  {item.children
+                                    .map((child: any) => child.text)
+                                    .join("")}
                                 </li>
                               ))}
                             </ul>
                           );
                         }
-                        
+
                         // Skip unsupported block types
                         return null;
                       })}
@@ -98,18 +106,15 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
                             href={link.url}
                             class="info-link"
                             target={
-                              link.url.startsWith('http') ? '_blank' : undefined
+                              link.url.startsWith("http") ? "_blank" : undefined
                             }
                             rel={
-                              link.url.startsWith('http')
-                                ? 'noopener noreferrer'
+                              link.url.startsWith("http")
+                                ? "noopener noreferrer"
                                 : undefined
                             }
                           >
                             {link.text}
-                            {link.url.startsWith('http') && (
-                              <Icon name="lucide:external-link" size={16} />
-                            )}
                           </a>
                         ))}
                       </div>
@@ -128,7 +133,7 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
 </DefaultLayout>
 
 <style lang="scss">
-  @use '../assets/scss/base/mixins' as *;
+  @use "../assets/scss/base/mixins" as *;
 
   .info-page {
     padding: var(--space-xl) 0 var(--space-2xl);
@@ -148,7 +153,7 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
 
   .section-content {
     padding: var(--space-l);
-    
+
     p {
       margin-bottom: var(--space-m);
       line-height: var(--line-height-relaxed);
@@ -162,12 +167,12 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     .content-list {
       margin: var(--space-m) 0;
       padding-left: var(--space-l);
-      
+
       li {
         margin-bottom: var(--space-s);
         line-height: var(--line-height-relaxed);
         color: var(--foreground-color);
-        
+
         &::marker {
           color: var(--link-color);
         }
@@ -175,13 +180,10 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     }
 
     .content-link {
-      @include text-decoration(
-        var(--link-color),
-        var(--link-hover-color)
-      );
+      @include text-decoration(var(--link-color), var(--link-hover-color));
       color: var(--link-color);
       font-weight: 500;
-      
+
       &:hover,
       &:focus-visible {
         color: var(--link-hover-color);
@@ -209,7 +211,7 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     color: var(--link-color);
     font-weight: 500;
     text-decoration: none;
-    transition: 
+    transition:
       background-color var(--animation-speed-fast) var(--cubic-bezier),
       border-color var(--animation-speed-fast) var(--cubic-bezier),
       color var(--animation-speed-fast) var(--cubic-bezier),
@@ -226,12 +228,6 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     &:focus-visible {
       outline: 2px solid var(--link-color);
       outline-offset: 2px;
-    }
-
-    svg {
-      flex-shrink: 0;
-      width: 1rem;
-      height: 1rem;
     }
   }
 

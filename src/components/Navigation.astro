@@ -56,39 +56,30 @@ import ScrollingText from "./ScrollingText.astro";
             <div class="dropdown-menu" id="info-dropdown" data-dropdown-menu>
               <div class="dropdown-content">
                 <a href="/info/" class="dropdown-link">
-                  <Icon name="lucide:info" size="16" />
                   <span>Festival Info</span>
                 </a>
                 <a href="/info/camping" class="dropdown-link">
-                  <Icon name="lucide:tent" size="16" />
                   <span>Camping & Accommodation</span>
                 </a>
                 <a href="/info/motor-inn" class="dropdown-link">
-                  <Icon name="lucide:bed" size="16" />
                   <span>The Motor Inn</span>
                 </a>
                 <a href="/info/accessibility" class="dropdown-link">
-                  <Icon name="lucide:accessibility" size="16" />
                   <span>Accessibility</span>
                 </a>
                 <a href="/info/getting-there" class="dropdown-link">
-                  <Icon name="lucide:map-pin" size="16" />
                   <span>Travel & Entry</span>
                 </a>
                 <a href="/info/food-beverages" class="dropdown-link">
-                  <Icon name="lucide:utensils" size="16" />
                   <span>Food & Beverages</span>
                 </a>
                 <a href="/applications" class="dropdown-link">
-                  <Icon name="lucide:file-text" size="16" />
                   <span>Applications</span>
                 </a>
                 <a href="/info/tickets" class="dropdown-link">
-                  <Icon name="lucide:ticket" size="16" />
                   <span>Tickets</span>
                 </a>
                 <a href="/privacy-policy/" class="dropdown-link">
-                  <Icon name="lucide:shield" size="16" />
                   <span>Privacy Policy</span>
                 </a>
               </div>
@@ -100,27 +91,8 @@ import ScrollingText from "./ScrollingText.astro";
               class="nav-link nav-cta"
               aria-label="Buy festival tickets"
             >
-              <Icon name="lucide:ticket" size="16" />
               <span>Tickets</span>
             </a>
-          </li>
-          <li class="nav-item">
-            <button
-              class="nav-link theme-toggle"
-              aria-label="Toggle dark mode"
-              data-theme-toggle
-            >
-              <Icon
-                name="lucide:sun"
-                class="theme-icon theme-icon--light"
-                size="20"
-              />
-              <Icon
-                name="lucide:moon"
-                class="theme-icon theme-icon--dark"
-                size="20"
-              />
-            </button>
           </li>
         </ul>
       </div>
@@ -154,11 +126,9 @@ import ScrollingText from "./ScrollingText.astro";
         </div>
         <div class="mobile-menu-content">
           <a href="/" class="mobile-link">
-            <Icon name="lucide:home" size="20" />
             <span>Home</span>
           </a>
           <a href="/program/" class="mobile-link">
-            <Icon name="lucide:calendar" size="20" />
             <span>Program</span>
           </a>
           <div class="mobile-dropdown" data-mobile-dropdown>
@@ -166,7 +136,6 @@ import ScrollingText from "./ScrollingText.astro";
               class="mobile-dropdown-trigger"
               data-mobile-dropdown-trigger
             >
-              <Icon name="lucide:info" size="20" />
               <span>Info</span>
               <Icon
                 name="lucide:chevron-down"
@@ -201,7 +170,6 @@ import ScrollingText from "./ScrollingText.astro";
             </div>
           </div>
           <a href="#tickets" class="mobile-link mobile-cta">
-            <Icon name="lucide:ticket" size="20" />
             <span>Get Tickets</span>
           </a>
         </div>
@@ -216,7 +184,6 @@ import ScrollingText from "./ScrollingText.astro";
     private mobileToggle: HTMLButtonElement;
     private mobileOverlay: HTMLElement;
     private dropdownTriggers: NodeListOf<HTMLButtonElement>;
-    private themeToggle: HTMLButtonElement;
     private lastScrollY = 0;
     private isScrolling = false;
 
@@ -231,9 +198,6 @@ import ScrollingText from "./ScrollingText.astro";
       this.dropdownTriggers = document.querySelectorAll(
         "[data-dropdown-trigger]"
       ) as NodeListOf<HTMLButtonElement>;
-      this.themeToggle = document.querySelector(
-        "[data-theme-toggle]"
-      ) as HTMLButtonElement;
 
       this.init();
     }
@@ -242,7 +206,6 @@ import ScrollingText from "./ScrollingText.astro";
       this.handleStickyScroll();
       this.setupMobileMenu();
       this.setupDropdowns();
-      this.setupThemeToggle();
       this.setupKeyboardNavigation();
       this.setActiveMenuItem();
 
@@ -324,30 +287,6 @@ import ScrollingText from "./ScrollingText.astro";
           }
         });
       });
-    }
-
-    private setupThemeToggle(): void {
-      if (this.themeToggle) {
-        this.themeToggle.addEventListener("click", () => {
-          document.documentElement.classList.toggle("darkmode");
-          localStorage.setItem(
-            "theme",
-            document.documentElement.classList.contains("darkmode")
-              ? "dark"
-              : "light"
-          );
-        });
-
-        // Initialize theme
-        const savedTheme = localStorage.getItem("theme");
-        const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
-        ).matches;
-
-        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-          document.documentElement.classList.add("darkmode");
-        }
-      }
     }
 
     private setupKeyboardNavigation(): void {
@@ -468,31 +407,18 @@ import ScrollingText from "./ScrollingText.astro";
   // CSS Custom Properties
   :root {
     --nav-height: 80px;
-    --nav-bg: transparent;
-    --nav-bg-scrolled: (255, 255, 255, 50);
+    --nav-bg: #ffffff;
+    --nav-bg-scrolled: #ffffff;
     --nav-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
     --nav-shadow-scrolled: 0 8px 48px rgba(0, 0, 0, 0.15);
-    --nav-backdrop-blur: blur(20px);
     --nav-border: rgba(0, 0, 0, 0.1);
     --nav-text: var(--foreground-color);
     --nav-text-hover: var(--foreground-color);
     --nav-accent: var(--foreground-color);
     --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mobile-overlay-bg: rgba(0, 0, 0, 0.5);
-    --dropdown-bg: rgba(255, 255, 255, 0.9);
+    --dropdown-bg: #ffffff;
     --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
-  }
-
-  // Dark mode variables
-  .darkmode {
-    --nav-bg: transparent;
-    --nav-bg-scrolled: rgba(0, 0, 0, 0.8);
-    --nav-border: rgba(255, 255, 255, 0.1);
-    --nav-text: var(--foreground-color);
-    --nav-text-hover: var(--foreground-color);
-    --nav-accent: var(--foreground-color);
-    --dropdown-bg: rgba(0, 0, 0, 0.9);
-    --mobile-overlay-bg: rgba(0, 0, 0, 0.8);
   }
 
   // Main Header Container
@@ -507,8 +433,6 @@ import ScrollingText from "./ScrollingText.astro";
   .hopkins-nav {
     width: 100%;
     background: var(--nav-bg);
-    backdrop-filter: var(--nav-backdrop-blur);
-    -webkit-backdrop-filter: var(--nav-backdrop-blur);
     border-bottom: 1px solid transparent;
     transition: var(--nav-transition);
     min-height: var(--nav-height);
@@ -609,7 +533,7 @@ import ScrollingText from "./ScrollingText.astro";
   }
 
   // Nav links when scrolled - show pill background
-  .hopkins-nav.nav-scrolled .nav-link {
+  .hopkins-nav.nav-scrolled .nav-link:not(.nav-cta) {
     background: #f5f5f5;
   }
 
@@ -660,8 +584,6 @@ import ScrollingText from "./ScrollingText.astro";
     left: 0;
     min-width: 280px;
     background: var(--dropdown-bg);
-    backdrop-filter: var(--nav-backdrop-blur);
-    -webkit-backdrop-filter: var(--nav-backdrop-blur);
     border-radius: 12px;
     box-shadow: var(--dropdown-shadow);
     border: 1px solid var(--nav-border);
@@ -696,42 +618,6 @@ import ScrollingText from "./ScrollingText.astro";
     &:focus-visible {
       outline: 2px solid var(--nav-accent);
       outline-offset: 2px;
-    }
-  }
-
-  // Theme Toggle
-  .theme-toggle {
-    position: relative;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    justify-content: center;
-
-    .theme-icon {
-      position: absolute;
-      transition: var(--nav-transition);
-    }
-
-    .theme-icon--light {
-      opacity: 1;
-      transform: rotate(0deg) scale(1);
-    }
-
-    .theme-icon--dark {
-      opacity: 0;
-      transform: rotate(180deg) scale(0);
-    }
-
-    .darkmode & {
-      .theme-icon--light {
-        opacity: 0;
-        transform: rotate(180deg) scale(0);
-      }
-
-      .theme-icon--dark {
-        opacity: 1;
-        transform: rotate(0deg) scale(1);
-      }
     }
   }
 
@@ -805,8 +691,6 @@ import ScrollingText from "./ScrollingText.astro";
     width: 100%;
     height: 100vh;
     background: var(--mobile-overlay-bg);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
     z-index: 999;
     opacity: 0;
     visibility: hidden;
@@ -829,8 +713,6 @@ import ScrollingText from "./ScrollingText.astro";
     width: min(400px, 90vw);
     height: 100vh;
     background: var(--nav-bg);
-    backdrop-filter: var(--nav-backdrop-blur);
-    -webkit-backdrop-filter: var(--nav-backdrop-blur);
     transform: translateX(100%);
     transition: var(--nav-transition);
     overflow-y: auto;
@@ -1017,7 +899,6 @@ import ScrollingText from "./ScrollingText.astro";
     }
 
     .mobile-toggle,
-    .theme-toggle,
     .nav-cta {
       display: none;
     }

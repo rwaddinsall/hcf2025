@@ -57,7 +57,7 @@ artists.sort((a, b) => {
 });
 ---
 
-<section class="px-6 py-16">
+<section class="px-6 py-4 sm:px-8 sm:py-8 md:px-12 md:py-12">
   <div class="max-w-6xl mx-auto">
     {
       artists.length > 0 ? (
@@ -109,6 +109,15 @@ artists.sort((a, b) => {
     max-width: 100%;
     text-align: center;
     gap: var(--space-s) var(--space-m);
+
+    @media (max-width: 768px) {
+      gap: var(--space-xs) var(--space-s);
+    }
+
+    @media (max-width: 480px) {
+      gap: var(--space-2xs) var(--space-xs);
+      padding: 0 var(--space-xs);
+    }
   }
 
   .artist-item {
@@ -149,6 +158,16 @@ artists.sort((a, b) => {
   .artist-name {
     font-weight: 600;
     margin: 0;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+      font-size: clamp(1rem, 3.5vw, 1.5rem);
+    }
+
+    @media (max-width: 480px) {
+      font-size: clamp(0.9rem, 3vw, 1.25rem);
+    }
   }
 
   .artist-link {
@@ -170,28 +189,20 @@ artists.sort((a, b) => {
     font-weight: 200;
     margin-left: var(--space-5xs);
     opacity: 1;
+
+    @media (max-width: 768px) {
+      font-size: 0.65em;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.7em;
+      margin-left: var(--space-4xs);
+    }
   }
 
   /* All artists same size */
   .artist-item {
     /* Size will be inherited from h2 design system */
-  }
-
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .lineup-grid {
-      gap: var(--space-xs) var(--space-s);
-    }
-  }
-
-  @media (max-width: 480px) {
-    .lineup-grid {
-      gap: var(--space-2xs) var(--space-xs);
-    }
-
-    .artist-item {
-      padding: var(--space-2xs) var(--space-xs);
-    }
   }
 </style>
 

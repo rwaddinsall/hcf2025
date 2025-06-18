@@ -9,19 +9,15 @@ import StrapiExample from "@components/StrapiExample.astro";
 ---
 
 <DefaultLayout title="Hopkins Creek Festival">
-  <section>
-    <Hero />
-  </section>
-
-  <section>
-    <Lineup />
-  </section>
+  <Hero />
+  <Lineup />
   <CallToAction useCMS={true} />
 
   <!-- Strapi CMS Integration Example -->
   <!-- <StrapiExample /> -->
 
-  <!-- Festival Information Section -->
+  <!-- LAUNCH VERSION: Festival Information Section temporarily hidden - uncomment when ready -->
+  <!--
   <section class="my-12">
     <div class="container">
       <PageHeader
@@ -122,6 +118,7 @@ import StrapiExample from "@components/StrapiExample.astro";
       </div>
     </div>
   </section>
+  -->
 </DefaultLayout>
 
 <style lang="scss">

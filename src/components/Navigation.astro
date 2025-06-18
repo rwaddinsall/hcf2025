@@ -6,9 +6,17 @@
  * and enhanced UX features
  */
 import Logo from "./Logo.astro";
-import { Icon } from "astro-icon/components";
 import { SkipLink } from "accessible-astro-components";
 import ScrollingText from "./ScrollingText.astro";
+import { fetchCTAData } from "../lib/strapi";
+
+// LAUNCH VERSION: Fetch big link data for the CTA
+let ctaData = null;
+try {
+  ctaData = await fetchCTAData();
+} catch (error) {
+  console.error("Failed to fetch CTA data:", error);
+}
 ---
 
 <header class="hopkins-header">
@@ -16,12 +24,51 @@ import ScrollingText from "./ScrollingText.astro";
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
     <!-- Scrolling text positioned absolutely to start from container edge -->
 
-    <div class="nav-container">
+    <!-- LAUNCH VERSION: Simplified navigation with just logo and CTA -->
+    <div class="nav-container launch-version">
       <!-- Logo Section -->
+      <div class="nav-brand">
+        <Logo />
+      </div>
+      <ScrollingText strapiType="header" />
+
+      <!-- LAUNCH VERSION: Single prominent CTA using Strapi big-link data -->
+      <div class="launch-cta">
+        {
+          ctaData?.bigLink && (
+            <a
+              href={ctaData.bigLink.url || "#tickets"}
+              class="nav-link nav-cta launch-cta-button"
+              aria-label={ctaData.bigLink.ariaLabel || "Buy festival tickets"}
+              target={ctaData.bigLink.isExternal ? "_blank" : undefined}
+              rel={
+                ctaData.bigLink.isExternal ? "noopener noreferrer" : undefined
+              }
+            >
+              <span>{ctaData.bigLink.label || "Get Tickets"}</span>
+            </a>
+          )
+        }
+        {
+          !ctaData?.bigLink && (
+            <a
+              href="#tickets"
+              class="nav-link nav-cta launch-cta-button"
+              aria-label="Buy festival tickets"
+            >
+              <span>Get Tickets</span>
+            </a>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- LAUNCH VERSION: Full navigation temporarily hidden - uncomment when ready -->
+    <!--
+    <div class="nav-container">
       <div class="nav-brand"></div>
       <ScrollingText strapiType="header" />
 
-      <!-- Desktop Navigation -->
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-list">
           <li class="nav-item">
@@ -97,7 +144,6 @@ import ScrollingText from "./ScrollingText.astro";
         </ul>
       </div>
 
-      <!-- Mobile Menu Toggle -->
       <button
         class="mobile-toggle"
         aria-expanded="false"
@@ -110,72 +156,67 @@ import ScrollingText from "./ScrollingText.astro";
         <span class="mobile-toggle-line"></span>
       </button>
     </div>
+    -->
+  </nav>
 
-    <!-- Mobile Navigation Overlay -->
-    <div class="mobile-overlay" data-mobile-overlay>
-      <div class="mobile-menu">
-        <div class="mobile-menu-header">
-          <Logo />
-          <button
-            class="mobile-close"
-            data-mobile-close
-            aria-label="Close menu"
-          >
-            <Icon name="lucide:x" size="24" />
+  <!-- LAUNCH VERSION: Mobile overlay temporarily hidden - uncomment when ready -->
+  <!--
+  <div class="mobile-overlay" data-mobile-overlay>
+    <div class="mobile-menu">
+      <div class="mobile-menu-header">
+        <Logo />
+        <button class="mobile-close" data-mobile-close aria-label="Close menu">
+          <Icon name="lucide:x" size="24" />
+        </button>
+      </div>
+      <div class="mobile-menu-content">
+        <a href="/" class="mobile-link">
+          <span>Home</span>
+        </a>
+        <a href="/program/" class="mobile-link">
+          <span>Program</span>
+        </a>
+        <div class="mobile-dropdown" data-mobile-dropdown>
+          <button class="mobile-dropdown-trigger" data-mobile-dropdown-trigger>
+            <span>Info</span>
+            <Icon
+              name="lucide:chevron-down"
+              class="mobile-dropdown-icon"
+              size="16"
+            />
           </button>
-        </div>
-        <div class="mobile-menu-content">
-          <a href="/" class="mobile-link">
-            <span>Home</span>
-          </a>
-          <a href="/program/" class="mobile-link">
-            <span>Program</span>
-          </a>
-          <div class="mobile-dropdown" data-mobile-dropdown>
-            <button
-              class="mobile-dropdown-trigger"
-              data-mobile-dropdown-trigger
+          <div class="mobile-dropdown-content" data-mobile-dropdown-content>
+            <a href="/info/" class="mobile-dropdown-link">Festival Info</a>
+            <a href="/info/camping" class="mobile-dropdown-link"
+              >Camping & Accommodation</a
             >
-              <span>Info</span>
-              <Icon
-                name="lucide:chevron-down"
-                class="mobile-dropdown-icon"
-                size="16"
-              />
-            </button>
-            <div class="mobile-dropdown-content" data-mobile-dropdown-content>
-              <a href="/info/" class="mobile-dropdown-link">Festival Info</a>
-              <a href="/info/camping" class="mobile-dropdown-link"
-                >Camping & Accommodation</a
-              >
-              <a href="/info/motor-inn" class="mobile-dropdown-link"
-                >The Motor Inn</a
-              >
-              <a href="/info/accessibility" class="mobile-dropdown-link"
-                >Accessibility</a
-              >
-              <a href="/info/getting-there" class="mobile-dropdown-link"
-                >Travel & Entry</a
-              >
-              <a href="/info/food-beverages" class="mobile-dropdown-link"
-                >Food & Beverages</a
-              >
-              <a href="/applications" class="mobile-dropdown-link"
-                >Applications</a
-              >
-              <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
-              <a href="/privacy-policy/" class="mobile-dropdown-link"
-                >Privacy Policy</a
-              >
-            </div>
+            <a href="/info/motor-inn" class="mobile-dropdown-link"
+              >The Motor Inn</a
+            >
+            <a href="/info/accessibility" class="mobile-dropdown-link"
+              >Accessibility</a
+            >
+            <a href="/info/getting-there" class="mobile-dropdown-link"
+              >Travel & Entry</a
+            >
+            <a href="/info/food-beverages" class="mobile-dropdown-link"
+              >Food & Beverages</a
+            >
+            <a href="/applications" class="mobile-dropdown-link">Applications</a
+            >
+            <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
+            <a href="/privacy-policy/" class="mobile-dropdown-link"
+              >Privacy Policy</a
+            >
           </div>
-          <a href="#tickets" class="mobile-link mobile-cta">
-            <span>Get Tickets</span>
-          </a>
         </div>
+        <a href="#tickets" class="mobile-link mobile-cta">
+          <span>Get Tickets</span>
+        </a>
       </div>
     </div>
-  </nav>
+  </div>
+  -->
 </header>
 
 <script>
@@ -902,5 +943,67 @@ import ScrollingText from "./ScrollingText.astro";
     .nav-cta {
       display: none;
     }
+  }
+
+  // LAUNCH VERSION: Simplified navigation styles
+  .launch-version {
+    .nav-brand {
+      // Ensure logo is visible
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .launch-cta {
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+
+    .launch-cta-button {
+      background: var(--color-primary, #000);
+      color: var(--color-background, #fff);
+      padding: 0.5rem 1rem;
+      border-radius: 1.25rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--color-primary, #000);
+      font-size: 0.875rem;
+
+      @media (max-width: 768px) {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        border-radius: 1.25rem;
+      }
+
+      @media (max-width: 480px) {
+        padding: 0.55rem 1.1rem;
+        font-size: 0.85rem;
+      }
+
+      &:hover,
+      &:focus {
+        background: transparent;
+        color: var(--color-primary, #000);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      &:focus {
+        outline: 2px solid var(--color-primary, #000);
+        outline-offset: 2px;
+      }
+
+      span {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  // LAUNCH VERSION: Hide elements that are not needed
+  .nav-menu,
+  .mobile-toggle,
+  .mobile-overlay {
+    display: none !important;
   }
 </style>

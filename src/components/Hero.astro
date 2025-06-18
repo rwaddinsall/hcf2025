@@ -1,27 +1,25 @@
 ---
+import HeroHeading from "@assets/images/projects/HeroHeading.svg";
+import HerooGallery from "@assets/images/projects/HeroGallery.jpg";
 
-import HeroHeading from '@assets/images/projects/HeroHeading.svg';
-import HerooGallery from '@assets/images/projects/HeroGallery.jpg';
-
-import Image from 'astro/components/Image.astro';
-
+import Image from "astro/components/Image.astro";
 ---
-<section class='container m-12'>
-<Image
+
+<section class="container m-6 md:m-8">
+  <Image
     src={HeroHeading}
     alt="Hopkins Creek Festival logo"
     loading="eager"
     quality="high"
     class="hero-heading"
-    />
-<Image
-class='p-4 my-8'
+  />
+  <Image
+    class="p-2 mt-4 mb-2 md:p-4 md:mt-6 md:mb-4"
     src={HerooGallery}
     alt="Hopkins Creek Festival logo"
     loading="eager"
     quality="high"
-
-    />
+  />
 </section>
 
 <style>
@@ -34,14 +32,14 @@ class='p-4 my-8'
   }
 
   .hero-heading,
-.hero-gallery {
-  margin: 0;
-  padding: 0;
-}
+  .hero-gallery {
+    margin: 0;
+    padding: 0;
+  }
 
-.hero-heading svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
+  .hero-heading svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
 </style>

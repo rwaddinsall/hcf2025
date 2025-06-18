@@ -24,16 +24,19 @@ const currentYear = new Date().getFullYear();
     </div>
   </section>
 
-  <section class="py-20">
+  <!-- <section class="py-20">
     <h2 class="sr-only">Footer</h2>
     <div class="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       <div class="flex flex-col gap-4">
-        <ul class="flex flex-col gap-2">
-          <li><a href="/">Home</a></li>
-          <li><a href="/portfolio">Artists</a></li>
-          <li><a href="/info">Info</a></li>
-        </ul>
-      </div>
+        <ul class="flex flex-col gap-2"> -->
+  <li><a href="/">Home</a></li>
+  <!-- <li><a href="/">Artists</a></li> -->
+  <!-- LAUNCH VERSION: Info link temporarily hidden - uncomment when ready -->
+  <!-- <li><a href="/info">Info</a></li> -->
+</footer>
+
+<!-- LAUNCH VERSION: Info-related footer links temporarily hidden - uncomment when ready -->
+<!--
       <div class="flex flex-col gap-4">
         <ul class="flex flex-col gap-2">
           <li><a href="/info/camping">Camping & Accommodation</a></li>
@@ -43,7 +46,8 @@ const currentYear = new Date().getFullYear();
           <li><a href="/info/sustainability">Sustainability</a></li>
         </ul>
       </div>
-      <div class="flex flex-col gap-4">
+      -->
+<!-- <div class="flex flex-col gap-4">
         <ul class="flex flex-col gap-2">
           <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
@@ -61,24 +65,23 @@ const currentYear = new Date().getFullYear();
         </div>
       </section>
     </div>
+  </section> -->
 
-    <style>
-      .acknowledgement-section {
-        padding: var(--space-l) 0;
-        border-bottom: 1px solid var(--border-color-subtle);
-      }
+<style>
+  .acknowledgement-section {
+    padding: var(--space-l) 0;
+    border-bottom: 1px solid var(--border-color-subtle);
+  }
 
-      section {
-        border-top: 1px solid var(--border-color-subtle);
-      }
+  section {
+    border-top: 1px solid var(--border-color-subtle);
+  }
 
-      footer a {
-        text-decoration: none;
-      }
+  footer a {
+    text-decoration: none;
+  }
 
-      footer a:hover {
-        text-decoration: underline;
-      }
-    </style>
-  </section>
-</footer>
+  footer a:hover {
+    text-decoration: underline;
+  }
+</style>

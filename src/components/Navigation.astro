@@ -468,30 +468,30 @@ import ScrollingText from "./ScrollingText.astro";
   // CSS Custom Properties
   :root {
     --nav-height: 80px;
-    --nav-bg: rgba(255, 255, 255, 0.95);
-    --nav-bg-scrolled: rgba(255, 255, 255, 0.98);
+    --nav-bg: transparent;
+    --nav-bg-scrolled: (255, 255, 255, 50);
     --nav-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
     --nav-shadow-scrolled: 0 8px 48px rgba(0, 0, 0, 0.15);
-    --nav-backdrop-blur: blur(16px);
+    --nav-backdrop-blur: blur(20px);
     --nav-border: rgba(0, 0, 0, 0.1);
-    --nav-text: #333333;
-    --nav-text-hover: #0066cc;
-    --nav-accent: #0066cc;
+    --nav-text: var(--foreground-color);
+    --nav-text-hover: var(--foreground-color);
+    --nav-accent: var(--foreground-color);
     --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --mobile-overlay-bg: rgba(0, 0, 0, 0.5);
-    --dropdown-bg: rgba(255, 255, 255, 0.98);
+    --dropdown-bg: rgba(255, 255, 255, 0.9);
     --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
   }
 
   // Dark mode variables
   .darkmode {
-    --nav-bg: rgba(0, 0, 0, 0.95);
-    --nav-bg-scrolled: rgba(0, 0, 0, 0.98);
+    --nav-bg: transparent;
+    --nav-bg-scrolled: rgba(0, 0, 0, 0.8);
     --nav-border: rgba(255, 255, 255, 0.1);
-    --nav-text: #ffffff;
-    --nav-text-hover: #42e0ce;
-    --nav-accent: #42e0ce;
-    --dropdown-bg: rgba(0, 0, 0, 0.98);
+    --nav-text: var(--foreground-color);
+    --nav-text-hover: var(--foreground-color);
+    --nav-accent: var(--foreground-color);
+    --dropdown-bg: rgba(0, 0, 0, 0.9);
     --mobile-overlay-bg: rgba(0, 0, 0, 0.8);
   }
 
@@ -564,13 +564,13 @@ import ScrollingText from "./ScrollingText.astro";
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.25rem;
     color: var(--nav-text);
     text-decoration: none;
     font-weight: 500;
-    border-radius: 8px;
+    border-radius: 50px;
     transition: var(--nav-transition);
-    background: none;
+    background: transparent;
     border: none;
     cursor: pointer;
     font-size: inherit;
@@ -583,7 +583,7 @@ import ScrollingText from "./ScrollingText.astro";
     &:hover,
     &:focus-visible {
       color: var(--nav-text-hover);
-      background: rgba(0, 102, 204, 0.1);
+      background: var(--brand-secondary);
     }
 
     &.active {
@@ -608,17 +608,23 @@ import ScrollingText from "./ScrollingText.astro";
     }
   }
 
+  // Nav links when scrolled - show pill background
+  .hopkins-nav.nav-scrolled .nav-link {
+    background: #f5f5f5;
+  }
+
   .nav-cta {
     background: var(--nav-accent);
     color: white;
     font-weight: 600;
+    border-radius: 50px;
 
     &:hover,
     &:focus-visible {
       background: var(--nav-text-hover);
       color: white;
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+      // box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
     }
   }
 
@@ -674,10 +680,10 @@ import ScrollingText from "./ScrollingText.astro";
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.25rem;
     color: var(--nav-text);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 50px;
     transition: var(--nav-transition);
     font-weight: 500;
 
@@ -868,10 +874,10 @@ import ScrollingText from "./ScrollingText.astro";
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     color: var(--nav-text);
     text-decoration: none;
-    border-radius: 12px;
+    border-radius: 50px;
     transition: var(--nav-transition);
     font-weight: 500;
     margin-bottom: 0.5rem;
@@ -911,11 +917,11 @@ import ScrollingText from "./ScrollingText.astro";
     justify-content: space-between;
     width: 100%;
     gap: 1rem;
-    padding: 1rem;
+    padding: 1rem 1.25rem;
     color: var(--nav-text);
     background: none;
     border: none;
-    border-radius: 12px;
+    border-radius: 50px;
     transition: var(--nav-transition);
     font-weight: 500;
     cursor: pointer;
@@ -958,10 +964,10 @@ import ScrollingText from "./ScrollingText.astro";
 
   .mobile-dropdown-link {
     display: block;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1.25rem;
     color: var(--nav-text);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 50px;
     transition: var(--nav-transition);
     margin-bottom: 0.25rem;
 

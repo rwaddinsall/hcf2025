@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { fetchCTAData } from "../lib/strapi";
 
 /**
  * CallToAction Component
@@ -23,6 +24,10 @@ interface Props {
    * Whether to show the arrow icon
    */
   showIcon?: boolean;
+  /**
+   * Whether to use CMS data
+   */
+  useCMS?: boolean;
 }
 
 const {
@@ -30,14 +35,30 @@ const {
   link = "#tickets",
   linkText = "Buy Tickets",
   showIcon = false,
+  useCMS = false,
 } = Astro.props;
+
+// Fetch CMS data if requested
+let cmsData = null;
+if (useCMS) {
+  try {
+    cmsData = await fetchCTAData();
+  } catch (error) {
+    console.error("CTA fetch failed:", error);
+  }
+}
+
+// Use CMS data or fallback to props
+const displayTitle = cmsData?.title || title;
+const displayLink = cmsData?.url || link;
+const displayText = cmsData?.text || linkText;
 ---
 
 <div class="container">
   <div class="call-to-action">
-    {title && <h2>{title}</h2>}
-    <a href={link} class="cta-button">
-      {linkText}
+    {displayTitle && <h2>{displayTitle}</h2>}
+    <a href={displayLink} class="cta-button">
+      {displayText}
       {showIcon && <Icon name="lucide:arrow-right" />}
     </a>
   </div>

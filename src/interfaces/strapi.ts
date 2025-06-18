@@ -99,8 +99,9 @@ export interface Article extends StrapiEntity {
 // Artist interfaces
 export interface Artist extends StrapiEntity {
   name: string;
-  slug: string;
-  bio?: any; // Rich text content
+  isLive?: boolean;
+  country?: string;
+  bio?: string; // Text content
   image?: {
     id: number;
     documentId: string;
@@ -110,16 +111,8 @@ export interface Artist extends StrapiEntity {
     width?: number;
     height?: number;
   };
-  genre?: string;
-  website?: string;
-  socialMedia?: {
-    instagram?: string;
-    facebook?: string;
-    twitter?: string;
-    spotify?: string;
-  };
+  socialLink?: string;
   displayOrder?: number;
-  featured?: boolean;
 }
 
 // Response type exports

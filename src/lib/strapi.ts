@@ -128,7 +128,7 @@ export async function fetchArticleByDocumentId(documentId: string) {
  * Fetches all artists/performers
  */
 export async function fetchArtists() {
-  return fetchApi<import("../interfaces/strapi").ArtistResponse>({
+  return fetchApi<import("../interfaces/strapi").Artist[]>({
     endpoint: "artists",
     query: {
       "filters[publishedAt][$notNull]": "true",
@@ -168,4 +168,17 @@ export function formatStrapiDate(dateString: string): string {
   } catch {
     return dateString;
   }
+}
+
+/**
+ * Fetches call-to-action data from Strapi
+ */
+export async function fetchCTAData() {
+  return fetchApi<any>({
+    endpoint: "global-settings", // or whatever your CTA endpoint is called
+    query: {
+      "populate[ctaButtons][populate]": "*",
+    },
+    wrappedByKey: "data",
+  });
 }

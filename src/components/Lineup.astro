@@ -1,87 +1,85 @@
 ---
 // Lineup component for Hopkins Creek Festival
+import { fetchArtists } from "../lib/strapi";
+
 interface ArtistData {
   name: string;
   annotation?: string; // [live], [GER], [UK], etc.
   size?: "small" | "medium" | "large" | "xl";
 }
 
-const artists: ArtistData[] = [
-  { name: "Aarti Jadu", annotation: "live", size: "medium" },
-  { name: "Alex Albrecht", annotation: "live", size: "medium" },
-  { name: "Babyxann", size: "medium" },
-  { name: "Birdsnake", size: "small" },
-  { name: "Bumpy", size: "small" },
-  { name: "C.R.A.I.G", size: "medium" },
-  { name: "Casey", size: "small" },
-  { name: "Castro Nemo", annotation: "GER", size: "small" },
-  { name: "Chuleo Club", size: "medium" },
-  { name: "College of Knowledge", size: "large" },
-  { name: "Cousin", annotation: "live", size: "medium" },
-  { name: "Darcy Justice", size: "medium" },
-  { name: "DITA", annotation: "LDN", size: "small" },
-  { name: "DJ Kiti", size: "small" },
-  { name: "DJ No More", size: "medium" },
-  { name: "DJ Shio", size: "small" },
-  { name: "Dreems", size: "medium" },
-  { name: "Earl Grey", size: "medium" },
-  { name: "Emelyne", size: "medium" },
-  { name: "Ewan Saturdy", size: "medium" },
-  { name: "Folarin", size: "medium" },
-  { name: "Handclap", annotation: "live", size: "medium" },
-  { name: "Hooks Lines and Sinker", size: "large" },
-  { name: "Intermodd", size: "medium" },
-  { name: "JEEP Sessions", size: "medium" },
-  { name: "Katie Pearson", size: "medium" },
-  { name: "Keanu Nelson", size: "medium" },
-  { name: "Low Flung", annotation: "live", size: "medium" },
-  { name: "Lunacy", size: "medium" },
-  { name: "Magda B", size: "small" },
-  { name: "Maria Moles", annotation: "live", size: "medium" },
-  { name: "Miki", size: "small" },
-  { name: "Milou Moon", size: "medium" },
-  { name: "MiNNA", annotation: "UK", size: "small" },
-  { name: "Mitsuki", annotation: "JAP", size: "small" },
-  { name: "Myles Mac DJ Possum", size: "large" },
-  { name: "Noise In My Head", size: "medium" },
-  { name: "Nū", annotation: "live", size: "small" },
-  { name: "Nuestra Planeta", size: "medium" },
-  { name: "Ones", size: "small" },
-  { name: "Optimo", annotation: "SCT", size: "medium" },
-  { name: "Our Carlson", size: "medium" },
-  { name: "Owelu Dreamhouse", size: "large" },
-  { name: "Quality Used Cars", size: "large" },
-  { name: "R.Ribiero", size: "small" },
-  { name: "Ryan Berkeley", annotation: "live", size: "medium" },
-  { name: "San Of The Rambutan", size: "large" },
-  { name: "Seen.Touch", size: "medium" },
-  { name: "Setwun", size: "medium" },
-  { name: "Sleep D Live", annotation: "live", size: "medium" },
-  { name: "Timepoor", size: "medium" },
-  { name: "Walter Majik", size: "medium" },
-  { name: "Wax Nomads", size: "xl" },
-];
+// Fetch artists from Strapi CMS
+let strapiArtists: import("../interfaces/strapi").Artist[] = [];
+
+try {
+  strapiArtists = await fetchArtists();
+} catch (error) {
+  console.error("Failed to fetch artists from Strapi:", error);
+  // Gracefully handle error - component will show empty lineup
+}
+
+// Transform Strapi data to component format
+const artists: ArtistData[] = strapiArtists.map((artist) => {
+  let annotation = "";
+
+  // Build annotation from country and live status
+  if (artist.country && artist.isLive) {
+    annotation = `${artist.country}, live`;
+  } else if (artist.country) {
+    annotation = artist.country;
+  } else if (artist.isLive) {
+    annotation = "live";
+  }
+
+  return {
+    name: artist.name,
+    annotation: annotation || undefined,
+    size: "medium" as const, // Default size, can be customized later
+  };
+});
+
+// Sort by display order, then alphabetically
+artists.sort((a, b) => {
+  // Find original Strapi data for display order
+  const strapiA = strapiArtists.find((sa) => sa.name === a.name);
+  const strapiB = strapiArtists.find((sa) => sa.name === b.name);
+
+  const orderA = strapiA?.displayOrder ?? 999;
+  const orderB = strapiB?.displayOrder ?? 999;
+
+  if (orderA !== orderB) {
+    return orderA - orderB;
+  }
+
+  return a.name.localeCompare(b.name);
+});
 ---
 
 <section class="px-6 py-16">
   <div class="max-w-6xl mx-auto">
-    <div class="lineup-grid">
-      {
-        artists.map((artist) => (
-          <div
-            class={`artist-item ${artist.size || "medium"}`}
-            data-artist={artist.name}
-          >
-            <h2 class="artist-name">
-              {artist.name}
-              {artist.annotation && (
-                <span class="artist-annotation">[{artist.annotation}]</span>
-              )}
-            </h2>
-          </div>
-        ))
-      }
-    </div>
+    {
+      artists.length > 0 ? (
+        <div class="lineup-grid">
+          {artists.map((artist) => (
+            <div
+              class={`artist-item ${artist.size || "medium"}`}
+              data-artist={artist.name}
+            >
+              <h2 class="artist-name">
+                {artist.name}
+                {artist.annotation && (
+                  <span class="artist-annotation">[{artist.annotation}]</span>
+                )}
+              </h2>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center text-neutral-600">
+          <p>Artist lineup coming soon...</p>
+        </div>
+      )
+    }
   </div>
 </section>
 

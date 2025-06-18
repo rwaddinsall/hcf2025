@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 /**
  * Feature Component
@@ -17,7 +17,7 @@ interface Props {
   title: string;
 }
 
-const { title = 'Title' }: Props = Astro.props;
+const { title = "Title" }: Props = Astro.props;
 ---
 
 <div class="flex flex-col gap-4 feature">
@@ -32,16 +32,28 @@ const { title = 'Title' }: Props = Astro.props;
 </div>
 
 <style lang="scss">
-  @use '../assets/scss/base/breakpoint' as *;
+  @use "../assets/scss/base/breakpoint" as *;
 
   .feature {
     position: relative;
     padding: var(--space-l);
     inline-size: calc(100% - var(--space-l));
+    cursor: pointer;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
 
     > * {
       position: relative;
       z-index: 2;
+    }
+
+    .content h3 {
+      color: var(--color-neutral-900) !important;
+      transition: color var(--animation-speed-fast) var(--cubic-bezier);
+    }
+
+    .content p {
+      color: var(--color-neutral-300) !important;
+      transition: color var(--animation-speed-fast) var(--cubic-bezier);
     }
 
     @include breakpoint(xl) {
@@ -51,7 +63,8 @@ const { title = 'Title' }: Props = Astro.props;
     &::before,
     &::after {
       position: absolute;
-      content: '';
+      content: "";
+      transition: all var(--animation-speed-fast) var(--cubic-bezier);
     }
 
     &::before {
@@ -65,14 +78,68 @@ const { title = 'Title' }: Props = Astro.props;
 
     &::after {
       z-index: 0;
-      // inset: var(--space-m) -0.5rem -0.15rem 1rem;
       border-radius: var(--radius-l);
       background-color: var(--link-color);
     }
+
+    // Hover effect
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+
+      &::before {
+        background-color: var(--color-neutral-900);
+        border-color: var(--color-neutral-900);
+        box-shadow: 0 0 0 6px var(--color-neutral-900);
+      }
+
+      .content h3,
+      .content p,
+      h3,
+      p,
+      * {
+        color: var(--color-neutral-100) !important;
+      }
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-neutral-900);
+      outline-offset: 4px;
+    }
   }
 
-  :global(.darkmode .feature::before) {
-    box-shadow: 0 0 0 6px var(--color-neutral-900);
-    background-color: var(--color-neutral-900);
+  // Dark mode adjustments
+  :global(.darkmode) .feature {
+    &::before {
+      box-shadow: 0 0 0 6px var(--color-neutral-900);
+      background-color: var(--color-neutral-900);
+      border-color: var(--color-neutral-100);
+    }
+
+    h3,
+    p {
+      color: var(--color-neutral-100);
+    }
+
+    &:hover {
+      &::before {
+        background-color: var(--color-neutral-100);
+        border-color: var(--color-neutral-100);
+        box-shadow: 0 0 0 6px var(--color-neutral-100);
+      }
+
+      h3,
+      p {
+        color: var(--color-neutral-900);
+      }
+    }
+
+    &:focus-visible {
+      outline-color: var(--color-neutral-100);
+    }
   }
 </style>

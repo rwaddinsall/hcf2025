@@ -1,82 +1,11 @@
 ---
-import Navigation from "./Navigation.astro";
-import { DarkMode, SkipLink } from "accessible-astro-components";
-import { Icon } from "astro-icon/components";
-
 /**
  * Header Component
  *
  * @description A component that displays the header of the website
+ * Now imports the combined Header/Navigation component
  */
+import Navigation from "./Navigation.astro";
 ---
 
-<header>
-  <SkipLink />
-  <Navigation>
-    <li class="menu-item">
-      <a href="/program/">Program</a>
-    </li>
-    <li class="menu-item">
-      <a href="/applications/">Applications</a>
-    </li>
-    <!-- Info Dropdown -->
-    <li class="menu-item has-dropdown">
-      <button aria-haspopup="true" aria-expanded="false">
-        Info
-        <Icon name="lucide:chevron-down" size="16" />
-      </button>
-      <ul class="dropdown-menu">
-        <li class="submenu-item">
-          <a href="/info/camping">Camping & Accommodation</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/motor-inn">The Motor Inn</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/accessibility">Accessibility</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/travel">Travel & Entry</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/safety">Arrival, Weather & Safety</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/tickets">Tickets</a>
-        </li>
-        <li class="submenu-item">
-          <a href="/info/sustainability">Sustainability</a>
-        </li>
-      </ul>
-    </li>
-    <li class="menu-item highlight">
-      <a href="#tickets">Tickets</a>
-    </li>
-    <li class="menu-item type-icon">
-      <DarkMode>
-        <Icon name="lucide:moon" slot="light" size="24" />
-        <Icon name="lucide:sun" slot="dark" size="24" />
-      </DarkMode>
-    </li>
-  </Navigation>
-</header>
-
-<style lang="scss" is:global>
-  header {
-    .type-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      svg {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
-
-  // Ensure main content doesn't get hidden behind sticky nav
-  main {
-    padding-top: 0; // Remove fixed padding since nav is sticky
-  }
-</style>
+<Navigation />

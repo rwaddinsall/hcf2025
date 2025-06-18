@@ -1,16 +1,17 @@
 ---
-import '../styles/tailwind.css';
-import '../assets/scss/index.scss';
-import SiteMeta from '../components/SiteMeta.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import "../styles/tailwind.css";
+import "../assets/scss/index.scss";
+import SiteMeta from "../components/SiteMeta.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Navigation from "@components/Navigation.astro";
 
 const {
-  title = 'Hopkins Creek Festival',
-  description = 'Hopkins Creek Music Festival - A celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists and good vibes.',
+  title = "Hopkins Creek Festival",
+  description = "Hopkins Creek Music Festival - A celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists and good vibes.",
   url = Astro.site,
-  image = 'social-preview-image.png',
-  author = 'Hopkins Creek Festival',
+  image = "social-preview-image.png",
+  author = "Hopkins Creek Festival",
 } = Astro.props;
 ---
 
@@ -32,7 +33,7 @@ const {
     />
   </head>
   <body>
-    <Header />
+    <Navigation />
     <main id="main-content">
       <slot />
     </main>
@@ -41,7 +42,6 @@ const {
       // sticky footer on low content pages
       html,
       body {
-        height: 100%;
       }
 
       body {

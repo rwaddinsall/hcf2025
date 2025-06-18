@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { Icon } from "astro-icon/components";
 
 /**
  * CallToAction Component
@@ -19,62 +19,118 @@ interface Props {
    * The text to display on the button
    */
   linkText?: string;
+  /**
+   * Whether to show the arrow icon
+   */
+  showIcon?: boolean;
 }
 
 const {
-  title = 'This is a call to action',
-  link = '#tickets',
-  linkText = 'Button',
+  title,
+  link = "#tickets",
+  linkText = "Buy Tickets",
+  showIcon = false,
 } = Astro.props;
 ---
 
 <div class="container">
-  <div
-    class="flex flex-col items-center gap-12 px-12 py-20 mt-24 mb-32 call-to-action rounded-xl md:px-24"
-  >
-    <h2 class="text-3xl text-center md:text-6xl">{title}</h2>
-    <a href={link} class="text-2xl text-center">
+  <div class="call-to-action">
+    {title && <h2>{title}</h2>}
+    <a href={link} class="cta-button">
       {linkText}
-      <Icon name="lucide:arrow-right" />
+      {showIcon && <Icon name="lucide:arrow-right" />}
     </a>
   </div>
 </div>
 
 <style lang="scss">
-  @use '../assets/scss/base/mixins' as *;
+  @use "../assets/scss/base/breakpoint" as *;
 
   .call-to-action {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-l);
+    padding: var(--space-2xl) 0;
+    text-align: center;
 
-    color: var(--color-neutral-900);
+    h2 {
+      margin: 0;
+      font-size: var(--font-size-3);
+      color: var(--foreground-color);
+
+      @include breakpoint(m) {
+        font-size: var(--font-size-4);
+      }
+    }
   }
 
-  a,
-  a:visited {
+  .cta-button {
     display: flex;
     align-items: center;
-    gap: var(--space-2xs);
-    border: 3px solid var(--color-neutral-900);
-    border-radius: var(--radius-s);
-    padding: var(--space-s);
-    color: var(--color-neutral-900);
-    font-weight: bold;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    min-height: 80px;
+    background-color: var(--color-neutral-900);
+    border: 2px solid var(--color-neutral-900);
+    border-radius: var(--radius-m);
+    padding: var(--space-m) var(--space-xl);
+    color: var(--color-neutral-100);
+    font-family: var(--font-body);
+    font-size: var(--font-size-2);
+    font-weight: 400;
+    letter-spacing: 0.05em;
     text-decoration: none;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
 
-    @include text-decoration(transparent, currentColor);
-
-    [data-icon] {
-      transition: translate var(--animation-speed-fast) var(--cubic-bezier);
+    @include breakpoint(m) {
+      min-height: 100px;
+      font-size: var(--font-size-3);
     }
 
-    &:where(:hover, :focus) {
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-neutral-100);
+      color: var(--color-neutral-900);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-neutral-900);
+      outline-offset: 4px;
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
+      transition: transform var(--animation-speed-fast) var(--cubic-bezier);
+    }
+
+    &:hover svg {
+      transform: translateX(4px);
+    }
+  }
+
+  // Dark mode adjustments
+  :global(.darkmode) .cta-button {
+    background-color: var(--color-neutral-100);
+    border-color: var(--color-neutral-100);
+    color: var(--color-neutral-900);
+
+    &:hover,
+    &:focus-visible {
       background-color: var(--color-neutral-900);
       color: var(--color-neutral-100);
-      text-decoration: underline;
+    }
 
-      [data-icon] {
-        translate: 5px 0;
-      }
+    &:focus-visible {
+      outline-color: var(--color-neutral-100);
     }
   }
 </style>

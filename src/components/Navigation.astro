@@ -1,39 +1,14 @@
 ---
-/**
- * Hopkins Creek Header Component with Navigation
- *
- * @description A complete header component with sticky navigation
- * and enhanced UX features
- */
-import Logo from "./Logo.astro";
 import { SkipLink } from "accessible-astro-components";
 import ScrollingText from "./ScrollingText.astro";
-// Commented out fetchCTAData to make CTA always Humanitix
-// import { fetchCTAData } from "../lib/strapi";
-
-// LAUNCH VERSION: Hardcoded Humanitix CTA
-// let ctaData = null;
-// try {
-//   ctaData = await fetchCTAData();
-// } catch (error) {
-//   console.error("Failed to fetch CTA data:", error);
-// }
+// import Logo from "./Logo.astro";  // Logo import is now unused and can be deleted if not needed
 ---
 
 <header class="hopkins-header">
   <SkipLink />
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
-    <!-- Scrolling text positioned absolutely to start from container edge -->
-
-    <!-- LAUNCH VERSION: Simplified navigation with just logo and CTA -->
     <div class="nav-container launch-version">
-      <!-- Logo Section -->
-      <div class="nav-brand">
-        <Logo />
-      </div>
       <ScrollingText strapiType="header" />
-
-      <!-- LAUNCH VERSION: Single prominent CTA always Humanitix -->
       <div class="launch-cta">
         <a
           href="https://events.humanitix.com/hopkins-creek-2025"
@@ -46,110 +21,177 @@ import ScrollingText from "./ScrollingText.astro";
         </a>
       </div>
     </div>
-
-    <!-- LAUNCH VERSION: Full navigation temporarily hidden - uncomment when ready -->
-    <!--
-    <div class="nav-container">
-      <div class="nav-brand"></div>
-      <ScrollingText strapiType="header" />
-
-      <div class="nav-menu" id="nav-menu">
-        <ul class="nav-list">
-          <li class="nav-item">
-            <a href="/" class="nav-link" aria-label="Go to homepage">
-              <span>Home</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              href="/program/"
-              class="nav-link"
-              aria-label="View festival program"
-            >
-              <span>Program</span>
-            </a>
-          </li>
-          <li class="nav-item nav-dropdown" data-dropdown>
-            <button
-              class="nav-link dropdown-trigger"
-              aria-expanded="false"
-              aria-haspopup="true"
-              aria-controls="info-dropdown"
-              data-dropdown-trigger
-            >
-              <span>Info</span>
-              <Icon
-                name="lucide:chevron-down"
-                class="dropdown-icon"
-                size="16"
-              />
-            </button>
-            <div class="dropdown-menu" id="info-dropdown" data-dropdown-menu>
-              <div class="dropdown-content">
-                <a href="/info/" class="dropdown-link">
-                  <span>Festival Info</span>
-                </a>
-                <a href="/info/camping" class="dropdown-link">
-                  <span>Camping & Accommodation</span>
-                </a>
-                <a href="/info/motor-inn" class="dropdown-link">
-                  <span>The Motor Inn</span>
-                </a>
-                <a href="/info/accessibility" class="dropdown-link">
-                  <span>Accessibility</span>
-                </a>
-                <a href="/info/getting-there" class="dropdown-link">
-                  <span>Travel & Entry</span>
-                </a>
-                <a href="/info/food-beverages" class="dropdown-link">
-                  <span>Food & Beverages</span>
-                </a>
-                <a href="/applications" class="dropdown-link">
-                  <span>Applications</span>
-                </a>
-                <a href="/info/tickets" class="dropdown-link">
-                  <span>Tickets</span>
-                </a>
-                <a href="/privacy-policy/" class="dropdown-link">
-                  <span>Privacy Policy</span>
-                </a>
-              </div>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://events.humanitix.com/hopkins-creek-2025"
-              class="nav-link nav-cta"
-              aria-label="Buy festival tickets"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>Tickets</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <button
-        class="mobile-toggle"
-        aria-expanded="false"
-        aria-controls="nav-menu"
-        aria-label="Toggle navigation menu"
-        data-mobile-toggle
-      >
-        <span class="mobile-toggle-line"></span>
-        <span class="mobile-toggle-line"></span>
-        <span class="mobile-toggle-line"></span>
-      </button>
-    </div>
-    -->
   </nav>
 </header>
 
-<script>
-  // ...keep your existing HopkinsNavigation class and logic...
-</script>
-
 <style lang="scss">
-  // ...keep your existing styles...
+:root {
+  --nav-height: 80px;
+  --nav-bg: #ffffff;
+  --nav-bg-scrolled: #ffffff;
+  --nav-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  --nav-shadow-scrolled: 0 8px 48px rgba(0, 0, 0, 0.15);
+  --nav-border: rgba(0, 0, 0, 0.1);
+  --nav-text: var(--foreground-color);
+  --nav-text-hover: var(--foreground-color);
+  --nav-accent: var(--foreground-color);
+  --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --mobile-overlay-bg: rgba(0, 0, 0, 0.5);
+  --dropdown-bg: #ffffff;
+  --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+.hopkins-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
+
+.hopkins-nav {
+  width: 100%;
+  background: var(--nav-bg);
+  border-bottom: 1px solid transparent;
+  transition: var(--nav-transition);
+  min-height: var(--nav-height);
+  position: relative;
+
+  &.nav-scrolled {
+    background: var(--nav-bg-scrolled);
+    box-shadow: var(--nav-shadow-scrolled);
+    border-bottom-color: var(--nav-border);
+  }
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  position: relative;
+  z-index: 2;
+}
+
+.nav-brand {
+  flex-shrink: 0;
+  z-index: 1001;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  color: var(--nav-text);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 50px;
+  transition: var(--nav-transition);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  font-family: inherit;
+
+  span {
+    position: relative;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--nav-text-hover);
+    background: var(--brand-secondary);
+  }
+
+  &.active {
+    color: var(--nav-accent);
+    font-weight: 600;
+
+    span::after {
+      content: "";
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--nav-accent);
+      border-radius: 1px;
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--nav-accent);
+    outline-offset: 2px;
+  }
+}
+
+.nav-cta {
+  background: var(--nav-accent);
+  color: white;
+  font-weight: 600;
+  border-radius: 50px;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--nav-text-hover);
+    color: white;
+    transform: translateY(-1px);
+  }
+}
+
+.launch-version {
+  .nav-brand {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.launch-cta {
+  display: flex;
+  align-items: center;
+  z-index: 1001;
+
+  .launch-cta-button {
+    background: var(--color-primary, #000);
+    color: var(--color-background, #fff);
+    padding: 0.5rem 1rem;
+    border-radius: 1.25rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid var(--color-primary, #000);
+    font-size: 0.875rem;
+
+    @media (max-width: 768px) {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.9rem;
+      border-radius: 1.25rem;
+    }
+
+    @media (max-width: 480px) {
+      padding: 0.55rem 1.1rem;
+      font-size: 0.85rem;
+    }
+
+    &:hover,
+    &:focus {
+      background: transparent;
+      color: var(--color-primary, #000);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-primary, #000);
+      outline-offset: 2px;
+    }
+
+    span {
+      white-space: nowrap;
+    }
+  }
+}
 </style>

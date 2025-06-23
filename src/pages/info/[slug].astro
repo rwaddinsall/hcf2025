@@ -5,9 +5,18 @@ import { fetchAllInfoPages } from "../../lib/strapi";
 // Static generation: Get all possible slugs
 export async function getStaticPaths() {
   try {
-    const infoPages = await fetchAllInfoPages();
+    const response = await fetchAllInfoPages();
+    const infoPages = response.data;
 
-    return infoPages.map((page: any) => ({
+    // Filter out pages with null or invalid slugs
+    const validPages = infoPages.filter(
+      (page: any) =>
+        page.slug &&
+        typeof page.slug === "string" &&
+        page.slug.trim().length > 0
+    );
+
+    return validPages.map((page: any) => ({
       params: { slug: page.slug },
     }));
   } catch (error) {

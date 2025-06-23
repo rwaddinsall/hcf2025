@@ -1,0 +1,239 @@
+---
+import InfoPageLayout from "../../components/InfoPageLayout.astro";
+import { fetchAllInfoPages } from "../../lib/strapi";
+
+// Static generation: Get all possible slugs
+export async function getStaticPaths() {
+  try {
+    const infoPages = await fetchAllInfoPages();
+    
+    return infoPages.map((page: any) => ({
+      params: { slug: page.slug }
+    }));
+  } catch (error) {
+    console.warn("Failed to fetch info pages for static generation:", error);
+    
+    // Fallback slugs for development/backup
+    return [
+      { params: { slug: "camping" } },
+      { params: { slug: "accessibility" } },
+      { params: { slug: "tickets" } },
+      { params: { slug: "getting-there" } },
+      { params: { slug: "motor-inn" } },
+      { params: { slug: "food-beverages" } },
+      { params: { slug: "applications" } }
+    ];
+  }
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+
+// Define comprehensive fallback content for each page
+const fallbackContent = {
+  camping: {
+    title: "Camping & Accommodation",
+    subtitle: "Find your perfect camping spot at Hopkins Creek Festival",
+    sections: [
+      {
+        title: "Camping Options Available",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Choose from various camping options to suit your festival experience." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Powered camping sites with electrical hookups" }] },
+              { children: [{ text: "Unpowered camping areas in scenic locations" }] },
+              { children: [{ text: "Group camping areas for larger parties" }] },
+              { children: [{ text: "Glamping options with pre-set tents" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "Book Camping Now", url: "/tickets" },
+          { text: "View Campground Map", url: "/camping-map" }
+        ]
+      },
+      {
+        title: "What to Bring",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Essential items for a comfortable camping experience:" }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Tent and camping gear" }] },
+              { children: [{ text: "Portable chairs and tables" }] },
+              { children: [{ text: "Cooler and ice packs" }] },
+              { children: [{ text: "Flashlight and batteries" }] }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  
+  accessibility: {
+    title: "Accessibility Information",
+    subtitle: "Making Hopkins Creek Festival accessible for everyone",
+    sections: [
+      {
+        title: "Accessibility Features",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "We're committed to ensuring everyone can enjoy Hopkins Creek Festival." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Wheelchair accessible pathways and viewing areas" }] },
+              { children: [{ text: "Accessible toilet facilities throughout the site" }] },
+              { children: [{ text: "Reserved parking spaces close to entrances" }] },
+              { children: [{ text: "Audio description services available" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "Contact Accessibility Team", url: "/contact" },
+          { text: "Request Special Assistance", url: "/accessibility-request" }
+        ]
+      }
+    ]
+  },
+
+  tickets: {
+    title: "Tickets & Pricing",
+    subtitle: "Choose your festival experience",
+    sections: [
+      {
+        title: "Ticket Options",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Multiple ticket types available to suit different budgets and preferences." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Single day passes" }] },
+              { children: [{ text: "Full festival weekend passes" }] },
+              { children: [{ text: "VIP packages with exclusive access" }] },
+              { children: [{ text: "Group discounts available" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "Buy Tickets Online", url: "/tickets" },
+          { text: "Group Booking Form", url: "/group-booking" }
+        ]
+      }
+    ]
+  },
+
+  "getting-there": {
+    title: "Getting There",
+    subtitle: "Travel information and directions to Hopkins Creek Festival",
+    sections: [
+      {
+        title: "Transport Options",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Multiple ways to reach Hopkins Creek Festival site." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Free parking available on-site" }] },
+              { children: [{ text: "Shuttle buses from town center" }] },
+              { children: [{ text: "Train station 2km from festival grounds" }] },
+              { children: [{ text: "Bicycle parking areas provided" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "View Interactive Map", url: "/map" },
+          { text: "Bus Timetables", url: "/transport" }
+        ]
+      }
+    ]
+  },
+
+  "motor-inn": {
+    title: "The Motor Inn",
+    subtitle: "Comfortable accommodation packages",
+    sections: [
+      {
+        title: "Motor Inn Packages",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Stay comfortably at our partner Motor Inn with festival packages." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Standard rooms with festival tickets included" }] },
+              { children: [{ text: "Deluxe suites with VIP access" }] },
+              { children: [{ text: "Complimentary breakfast and shuttle service" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "Book Motor Inn Package", url: "/motor-inn-booking" },
+          { text: "View Room Options", url: "/accommodation" }
+        ]
+      }
+    ]
+  },
+
+  "food-beverages": {
+    title: "Food & Beverages",
+    subtitle: "Delicious food and drinks await",
+    sections: [
+      {
+        title: "Food Options",
+        content: [
+          {
+            type: "paragraph",
+            children: [{ text: "Wide variety of food vendors and beverage options throughout the festival." }]
+          },
+          {
+            type: "list",
+            children: [
+              { children: [{ text: "Local food trucks and vendors" }] },
+              { children: [{ text: "Vegetarian and vegan options available" }] },
+              { children: [{ text: "Licensed bar areas" }] },
+              { children: [{ text: "Coffee and snack stations" }] }
+            ]
+          }
+        ],
+        links: [
+          { text: "View Food Vendor List", url: "/vendors" },
+          { text: "Dietary Requirements", url: "/dietary-info" }
+        ]
+      }
+    ]
+  }
+};
+
+// Get fallback content or default
+const fallback = fallbackContent[slug as keyof typeof fallbackContent] || {
+  title: "Festival Information",
+  subtitle: "Information about Hopkins Creek Festival",
+  sections: []
+};
+---
+
+<InfoPageLayout
+  slug={slug || ""}
+  fallbackTitle={fallback.title}
+  fallbackSubtitle={fallback.subtitle}
+  fallbackSections={fallback.sections}
+/>

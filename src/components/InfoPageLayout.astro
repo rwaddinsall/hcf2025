@@ -2,6 +2,8 @@
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import PageHeader from "./PageHeader.astro";
 import { Accordion, AccordionItem } from "accessible-astro-components";
+import { Icon } from "astro-icon/components";
+import { fetchInfoPageBySlug } from "../lib/strapi";
 
 interface InfoLink {
   text: string;
@@ -15,114 +17,163 @@ interface InfoSection {
 }
 
 interface Props {
-  pageTitle: string;
-  pageSubtitle?: string;
-  metaDescription?: string;
-  infoSections?: InfoSection[];
+  slug: string;
+  backLink?: {
+    href: string;
+    text: string;
+  };
+  fallbackTitle?: string;
+  fallbackSubtitle?: string;
+  fallbackSections?: InfoSection[];
 }
 
-const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
+const {
+  slug,
+  backLink = { href: "/info", text: "Back to Festival Info" },
+  fallbackTitle,
+  fallbackSubtitle,
+  fallbackSections = [],
+} = Astro.props;
+
+// Fetch data from Strapi
+let pageData: any = null;
+let pageTitle = fallbackTitle || "Information";
+let pageSubtitle = fallbackSubtitle || "";
+let infoSections = fallbackSections;
+
+try {
+  pageData = await fetchInfoPageBySlug(slug);
+
+  if (pageData) {
+    pageTitle = pageData.title || fallbackTitle || "Information";
+    pageSubtitle = pageData.pageHeader?.subtitle || fallbackSubtitle || "";
+
+    // Transform FAQs to InfoSections format
+    if (pageData.faqs && pageData.faqs.length > 0) {
+      infoSections = pageData.faqs.map((faq: any) => ({
+        title: faq.question,
+        content: faq.answer
+          ? [{ type: "paragraph", children: [{ text: faq.answer }] }]
+          : [],
+        links: faq.links || [],
+      }));
+    }
+  }
+} catch (error) {
+  console.warn(`Failed to fetch info page data for slug "${slug}":`, error);
+  // Use fallback data
+}
 ---
 
 <DefaultLayout
   title={`${pageTitle} - Hopkins Creek Festival`}
-  description={metaDescription}
+  description={pageData?.metaDescription}
 >
-  <section class="info-page">
+  <section class="my-12">
     <PageHeader title={pageTitle} subtitle={pageSubtitle} />
+  </section>
 
-    <div class="info-content">
-      <div class="container">
+  <section class="my-12">
+    <div class="container">
+      <div class="space-content">
+        <div class="mb-8">
+          <a
+            href={backLink.href}
+            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
+          >
+            <Icon name="lucide:arrow-left" size="20" />
+            {backLink.text}
+          </a>
+        </div>
+
         {
           infoSections && infoSections.length > 0 && (
-            <div class="info-sections">
-              <Accordion>
-                {infoSections.map((section, index) => (
-                  <AccordionItem
-                    title={section.title}
-                    variant="chevron"
-                    name="info-accordion"
-                    open={index === 0}
-                  >
-                    <div class="section-content">
-                      {/* 
-                        Render structured content blocks from CMS data
-                        Handles paragraphs with inline links and unordered lists
-                      */}
-                      {section.content.map((block) => {
-                        // Render paragraph blocks with potential inline links
-                        if (block.type === "paragraph") {
-                          return (
-                            <p>
-                              {block.children.map((child: any) => {
-                                const hasLink = child.marks?.some(
+            <Accordion>
+              {infoSections.map((section) => (
+                <AccordionItem title={section.title}>
+                  <div class="space-content">
+                    {/* 
+                      Render structured content blocks from CMS data
+                      Handles paragraphs with inline links and unordered lists
+                    */}
+                    {section.content.map((block) => {
+                      // Render paragraph blocks with potential inline links
+                      if (block.type === "paragraph") {
+                        return (
+                          <p>
+                            {block.children.map((child: any) => {
+                              const hasLink = child.marks?.some(
+                                (mark: any) => mark.type === "link"
+                              );
+
+                              if (hasLink) {
+                                const linkMark = child.marks.find(
                                   (mark: any) => mark.type === "link"
                                 );
+                                return (
+                                  <a
+                                    href={linkMark.attrs.href}
+                                    class="content-link"
+                                  >
+                                    {child.text}
+                                  </a>
+                                );
+                              }
 
-                                if (hasLink) {
-                                  const linkMark = child.marks.find(
-                                    (mark: any) => mark.type === "link"
-                                  );
-                                  return (
-                                    <a
-                                      href={linkMark.attrs.href}
-                                      class="content-link"
-                                    >
-                                      {child.text}
-                                    </a>
-                                  );
-                                }
+                              return child.text;
+                            })}
+                          </p>
+                        );
+                      }
 
-                                return child.text;
-                              })}
-                            </p>
-                          );
-                        }
+                      // Render list blocks with simple text items
+                      if (block.type === "list") {
+                        return (
+                          <ul class="list-disc list-inside">
+                            {block.children.map((item: any) => (
+                              <li>
+                                {item.children
+                                  .map((child: any) => child.text)
+                                  .join("")}
+                              </li>
+                            ))}
+                          </ul>
+                        );
+                      }
 
-                        // Render list blocks with simple text items
-                        if (block.type === "list") {
-                          return (
-                            <ul class="content-list">
-                              {block.children.map((item: any) => (
-                                <li>
-                                  {item.children
-                                    .map((child: any) => child.text)
-                                    .join("")}
-                                </li>
-                              ))}
-                            </ul>
-                          );
-                        }
-
-                        // Skip unsupported block types
-                        return null;
-                      })}
-                    </div>
+                      // Skip unsupported block types
+                      return null;
+                    })}
 
                     {section.links && section.links.length > 0 && (
-                      <div class="section-links">
-                        {section.links.map((link) => (
-                          <a
-                            href={link.url}
-                            class="info-link"
-                            target={
-                              link.url.startsWith("http") ? "_blank" : undefined
-                            }
-                            rel={
-                              link.url.startsWith("http")
-                                ? "noopener noreferrer"
-                                : undefined
-                            }
-                          >
-                            {link.text}
-                          </a>
-                        ))}
+                      <div class="p-4 mt-4 border border-gray-200 rounded-lg bg-gray-50">
+                        <h4 class="mb-2 font-bold">Useful Links:</h4>
+                        <div class="space-y-2">
+                          {section.links.map((link) => (
+                            <a
+                              href={link.url}
+                              class="block underline text-primary-500 hover:text-primary-600"
+                              target={
+                                link.url.startsWith("http")
+                                  ? "_blank"
+                                  : undefined
+                              }
+                              rel={
+                                link.url.startsWith("http")
+                                  ? "noopener noreferrer"
+                                  : undefined
+                              }
+                            >
+                              {link.text}
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     )}
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
+                  </div>
+                </AccordionItem>
+              ))}
+            </Accordion>
           )
         }
 
@@ -133,55 +184,35 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
 </DefaultLayout>
 
 <style lang="scss">
-  @use "../assets/scss/base/mixins" as *;
-
-  .info-page {
-    padding: var(--space-xl) 0 var(--space-2xl);
-  }
-
-  .info-content {
-    .container {
-      max-width: min(70ch, calc(100vw - var(--space-l) * 2));
-      margin: 0 auto;
-      padding: 0 var(--space-m);
+  .space-content {
+    h4 {
+      font-weight: bold;
+      margin-top: var(--space-m);
+      margin-bottom: var(--space-s);
+      color: var(--foreground-color);
     }
-  }
 
-  .info-sections {
-    margin-top: var(--space-xl);
-  }
+    ul {
+      margin-bottom: var(--space-m);
+    }
 
-  .section-content {
-    padding: var(--space-l);
+    li {
+      margin-bottom: var(--space-2xs);
+    }
 
     p {
       margin-bottom: var(--space-m);
       line-height: var(--line-height-relaxed);
       color: var(--foreground-color);
 
-      &:last-child:not(:only-child) {
+      &:last-child {
         margin-bottom: 0;
       }
     }
 
-    .content-list {
-      margin: var(--space-m) 0;
-      padding-left: var(--space-l);
-
-      li {
-        margin-bottom: var(--space-s);
-        line-height: var(--line-height-relaxed);
-        color: var(--foreground-color);
-
-        &::marker {
-          color: var(--link-color);
-        }
-      }
-    }
-
     .content-link {
-      @include text-decoration(var(--link-color), var(--link-hover-color));
       color: var(--link-color);
+      text-decoration: underline;
       font-weight: 500;
 
       &:hover,
@@ -191,67 +222,10 @@ const { pageTitle, pageSubtitle, metaDescription, infoSections } = Astro.props;
     }
   }
 
-  .section-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-s);
-    padding: var(--space-m) var(--space-l) var(--space-l);
-    border-top: 1px solid var(--border-color-subtle);
-    background-color: var(--color-neutral-100);
-  }
-
-  .info-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-xs);
-    padding: var(--space-s) var(--space-m);
-    background-color: var(--background-color);
-    border: 1px solid var(--border-color-subtle);
-    border-radius: var(--radius-s);
-    color: var(--link-color);
-    font-weight: 500;
-    text-decoration: none;
-    transition:
-      background-color var(--animation-speed-fast) var(--cubic-bezier),
-      border-color var(--animation-speed-fast) var(--cubic-bezier),
-      color var(--animation-speed-fast) var(--cubic-bezier),
-      transform var(--animation-speed-fast) var(--cubic-bezier);
-
-    &:hover,
-    &:focus-visible {
-      background-color: var(--link-color);
-      border-color: var(--link-color);
-      color: var(--background-color);
-      transform: translateY(-1px);
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--link-color);
-      outline-offset: 2px;
-    }
-  }
-
   // Responsive adjustments
   @media (max-width: 48rem) {
-    .info-page {
-      padding: var(--space-l) 0 var(--space-xl);
-    }
-
-    .info-content .container {
+    .space-content {
       padding: 0 var(--space-s);
-    }
-
-    .section-content {
-      padding: var(--space-m);
-    }
-
-    .section-links {
-      padding: var(--space-m);
-    }
-
-    .info-link {
-      padding: var(--space-s);
-      font-size: var(--font-size--1);
     }
   }
 </style>

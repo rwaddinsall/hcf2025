@@ -202,3 +202,17 @@ export async function fetchCTAData() {
     wrappedByKey: "data",
   });
 }
+
+/**
+ * Fetches all published info pages for static generation
+ */
+export async function fetchAllInfoPages() {
+  return fetchApi<import("../interfaces/strapi").InfoPageResponse>({
+    endpoint: "info-pages",
+    query: {
+      "filters[publishedAt][$notNull]": "true",
+      fields: "slug"
+    },
+    wrappedByKey: "data",
+  });
+}

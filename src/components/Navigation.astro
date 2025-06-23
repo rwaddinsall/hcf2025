@@ -62,29 +62,22 @@ const isHomePage = Astro.url.pathname === "/";
             <div class="dropdown-menu" id="info-dropdown" data-dropdown-menu>
               <div class="dropdown-content">
                 <a href="/info/" class="dropdown-link"> </a>
-                <a href="/info/camping" class="dropdown-link">
-                  <span>Camping & Accommodation</span>
-                </a>
-                <a href="/info/motor-inn" class="dropdown-link">
-                  <span>The Motor Inn</span>
-                </a>
-                <a href="/info/accessibility" class="dropdown-link">
-                  <span>Accessibility</span>
-                </a>
-                <a href="/info/getting-there" class="dropdown-link">
-                  <span>Travel & Entry</span>
-                </a>
-                <a href="/info/food-beverages" class="dropdown-link">
-                  <span>Food & Beverages</span>
-                </a>
-
                 <a href="/info/tickets" class="dropdown-link">
                   <span>Tickets</span>
                 </a>
-                <a href="/privacy-policy/" class="dropdown-link">
-                  <span>Privacy Policy</span>
+                <a href="/info/camping" class="dropdown-link">
+                  <span>Camping & Accommodation</span>
                 </a>
               </div>
+              <a href="/info/accessibility" class="dropdown-link">
+                <span>Accessibility</span>
+              </a>
+              <a href="/info/getting-there" class="dropdown-link">
+                <span>Travel & Entry</span>
+              </a>
+              <a href="/info/food-beverages" class="dropdown-link">
+                <span>Food & Beverages</span>
+              </a>
             </div>
           </li>
           <li class="nav-item">
@@ -161,9 +154,6 @@ const isHomePage = Astro.url.pathname === "/";
                   >Applications</a
                 >
                 <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
-                <a href="/privacy-policy/" class="mobile-dropdown-link"
-                  >Privacy Policy</a
-                >
               </div>
             </div>
             <a
@@ -483,12 +473,19 @@ const isHomePage = Astro.url.pathname === "/";
           list-style: none;
           margin: 0;
           padding: 0;
-          gap: 0.5rem;
+          gap: 0.25rem;
         }
       }
 
       .nav-item {
         position: relative;
+        flex-shrink: 0;
+      }
+
+      // Special styling for CTA container
+      .launch-cta {
+        flex-shrink: 0;
+        margin-left: 0.5rem;
       }
 
       // Base nav link styling
@@ -496,7 +493,7 @@ const isHomePage = Astro.url.pathname === "/";
         display: flex;
         align-items: center;
         gap: 0.5rem;
-        padding: 0.75rem 1.25rem;
+        padding: 0.75rem 1rem;
         color: var(--nav-text);
         text-decoration: none;
         font-weight: 500;
@@ -507,6 +504,7 @@ const isHomePage = Astro.url.pathname === "/";
         cursor: pointer;
         font-size: inherit;
         font-family: inherit;
+        white-space: nowrap;
 
         span {
           position: relative;
@@ -549,6 +547,8 @@ const isHomePage = Astro.url.pathname === "/";
         color: white;
         font-weight: 600;
         border-radius: 50px;
+        padding: 0.75rem 1.25rem !important;
+        flex-shrink: 0;
 
         &:hover,
         &:focus-visible {

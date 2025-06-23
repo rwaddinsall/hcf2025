@@ -11,19 +11,6 @@ const currentYear = new Date().getFullYear();
 ---
 
 <footer>
-  <!-- Acknowledgement of Country - Prominent placement at top -->
-  <section class="acknowledgement-section">
-    <div class="container">
-      <ScrollingText
-        strapiType="acknowledgement-of-country"
-        duration={30}
-        ariaLabel="Acknowledgement of Country"
-        width="100%"
-        variant="acknowledgement-of-country"
-      />
-    </div>
-  </section>
-
   <section class="py-20">
     <h2 class="sr-only">Footer</h2>
     <div
@@ -63,31 +50,36 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <!-- Copyright Section -->
-    <div class="container pt-8 mt-12 border-t border-gray-200">
-      <div class="flex flex-col gap-4 md:flex-row md:justify-between">
-        <p>
-          &copy; {currentYear} - Hopkins Creek Festival. All rights reserved.
-        </p>
+    <!-- Acknowledgement of Country - Prominent placement at top -->
+    <section class="acknowledgement-section">
+      <div class="container">
+        <ScrollingText
+          strapiType="acknowledgement-of-country"
+          duration={30}
+          ariaLabel="Acknowledgement of Country"
+          width="100%"
+          variant="acknowledgement-of-country"
+        />
       </div>
-    </div>
+    </section>
   </section>
+
+  <style>
+    .acknowledgement-section {
+      padding: var(--space-l);
+      margin-top: var(--space-xl);
+    }
+
+    footer a {
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    footer h3 {
+      color: var(--neutral-900, #1a1a1a);
+    }
+  </style>
 </footer>
-
-<style>
-  .acknowledgement-section {
-    padding: var(--space-l);
-  }
-
-  footer a {
-    text-decoration: none;
-  }
-
-  footer a:hover {
-    text-decoration: underline;
-  }
-
-  footer h3 {
-    color: var(--neutral-900, #1a1a1a);
-  }
-</style>

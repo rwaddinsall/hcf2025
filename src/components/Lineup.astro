@@ -35,7 +35,7 @@ const artists: ArtistData[] = strapiArtists.map((artist) => {
   return {
     name: artist.name,
     annotation: annotation || undefined,
-    size: "medium" as const, // Default size, can be customized later
+    size: "medium" as const, // Consistent size for all artists
     socialLink: artist.socialLink, // Include social link from Strapi
   };
 });
@@ -57,15 +57,21 @@ artists.sort((a, b) => {
 });
 ---
 
-<section class="px-6 py-4 sm:px-8 sm:py-8 md:px-12 md:py-12">
-  <div class="max-w-6xl mx-auto">
+<section class="lineup-section">
+  <div class="lineup-container">
     {
       artists.length > 0 ? (
-        <div class="lineup-grid">
-          {artists.map((artist) => (
+        <div
+          class="lineup-grid"
+          role="list"
+          aria-label="Festival artist lineup"
+        >
+          {artists.map((artist, index) => (
             <div
-              class={`artist-item ${artist.size || "medium"}`}
+              class={`lineup-artist ${artist.size || "medium"}`}
+              role="listitem"
               data-artist={artist.name}
+              data-index={index}
             >
               <h2 class="artist-name">
                 {artist.socialLink ? (
@@ -74,22 +80,37 @@ artists.sort((a, b) => {
                     class="artist-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Visit ${artist.name}'s page`}
+                    aria-label={`Visit ${artist.name}'s website or social media page`}
                   >
-                    {artist.name}
+                    <span class="artist-text">{artist.name}</span>
+                    {artist.annotation && (
+                      <span
+                        class="artist-annotation"
+                        aria-label={`Additional info: ${artist.annotation}`}
+                      >
+                        [{artist.annotation}]
+                      </span>
+                    )}
                   </a>
                 ) : (
-                  artist.name
-                )}
-                {artist.annotation && (
-                  <span class="artist-annotation">[{artist.annotation}]</span>
+                  <>
+                    <span class="artist-text">{artist.name}</span>
+                    {artist.annotation && (
+                      <span
+                        class="artist-annotation"
+                        aria-label={`Additional info: ${artist.annotation}`}
+                      >
+                        [{artist.annotation}]
+                      </span>
+                    )}
+                  </>
                 )}
               </h2>
             </div>
           ))}
         </div>
       ) : (
-        <div class="text-center text-neutral-600">
+        <div class="lineup-empty" role="status" aria-live="polite">
           <p>Artist lineup coming soon...</p>
         </div>
       )
@@ -98,125 +119,320 @@ artists.sort((a, b) => {
 </section>
 
 <style>
-  .lineup-container {
+  /* Lineup Section - Modern CSS with Design System Tokens */
+  .lineup-section {
+    padding: var(--space-m) var(--space-s);
+
+    @media (min-width: 48rem) {
+      padding: var(--space-l) var(--space-m);
+    }
+
+    @media (min-width: 64rem) {
+      padding: var(--space-xl) var(--space-l);
+    }
   }
 
+  .lineup-container {
+    max-inline-size: var(--grid-max-width);
+    margin-inline: auto;
+  }
+
+  /* Lineup Grid - Flexible Layout */
   .lineup-grid {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    max-width: 100%;
+    align-items: baseline;
+    gap: var(--space-4xs) var(--space-s);
     text-align: center;
-    gap: var(--space-s) var(--space-m);
 
-    @media (max-width: 768px) {
-      gap: var(--space-xs) var(--space-s);
+    @media (min-width: 48rem) {
+      gap: var(--space-3xs) var(--space-m);
     }
 
-    @media (max-width: 480px) {
-      gap: var(--space-2xs) var(--space-xs);
-      padding: 0 var(--space-xs);
+    @media (min-width: 64rem) {
+      gap: var(--space-2xs) var(--space-l);
     }
   }
 
-  .artist-item {
+  /* Artist Item - Base Styling */
+  .lineup-artist {
     position: relative;
     white-space: nowrap;
-    text-align: center;
     opacity: 0;
-    animation: fadeInUp 0.6s ease forwards;
-    transition: all 0.3s ease;
-    cursor: pointer;
+    animation: fadeInUp 0.6s var(--cubic-bezier, ease) forwards;
+    transition:
+      opacity var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      transform var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
   }
 
-  .lineup-grid:hover .artist-item {
+  /* Grid Hover Effects */
+  .lineup-grid:hover .lineup-artist {
     opacity: 0.6;
   }
 
-  .lineup-grid:hover .artist-item:hover {
+  .lineup-grid:hover .lineup-artist:hover {
     opacity: 1;
-    transform: translateY(var(--random-y, 0px)) scale(1.05);
+    transform: translateY(-2px) scale(1.02);
   }
 
-  /* Ensure link hover states work within the grid hover context */
-  .lineup-grid:hover .artist-item:hover .artist-link {
-    color: var(--link-hover-color, #666);
-  }
-
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(calc(20px + var(--random-y, 0px)));
-    }
-    to {
-      opacity: 1;
-      transform: translateY(var(--random-y, 0px));
-    }
-  }
-
+  /* Artist Name Typography */
   .artist-name {
-    font-weight: 600;
     margin: 0;
-    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-size: var(--font-size-2);
+    font-family: var(--font-heading);
     line-height: 1.2;
 
-    @media (max-width: 768px) {
-      font-size: clamp(1rem, 3.5vw, 1.5rem);
+    @media (min-width: 48rem) {
+      font-size: var(--font-size-3);
     }
 
-    @media (max-width: 480px) {
-      font-size: clamp(0.9rem, 3vw, 1.25rem);
+    @media (min-width: 64rem) {
+      font-size: var(--font-size-4);
     }
   }
 
+  /* Artist Text - Main Name */
+  .artist-text {
+    display: inline-block;
+    color: var(--foreground-color);
+    transition: color var(--animation-speed-fast, 0.2s)
+      var(--cubic-bezier, ease);
+  }
+
+  /* Artist Link - Enhanced Styling */
   .artist-link {
     color: inherit;
     text-decoration: none;
-    transition: color var(--animation-speed-fast, 0.2s)
-      var(--cubic-bezier, ease);
-    display: inline-block; /* Ensure proper hover area */
+    display: inline-block;
+    transition:
+      color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      text-decoration-color var(--animation-speed-fast, 0.2s)
+        var(--cubic-bezier, ease);
+    border-radius: var(--radius-xs);
+    padding: var(--space-5xs) var(--space-4xs);
+    margin: calc(var(--space-5xs) * -1) calc(var(--space-4xs) * -1);
 
     &:where(:hover, :focus-visible) {
-      color: var(--link-hover-color, #666);
-      text-decoration: none;
+      color: var(--link-hover-color);
+      text-decoration: underline;
+      text-decoration-color: var(--link-hover-color);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.25em;
+      outline: 2px solid var(--link-hover-color);
+      outline-offset: 2px;
+    }
+
+    &:focus-visible {
+      outline-style: solid;
+      outline-width: 2px;
     }
   }
 
+  /* Artist Annotation - Metadata Styling */
   .artist-annotation {
-    font-size: 0.6em;
-    font-style: normal;
-    font-weight: 200;
-    margin-left: var(--space-5xs);
-    opacity: 1;
+    font-size: 0.75em;
+    font-weight: 300;
+    font-family: var(--font-body);
+    margin-inline-start: var(--space-4xs);
+    opacity: 0.8;
+    color: var(--foreground-color);
+    transition: opacity var(--animation-speed-fast, 0.2s)
+      var(--cubic-bezier, ease);
 
-    @media (max-width: 768px) {
-      font-size: 0.65em;
+    @media (min-width: 48rem) {
+      font-size: 0.7em;
+      margin-inline-start: var(--space-3xs);
     }
 
-    @media (max-width: 480px) {
-      font-size: 0.7em;
-      margin-left: var(--space-4xs);
+    @media (min-width: 64rem) {
+      font-size: 0.65em;
+      margin-inline-start: var(--space-2xs);
     }
   }
 
-  /* All artists same size */
-  .artist-item {
-    /* Size will be inherited from h2 design system */
+  /* Hover Enhancement for Annotations */
+  .artist-link:where(:hover, :focus-visible) .artist-annotation {
+    opacity: 1;
+  }
+
+  /* Animation Keyframes */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(var(--space-xs));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Empty State Styling */
+  .lineup-empty {
+    text-align: center;
+    padding: var(--space-xl);
+    color: var(--foreground-color);
+    opacity: 0.7;
+
+    p {
+      font-size: var(--font-size-1);
+      font-family: var(--font-body);
+      margin: 0;
+    }
+  }
+
+  /* High Contrast Mode Support */
+  @media (prefers-contrast: high) {
+    .lineup-artist {
+      border: 1px solid transparent;
+    }
+
+    .artist-link:where(:hover, :focus-visible) {
+      border: 2px solid currentColor;
+      outline: none;
+    }
+  }
+
+  /* Reduced Motion Support */
+  @media (prefers-reduced-motion: reduce) {
+    .lineup-artist {
+      animation: none;
+      opacity: 1;
+    }
+
+    .lineup-artist,
+    .artist-link,
+    .artist-annotation {
+      transition: none;
+    }
+  }
+
+  /* Print Styles */
+  @media print {
+    .lineup-section {
+      padding: 0;
+    }
+
+    .lineup-grid {
+      display: block;
+      columns: 3;
+      column-gap: var(--space-m);
+    }
+
+    .lineup-artist {
+      break-inside: avoid;
+      margin-bottom: var(--space-xs);
+      opacity: 1;
+      animation: none;
+    }
   }
 </style>
 
 <script>
-  // Add subtle random positioning for organic layout
+  // Enhanced lineup interactivity with modern JavaScript
   document.addEventListener("DOMContentLoaded", () => {
-    const artists = document.querySelectorAll(".artist-item");
-    artists.forEach((artist, index) => {
-      const element = artist as HTMLElement;
+    const lineupGrid = document.querySelector(".lineup-grid");
+    const artists = document.querySelectorAll(".lineup-artist");
 
-      // Add subtle random positioning for organic layout
+    if (!lineupGrid || !artists.length) return;
 
-      // Add staggered animation delay
-      element.style.animationDelay = `${index * 0.05}s`;
+    // Add staggered animation delays using IntersectionObserver for performance
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const element = entry.target as HTMLElement;
+          const index = parseInt(element.dataset.index || "0", 10);
+
+          // Staggered animation delay
+          element.style.animationDelay = `${index * 0.03}s`;
+
+          // Remove observer after animation starts
+          observer.unobserve(element);
+        }
+      });
+    }, observerOptions);
+
+    // Observe all artist elements
+    artists.forEach((artist) => {
+      observer.observe(artist);
     });
+
+    // Enhanced keyboard navigation
+    lineupGrid.addEventListener("keydown", (event) => {
+      const keyboardEvent = event as KeyboardEvent;
+      if (
+        ![
+          "ArrowLeft",
+          "ArrowRight",
+          "ArrowUp",
+          "ArrowDown",
+          "Home",
+          "End",
+        ].includes(keyboardEvent.key)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      const focusedElement = document.activeElement as HTMLElement;
+      const focusableElements = Array.from(
+        lineupGrid.querySelectorAll(".artist-link")
+      );
+      const currentIndex = focusableElements.indexOf(focusedElement);
+
+      if (currentIndex === -1) return;
+
+      let newIndex = currentIndex;
+
+      switch (keyboardEvent.key) {
+        case "ArrowLeft":
+        case "ArrowUp":
+          newIndex =
+            currentIndex > 0 ? currentIndex - 1 : focusableElements.length - 1;
+          break;
+        case "ArrowRight":
+        case "ArrowDown":
+          newIndex =
+            currentIndex < focusableElements.length - 1 ? currentIndex + 1 : 0;
+          break;
+        case "Home":
+          newIndex = 0;
+          break;
+        case "End":
+          newIndex = focusableElements.length - 1;
+          break;
+      }
+
+      (focusableElements[newIndex] as HTMLElement)?.focus();
+    });
+
+    // Announce lineup changes for screen readers
+    const announceLineup = () => {
+      const artistCount = artists.length;
+      const announcement = `Festival lineup loaded with ${artistCount} artist${artistCount !== 1 ? "s" : ""}`;
+
+      // Create temporary announcement element
+      const announcer = document.createElement("div");
+      announcer.setAttribute("aria-live", "polite");
+      announcer.setAttribute("aria-atomic", "true");
+      announcer.className = "sr-only";
+      announcer.textContent = announcement;
+
+      document.body.appendChild(announcer);
+
+      // Remove after announcement
+      setTimeout(() => {
+        document.body.removeChild(announcer);
+      }, 1000);
+    };
+
+    // Announce lineup after animations complete
+    setTimeout(announceLineup, 1000);
   });
 </script>

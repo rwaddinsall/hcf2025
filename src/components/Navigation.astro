@@ -82,12 +82,12 @@ const isHomePage = Astro.url.pathname === "/";
             <div class="launch-cta">
               <a
                 href="https://events.humanitix.com/hopkins-creek-2025"
-                class="nav-link nav-cta launch-cta-button"
+                class="nav-link"
                 aria-label="Buy festival tickets"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span>Get Tickets</span>
+                <span>Tickets</span>
               </a>
             </div>
           </li>
@@ -112,13 +112,21 @@ const isHomePage = Astro.url.pathname === "/";
           <div class="mobile-menu-header">
             <a href="/" class="font-bold text-foreground-color">Hopkins Creek</a
             >
+            <button
+              class="mobile-close-button"
+              aria-label="Close navigation menu"
+              data-mobile-toggle
+            >
+              <span class="mobile-close-line"></span>
+              <span class="mobile-close-line"></span>
+            </button>
           </div>
           <div class="mobile-menu-content">
             <a href="/" class="mobile-link">
               <span>Home</span>
             </a>
-            <a href="/program/" class="mobile-link">
-              <span>Program</span>
+            <a href="/applications" class="mobile-link">
+              <span>Applications</span>
             </a>
             <div class="mobile-dropdown" data-mobile-dropdown>
               <button
@@ -134,6 +142,7 @@ const isHomePage = Astro.url.pathname === "/";
               </button>
               <div class="mobile-dropdown-content" data-mobile-dropdown-content>
                 <a href="/info/" class="mobile-dropdown-link">Festival Info</a>
+                <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
                 <a href="/info/camping" class="mobile-dropdown-link"
                   >Camping & Accommodation</a
                 >
@@ -152,14 +161,13 @@ const isHomePage = Astro.url.pathname === "/";
                 <a href="/applications" class="mobile-dropdown-link"
                   >Applications</a
                 >
-                <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
               </div>
             </div>
             <a
               href="https://events.humanitix.com/hopkins-creek-2025"
-              class="mobile-link mobile-cta"
+              class="mobile-link"
             >
-              <span>Get Tickets</span>
+              <span>Tickets</span>
             </a>
           </div>
         </div>
@@ -422,702 +430,6 @@ const isHomePage = Astro.url.pathname === "/";
         new HopkinsNavigation();
       });
     </script>
-
-    <style lang="scss">
-      // Navigation CSS variables - leveraging base design system
-      :root {
-        --nav-height: 80px;
-        --nav-bg: transparent;
-        --nav-bg-scrolled: transparent;
-        --nav-shadow: none;
-        --nav-shadow-scrolled: none;
-        --nav-backdrop-blur: none;
-        --nav-border: transparent;
-        --nav-text: var(--foreground-color); // Uses base design system
-        --nav-text-hover: var(--foreground-color);
-        --nav-accent: var(--foreground-color);
-        --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        --mobile-overlay-bg: rgba(0, 0, 0, 0.5);
-        --dropdown-bg: #ffffff;
-        --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
-      }
-
-      // Sticky header container
-      .hopkins-header {
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        width: 100%;
-      }
-
-      // Main navigation bar with scroll effects
-      .hopkins-nav {
-        width: 100%;
-        background: var(--nav-bg);
-        border-bottom: 1px solid transparent;
-        transition: var(--nav-transition);
-        min-height: var(--nav-height);
-        position: relative;
-
-        // Scrolled state styling - maintain transparency
-        &.nav-scrolled {
-          background: var(--nav-bg-scrolled);
-          box-shadow: var(--nav-shadow-scrolled);
-          border-bottom-color: transparent;
-
-          // Apply hover state styling to nav links when scrolled
-          .nav-link:not(.nav-cta) {
-            background: var(--brand-secondary);
-            color: var(--nav-text-hover);
-          }
-
-          // Keep CTA button styling consistent
-          .nav-cta {
-            background: var(--nav-accent);
-            color: white;
-          }
-
-          // Hide scrolling text when scrolled - optimized for nav variant
-          .nav-container .scrolling-text-container--nav {
-            opacity: 0 !important;
-            visibility: hidden !important;
-            transform: translateY(-50%) translateY(-10px) !important;
-            pointer-events: none !important;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-          }
-        }
-      }
-
-      // Container with max-width and centering - matching main content grid system
-      .nav-container {
-        max-width: var(--grid-max-width);
-        margin: 0 auto;
-        padding-inline: var(--grid-gutter);
-        padding-block: var(
-          --space-xs
-        ); // Add vertical rhythm using design system
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        min-height: var(--nav-height);
-        position: relative;
-        z-index: 2;
-
-        // Responsive margin adjustments using design system breakpoints
-        @media (min-width: 768px) {
-          padding-inline: var(--space-l); // More space on larger screens
-          padding-block: var(--space-s);
-        }
-
-        @media (min-width: 1024px) {
-          padding-inline: var(--space-xl); // Maximum space on desktop
-          padding-block: var(--space-m);
-        }
-
-        // Fix ScrollingText positioning in nav context with proper margins
-        .scrolling-text-container--nav {
-          position: absolute;
-          top: 50%;
-          left: var(--space-l); // Use design system spacing
-          transform: translateY(-50%);
-          z-index: 1; // Behind nav items but above background
-          pointer-events: none;
-          opacity: 0.6;
-          width: calc(100% - var(--space-2xl)); // Proper responsive width
-          max-width: 400px; // Prevent overlap with nav items
-          margin-right: var(--space-xl); // Ensure clearance from nav menu
-
-          // Responsive positioning adjustments
-          @media (min-width: 768px) {
-            left: var(--space-xl);
-            width: calc(100% - var(--space-3xl));
-            margin-right: var(--space-2xl);
-          }
-
-          @media (min-width: 1024px) {
-            left: var(--space-2xl);
-            width: calc(100% - var(--space-4xl));
-            margin-right: var(--space-3xl);
-          }
-
-          // Override the default nav variant styles for better integration
-          &:not(.hopkins-nav.nav-scrolled &) {
-            // Only apply when not scrolled
-            opacity: 0.6;
-            visibility: visible;
-          }
-
-          // Hide on mobile to prevent overlap with hamburger menu
-          @media (max-width: 900px) {
-            display: none;
-          }
-        }
-      }
-
-      // Brand area containing both ScrollingText and Logo
-      .nav-brand-area {
-        position: relative;
-        flex-shrink: 0;
-        z-index: 1001;
-        display: flex;
-        align-items: center;
-        min-height: 2.5rem; // Prevent layout shifts
-
-        // On homepage when not scrolled, brand area takes available space for scrolling text
-        .hopkins-nav.hopkins-nav--homepage:not(.nav-scrolled) & {
-          flex: 1;
-          max-width: 25%; // Limit to first quarter of header
-          margin-right: var(--space-l); // Ensure clearance from nav
-
-          @media (max-width: 900px) {
-            display: none; // Hide ScrollingText on mobile
-          }
-        }
-
-        // When scrolled or not on homepage, brand area is compact for logo
-        .hopkins-nav.nav-scrolled &,
-        .hopkins-nav:not(.hopkins-nav--homepage) & {
-          flex: 0;
-          max-width: none;
-          margin-right: var(--space-m);
-        }
-      }
-
-      // ScrollingText navigation variant
-      .scrolling-text-nav {
-        // Show by default on homepage when not scrolled
-        opacity: 1;
-        transition: var(--nav-transition);
-
-        // Hide when scrolled or not on homepage
-        .hopkins-nav.nav-scrolled &,
-        .hopkins-nav:not(.hopkins-nav--homepage) & {
-          opacity: 0;
-          pointer-events: none;
-        }
-
-        // Ensure it doesn't interfere with logo positioning
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 100%;
-
-        // Only show on homepage when not scrolled
-        .hopkins-nav.hopkins-nav--homepage:not(.nav-scrolled) & {
-          position: static;
-          opacity: 1;
-          pointer-events: auto;
-        }
-      }
-
-      // Navigation Logo
-      .nav-logo {
-        transition: var(--nav-transition);
-        position: relative;
-        z-index: 2; // Above ScrollingText
-
-        // Hidden state (homepage, not scrolled)
-        &--hidden {
-          opacity: 0;
-          transform: scale(0.9);
-          pointer-events: none;
-
-          // Show when scrolled on homepage
-          .hopkins-nav.nav-scrolled & {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-          }
-        }
-
-        // Visible state (non-homepage or scrolled)
-        &--visible {
-          opacity: 1;
-          transform: scale(1);
-          pointer-events: auto;
-        }
-      }
-
-      // Legacy nav-brand class (keeping for compatibility)
-      .nav-brand {
-        flex-shrink: 0;
-        z-index: 1001;
-      }
-
-      // Navigation container - shows hamburger on mobile, navigation on desktop
-      .nav-menu {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        position: relative;
-        z-index: 3; // Above ScrollingText
-        margin-left: auto; // Ensure right alignment
-      }
-
-      // Desktop navigation list - hidden on mobile
-      .nav-list {
-        display: none;
-
-        @media (min-width: 901px) {
-          display: flex;
-          align-items: center;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-          gap: var(--space-xs); // Use design system spacing for consistent gaps
-          margin-left: auto; // Push to right side
-          margin-right: var(--space-s); // Space from edge using design system
-        }
-      }
-
-      .nav-item {
-        position: relative;
-        flex-shrink: 0;
-      }
-
-      // Special styling for CTA container
-      .launch-cta {
-        flex-shrink: 0;
-        margin-left: 0.5rem;
-      }
-
-      // Base nav link styling - IMPROVED PILLS
-      .nav-link {
-        display: flex;
-        align-items: center;
-        gap: var(--space-s);
-        padding: var(--space-xs) var(--space-m); // Slightly more horizontal padding
-        color: var(--nav-text);
-        text-decoration: none;
-        font-weight: 500;
-        border-radius: 9999px; // True pill shape instead of 50px
-        transition: var(--nav-transition);
-        background: transparent;
-        border: 1px solid transparent; // Prevents size jumping on hover
-        cursor: pointer;
-        font-size: inherit;
-        font-family: inherit;
-        white-space: nowrap;
-        margin: var(--space-2xs) 0;
-
-        span {
-          position: relative;
-        }
-
-        // Improved hover states
-        &:hover,
-        &:focus-visible {
-          color: var(--nav-text-hover);
-          background: var(--brand-secondary);
-          border-color: rgba(255, 255, 255, 0.1); // Subtle border
-        }
-
-        // Active state with underline (keeping original behavior)
-        &.active {
-          color: var(--nav-accent);
-          font-weight: 600;
-
-          span::after {
-            content: "";
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--nav-accent);
-            border-radius: 1px;
-          }
-        }
-
-        // Enhanced focus visibility
-        &:focus-visible {
-          outline: 2px solid var(--nav-accent);
-          outline-offset: 2px;
-        }
-      }
-
-      // CTA button styling - IMPROVED PILLS
-      .nav-cta {
-        background: var(--nav-accent);
-        color: white;
-        font-weight: 600;
-        border-radius: 9999px; // True pill shape
-        padding: var(--space-xs) var(--space-l) !important; // More generous padding
-        flex-shrink: 0;
-        margin-left: var(--space-s);
-        border: 1px solid var(--nav-accent); // Consistent border
-
-        &:hover,
-        &:focus-visible {
-          background: var(--nav-text-hover);
-          color: white;
-          transform: translateY(-1px);
-          border-color: var(--nav-text-hover);
-        }
-      }
-
-      // Dropdown Styles
-      .nav-dropdown {
-        // Hover and active states
-        &:hover,
-        &.active {
-          .dropdown-trigger {
-            color: var(--nav-accent);
-            background: var(--brand-secondary); // Uses base design system
-          }
-
-          .dropdown-icon {
-            transform: rotate(180deg);
-          }
-
-          .dropdown-menu {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-          }
-        }
-      }
-
-      .dropdown-trigger {
-        .dropdown-icon {
-          transition: transform 0.2s ease;
-        }
-      }
-
-      // Dropdown menu positioning and styling
-      .dropdown-menu {
-        position: absolute;
-        top: calc(100% + 8px);
-        left: 0;
-        min-width: 280px;
-        background: var(--dropdown-bg);
-        backdrop-filter: var(--nav-backdrop-blur);
-        -webkit-backdrop-filter: var(--nav-backdrop-blur);
-        border-radius: var(--radius-l); // Use design system border radius
-        box-shadow: var(--dropdown-shadow);
-        border: 1px solid var(--nav-border);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-8px);
-        transition: var(--nav-transition);
-        z-index: 1000;
-      }
-
-      .dropdown-content {
-        padding: var(--space-xs); // Use design system spacing
-      }
-
-      // Improved dropdown links
-      .dropdown-link {
-        display: flex;
-        align-items: center;
-        gap: var(--space-s);
-        padding: var(--space-xs) var(--space-m);
-        color: var(--nav-text);
-        text-decoration: none;
-        border-radius: 9999px; // True pill shape
-        transition: var(--nav-transition);
-        font-weight: 500;
-        border: 1px solid transparent; // Prevents jumping
-
-        &:hover,
-        &:focus-visible {
-          background: var(--brand-secondary);
-          color: var(--nav-accent);
-          border-color: rgba(0, 102, 204, 0.1);
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--nav-accent);
-          outline-offset: 2px;
-        }
-      }
-
-      // Mobile Toggle
-      .mobile-toggle {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: var(--target-size-max); // Use design system target size
-        height: var(--target-size-max);
-        padding: var(--space-2xs);
-        background: none;
-        border: none;
-        cursor: pointer;
-        z-index: 1001;
-        margin-left: var(--space-xs); // Space from other elements
-        border-radius: var(--radius-s); // Subtle rounding for better UX
-
-        // Hide on desktop
-        @media (min-width: 901px) {
-          display: none;
-        }
-
-        // Hamburger lines
-        .mobile-toggle-line {
-          display: block;
-          width: 24px;
-          height: 2px;
-          background: var(--nav-text);
-          border-radius: 1px;
-          transition: var(--nav-transition);
-          margin: 2px 0;
-
-          &:nth-child(1) {
-            transform-origin: center;
-          }
-
-          &:nth-child(2) {
-            transform-origin: center;
-          }
-
-          &:nth-child(3) {
-            transform-origin: center;
-          }
-        }
-
-        // Active state - X animation
-        &.active {
-          .mobile-toggle-line {
-            &:nth-child(1) {
-              transform: rotate(45deg) translate(5px, 5px);
-            }
-
-            &:nth-child(2) {
-              opacity: 0;
-            }
-
-            &:nth-child(3) {
-              transform: rotate(-45deg) translate(7px, -6px);
-            }
-          }
-        }
-
-        &:focus-visible {
-          outline: 2px solid var(--nav-accent);
-          outline-offset: 2px;
-          border-radius: 4px;
-        }
-      }
-
-      // Mobile Overlay & Menu
-      .mobile-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        background: var(--mobile-overlay-bg);
-        z-index: 999;
-        visibility: hidden;
-        transition: var(--nav-transition);
-
-        // Active state
-        &.active {
-          visibility: visible;
-        }
-
-        // Hide on desktop
-        @media (min-width: 901px) {
-          display: none;
-        }
-      }
-
-      .mobile-menu {
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: min(400px, 90vw);
-        height: 100vh;
-        background: white;
-        border-left: 1px solid var(--nav-border);
-        transform: translateX(100%);
-        transition: var(--nav-transition);
-        overflow-y: auto;
-
-        // Slide in when active
-        .mobile-overlay.active & {
-          transform: translateX(0);
-        }
-      }
-
-      .mobile-menu-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--nav-border);
-      }
-
-      .mobile-menu-content {
-        padding: var(--space-m); // Use design system spacing
-      }
-
-      // Improved mobile links
-      .mobile-link {
-        display: flex;
-        align-items: center;
-        gap: var(--space-s);
-        padding: var(--space-s) var(--space-m);
-        color: var(--nav-text);
-        text-decoration: none;
-        border-radius: 9999px; // True pill shape
-        transition: var(--nav-transition);
-        font-weight: 500;
-        margin-bottom: var(--space-xs);
-        border: 1px solid transparent; // Prevents jumping
-
-        &:hover,
-        &:focus-visible {
-          background: var(--brand-secondary);
-          color: var(--nav-accent);
-          border-color: rgba(0, 102, 204, 0.1);
-        }
-
-        // Improved mobile CTA
-        &.mobile-cta {
-          background: var(--nav-accent);
-          color: white;
-          margin-top: 1rem;
-          border-color: var(--nav-accent);
-
-          &:hover {
-            background: var(--nav-text-hover);
-            color: white;
-            border-color: var(--nav-text-hover);
-          }
-        }
-
-        // Better active state
-        &.active {
-          background: var(--nav-accent);
-          color: white;
-          font-weight: 600;
-          border-color: var(--nav-accent);
-        }
-      }
-
-      // Mobile Dropdown
-      .mobile-dropdown {
-        margin-bottom: var(--space-xs); // Design system spacing
-      }
-
-      // Improved mobile dropdown elements
-      .mobile-dropdown-trigger {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        gap: var(--space-s); // Design system spacing
-        padding: var(--space-s) var(--space-m); // Consistent padding
-        color: var(--nav-text);
-        background: none;
-        border: 1px solid transparent;
-        border-radius: 9999px; // True pill shape
-        transition: var(--nav-transition);
-        font-weight: 500;
-        cursor: pointer;
-        font-size: inherit;
-        font-family: inherit;
-
-        .mobile-dropdown-icon {
-          transition: transform 0.2s ease;
-        }
-
-        &:hover {
-          background: var(--brand-secondary);
-          color: var(--nav-accent);
-          border-color: rgba(0, 102, 204, 0.1);
-        }
-      }
-
-      // Active dropdown state
-      .mobile-dropdown.active {
-        .mobile-dropdown-trigger {
-          background: var(--brand-secondary);
-          color: var(--nav-accent);
-
-          .mobile-dropdown-icon {
-            transform: rotate(180deg);
-          }
-        }
-
-        .mobile-dropdown-content {
-          max-height: 500px;
-        }
-      }
-
-      .mobile-dropdown-content {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease;
-        padding-left: var(--space-l); // Design system spacing for indentation
-      }
-
-      .mobile-dropdown-link {
-        display: block;
-        padding: var(--space-xs) var(--space-m); // Design system spacing
-        color: var(--nav-text);
-        text-decoration: none;
-        border-radius: 9999px; // True pill shape
-        transition: var(--nav-transition);
-        margin-bottom: var(--space-2xs); // Small spacing between dropdown items
-        border: 1px solid transparent;
-
-        &:hover,
-        &:focus-visible {
-          background: var(--brand-secondary);
-          color: var(--nav-accent);
-          border-color: rgba(0, 102, 204, 0.1);
-        }
-      }
-
-      // Smooth scroll accounting for sticky nav
-      html {
-        scroll-padding-top: calc(var(--nav-height) + 2rem);
-      }
-
-      // Prevent layout shifts
-      body {
-        margin: 0;
-      }
-
-      // Reduced motion support
-      @media (prefers-reduced-motion: reduce) {
-        * {
-          transition: none !important;
-          animation: none !important;
-        }
-      }
-
-      // High contrast support
-      @media (prefers-contrast: high) {
-        .hopkins-nav {
-          border-bottom: 2px solid currentColor;
-        }
-
-        .dropdown-menu {
-          border: 2px solid currentColor;
-        }
-      }
-
-      // Print styles
-      @media print {
-        .hopkins-nav {
-          position: static;
-          box-shadow: none;
-          background: white;
-          border-bottom: 1px solid black;
-        }
-
-        .mobile-toggle,
-        .nav-cta {
-          display: none;
-        }
-      }
-    </style>
   </nav>
 </header>
 
@@ -1767,6 +1079,738 @@ const isHomePage = Astro.url.pathname === "/";
       background: var(--brand-secondary);
       color: var(--nav-accent);
       border-color: rgba(0, 102, 204, 0.1);
+    }
+  }
+
+  // Smooth scroll accounting for sticky nav
+  html {
+    scroll-padding-top: calc(var(--nav-height) + 2rem);
+  }
+
+  // Prevent layout shifts
+  body {
+    margin: 0;
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      transition: none !important;
+      animation: none !important;
+    }
+  }
+
+  // High contrast support
+  @media (prefers-contrast: high) {
+    .hopkins-nav {
+      border-bottom: 2px solid currentColor;
+    }
+
+    .dropdown-menu {
+      border: 2px solid currentColor;
+    }
+  }
+
+  // Print styles
+  @media print {
+    .hopkins-nav {
+      position: static;
+      box-shadow: none;
+      background: white;
+      border-bottom: 1px solid black;
+    }
+
+    .mobile-toggle,
+    .nav-cta {
+      display: none;
+    }
+  }
+</style>
+
+<style lang="scss">
+  // Navigation CSS variables - leveraging base design system
+  :root {
+    --nav-height: 80px;
+    --nav-bg: transparent;
+    --nav-bg-scrolled: transparent;
+    --nav-shadow: none;
+    --nav-shadow-scrolled: none;
+    --nav-backdrop-blur: none;
+    --nav-border: transparent;
+    --nav-text: var(--foreground-color); // Uses base design system
+    --nav-text-hover: var(--foreground-color);
+    --nav-accent: var(--foreground-color);
+    --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --mobile-overlay-bg: rgba(0, 0, 0, 0.5);
+    --dropdown-bg: #ffffff;
+    --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+  }
+
+  // Sticky header container
+  .hopkins-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+  }
+
+  // Main navigation bar with scroll effects
+  .hopkins-nav {
+    width: 100%;
+    background: var(--nav-bg);
+    border-bottom: 1px solid transparent;
+    transition: var(--nav-transition);
+    min-height: var(--nav-height);
+    position: relative;
+
+    // Scrolled state styling - maintain transparency
+    &.nav-scrolled {
+      background: var(--nav-bg-scrolled);
+      box-shadow: var(--nav-shadow-scrolled);
+      border-bottom-color: transparent;
+
+      // Hide scrolling text when scrolled - optimized for nav variant
+      .nav-container .scrolling-text-container--nav {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        transform: translateY(-50%) translateY(-10px) !important;
+        pointer-events: none !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      }
+    }
+  }
+
+  // Container with max-width and centering - matching main content grid system
+  .nav-container {
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+    padding-inline: var(--grid-gutter);
+    padding-block: var(--space-xs); // Add vertical rhythm using design system
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: var(--nav-height);
+    position: relative;
+    z-index: 2;
+
+    // Responsive margin adjustments using design system breakpoints
+    @media (min-width: 768px) {
+      padding-inline: var(--space-l); // More space on larger screens
+      padding-block: var(--space-s);
+    }
+
+    @media (min-width: 1024px) {
+      padding-inline: var(--space-xl); // Maximum space on desktop
+      padding-block: var(--space-m);
+    }
+
+    // Fix ScrollingText positioning in nav context with proper margins
+    .scrolling-text-container--nav {
+      position: absolute;
+      top: 50%;
+      left: var(--space-l); // Use design system spacing
+      transform: translateY(-50%);
+      z-index: 1; // Behind nav items but above background
+      pointer-events: none;
+      opacity: 0.6;
+      width: calc(100% - var(--space-2xl)); // Proper responsive width
+      max-width: 400px; // Prevent overlap with nav items
+      margin-right: var(--space-xl); // Ensure clearance from nav menu
+
+      // Responsive positioning adjustments
+      @media (min-width: 768px) {
+        left: var(--space-xl);
+        width: calc(100% - var(--space-3xl));
+        margin-right: var(--space-2xl);
+      }
+
+      @media (min-width: 1024px) {
+        left: var(--space-2xl);
+        width: calc(100% - var(--space-4xl));
+        margin-right: var(--space-3xl);
+      }
+
+      // Override the default nav variant styles for better integration
+      &:not(.hopkins-nav.nav-scrolled &) {
+        // Only apply when not scrolled
+        opacity: 0.6;
+        visibility: visible;
+      }
+
+      // Hide on mobile to prevent overlap with hamburger menu
+      @media (max-width: 900px) {
+        display: none;
+      }
+    }
+  }
+
+  // Brand area containing both ScrollingText and Logo
+  .nav-brand-area {
+    position: relative;
+    flex-shrink: 0;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    min-height: 2.5rem; // Prevent layout shifts
+
+    // On homepage when not scrolled, brand area takes available space for scrolling text
+    .hopkins-nav.hopkins-nav--homepage:not(.nav-scrolled) & {
+      flex: 1;
+      max-width: 25%; // Limit to first quarter of header
+      margin-right: var(--space-l); // Ensure clearance from nav
+
+      @media (max-width: 900px) {
+        display: none; // Hide ScrollingText on mobile
+      }
+    }
+
+    // When scrolled or not on homepage, brand area is compact for logo
+    .hopkins-nav.nav-scrolled &,
+    .hopkins-nav:not(.hopkins-nav--homepage) & {
+      flex: 0;
+      max-width: none;
+      margin-right: var(--space-m);
+    }
+  }
+
+  // ScrollingText navigation variant
+  .scrolling-text-nav {
+    // Show by default on homepage when not scrolled
+    opacity: 1;
+    transition: var(--nav-transition);
+
+    // Hide when scrolled or not on homepage
+    .hopkins-nav.nav-scrolled &,
+    .hopkins-nav:not(.hopkins-nav--homepage) & {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    // Ensure it doesn't interfere with logo positioning
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+
+    // Only show on homepage when not scrolled
+    .hopkins-nav.hopkins-nav--homepage:not(.nav-scrolled) & {
+      position: static;
+      opacity: 1;
+      pointer-events: auto;
+    }
+  }
+
+  // Navigation Logo
+  .nav-logo {
+    transition: var(--nav-transition);
+    position: relative;
+    z-index: 2; // Above ScrollingText
+
+    // Hidden state (homepage, not scrolled)
+    &--hidden {
+      opacity: 0;
+      transform: scale(0.9);
+      pointer-events: none;
+
+      // Show when scrolled on homepage
+      .hopkins-nav.nav-scrolled & {
+        opacity: 1;
+        transform: scale(1);
+        pointer-events: auto;
+      }
+    }
+
+    // Visible state (non-homepage or scrolled)
+    &--visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+  }
+
+  // Legacy nav-brand class (keeping for compatibility)
+  .nav-brand {
+    flex-shrink: 0;
+    z-index: 1001;
+  }
+
+  // Navigation container - shows hamburger on mobile, navigation on desktop
+  .nav-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 3; // Above ScrollingText
+    margin-left: auto; // Ensure right alignment
+  }
+
+  // Desktop navigation list - hidden on mobile
+  .nav-list {
+    display: none;
+
+    @media (min-width: 901px) {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: var(--space-xs); // Use design system spacing for consistent gaps
+      margin-left: auto; // Push to right side
+      margin-right: var(--space-s); // Space from edge using design system
+    }
+  }
+
+  .nav-item {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  // Special styling for CTA container
+  .launch-cta {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  // Base nav link styling - MINIMAL PILLS
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs); // Reduced gap
+    padding: var(--space-2xs) var(--space-s); // Reduced padding for shorter pills
+    color: var(--nav-text);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 9999px; // True pill shape
+    transition: var(--nav-transition);
+    background: transparent;
+    border: 1px solid transparent; // Prevents size jumping on hover
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+    white-space: nowrap;
+    margin: var(--space-3xs) 0;
+
+    span {
+      position: relative;
+    }
+
+    // Default hover states - subtle
+    &:hover,
+    &:focus-visible {
+      color: var(--nav-text-hover);
+      background: rgba(0, 0, 0, 0.05);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    // Active state with underline (keeping original behavior)
+    &.active {
+      color: var(--nav-accent);
+      font-weight: 600;
+
+      span::after {
+        content: "";
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--nav-accent);
+        border-radius: 1px;
+      }
+    }
+
+    // Enhanced focus visibility
+    &:focus-visible {
+      outline: 2px solid var(--nav-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  // When scrolled, all nav links get black pill background
+  .hopkins-nav.nav-scrolled .nav-link {
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    border-color: rgba(0, 0, 0, 0.9);
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(0, 0, 0, 1);
+      color: white;
+      border-color: rgba(0, 0, 0, 1);
+      transform: translateY(-1px);
+    }
+
+    &.active {
+      background: rgba(0, 0, 0, 1);
+      color: white;
+
+      span::after {
+        background: white;
+      }
+    }
+  }
+
+  // When scrolled, dropdown triggers also get black pills
+  .hopkins-nav.nav-scrolled .nav-dropdown {
+    &:hover,
+    &.active {
+      .dropdown-trigger {
+        background: rgba(0, 0, 0, 0.9);
+        color: white;
+        border-color: rgba(0, 0, 0, 0.9);
+
+        &:hover {
+          background: rgba(0, 0, 0, 1);
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+
+  // Dropdown Styles
+  .nav-dropdown {
+    // Hover and active states
+    &:hover,
+    &.active {
+      .dropdown-trigger {
+        color: var(--nav-accent);
+        background: rgba(0, 0, 0, 0.05); // Minimal hover state
+        border-color: rgba(0, 0, 0, 0.1);
+      }
+
+      .dropdown-icon {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+    }
+  }
+
+  .dropdown-trigger {
+    .dropdown-icon {
+      transition: transform 0.2s ease;
+    }
+  }
+
+  // Dropdown menu positioning and styling
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    min-width: 280px;
+    background: var(--dropdown-bg);
+    backdrop-filter: var(--nav-backdrop-blur);
+    -webkit-backdrop-filter: var(--nav-backdrop-blur);
+    border-radius: var(--radius-l); // Use design system border radius
+    box-shadow: var(--dropdown-shadow);
+    border: 1px solid var(--nav-border);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: var(--nav-transition);
+    z-index: 1000;
+  }
+
+  .dropdown-content {
+    padding: var(--space-xs); // Use design system spacing
+  }
+
+  // Improved dropdown links - MINIMAL DESIGN
+  .dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs); // Reduced gap to match nav links
+    padding: var(--space-2xs) var(--space-s); // Reduced padding for shorter pills
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 9999px; // True pill shape
+    transition: var(--nav-transition);
+    font-weight: 500;
+    border: 1px solid transparent; // Prevents jumping
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  // Mobile Toggle
+  .mobile-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: var(--target-size-max); // Use design system target size
+    height: var(--target-size-max);
+    padding: var(--space-2xs);
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    margin-left: var(--space-xs); // Space from other elements
+    border-radius: var(--radius-s); // Subtle rounding for better UX
+
+    // Hide on desktop
+    @media (min-width: 901px) {
+      display: none;
+    }
+
+    // Hamburger lines
+    .mobile-toggle-line {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--nav-text);
+      border-radius: 1px;
+      transition: var(--nav-transition);
+      margin: 2px 0;
+
+      &:nth-child(1) {
+        transform-origin: center;
+      }
+
+      &:nth-child(2) {
+        transform-origin: center;
+      }
+
+      &:nth-child(3) {
+        transform-origin: center;
+      }
+    }
+
+    // Active state - X animation
+    &.active {
+      .mobile-toggle-line {
+        &:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
+        }
+
+        &:nth-child(2) {
+          opacity: 0;
+        }
+
+        &:nth-child(3) {
+          transform: rotate(-45deg) translate(7px, -6px);
+        }
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+  }
+
+  // Mobile Overlay & Menu
+  .mobile-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--mobile-overlay-bg);
+    z-index: 999;
+    visibility: hidden;
+    transition: var(--nav-transition);
+
+    // Active state
+    &.active {
+      visibility: visible;
+    }
+
+    // Hide on desktop
+    @media (min-width: 901px) {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: min(400px, 90vw);
+    height: 100vh;
+    background: white;
+    border-left: 1px solid var(--nav-border);
+    transform: translateX(100%);
+    transition: var(--nav-transition);
+    overflow-y: auto;
+
+    // Slide in when active
+    .mobile-overlay.active & {
+      transform: translateX(0);
+    }
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--nav-border);
+  }
+
+  // Mobile close button (X)
+  .mobile-close-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--target-size-max);
+    height: var(--target-size-max);
+    padding: var(--space-2xs);
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: var(--radius-s);
+    position: relative;
+
+    &:focus-visible {
+      outline: 2px solid var(--nav-accent);
+      outline-offset: 2px;
+    }
+
+    // X lines
+    .mobile-close-line {
+      position: absolute;
+      width: 20px;
+      height: 2px;
+      background: var(--nav-text);
+      border-radius: 1px;
+      transition: var(--nav-transition);
+
+      &:nth-child(1) {
+        transform: rotate(45deg);
+      }
+
+      &:nth-child(2) {
+        transform: rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .mobile-menu-content {
+    padding: var(--space-m); // Use design system spacing
+  }
+
+  // Improved mobile links - MINIMAL DESIGN
+  .mobile-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs); // Reduced gap to match desktop nav
+    padding: var(--space-2xs) var(--space-s); // Consistent with desktop nav
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 9999px; // True pill shape
+    transition: var(--nav-transition);
+    font-weight: 500;
+    margin-bottom: var(--space-xs);
+    border: 1px solid transparent; // Prevents jumping
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+
+    // Better active state
+    &.active {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+      font-weight: 600;
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Mobile Dropdown
+  .mobile-dropdown {
+    margin-bottom: var(--space-xs); // Design system spacing
+  }
+
+  // Improved mobile dropdown elements - MINIMAL DESIGN
+  .mobile-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: var(--space-2xs); // Design system spacing - reduced
+    padding: var(--space-2xs) var(--space-s); // Consistent padding - reduced
+    color: var(--nav-text);
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 9999px; // True pill shape
+    transition: var(--nav-transition);
+    font-weight: 500;
+    cursor: pointer;
+    font-size: inherit;
+    font-family: inherit;
+
+    .mobile-dropdown-icon {
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+      border-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  // Active dropdown state
+  .mobile-dropdown.active {
+    .mobile-dropdown-trigger {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+
+      .mobile-dropdown-icon {
+        transform: rotate(180deg);
+      }
+    }
+
+    .mobile-dropdown-content {
+      max-height: 500px;
+    }
+  }
+
+  .mobile-dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    padding-left: var(--space-l); // Design system spacing for indentation
+  }
+
+  .mobile-dropdown-link {
+    display: block;
+    padding: var(--space-2xs) var(--space-s); // Design system spacing - reduced
+    color: var(--nav-text);
+    text-decoration: none;
+    border-radius: 9999px; // True pill shape
+    transition: var(--nav-transition);
+    margin-bottom: var(--space-2xs); // Small spacing between dropdown items
+    border: 1px solid transparent;
+
+    &:hover,
+    &:focus-visible {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--nav-accent);
+      border-color: rgba(0, 0, 0, 0.1);
     }
   }
 

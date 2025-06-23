@@ -44,22 +44,23 @@ export interface Accordion {
   isOpen?: boolean;
 }
 
-export interface InfoSection {
+export interface AccordionSection {
   title: string;
-  subtitle?: string;
-  content: string;
-  sectionId?: string;
-  accordions?: Accordion[];
-  displayOrder: number;
+  details: any; // Rich text content
+  category?:
+    | "general"
+    | "lineup"
+    | "tickets"
+    | "transport"
+    | "sustainability"
+    | "accessibility";
 }
 
 export interface InfoPage extends StrapiEntity {
-  title: string;
+  heading: string;
+  subheading?: string;
   slug: string;
-  pageHeader?: PageHeader;
-  faqs?: InfoSection[];
-  metaDescription?: string;
-  displayOrder?: number;
+  accordion?: AccordionSection[];
 }
 
 export type InfoPageResponse = StrapiResponse<InfoPage[]>;

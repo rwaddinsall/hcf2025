@@ -5,15 +5,10 @@ import { Accordion, AccordionItem } from "accessible-astro-components";
 import { Icon } from "astro-icon/components";
 import { fetchInfoPageBySlug } from "../lib/strapi";
 
-interface InfoLink {
-  text: string;
-  url: string;
-}
-
-interface InfoSection {
+interface AccordionSection {
   title: string;
-  content: any[];
-  links?: InfoLink[];
+  details: any;
+  category?: string;
 }
 
 interface Props {
@@ -22,55 +17,61 @@ interface Props {
     href: string;
     text: string;
   };
-  fallbackTitle?: string;
-  fallbackSubtitle?: string;
-  fallbackSections?: InfoSection[];
+  fallbackHeading?: string;
+  fallbackSubheading?: string;
+  fallbackAccordion?: AccordionSection[];
 }
 
 const {
   slug,
   backLink = { href: "/info", text: "Back to Festival Info" },
-  fallbackTitle,
-  fallbackSubtitle,
-  fallbackSections = [],
+  fallbackHeading,
+  fallbackSubheading,
+  fallbackAccordion = [],
 } = Astro.props;
 
 // Fetch data from Strapi
 let pageData: any = null;
-let pageTitle = fallbackTitle || "Information";
-let pageSubtitle = fallbackSubtitle || "";
-let infoSections = fallbackSections;
+let pageHeading = fallbackHeading || "Information";
+let pageSubheading = fallbackSubheading || "";
+let accordionSections = fallbackAccordion;
 
 try {
   pageData = await fetchInfoPageBySlug(slug);
+  console.log(
+    "API Response for slug:",
+    slug,
+    "Data:",
+    JSON.stringify(pageData, null, 2)
+  );
 
   if (pageData) {
-    pageTitle = pageData.title || fallbackTitle || "Information";
-    pageSubtitle = pageData.pageHeader?.subtitle || fallbackSubtitle || "";
+    pageHeading = pageData.heading || fallbackHeading || "Information";
+    pageSubheading = pageData.subheading || fallbackSubheading || "";
 
-    // Transform FAQs to InfoSections format
-    if (pageData.faqs && pageData.faqs.length > 0) {
-      infoSections = pageData.faqs.map((faq: any) => ({
-        title: faq.question,
-        content: faq.answer
-          ? [{ type: "paragraph", children: [{ text: faq.answer }] }]
-          : [],
-        links: faq.links || [],
-      }));
+    // Use accordion data directly from CMS
+    if (pageData.accordion && pageData.accordion.length > 0) {
+      accordionSections = pageData.accordion;
+      console.log("Using CMS accordion data:", accordionSections);
+    } else {
+      console.log("No accordion data found in CMS response, using fallback");
     }
+  } else {
+    console.log("No pageData returned from API, using fallback");
   }
 } catch (error) {
   console.warn(`Failed to fetch info page data for slug "${slug}":`, error);
+  console.log("Using fallback accordion data:", fallbackAccordion);
   // Use fallback data
 }
 ---
 
 <DefaultLayout
-  title={`${pageTitle} - Hopkins Creek Festival`}
+  title={`${pageHeading} - Hopkins Creek Festival`}
   description={pageData?.metaDescription}
 >
   <section class="my-12">
-    <PageHeader title={pageTitle} subtitle={pageSubtitle} />
+    <PageHeader title={pageHeading} subtitle={pageSubheading} />
   </section>
 
   <section class="my-12">
@@ -87,89 +88,12 @@ try {
         </div>
 
         {
-          infoSections && infoSections.length > 0 && (
+          accordionSections && accordionSections.length > 0 && (
             <Accordion>
-              {infoSections.map((section) => (
+              {accordionSections.map((section: AccordionSection) => (
                 <AccordionItem title={section.title}>
                   <div class="space-content">
-                    {/* 
-                      Render structured content blocks from CMS data
-                      Handles paragraphs with inline links and unordered lists
-                    */}
-                    {section.content.map((block) => {
-                      // Render paragraph blocks with potential inline links
-                      if (block.type === "paragraph") {
-                        return (
-                          <p>
-                            {block.children.map((child: any) => {
-                              const hasLink = child.marks?.some(
-                                (mark: any) => mark.type === "link"
-                              );
-
-                              if (hasLink) {
-                                const linkMark = child.marks.find(
-                                  (mark: any) => mark.type === "link"
-                                );
-                                return (
-                                  <a
-                                    href={linkMark.attrs.href}
-                                    class="content-link"
-                                  >
-                                    {child.text}
-                                  </a>
-                                );
-                              }
-
-                              return child.text;
-                            })}
-                          </p>
-                        );
-                      }
-
-                      // Render list blocks with simple text items
-                      if (block.type === "list") {
-                        return (
-                          <ul class="list-disc list-inside">
-                            {block.children.map((item: any) => (
-                              <li>
-                                {item.children
-                                  .map((child: any) => child.text)
-                                  .join("")}
-                              </li>
-                            ))}
-                          </ul>
-                        );
-                      }
-
-                      // Skip unsupported block types
-                      return null;
-                    })}
-
-                    {section.links && section.links.length > 0 && (
-                      <div class="p-4 mt-4 border border-gray-200 rounded-lg bg-gray-50">
-                        <h4 class="mb-2 font-bold">Useful Links:</h4>
-                        <div class="space-y-2">
-                          {section.links.map((link) => (
-                            <a
-                              href={link.url}
-                              class="block underline text-primary-500 hover:text-primary-600"
-                              target={
-                                link.url.startsWith("http")
-                                  ? "_blank"
-                                  : undefined
-                              }
-                              rel={
-                                link.url.startsWith("http")
-                                  ? "noopener noreferrer"
-                                  : undefined
-                              }
-                            >
-                              {link.text}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    )}
+                    <div set:html={section.details} />
                   </div>
                 </AccordionItem>
               ))}

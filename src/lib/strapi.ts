@@ -87,9 +87,7 @@ export async function fetchInfoPageBySlug(slug: string) {
     query: {
       "filters[slug][$eq]": slug,
       "filters[publishedAt][$notNull]": "true",
-      "populate[pageHeader][populate]": "*",
-      "populate[faqs][populate]": "*",
-      "populate[faqs][sort]": "displayOrder:asc",
+      "populate[accordion][populate]": "*",
     },
     wrappedByKey: "data",
     wrappedByList: true,
@@ -211,7 +209,7 @@ export async function fetchAllInfoPages() {
     endpoint: "info-pages",
     query: {
       "filters[publishedAt][$notNull]": "true",
-      fields: "slug"
+      fields: "slug",
     },
     wrappedByKey: "data",
   });

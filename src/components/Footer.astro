@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
     <div class="container">
       <ScrollingText
         strapiType="acknowledgement-of-country"
-        duration={30}
+        duration={50}
         ariaLabel="Acknowledgement of Country"
         width="100%"
         variant="acknowledgement-of-country"
@@ -24,19 +24,19 @@ const currentYear = new Date().getFullYear();
     </div>
   </section>
 
-  <!-- <section class="py-20">
+  <section class="py-20">
     <h2 class="sr-only">Footer</h2>
     <div class="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
       <div class="flex flex-col gap-4">
-        <ul class="flex flex-col gap-2"> -->
-  <li><a href="/">Home</a></li>
-  <!-- <li><a href="/">Artists</a></li> -->
-  <!-- LAUNCH VERSION: Info link temporarily hidden - uncomment when ready -->
-  <!-- <li><a href="/info">Info</a></li> -->
-</footer>
+        <ul class="flex flex-col gap-2">
+          <li><a href="/">Home</a></li>
+          <li><a href="/">Artists</a></li>
+          <!-- LAUNCH VERSION: Info link temporarily hidden - uncomment when ready -->
+          <li><a href="/info">Info</a></li>
+        </ul>
 
-<!-- LAUNCH VERSION: Info-related footer links temporarily hidden - uncomment when ready -->
-<!--
+        <!-- LAUNCH VERSION: Info-related footer links temporarily hidden - uncomment when ready -->
+        <!--
       <div class="flex flex-col gap-4">
         <ul class="flex flex-col gap-2">
           <li><a href="/info/camping">Camping & Accommodation</a></li>
@@ -47,7 +47,7 @@ const currentYear = new Date().getFullYear();
         </ul>
       </div>
       -->
-<!-- <div class="flex flex-col gap-4">
+        <!-- <div class="flex flex-col gap-4">
         <ul class="flex flex-col gap-2">
           <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
@@ -67,21 +67,23 @@ const currentYear = new Date().getFullYear();
     </div>
   </section> -->
 
-<style>
-  .acknowledgement-section {
-    padding: var(--space-l) 0;
-    border-bottom: 1px solid var(--border-color-subtle);
-  }
+        <style>
+          .acknowledgement-section {
+            padding: var(--space-l);
+          }
 
-  section {
-    border-top: 1px solid var(--border-color-subtle);
-  }
+          section {
+          }
 
-  footer a {
-    text-decoration: none;
-  }
+          footer a {
+            text-decoration: none;
+          }
 
-  footer a:hover {
-    text-decoration: underline;
-  }
-</style>
+          footer a:hover {
+            text-decoration: underline;
+          }
+        </style>
+      </div>
+    </div>
+  </section>
+</footer>

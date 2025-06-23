@@ -214,3 +214,33 @@ export async function fetchAllInfoPages() {
     wrappedByKey: "data",
   });
 }
+
+/**
+ * Fetches all published info pages for navigation with titles
+ */
+export async function fetchInfoPagesForNavigation() {
+  return fetchApi<import("../interfaces/strapi").InfoPageResponse>({
+    endpoint: "info-pages",
+    query: {
+      "filters[publishedAt][$notNull]": "true",
+      fields: "slug,heading",
+      sort: "heading:asc",
+    },
+    wrappedByKey: "data",
+  });
+}
+
+/**
+ * Fetches all published general pages for footer legal links
+ */
+export async function fetchGeneralPagesForFooter() {
+  return fetchApi<import("../interfaces/strapi").GeneralPageResponse>({
+    endpoint: "general-pages",
+    query: {
+      "filters[publishedAt][$notNull]": "true",
+      fields: "slug,title",
+      sort: "title:asc",
+    },
+    wrappedByKey: "data",
+  });
+}

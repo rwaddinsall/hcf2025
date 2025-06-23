@@ -8,9 +8,30 @@
 import { Icon } from "astro-icon/components";
 import { SkipLink } from "accessible-astro-components";
 import ScrollingText from "./ScrollingText.astro";
+import { fetchInfoPagesForNavigation } from "../lib/strapi";
 
 // Check if we're on the home page
 const isHomePage = Astro.url.pathname === "/";
+
+// Fetch info pages for navigation
+let infoPages: any[] = [];
+try {
+  const response = await fetchInfoPagesForNavigation();
+  infoPages = Array.isArray(response) ? response : [];
+  console.log("Fetched info pages for navigation:", infoPages);
+} catch (error) {
+  console.warn("Failed to fetch info pages for navigation:", error);
+
+  // Fallback navigation items
+  infoPages = [
+    { slug: "tickets", heading: "Tickets" },
+    { slug: "camping", heading: "Camping & Accommodation" },
+    { slug: "motor-inn", heading: "The Motor Inn" },
+    { slug: "accessibility", heading: "Accessibility" },
+    { slug: "getting-there", heading: "Travel & Entry" },
+    { slug: "food-beverages", heading: "Food & Beverages" },
+  ];
+}
 ---
 
 <header class="hopkins-header">
@@ -24,6 +45,16 @@ const isHomePage = Astro.url.pathname === "/";
           <li class="nav-item">
             <a href="/" class="nav-link" aria-label="Go to homepage">
               <span>Home</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/program"
+              class="nav-link"
+              aria-label="View festival lineup"
+            >
+              <span>Lineup</span>
             </a>
           </li>
 
@@ -51,30 +82,13 @@ const isHomePage = Astro.url.pathname === "/";
             </button>
             <div class="dropdown-menu" id="info-dropdown" data-dropdown-menu>
               <div class="dropdown-content">
-                <a href="/info/" class="dropdown-link">
-                  <span>Festival Info</span>
-                </a>
-                <a href="/info/tickets" class="dropdown-link">
-                  <span>Tickets</span>
-                </a>
-                <a href="/info/camping" class="dropdown-link">
-                  <span>Camping & Accommodation</span>
-                </a>
-                <a href="/info/motor-inn" class="dropdown-link">
-                  <span>The Motor Inn</span>
-                </a>
-                <a href="/info/accessibility" class="dropdown-link">
-                  <span>Accessibility</span>
-                </a>
-                <a href="/info/getting-there" class="dropdown-link">
-                  <span>Travel & Entry</span>
-                </a>
-                <a href="/info/food-beverages" class="dropdown-link">
-                  <span>Food & Beverages</span>
-                </a>
-                <a href="/applications" class="dropdown-link">
-                  <span>Applications</span>
-                </a>
+                {
+                  infoPages.map((page) => (
+                    <a href={`/info/${page.slug}`} class="dropdown-link">
+                      <span>{page.heading}</span>
+                    </a>
+                  ))
+                }
               </div>
             </div>
           </li>
@@ -125,6 +139,9 @@ const isHomePage = Astro.url.pathname === "/";
             <a href="/" class="mobile-link">
               <span>Home</span>
             </a>
+            <a href="/program" class="mobile-link">
+              <span>Lineup</span>
+            </a>
             <a href="/applications" class="mobile-link">
               <span>Applications</span>
             </a>
@@ -142,22 +159,13 @@ const isHomePage = Astro.url.pathname === "/";
               </button>
               <div class="mobile-dropdown-content" data-mobile-dropdown-content>
                 <a href="/info/" class="mobile-dropdown-link">Festival Info</a>
-                <a href="/info/tickets" class="mobile-dropdown-link">Tickets</a>
-                <a href="/info/camping" class="mobile-dropdown-link"
-                  >Camping & Accommodation</a
-                >
-                <a href="/info/motor-inn" class="mobile-dropdown-link"
-                  >The Motor Inn</a
-                >
-                <a href="/info/accessibility" class="mobile-dropdown-link"
-                  >Accessibility</a
-                >
-                <a href="/info/getting-there" class="mobile-dropdown-link"
-                  >Travel & Entry</a
-                >
-                <a href="/info/food-beverages" class="mobile-dropdown-link"
-                  >Food & Beverages</a
-                >
+                {
+                  infoPages.map((page) => (
+                    <a href={`/info/${page.slug}`} class="mobile-dropdown-link">
+                      {page.heading}
+                    </a>
+                  ))
+                }
                 <a href="/applications" class="mobile-dropdown-link"
                   >Applications</a
                 >

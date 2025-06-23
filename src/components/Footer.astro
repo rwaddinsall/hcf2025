@@ -1,52 +1,104 @@
 ---
 import Logo from "./Logo.astro";
 import ScrollingText from "./ScrollingText.astro";
+import {
+  fetchInfoPagesForNavigation,
+  fetchGeneralPagesForFooter,
+} from "../lib/strapi";
 
 /**
  * Footer Component
  *
  * @description A component that displays the footer of the website
  */
-const currentYear = new Date().getFullYear();
+
+// Fetch info pages for Information column
+let infoPages: any[] = [];
+try {
+  const response = await fetchInfoPagesForNavigation();
+  infoPages = Array.isArray(response) ? response : [];
+  console.log("Fetched info pages for footer:", infoPages);
+} catch (error) {
+  console.warn("Failed to fetch info pages for footer:", error);
+
+  // Fallback navigation items
+  infoPages = [
+    { slug: "tickets", heading: "Tickets" },
+    { slug: "camping", heading: "Camping & Accommodation" },
+    { slug: "motor-inn", heading: "The Motor Inn" },
+    { slug: "accessibility", heading: "Accessibility" },
+    { slug: "getting-there", heading: "Travel & Entry" },
+    { slug: "food-beverages", heading: "Food & Beverages" },
+  ];
+}
+
+// Fetch general pages for Legal column
+let generalPages: any[] = [];
+try {
+  const response = await fetchGeneralPagesForFooter();
+  generalPages = Array.isArray(response) ? response : [];
+  console.log("Fetched general pages for footer:", generalPages);
+} catch (error) {
+  console.warn("Failed to fetch general pages for footer:", error);
+
+  // Fallback legal items
+  generalPages = [
+    { slug: "privacy-policy", title: "Privacy Policy" },
+    { slug: "terms-conditions", title: "Terms & Conditions" },
+  ];
+}
 ---
 
 <footer>
   <section class="py-20">
     <h2 class="sr-only">Footer</h2>
-    <div
-      class="container grid grid-cols-1 gap-8 mx-auto md:grid-cols-2 lg:grid-cols-3 justify-items-center"
-    >
-      <!-- Column 1: Main Navigation -->
-      <div class="flex flex-col gap-4">
-        <h3 class="mb-2 text-lg font-semibold">Festival</h3>
-        <ul class="flex flex-col gap-2">
-          <li><a href="/">Home</a></li>
-          <li><a href="/">Artists</a></li>
-          <li><a href="/info">Info</a></li>
-        </ul>
-      </div>
-
-      <!-- Column 2: Info & Services -->
-      <div class="flex flex-col gap-4">
-        <h3 class="mb-2 text-lg font-semibold">Information</h3>
-        <ul class="flex flex-col gap-2">
-          <li><a href="/info/camping">Camping & Accommodation</a></li>
-          <li><a href="/info/tickets">Tickets</a></li>
-          <li><a href="/info/travel">Travel & Entry</a></li>
-          <li><a href="/info/accessibility">Accessibility</a></li>
-          <li><a href="/info/sustainability">Sustainability</a></li>
-        </ul>
-      </div>
-
-      <!-- Column 3: Legal & Logo -->
-      <div class="flex flex-col gap-4">
-        <h3 class="mb-2 text-lg font-semibold">Legal</h3>
-        <ul class="flex flex-col gap-2">
-          <li><a href="/privacy-policy">Privacy Policy</a></li>
-        </ul>
-        <div class="mt-4">
-          <Logo loading="lazy" />
+    <div class="container mx-auto">
+      <!-- Footer Navigation Grid -->
+      <div
+        class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-12 lg:gap-16"
+      >
+        <!-- Column 1: Main Navigation -->
+        <div class="flex flex-col gap-4">
+          <h3 class="mb-2 text-lg font-semibold">Festival</h3>
+          <ul class="flex flex-col gap-2">
+            <li><a href="/">Home</a></li>
+            <li><a href="/">Artists</a></li>
+            <li><a href="/info">Info</a></li>
+          </ul>
         </div>
+
+        <!-- Column 2: Info & Services -->
+        <div class="flex flex-col gap-4">
+          <h3 class="mb-2 text-lg font-semibold">Information</h3>
+          <ul class="flex flex-col gap-2">
+            {
+              infoPages.map((page) => (
+                <li>
+                  <a href={`/info/${page.slug}`}>{page.heading}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Column 3: Legal -->
+        <div class="flex flex-col gap-4">
+          <h3 class="mb-2 text-lg font-semibold">Legal</h3>
+          <ul class="flex flex-col gap-2">
+            {
+              generalPages.map((page) => (
+                <li>
+                  <a href={`/${page.slug}`}>{page.title}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- Logo Section - Better positioned for all screen sizes -->
+      <div class="flex justify-center mt-12 sm:mt-16">
+        <Logo loading="lazy" />
       </div>
     </div>
 

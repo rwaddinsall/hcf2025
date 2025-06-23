@@ -66,6 +66,19 @@ export interface InfoPage extends StrapiEntity {
 export type InfoPageResponse = StrapiResponse<InfoPage[]>;
 export type SingleInfoPageResponse = StrapiResponse<InfoPage>;
 
+// General page interfaces (for legal pages like Privacy Policy)
+export interface GeneralPage extends StrapiEntity {
+  title: string;
+  slug: string;
+  subtitle?: string;
+  content: string;
+  metaTitle?: string;
+  metaDescription?: string;
+}
+
+export type GeneralPageResponse = StrapiResponse<GeneralPage[]>;
+export type SingleGeneralPageResponse = StrapiResponse<GeneralPage>;
+
 // Article interfaces
 export interface Article extends StrapiEntity {
   title: string;

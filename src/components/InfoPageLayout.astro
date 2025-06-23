@@ -77,16 +77,6 @@ try {
   <section class="my-12">
     <div class="container">
       <div class="space-content">
-        <div class="mb-8">
-          <a
-            href={backLink.href}
-            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
-          >
-            <Icon name="lucide:arrow-left" size="20" />
-            {backLink.text}
-          </a>
-        </div>
-
         {
           accordionSections && accordionSections.length > 0 && (
             <Accordion>
@@ -102,6 +92,16 @@ try {
         }
 
         <slot />
+
+        <div class="mb-8">
+          <a
+            href={backLink.href}
+            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
+          >
+            <Icon name="lucide:arrow-left" size="20" />
+            {backLink.text}
+          </a>
+        </div>
       </div>
     </div>
   </section>

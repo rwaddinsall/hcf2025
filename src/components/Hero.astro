@@ -1,11 +1,16 @@
 ---
+import { Image } from "astro:assets";
 import HeroHeading from "@assets/images/projects/HeroHeading.svg";
-import HerooGallery from "@assets/images/projects/HeroGallery.jpg";
+import HeroGallery from "@assets/images/projects/HeroGallery.jpg";
 
-import Image from "astro/components/Image.astro";
+/**
+ * Hero Section Component
+ *
+ * @description Main hero section displaying the festival logo and gallery image
+ */
 ---
 
-<section class="container m-6 md:m-8">
+<section class="hero-section">
   <Image
     src={HeroHeading}
     alt="Hopkins Creek Festival logo"
@@ -14,32 +19,144 @@ import Image from "astro/components/Image.astro";
     class="hero-heading"
   />
   <Image
-    class="p-2 mt-4 mb-2 md:p-4 md:mt-6 md:mb-4"
-    src={HerooGallery}
-    alt="Hopkins Creek Festival logo"
+    src={HeroGallery}
+    alt="Hopkins Creek Festival gallery"
     loading="eager"
     quality="high"
+    class="hero-gallery"
   />
 </section>
 
-<style>
-  .container {
-    gap: var(--space-l);
+<style lang="scss">
+  @use "../assets/scss/base/mixins" as *;
+  @use "../assets/scss/base/breakpoint" as *;
+
+  .hero-section {
+    // Use design system container pattern
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    width: 100%;
+    padding-inline: var(--container-gutter);
+    padding-block: var(--space-xl);
+
+    // Layout using design system patterns
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: var(--space-xl);
+
+    @include breakpoint("m") {
+      padding-inline: var(--space-xl);
+      padding-block: var(--space-2xl);
+      gap: var(--space-xl);
+    }
+
+    @include breakpoint("l") {
+      padding-inline: var(--space-2xl);
+      padding-block: var(--space-3xl);
+      gap: var(--space-2xl);
+    }
   }
 
-  .hero-heading,
-  .hero-gallery {
-    margin: 0;
-    padding: 0;
-  }
-
-  .hero-heading svg {
-    display: block;
+  .hero-heading {
+    // Constrain maximum width instead of full width
     width: 100%;
+    max-width: 600px; // Limit heading size
     height: auto;
+    display: block;
+
+    // Optimize SVG rendering
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+
+    // Add subtle animation on load
+    animation: fadeInUp var(--duration-normal) var(--ease-out-quad);
+    animation-fill-mode: both;
+
+    // Responsive sizing
+    @include breakpoint("m") {
+      max-width: 700px;
+    }
+
+    @include breakpoint("l") {
+      max-width: 800px;
+    }
+  }
+
+  .hero-gallery {
+    // Constrain maximum width instead of full width
+    width: 100%;
+    max-width: 700px; // Reduced from 800px
+    height: auto;
+    display: block;
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    box-shadow: var(--elevation-2);
+
+    // Optimize image rendering
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+
+    // Add subtle animation with delay
+    animation: fadeInUp var(--animation-speed-medium) var(--cubic-bezier);
+    animation-delay: var(--animation-speed-fast);
+    animation-fill-mode: both;
+
+    // Responsive sizing - reduced across all breakpoints
+    @include breakpoint("m") {
+      max-width: 750px; // Reduced from 900px
+    }
+
+    @include breakpoint("l") {
+      max-width: 800px; // Reduced from 1000px
+    }
+
+    // Responsive border radius - smaller screens get smaller radius
+    @media (max-width: map-get($breakpoints, "m")) {
+      border-radius: var(--radius-m);
+    }
+
+    @media (max-width: map-get($breakpoints, "s")) {
+      border-radius: var(--radius-s);
+    }
+  }
+
+  // Animations
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(var(--space-md));
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  // Reduced motion support
+  @media (prefers-reduced-motion: reduce) {
+    .hero-heading,
+    .hero-gallery {
+      animation: none;
+    }
+  }
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    .hero-gallery {
+      box-shadow: var(--elevation-dark-md);
+    }
+  }
+
+  // Print styles
+  @media print {
+    .hero-section {
+      padding-block: var(--space-md);
+      gap: var(--space-md);
+    }
+
+    .hero-gallery {
+      box-shadow: none;
+    }
   }
 </style>

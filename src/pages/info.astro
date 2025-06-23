@@ -16,14 +16,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
       <div class="info-grid">
         <Feature icon="lucide:tent" title="Camping & Accommodation">
           <p>
-            There's nothing like the great outdoors. Come get acquainted with
-            the stars, the gumtrees, and the quiet hum of tents settling in.
-          </p>
-          <p>
-            Hopkins Creek offers two main camping areas: <strong>Uptown</strong>
-            and <strong>Downtown</strong>.
-          </p>
-          <p>
             <a href="/info/camping" class="feature-link"
               >Learn more about camping →</a
             >
@@ -31,14 +23,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
         </Feature>
 
         <Feature icon="mdi:bed" title="The Motor Inn">
-          <p>
-            Welcoming weary travellers, lone rangers, honeymooners, wayfarers
-            and wide-eyed roamers.
-          </p>
-          <p>
-            Lay your head beneath the sky at the Hopkins Creek Motor Inn — our
-            version of luxury, comfort, and low-maintenance setup.
-          </p>
           <p>
             <a href="/info/motor-inn" class="feature-link"
               >Explore Motor Inn packages →</a
@@ -48,14 +32,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
 
         <Feature icon="mdi:wheelchair-accessibility" title="Accessibility">
           <p>
-            Hopkins Creek is committed to creating an inclusive and accessible
-            event for all attendees.
-          </p>
-          <p>
-            We're currently working on making the festival experience safer,
-            easier and more enjoyable for everyone.
-          </p>
-          <p>
             <a href="/info/accessibility" class="feature-link"
               >View accessibility info →</a
             >
@@ -63,12 +39,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
         </Feature>
 
         <Feature icon="mdi:ticket" title="Tickets & Pricing">
-          <p>
-            Early bird specials, group discounts, and payment plans available.
-          </p>
-          <p>
-            Get your tickets now and secure your spot at Hopkins Creek Festival.
-          </p>
           <p>
             <a href="/info/tickets" class="feature-link"
               >View ticket options →</a
@@ -78,13 +48,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
 
         <Feature icon="mdi:car" title="Getting There">
           <p>
-            Located in the heart of nature, easily accessible by car with ample
-            parking.
-          </p>
-          <p>
-            Shuttle services and rideshare options available from nearby towns.
-          </p>
-          <p>
             <a href="/info/getting-there" class="feature-link"
               >Plan your journey →</a
             >
@@ -92,11 +55,6 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
         </Feature>
 
         <Feature icon="mdi:food" title="Food & Beverages">
-          <p>
-            Delicious local food vendors, dietary options, and refreshing
-            beverages.
-          </p>
-          <p>Support local businesses while enjoying amazing festival fare.</p>
           <p>
             <a href="/info/food-beverages" class="feature-link"
               >Explore food options →</a
@@ -114,10 +72,30 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: var(--space-l);
     margin-top: var(--space-xl);
+    align-items: stretch;
 
     @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
+  }
+
+  // Target the Feature components to ensure consistent height
+  :global(.info-grid > .feature) {
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+  }
+
+  // Ensure content fills the available space
+  :global(.info-grid > .feature .content) {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  // Push links to bottom
+  :global(.info-grid > .feature .content > p:last-child) {
+    margin-top: auto;
   }
 
   :global(.feature-link) {

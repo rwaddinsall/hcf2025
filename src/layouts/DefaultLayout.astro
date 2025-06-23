@@ -47,14 +47,23 @@ const {
       body {
         display: flex;
         flex-direction: column;
-        // overflow-x: clip;
+        padding-inline: var(--grid-gutter); // Uses responsive gutter spacing
 
         main {
           flex: 1 0 auto;
+          max-width: var(--grid-max-width);
+          margin: var(--space-l) auto 0; // Add top margin for spacing from nav
+          padding-inline: var(--space-s); // Additional inner padding
+          padding-block: var(
+            --space-m
+          ); // Add vertical padding for better content spacing
         }
 
         footer {
           flex-shrink: 0;
+          margin-top: var(
+            --space-xl
+          ); // Add top margin for separation from content
         }
       }
 

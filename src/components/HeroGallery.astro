@@ -1,6 +1,6 @@
 ---
-import { Image } from 'astro:assets';
-import heroGalleryImage from '@assets/images/projects/HeroGallery.jpg';
+import { Image } from "astro:assets";
+import heroGalleryImage from "@assets/images/projects/HeroGallery.jpg";
 
 /**
  * Hero Gallery Component
@@ -20,18 +20,18 @@ interface Props {
   /**
    * Loading strategy for the image
    */
-  loading?: 'lazy' | 'eager';
+  loading?: "lazy" | "eager";
   /**
    * Image quality (0-100 or preset)
    */
-  quality?: number | 'low' | 'mid' | 'high' | 'max';
+  quality?: number | "low" | "mid" | "high" | "max";
 }
 
 const {
-  alt = 'Hopkins Creek Festival gallery showcase',
-  class: className = '',
-  loading = 'eager',
-  quality = 'high',
+  alt = "Hopkins Creek Festival gallery showcase",
+  class: className = "",
+  loading = "eager",
+  quality = "high",
 } = Astro.props;
 ---
 
@@ -55,82 +55,59 @@ const {
 </section>
 
 <style lang="scss">
-  // Design tokens
-  $breakpoint-mobile: 480px;
-  $breakpoint-tablet: 768px;
-  $breakpoint-desktop: 1024px;
-  $breakpoint-large: 1200px;
+  @use "../assets/scss/base/mixins" as *;
+  @use "../assets/scss/base/breakpoint" as *;
 
-  $spacing-sm: 1rem;
-  $spacing-md: 2rem;
-  $spacing-lg: 4rem;
-  $spacing-xl: 6rem;
-
-  $border-radius: 12px;
-  $box-shadow-subtle: 0 4px 12px rgba(0, 0, 0, 0.1);
-  $box-shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.15);
-
-  $transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  // Utility class for screen readers
+  // Screen reader utility using design system mixin
   .visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    // overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    @include sr-only;
   }
 
   .hero-gallery {
-    padding: $spacing-lg $spacing-md;
-
-    @media (max-width: $breakpoint-tablet) {
-      padding: $spacing-md $spacing-sm;
-    }
+    padding: var(--space-lg) var(--space-md);
 
     &__container {
-      max-width: $breakpoint-large;
+      max-width: var(--container-max-width);
       margin: 0 auto;
       width: 100%;
+      padding-inline: var(--container-gutter);
     }
 
     &__image-wrapper {
       position: relative;
-      border-radius: $border-radius;
-      // overflow: hidden;
-      box-shadow: $box-shadow-subtle;
-      transition: $transition-smooth;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--elevation-md);
+      transition: var(--transition-smooth);
+      background-color: var(--color-neutral-100);
 
       // Focus styles for accessibility
       &:focus-within {
-        outline: 3px solid currentColor;
-        outline-offset: 4px;
+        outline: 3px solid var(--color-primary-500);
+        outline-offset: var(--space-xs);
+        box-shadow: var(--elevation-lg);
       }
 
       // Hover effects
       &:hover {
-        transform: translateY(-4px);
-        box-shadow: $box-shadow-elevated;
+        transform: translateY(calc(var(--space-xs) * -1));
+        box-shadow: var(--elevation-lg);
       }
 
-      @media (max-width: $breakpoint-tablet) {
-        border-radius: calc($border-radius * 0.75);
+      @include bp(tablet-down) {
+        border-radius: var(--radius-md);
 
         &:hover {
-          transform: translateY(-2px);
+          transform: translateY(calc(var(--space-2xs) * -1));
         }
       }
 
-      @media (max-width: $breakpoint-mobile) {
-        border-radius: calc($border-radius * 0.5);
+      @include bp(mobile-down) {
+        border-radius: var(--radius-sm);
 
         &:hover {
           transform: none;
-          box-shadow: $box-shadow-subtle;
+          box-shadow: var(--elevation-sm);
         }
       }
     }
@@ -139,7 +116,7 @@ const {
       width: 100%;
       height: auto;
       display: block;
-      transition: $transition-smooth;
+      transition: var(--transition-smooth);
 
       // Ensure crisp rendering
       image-rendering: -webkit-optimize-contrast;
@@ -150,24 +127,24 @@ const {
       object-fit: cover;
       object-position: center;
 
-      @media (max-width: $breakpoint-tablet) {
+      @include bp(tablet-down) {
         aspect-ratio: 4 / 3;
       }
 
-      @media (max-width: $breakpoint-mobile) {
+      @include bp(mobile-down) {
         aspect-ratio: 3 / 2;
       }
 
-      // Loading state
+      // Loading state using design system colors
       &[data-loading] {
         background: linear-gradient(
           90deg,
-          #f0f0f0 25%,
-          #e0e0e0 50%,
-          #f0f0f0 75%
+          var(--color-neutral-100) 25%,
+          var(--color-neutral-200) 50%,
+          var(--color-neutral-100) 75%
         );
         background-size: 200% 100%;
-        animation: shimmer 1.5s infinite;
+        animation: shimmer var(--duration-slow) infinite;
       }
     }
   }
@@ -204,17 +181,22 @@ const {
   // High contrast mode support
   @media (prefers-contrast: high) {
     .hero-gallery__image-wrapper {
-      border: 2px solid currentColor;
+      border: 2px solid var(--color-text-primary);
     }
   }
 
-  // Dark mode support (if applicable)
+  // Dark mode support using design system
   @media (prefers-color-scheme: dark) {
     .hero-gallery__image-wrapper {
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      background-color: var(--color-neutral-800);
+      box-shadow: var(--elevation-dark-md);
 
       &:hover {
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        box-shadow: var(--elevation-dark-lg);
+      }
+
+      &:focus-within {
+        box-shadow: var(--elevation-dark-lg);
       }
     }
   }
@@ -224,6 +206,7 @@ const {
     .hero-gallery {
       break-inside: avoid;
       page-break-inside: avoid;
+      padding: var(--space-md) 0;
     }
 
     .hero-gallery__image-wrapper {
@@ -233,13 +216,13 @@ const {
   }
 
   // Large screens optimization
-  @media (min-width: $breakpoint-large) {
+  @include bp(desktop-up) {
     .hero-gallery {
-      padding: $spacing-xl $spacing-lg;
+      padding: var(--space-xl) var(--space-lg);
     }
 
     .hero-gallery__image-wrapper {
-      border-radius: calc($border-radius * 1.25);
+      border-radius: var(--radius-xl);
     }
   }
 </style>

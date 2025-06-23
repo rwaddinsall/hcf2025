@@ -105,7 +105,7 @@ const {
   pauseOnClick = false, // No pause on click by default
   class: className = '',
   ariaLabel = 'Scrolling announcement',
-  width = '50%', // Default width
+  width = '25%', // Default width
   variant = 'inline', // Default variant
   isVisible = true, // Default to visible
 } = Astro.props;
@@ -255,12 +255,28 @@ const {
       pointer-events: none;
       opacity: 0.6;
 
-      width: 100%;
+      width: 25%; // Limit to first quarter of the header
+      max-width: 300px; // Prevent it from being too wide on large screens
+      margin-left: var(--space-s); // Design system margin for proper spacing
+      margin-right: var(--space-l); // Ensure clearance from nav items
+
+      // Responsive margin adjustments
+      @media (min-width: 768px) {
+        margin-left: var(--space-m);
+        margin-right: var(--space-xl);
+      }
+
+      @media (min-width: 1024px) {
+        margin-left: var(--space-l);
+        margin-right: var(--space-2xl);
+      }
     }
 
     &--acknowledgement-of-country {
       width: 100%;
       opacity: 0.6;
+      margin-block: var(--space-m); // Add vertical margins using design system
+      padding-inline: var(--space-s); // Add horizontal padding for better spacing
 
       // Make acknowledgement of country text bold using design system font weights
       .scrolling-text__item {
@@ -273,6 +289,7 @@ const {
       // Default inline behavior - no special positioning
       display: inline-block;
       vertical-align: middle;
+      margin-inline: var(--space-xs); // Add subtle margins for inline variant
     }
   }
 
@@ -284,6 +301,7 @@ const {
     white-space: nowrap;
     display: flex;
     align-items: center;
+    padding-block: var(--space-2xs); // Subtle vertical padding for better visual balance
   }
 
   // The actual scrolling element

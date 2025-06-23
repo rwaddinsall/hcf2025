@@ -8,7 +8,7 @@
 import {
   fetchScrollingHeaderText,
   fetchAcknowledgementOfCountry,
-} from "../lib/strapi";
+} from '../lib/strapi';
 
 interface Props {
   /**
@@ -18,7 +18,11 @@ interface Props {
   /**
    * Fetch text from Strapi content type
    */
-  strapiType?: "header" | "acknowledgement-of-country";
+  strapiType?: 'header' | 'acknowledgement-of-country';
+  /**
+   * Whether the component should be visible
+   */
+  isVisible?: boolean;
   /**
    * Animation duration in seconds
    */
@@ -46,28 +50,28 @@ interface Props {
   /**
    * Variant for different contexts (nav, acknowledgement-of-country, inline)
    */
-  variant?: "nav" | "acknowledgement-of-country" | "inline";
+  variant?: 'nav' | 'acknowledgement-of-country' | 'inline';
 }
 
 // Fetch scrolling text from Strapi if strapiType is specified
 let strapiScrollingText:
-  | import("../interfaces/strapi").ScrollingHeaderText
-  | import("../interfaces/strapi").AcknowledgementOfCountry
+  | import('../interfaces/strapi').ScrollingHeaderText
+  | import('../interfaces/strapi').AcknowledgementOfCountry
   | null = null;
 
 // Default fallback texts for when Strapi content is not available
 const defaultTexts = {
   header:
-    "Welcome to Hopkins Creek Festival 2025 • Early Bird Tickets Available Now • Artists Announcement Coming Soon",
-  "acknowledgement-of-country":
-    "Hopkins Creek Festival 2025 • Follow us for updates • See you at the creek",
+    'Welcome to Hopkins Creek Festival 2025 • Early Bird Tickets Available Now • Artists Announcement Coming Soon',
+  'acknowledgement-of-country':
+    'Hopkins Creek Festival 2025 • Follow us for updates • See you at the creek',
 };
 
 if (Astro.props.strapiType) {
   try {
-    if (Astro.props.strapiType === "header") {
+    if (Astro.props.strapiType === 'header') {
       strapiScrollingText = await fetchScrollingHeaderText();
-    } else if (Astro.props.strapiType === "acknowledgement-of-country") {
+    } else if (Astro.props.strapiType === 'acknowledgement-of-country') {
       strapiScrollingText = await fetchAcknowledgementOfCountry();
     }
   } catch (error) {
@@ -81,7 +85,7 @@ if (Astro.props.strapiType) {
 
 // Determine the text to display with intelligent fallbacks
 // Handle the simple Text field from Strapi schema
-let displayText = "";
+let displayText = '';
 
 if (strapiScrollingText?.Text) {
   // Use the Text field directly from Strapi
@@ -90,8 +94,8 @@ if (strapiScrollingText?.Text) {
   // Fallback to props or default text
   displayText =
     Astro.props.text ||
-    (Astro.props.strapiType ? defaultTexts[Astro.props.strapiType] : "") ||
-    "Welcome • Stay tuned for updates";
+    (Astro.props.strapiType ? defaultTexts[Astro.props.strapiType] : '') ||
+    'Welcome • Stay tuned for updates';
 }
 
 const {
@@ -99,13 +103,15 @@ const {
   duration = 15, // Hardcoded duration
   pauseOnHover = false, // No pause on hover by default
   pauseOnClick = false, // No pause on click by default
-  class: className = "",
-  ariaLabel = "Scrolling announcement",
-  width = "50%", // Default width
-  variant = "inline", // Default variant
+  class: className = '',
+  ariaLabel = 'Scrolling announcement',
+  width = '50%', // Default width
+  variant = 'inline', // Default variant
+  isVisible = true, // Default to visible
 } = Astro.props;
 ---
 
+{isVisible && (
 <div
   class={`scrolling-text-container scrolling-text-container--${variant} ${className}`}
   data-pause-hover={pauseOnHover}
@@ -130,6 +136,7 @@ const {
     </div>
   </div>
 </div>
+)}
 
 <script>
   document.addEventListener("astro:page-load", () => {

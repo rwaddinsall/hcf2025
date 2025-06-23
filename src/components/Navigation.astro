@@ -9,13 +9,16 @@ import Logo from "./Logo.astro";
 import { Icon } from "astro-icon/components";
 import { SkipLink } from "accessible-astro-components";
 import ScrollingText from "./ScrollingText.astro";
+
+// Check if we're on the home page
+const isHomePage = Astro.url.pathname === "/";
 ---
 
 <header class="hopkins-header">
   <SkipLink />
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container launch-version">
-      <ScrollingText strapiType="header" />
+      <ScrollingText strapiType="header" isVisible={isHomePage} />
 
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-list">
@@ -32,6 +35,14 @@ import ScrollingText from "./ScrollingText.astro";
             >
               <span>Program</span>
             </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              href="/applications"
+              class="nav-link"
+              aria-label="View applications"><span>Applications</span></a
+            >
           </li>
           <li class="nav-item nav-dropdown" data-dropdown>
             <button
@@ -50,9 +61,7 @@ import ScrollingText from "./ScrollingText.astro";
             </button>
             <div class="dropdown-menu" id="info-dropdown" data-dropdown-menu>
               <div class="dropdown-content">
-                <a href="/info/" class="dropdown-link">
-                  <span>Festival Info</span>
-                </a>
+                <a href="/info/" class="dropdown-link"> </a>
                 <a href="/info/camping" class="dropdown-link">
                   <span>Camping & Accommodation</span>
                 </a>
@@ -68,9 +77,7 @@ import ScrollingText from "./ScrollingText.astro";
                 <a href="/info/food-beverages" class="dropdown-link">
                   <span>Food & Beverages</span>
                 </a>
-                <a href="/applications" class="dropdown-link">
-                  <span>Applications</span>
-                </a>
+
                 <a href="/info/tickets" class="dropdown-link">
                   <span>Tickets</span>
                 </a>
@@ -113,13 +120,6 @@ import ScrollingText from "./ScrollingText.astro";
         <div class="mobile-menu">
           <div class="mobile-menu-header">
             <Logo />
-            <button
-              class="mobile-close"
-              data-mobile-close
-              aria-label="Close menu"
-            >
-              <Icon name="lucide:x" size="24" />
-            </button>
           </div>
           <div class="mobile-menu-content">
             <a href="/" class="mobile-link">
@@ -166,7 +166,10 @@ import ScrollingText from "./ScrollingText.astro";
                 >
               </div>
             </div>
-            <a href="#tickets" class="mobile-link mobile-cta">
+            <a
+              href="https://events.humanitix.com/hopkins-creek-2025"
+              class="mobile-link mobile-cta"
+            >
               <span>Get Tickets</span>
             </a>
           </div>
@@ -180,7 +183,6 @@ import ScrollingText from "./ScrollingText.astro";
         private mobileToggle: HTMLButtonElement;
         private mobileOverlay: HTMLElement;
         private dropdownTriggers: NodeListOf<HTMLButtonElement>;
-        private themeToggle: HTMLButtonElement;
         private lastScrollY = 0;
         private isScrolling = false;
 
@@ -195,9 +197,6 @@ import ScrollingText from "./ScrollingText.astro";
           this.dropdownTriggers = document.querySelectorAll(
             "[data-dropdown-trigger]"
           ) as NodeListOf<HTMLButtonElement>;
-          this.themeToggle = document.querySelector(
-            "[data-theme-toggle]"
-          ) as HTMLButtonElement;
 
           this.init();
         }
@@ -206,7 +205,6 @@ import ScrollingText from "./ScrollingText.astro";
           this.handleStickyScroll();
           this.setupMobileMenu();
           this.setupDropdowns();
-          this.setupThemeToggle();
           this.setupKeyboardNavigation();
           this.setActiveMenuItem();
 
@@ -251,16 +249,8 @@ import ScrollingText from "./ScrollingText.astro";
         }
 
         private setupMobileMenu(): void {
-          const mobileClose = document.querySelector(
-            "[data-mobile-close]"
-          ) as HTMLButtonElement;
-
           this.mobileToggle.addEventListener("click", () => {
             this.toggleMobileMenu();
-          });
-
-          mobileClose.addEventListener("click", () => {
-            this.closeMobileMenu();
           });
 
           // Mobile dropdown functionality
@@ -294,27 +284,7 @@ import ScrollingText from "./ScrollingText.astro";
         }
 
         private setupThemeToggle(): void {
-          if (this.themeToggle) {
-            this.themeToggle.addEventListener("click", () => {
-              document.documentElement.classList.toggle("darkmode");
-              localStorage.setItem(
-                "theme",
-                document.documentElement.classList.contains("darkmode")
-                  ? "dark"
-                  : "light"
-              );
-            });
-
-            // Initialize theme
-            const savedTheme = localStorage.getItem("theme");
-            const prefersDark = window.matchMedia(
-              "(prefers-color-scheme: dark)"
-            ).matches;
-
-            if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-              document.documentElement.classList.add("darkmode");
-            }
-          }
+          // Theme toggle functionality removed
         }
 
         private setupKeyboardNavigation(): void {
@@ -434,7 +404,7 @@ import ScrollingText from "./ScrollingText.astro";
     </script>
 
     <style lang="scss">
-      // CSS Custom Properties
+      // Navigation CSS variables - leveraging base design system
       :root {
         --nav-height: 80px;
         --nav-bg: transparent;
@@ -443,7 +413,7 @@ import ScrollingText from "./ScrollingText.astro";
         --nav-shadow-scrolled: 0 8px 48px rgba(0, 0, 0, 0.15);
         --nav-backdrop-blur: blur(20px);
         --nav-border: rgba(0, 0, 0, 0.1);
-        --nav-text: var(--foreground-color);
+        --nav-text: var(--foreground-color); // Uses base design system
         --nav-text-hover: var(--foreground-color);
         --nav-accent: var(--foreground-color);
         --nav-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -452,6 +422,7 @@ import ScrollingText from "./ScrollingText.astro";
         --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
       }
 
+      // Sticky header container
       .hopkins-header {
         position: sticky;
         top: 0;
@@ -459,6 +430,7 @@ import ScrollingText from "./ScrollingText.astro";
         width: 100%;
       }
 
+      // Main navigation bar with scroll effects
       .hopkins-nav {
         width: 100%;
         background: var(--nav-bg);
@@ -467,6 +439,7 @@ import ScrollingText from "./ScrollingText.astro";
         min-height: var(--nav-height);
         position: relative;
 
+        // Scrolled state styling
         &.nav-scrolled {
           background: var(--nav-bg-scrolled);
           box-shadow: var(--nav-shadow-scrolled);
@@ -474,6 +447,7 @@ import ScrollingText from "./ScrollingText.astro";
         }
       }
 
+      // Container with max-width and centering
       .nav-container {
         max-width: 1200px;
         margin: 0 auto;
@@ -486,33 +460,38 @@ import ScrollingText from "./ScrollingText.astro";
         z-index: 2;
       }
 
+      // Logo/brand area
       .nav-brand {
         flex-shrink: 0;
         z-index: 1001;
       }
 
-      // Desktop Navigation
+      // Navigation container - shows hamburger on mobile, navigation on desktop
       .nav-menu {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+
+      // Desktop navigation list - hidden on mobile
+      .nav-list {
         display: none;
 
         @media (min-width: 901px) {
-          display: block;
+          display: flex;
+          align-items: center;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          gap: 0.5rem;
         }
-      }
-
-      .nav-list {
-        display: flex;
-        align-items: center;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        gap: 0.5rem;
       }
 
       .nav-item {
         position: relative;
       }
 
+      // Base nav link styling
       .nav-link {
         display: flex;
         align-items: center;
@@ -533,12 +512,14 @@ import ScrollingText from "./ScrollingText.astro";
           position: relative;
         }
 
+        // Hover states
         &:hover,
         &:focus-visible {
           color: var(--nav-text-hover);
-          background: var(--brand-secondary);
+          background: var(--brand-secondary); // Uses base design system
         }
 
+        // Active state with underline
         &.active {
           color: var(--nav-accent);
           font-weight: 600;
@@ -555,12 +536,14 @@ import ScrollingText from "./ScrollingText.astro";
           }
         }
 
+        // Focus visibility
         &:focus-visible {
           outline: 2px solid var(--nav-accent);
           outline-offset: 2px;
         }
       }
 
+      // CTA button styling
       .nav-cta {
         background: var(--nav-accent);
         color: white;
@@ -577,6 +560,7 @@ import ScrollingText from "./ScrollingText.astro";
 
       // Dropdown Styles
       .nav-dropdown {
+        // Hover and active states
         &:hover,
         &.active {
           .dropdown-trigger {
@@ -602,6 +586,7 @@ import ScrollingText from "./ScrollingText.astro";
         }
       }
 
+      // Dropdown menu positioning and styling
       .dropdown-menu {
         position: absolute;
         top: calc(100% + 8px);
@@ -647,53 +632,28 @@ import ScrollingText from "./ScrollingText.astro";
         }
       }
 
-      // Theme Toggle
-      .theme-toggle {
-        position: relative;
-        width: 40px;
-        height: 40px;
-        padding: 0;
-        justify-content: center;
-
-        .theme-icon {
-          position: absolute;
-          transition: var(--nav-transition);
-        }
-
-        .theme-icon--light {
-          opacity: 1;
-          transform: rotate(0deg) scale(1);
-        }
-
-        .theme-icon--dark {
-          opacity: 0;
-          transform: rotate(180deg) scale(0);
-        }
-
-        .darkmode & {
-          .theme-icon--light {
-            opacity: 0;
-            transform: rotate(180deg) scale(0);
-          }
-
-          .theme-icon--dark {
-            opacity: 1;
-            transform: rotate(0deg) scale(1);
-          }
-        }
-      }
-
       // Mobile Toggle
       .mobile-toggle {
         display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        background: none;
+        border: none;
+        cursor: pointer;
         z-index: 1001;
 
+        // Hide on desktop
         @media (min-width: 901px) {
           display: none;
         }
 
+        // Hamburger lines
         .mobile-toggle-line {
+          display: block;
           width: 24px;
           height: 2px;
           background: var(--nav-text);
@@ -714,6 +674,7 @@ import ScrollingText from "./ScrollingText.astro";
           }
         }
 
+        // Active state - X animation
         &.active {
           .mobile-toggle-line {
             &:nth-child(1) {
@@ -745,18 +706,16 @@ import ScrollingText from "./ScrollingText.astro";
         width: 100%;
         height: 100vh;
         background: var(--mobile-overlay-bg);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
         z-index: 999;
-        opacity: 0;
         visibility: hidden;
         transition: var(--nav-transition);
 
+        // Active state
         &.active {
-          opacity: 1;
           visibility: visible;
         }
 
+        // Hide on desktop
         @media (min-width: 901px) {
           display: none;
         }
@@ -768,13 +727,13 @@ import ScrollingText from "./ScrollingText.astro";
         right: 0;
         width: min(400px, 90vw);
         height: 100vh;
-        background: var(--nav-bg);
-        backdrop-filter: var(--nav-backdrop-blur);
-        -webkit-backdrop-filter: var(--nav-backdrop-blur);
+        background: white;
+        border-left: 1px solid var(--nav-border);
         transform: translateX(100%);
         transition: var(--nav-transition);
         overflow-y: auto;
 
+        // Slide in when active
         .mobile-overlay.active & {
           transform: translateX(0);
         }
@@ -783,27 +742,9 @@ import ScrollingText from "./ScrollingText.astro";
       .mobile-menu-header {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: center;
         padding: 1.5rem;
         border-bottom: 1px solid var(--nav-border);
-      }
-
-      .mobile-close {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: none;
-        border: none;
-        color: var(--nav-text);
-        cursor: pointer;
-        border-radius: 8px;
-        transition: var(--nav-transition);
-
-        &:hover {
-          background: rgba(0, 102, 204, 0.1);
-        }
       }
 
       .mobile-menu-content {
@@ -828,6 +769,7 @@ import ScrollingText from "./ScrollingText.astro";
           color: var(--nav-accent);
         }
 
+        // CTA styling
         &.mobile-cta {
           background: var(--nav-accent);
           color: white;
@@ -839,6 +781,7 @@ import ScrollingText from "./ScrollingText.astro";
           }
         }
 
+        // Active state
         &.active {
           background: rgba(0, 102, 204, 0.1);
           color: var(--nav-accent);
@@ -878,6 +821,7 @@ import ScrollingText from "./ScrollingText.astro";
         }
       }
 
+      // Active dropdown state
       .mobile-dropdown.active {
         .mobile-dropdown-trigger {
           background: rgba(0, 102, 204, 0.1);
@@ -890,15 +834,13 @@ import ScrollingText from "./ScrollingText.astro";
 
         .mobile-dropdown-content {
           max-height: 500px;
-          opacity: 1;
         }
       }
 
       .mobile-dropdown-content {
         max-height: 0;
-        opacity: 0;
         overflow: hidden;
-        transition: var(--nav-transition);
+        transition: max-height 0.3s ease;
         padding-left: 2rem;
       }
 
@@ -957,7 +899,6 @@ import ScrollingText from "./ScrollingText.astro";
         }
 
         .mobile-toggle,
-        .theme-toggle,
         .nav-cta {
           display: none;
         }

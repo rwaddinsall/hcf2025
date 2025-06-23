@@ -16,7 +16,7 @@ const currentYear = new Date().getFullYear();
     <div class="container">
       <ScrollingText
         strapiType="acknowledgement-of-country"
-        duration={50}
+        duration={30}
         ariaLabel="Acknowledgement of Country"
         width="100%"
         variant="acknowledgement-of-country"
@@ -26,18 +26,22 @@ const currentYear = new Date().getFullYear();
 
   <section class="py-20">
     <h2 class="sr-only">Footer</h2>
-    <div class="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div
+      class="container grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-start lg:justify-items-start"
+    >
+      <!-- Column 1: Main Navigation -->
       <div class="flex flex-col gap-4">
+        <h3 class="mb-2 text-lg font-semibold">Festival</h3>
         <ul class="flex flex-col gap-2">
           <li><a href="/">Home</a></li>
           <li><a href="/">Artists</a></li>
-          <!-- LAUNCH VERSION: Info link temporarily hidden - uncomment when ready -->
           <li><a href="/info">Info</a></li>
         </ul>
+      </div>
 
-        <!-- LAUNCH VERSION: Info-related footer links temporarily hidden - uncomment when ready -->
-        <!--
+      <!-- Column 2: Info & Services -->
       <div class="flex flex-col gap-4">
+        <h3 class="mb-2 text-lg font-semibold">Information</h3>
         <ul class="flex flex-col gap-2">
           <li><a href="/info/camping">Camping & Accommodation</a></li>
           <li><a href="/info/tickets">Tickets</a></li>
@@ -46,44 +50,44 @@ const currentYear = new Date().getFullYear();
           <li><a href="/info/sustainability">Sustainability</a></li>
         </ul>
       </div>
-      -->
-        <!-- <div class="flex flex-col gap-4">
+
+      <!-- Column 3: Legal & Logo -->
+      <div class="flex flex-col gap-4">
+        <h3 class="mb-2 text-lg font-semibold">Legal</h3>
         <ul class="flex flex-col gap-2">
           <li><a href="/privacy-policy">Privacy Policy</a></li>
         </ul>
-      </div>
-      <div class="flex flex-col gap-4">
-        <Logo loading="lazy" />
-      </div>
-      <section class="py-8">
-        <div
-          class="container flex flex-col gap-4 md:flex-row md:justify-between"
-        >
-          <p>
-            &copy; {currentYear} - Hopkins Creek Festival. All rights reserved.
-          </p>
+        <div class="mt-4">
+          <Logo loading="lazy" />
         </div>
-      </section>
+      </div>
     </div>
-  </section> -->
 
-        <style>
-          .acknowledgement-section {
-            padding: var(--space-l);
-          }
-
-          section {
-          }
-
-          footer a {
-            text-decoration: none;
-          }
-
-          footer a:hover {
-            text-decoration: underline;
-          }
-        </style>
+    <!-- Copyright Section -->
+    <div class="container pt-8 mt-12 border-t border-gray-200">
+      <div class="flex flex-col gap-4 md:flex-row md:justify-between">
+        <p>
+          &copy; {currentYear} - Hopkins Creek Festival. All rights reserved.
+        </p>
       </div>
     </div>
   </section>
 </footer>
+
+<style>
+  .acknowledgement-section {
+    padding: var(--space-l);
+  }
+
+  footer a {
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+  }
+
+  footer h3 {
+    color: var(--neutral-900, #1a1a1a);
+  }
+</style>

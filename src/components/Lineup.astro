@@ -159,6 +159,7 @@ artists.sort((a, b) => {
   .lineup-artist {
     position: relative;
     white-space: nowrap;
+    /* width: 100%; */
     opacity: 0;
     animation: fadeInUp 0.6s var(--cubic-bezier, ease) forwards;
     padding: var(--space-4xs) var(--space-3xs);
@@ -172,13 +173,13 @@ artists.sort((a, b) => {
 
   /* Grid Hover Effects */
   .lineup-grid:hover .lineup-artist {
-    opacity: 0.3;
+    /* opacity: 0.3; */
   }
 
   .lineup-grid:hover .lineup-artist:hover {
     opacity: 1;
     transform: translateY(-2px) scale(1.02);
-    background-color: var(--color-neutral-200);
+  
   }
 
   /* Artist Name Typography */
@@ -201,8 +202,14 @@ artists.sort((a, b) => {
   .artist-text {
     display: inline-block;
     color: var(--foreground-color);
-    transition: color var(--animation-speed-fast, 0.2s)
-      var(--cubic-bezier, ease);
+    transition: color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      font-weight 0.2s var(--cubic-bezier, ease),
+      text-shadow 0.2s var(--cubic-bezier, ease);
+  }
+
+  .lineup-artist:hover .artist-text {
+    font-weight: 600;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.08);
   }
 
   /* Artist Link - Enhanced Styling */

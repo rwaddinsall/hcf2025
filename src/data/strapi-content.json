@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-06-25T08:42:57.741Z",
+  "fetchedAt": "2025-06-25T10:22:10.377Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -21,47 +21,47 @@
       ]
     },
     {
-      "id": 13,
+      "id": 14,
       "documentId": "qo0ufcz4lvighw4jb3gkgui3",
       "createdAt": "2025-06-23T12:13:21.392Z",
-      "updatedAt": "2025-06-25T04:35:17.144Z",
-      "publishedAt": "2025-06-25T04:35:17.202Z",
+      "updatedAt": "2025-06-25T10:12:50.028Z",
+      "publishedAt": "2025-06-25T10:12:50.150Z",
       "heading": "Arrival, Weather, Food & Safety",
       "subheading": null,
       "slug": "arrival",
       "accordion": [
         {
-          "id": 35,
+          "id": 41,
           "category": "transport",
           "title": "Arrival & Parking",
           "details": "Camping and parking are separate unless you’ve purchased a car camping pass.\n\nThere’s no overnight loitering in the car park — once you’ve arrived, head to the campgrounds and get set up.\n\nIt’s a short walk from the car park to the campsites — a good chance to stretch your legs, haul your gear, and ease into it.\n\nIf you’re bringing a couch or marquee, you’ll need to leave a $50 deposit at check-in. Bring it back out with you and you’ll get the money back.\n\nLeave junk behind and will be banned from future events."
         },
         {
-          "id": 36,
+          "id": 42,
           "category": "general",
           "title": "Weather",
           "details": " Hopkins Creek weather is committed to the bit. Sun, hail, dust, mud — sometimes all in one day.\n\nCheck the forecast, but don’t trust it. Bring gear for every scenario. We’ve seen it all and we’re still standing."
         },
         {
-          "id": 37,
+          "id": 43,
           "category": "general",
           "title": "Food & Drink",
           "details": "There’ll be food vendors onsite all weekend serving up hot meals, snacks and caffeinated things.\n\nIce is available at the event.\n\nThere are no cash-out facilities on site, so get your cash sorted on Friday.\n\nHopkins is BYO-friendly — but pace yourself, and no glass.\n\nGrab a cocktail at Barry’s Bait Shop or swing past our newest bar, yet to be announced, if you’re feeling fancy.\n\nPlastic water bottles are banned. Bring your own reusable bottle or pick one up from the General Store. (Soft drinks and alcohol in plastic bottles are still allowed.)"
         },
         {
-          "id": 38,
+          "id": 44,
           "category": "general",
           "title": "Prohibited Items",
-          "details": "You bring these, we take them:\n\nIllegal substances\nNitrous oxide (nangs), Generators\nSound systems\nPets (service animals are allowed)\nFires\nFireworks\nGas cookers\nMini bikes\nGlass containers\nPlastic water bottles\nDoof sticks.\n\nWe’re a small event. You don’t need a 2-metre totem to find your mates. We will confiscate all doof sticks and totems at the event. "
+          "details": "You bring these, we take them:\n\n- Illegal substances\n- Nitrous oxide (nangs), Generators\n- Sound systems\n- Pets (service animals are allowed)\n- Fires\n- Fireworks\n- Gas cookers\n- Mini bikes\n- Glass containers\n- Plastic water bottles\n- Doof sticks\n- Walking sticks as fashion items - please respect those with accesibility requirements and leave these at home\n\nWe’re a small event. You don’t need a 2-metre totem to find your mates. We will confiscate all doof sticks and totems at the event. "
         },
         {
-          "id": 39,
+          "id": 45,
           "category": "general",
           "title": "Safety & Inclusivity",
-          "details": "Hopkins Creek is an inclusive space — zero judgement, zero harassment, zero discrimination.\n\nIf you see something off — say something. Chat to a staff member or head to the Info Tent. We’ll handle it.\n\nIf you're feeling unwell — physically, mentally, emotionally — visit the Wellbeing Tent.\n Our care crew is here for you, no questions asked. \n\nAt Hopkins, everyone’s your mate — whether you’ve met them yet or not.\n"
+          "details": "Hopkins Creek is an inclusive space — zero judgement, zero harassment, zero discrimination.\n\nIf you see something off — say something. Chat to a staff member or head to the Info Tent. We’ll handle it.\n\nIf you're feeling unwell — physically, mentally, emotionally — visit the Wellbeing Tent. Our care crew is here for you, no questions asked. \n\nAt Hopkins, everyone’s your mate — whether you’ve met them yet or not."
         },
         {
-          "id": 40,
+          "id": 46,
           "category": "general",
           "title": "Breath Testing",
           "details": "Back again doing the Lord’s work is Blow Me First — offering free breath testing, info and advice to all drivers.\n \nIf you’re unsure, don’t guess. \n\nGo see them. You’d be daft not to."
@@ -967,7 +967,7 @@
       "heading": "Accessibility"
     },
     {
-      "id": 13,
+      "id": 14,
       "documentId": "qo0ufcz4lvighw4jb3gkgui3",
       "slug": "arrival",
       "heading": "Arrival, Weather, Food & Safety"

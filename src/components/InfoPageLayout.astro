@@ -1,9 +1,9 @@
 ---
-import DefaultLayout from "../layouts/DefaultLayout.astro";
-import PageHeader from "./PageHeader.astro";
-import { Accordion, AccordionItem } from "accessible-astro-components";
-import { Icon } from "astro-icon/components";
-import { getInfoPageBySlug } from "../utils/static-content";
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import PageHeader from './PageHeader.astro';
+import { Accordion, AccordionItem } from 'accessible-astro-components';
+import { Icon } from 'astro-icon/components';
+import { getInfoPageBySlug } from '../utils/static-content';
 
 interface AccordionSection {
   title: string;
@@ -24,7 +24,7 @@ interface Props {
 
 const {
   slug,
-  backLink = { href: "/info", text: "Back to Festival Info" },
+  backLink = { href: '/info', text: 'Back to Festival Info' },
   fallbackHeading,
   fallbackSubheading,
   fallbackAccordion = [],
@@ -32,13 +32,13 @@ const {
 
 // Get data from static content
 const pageData = getInfoPageBySlug(slug);
-let pageHeading = fallbackHeading || "Information";
-let pageSubheading = fallbackSubheading || "";
+let pageHeading = fallbackHeading || 'Information';
+let pageSubheading = fallbackSubheading || '';
 let accordionSections = fallbackAccordion;
 
 if (pageData) {
-  pageHeading = pageData.heading || fallbackHeading || "Information";
-  pageSubheading = pageData.subheading || fallbackSubheading || "";
+  pageHeading = pageData.heading || fallbackHeading || 'Information';
+  pageSubheading = pageData.subheading || fallbackSubheading || '';
 
   // Use accordion data directly from static content
   if (pageData.accordion && pageData.accordion.length > 0) {
@@ -52,19 +52,19 @@ if (pageData) {
   description={pageSubheading ||
     `${pageHeading} information for Hopkins Creek Festival`}
 >
-  <section class="my-12">
+  <section class='my-12'>
     <PageHeader title={pageHeading} subtitle={pageSubheading} />
   </section>
 
-  <section class="my-12">
-    <div class="container">
-      <div class="space-content">
+  <section class='my-12'>
+    <div class='container'>
+      <div class='space-content'>
         {
           accordionSections && accordionSections.length > 0 && (
-            <Accordion>
+            <Accordion class='custom-accordion'>
               {accordionSections.map((section: AccordionSection) => (
                 <AccordionItem title={section.title}>
-                  <div class="space-content">
+                  <div class='space-content accordion-panel-content'>
                     <div set:html={section.details} />
                   </div>
                 </AccordionItem>
@@ -75,12 +75,12 @@ if (pageData) {
 
         <slot />
 
-        <div class="mb-8">
+        <div class='mb-8'>
           <a
             href={backLink.href}
-            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
+            class='inline-flex items-center gap-2 text-primary-500 hover:text-primary-600'
           >
-            <Icon name="lucide:arrow-left" size="20" />
+            <Icon name='lucide:arrow-left' size='20' />
             {backLink.text}
           </a>
         </div>
@@ -89,7 +89,7 @@ if (pageData) {
   </section>
 </DefaultLayout>
 
-<style lang="scss">
+<style lang='scss'>
   .space-content {
     h4 {
       font-weight: bold;
@@ -132,6 +132,43 @@ if (pageData) {
   @media (max-width: 48rem) {
     .space-content {
       padding: 0 var(--space-s);
+    }
+  }
+
+  .custom-accordion {
+    width: 100%;
+    text-align: left;
+    // Style the default trigger button (assume it is a button inside the accordion)
+    button {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-5xs) var(--space-s);
+      cursor: pointer;
+      border-radius: var(--radius-l);
+      border: 1px solid transparent;
+      background: transparent;
+      transition: var(--nav-transition);
+      color: var(--nav-text);
+      font-weight: 500;
+      font-size: inherit;
+      font-family: inherit;
+      margin: var(--space-2xs) 0;
+      gap: var(--space-s);
+      text-align: left;
+      &:hover,
+      &:focus-visible {
+        background: black;
+        color: white;
+        border-color: rgba(255,255,255,0.1);
+        outline: 2px solid var(--nav-accent);
+        outline-offset: 2px;
+      }
+    }
+    .accordion-panel-content {
+      padding: 1.5rem;
+      text-align: left;
     }
   }
 </style>

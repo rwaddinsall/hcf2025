@@ -177,31 +177,119 @@ artists.sort((a, b) => {
   /* Artist Item - Base Styling */
   .lineup-artist {
     position: relative;
-    white-space: normal; // allow wrapping
+    white-space: normal;
     opacity: 0;
     animation: fadeInUp 0.6s var(--cubic-bezier, ease) forwards;
     padding: var(--space-4xs) var(--space-3xs);
     border-radius: var(--radius-xs);
+    cursor: pointer; // Add cursor pointer for all artists
     transition:
       opacity var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
       transform var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
-      background-color var(--animation-speed-fast, 0.2s)
-        var(--cubic-bezier, ease);
+      background-color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
 
     @include breakpoint('xs') {
       white-space: normal;
     }
+
+    // Hover effects for ALL artists (whether they have links or not)
+    &:hover {
+      transform: translateY(-2px) scale(1.02);
+      
+      .artist-text {
+        color: var(--link-hover-color);
+        font-weight: 600;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      }
+      
+      .artist-annotation {
+        opacity: 1;
+        color: var(--link-hover-color);
+      }
+    }
+
+    // Focus styles for accessibility (when artist has a link)
+    &:has(.artist-link:focus-visible) {
+      .artist-text {
+        color: var(--link-hover-color);
+        font-weight: 600;
+      }
+      
+      .artist-annotation {
+        opacity: 1;
+        color: var(--link-hover-color);
+      }
+    }
   }
 
-  /* Grid Hover Effects */
+  /* Grid Hover Effects - Updated */
   .lineup-grid:hover .lineup-artist {
-    /* opacity: 0.3; */
+    opacity: 0.6; // Dim non-hovered artists
   }
 
   .lineup-grid:hover .lineup-artist:hover {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.02);
-  
+    opacity: 1; // Full opacity for hovered artist
+  }
+
+  /* Artist Text - Main Name */
+  .artist-text {
+    display: inline-block;
+    color: var(--foreground-color);
+    transition: 
+      color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      font-weight 0.2s var(--cubic-bezier, ease),
+      text-shadow 0.2s var(--cubic-bezier, ease);
+  }
+
+  /* Artist Link - Enhanced Styling (for artists with social links) */
+  .artist-link {
+    color: inherit;
+    text-decoration: none;
+    display: inline-block;
+    transition:
+      color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      text-decoration-color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
+    border-radius: var(--radius-xs);
+    padding: var(--space-5xs) var(--space-4xs);
+    margin: calc(var(--space-5xs) * -1) calc(var(--space-4xs) * -1);
+
+    &:where(:hover, :focus-visible) {
+      text-decoration: underline;
+      text-decoration-color: var(--link-hover-color);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.25em;
+      outline: 2px solid var(--link-hover-color);
+      outline-offset: 2px;
+    }
+
+    &:focus-visible {
+      outline-style: solid;
+      outline-width: 2px;
+    }
+  }
+
+  /* Artist Annotation - Metadata Styling */
+  .artist-annotation {
+    font-size: 0.6em;
+    font-weight: 300;
+    font-family: var(--font-heading);
+    margin-inline-start: var(--space-4xs);
+    opacity: 0.8;
+    color: var(--foreground-color);
+    vertical-align: super;
+    transition: 
+      opacity var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
+
+    @include breakpoint("m") {
+      font-size: 0.55em;
+      margin-inline-start: var(--space-3xs);
+    }
+
+    @include breakpoint("l") {
+      font-size: 0.5em;
+      margin-inline-start: var(--space-2xs);
+    }
   }
 
   /* Artist Name Typography */
@@ -229,81 +317,6 @@ artists.sort((a, b) => {
     }
   }
 
-  /* Artist Text - Main Name */
-  .artist-text {
-    display: inline-block;
-    color: var(--foreground-color);
-    transition: color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
-      font-weight 0.2s var(--cubic-bezier, ease),
-      text-shadow 0.2s var(--cubic-bezier, ease);
-  }
-
-  .lineup-artist:hover .artist-text {
-    font-weight: 600;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
-
-  /* Artist Link - Enhanced Styling */
-  .artist-link {
-    color: inherit;
-    text-decoration: none;
-    display: inline-block;
-    transition:
-      color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
-      text-decoration-color var(--animation-speed-fast, 0.2s)
-        var(--cubic-bezier, ease);
-    border-radius: var(--radius-xs);
-    padding: var(--space-5xs) var(--space-4xs);
-    margin: calc(var(--space-5xs) * -1) calc(var(--space-4xs) * -1);
-
-    &:where(:hover, :focus-visible) {
-      color: var(--link-hover-color);
-      text-decoration: underline;
-      text-decoration-color: var(--link-hover-color);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 0.25em;
-      outline: 2px solid var(--link-hover-color);
-      outline-offset: 2px;
-    }
-
-    &:focus-visible {
-      outline-style: solid;
-      outline-width: 2px;
-    }
-  }
-
-  /* Artist Annotation - Metadata Styling */
-  .artist-annotation {
-    font-size: 0.6em;
-    font-weight: 300;
-    font-family: var(--font-heading);
-    margin-inline-start: var(--space-4xs);
-    opacity: 0.8;
-    color: var(--foreground-color);
-    vertical-align: super;
-    transition: opacity var(--animation-speed-fast, 0.2s)
-      var(--cubic-bezier, ease);
-
-    @include breakpoint("m") {
-      font-size: 0.55em;
-      margin-inline-start: var(--space-3xs);
-    }
-
-    @include breakpoint("l") {
-      font-size: 0.5em;
-      margin-inline-start: var(--space-2xs);
-    }
-  }
-
-  /* Hover Enhancement for Annotations */
-  .artist-link:where(:hover, :focus-visible) .artist-annotation {
-    opacity: 1;
-  }
-
-  /* Dark Mode Support for Hover Effects */
-  :global(.darkmode) .lineup-grid:hover .lineup-artist:hover {
-    background-color: var(--color-neutral-800);
-  }
 
   /* Animation Keyframes */
   @keyframes fadeInUp {

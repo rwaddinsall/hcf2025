@@ -1,11 +1,23 @@
 ---
-import DefaultLayout from "../layouts/DefaultLayout.astro";
-import PageHeader from "../components/PageHeader.astro";
-import Feature from "../components/Feature.astro";
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import Feature from '../components/Feature.astro';
+import { getAllInfoPages } from '../utils/static-content';
 
-// Demo data - replace with Strapi data when available
-const pageTitle = "Festival Information";
-const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
+const pageTitle = 'Festival Information';
+const pageSubtitle = 'Everything you need to know about Hopkins Creek Festival';
+
+// Get all available info pages from Strapi content
+const infoPages = getAllInfoPages();
+
+// Create icon mapping for different page types based on slug
+const iconMapping: Record<string, string> = {
+  'camping-accomodation': 'lucide:tent',
+  'accessibility': 'mdi:wheelchair-accessibility',
+  'ticketing-info': 'mdi:ticket',
+  'arrival': 'mdi:car',
+  'info-page': 'mdi:map', // Travel & Entry
+};
 ---
 
 <DefaultLayout title={pageTitle}>
@@ -14,53 +26,16 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
   <section class="my-12">
     <div class="container">
       <div class="info-grid">
-        <Feature icon="lucide:tent" title="Camping & Accommodation">
-          <p>
-            <a href="/info/camping" class="feature-link"
-              >Learn more about camping →</a
+        {infoPages.map((page) => (
+          <a href={`/info/${page.slug}`} class="info-card-link">
+            <Feature 
+              icon={iconMapping[page.slug] || 'mdi:information-outline'} 
+              title={page.heading}
             >
-          </p>
-        </Feature>
-
-        <Feature icon="mdi:bed" title="The Motor Inn">
-          <p>
-            <a href="/info/motor-inn" class="feature-link"
-              >Explore Motor Inn packages →</a
-            >
-          </p>
-        </Feature>
-
-        <Feature icon="mdi:wheelchair-accessibility" title="Accessibility">
-          <p>
-            <a href="/info/accessibility" class="feature-link"
-              >View accessibility info →</a
-            >
-          </p>
-        </Feature>
-
-        <Feature icon="mdi:ticket" title="Tickets & Pricing">
-          <p>
-            <a href="/info/tickets" class="feature-link"
-              >View ticket options →</a
-            >
-          </p>
-        </Feature>
-
-        <Feature icon="mdi:car" title="Getting There">
-          <p>
-            <a href="/info/getting-there" class="feature-link"
-              >Plan your journey →</a
-            >
-          </p>
-        </Feature>
-
-        <Feature icon="mdi:food" title="Food & Beverages">
-          <p>
-            <a href="/info/food-beverages" class="feature-link"
-              >Explore food options →</a
-            >
-          </p>
-        </Feature>
+              <p>Learn more →</p>
+            </Feature>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -79,42 +54,39 @@ const pageSubtitle = "Everything you need to know about Hopkins Creek Festival";
     }
   }
 
+  // Style the card link wrapper
+  :global(.info-card-link) {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+
+    &:focus {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: var(--radius-l);
+    }
+  }
+
   // Target the Feature components to ensure consistent height
-  :global(.info-grid > .feature) {
+  :global(.info-grid > .info-card-link > .feature) {
     display: flex;
     flex-direction: column;
     min-height: 200px;
+    height: 100%;
   }
 
   // Ensure content fills the available space
-  :global(.info-grid > .feature .content) {
+  :global(.info-grid > .info-card-link > .feature .content) {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-  // Push links to bottom
-  :global(.info-grid > .feature .content > p:last-child) {
+  // Style the "Learn more" text
+  :global(.info-card-link .feature .content p) {
     margin-top: auto;
-  }
-
-  :global(.feature-link) {
-    display: inline-flex;
-    align-items: center;
-    margin-top: var(--space-s);
-    color: var(--color-primary);
-    text-decoration: none;
     font-weight: var(--font-weight-medium);
-    transition: all var(--animation-speed-fast) var(--cubic-bezier);
-
-    &:hover {
-      color: var(--color-primary-dark);
-      transform: translateX(4px);
-    }
-
-    &:focus {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
+    opacity: 0.8;
   }
 </style>

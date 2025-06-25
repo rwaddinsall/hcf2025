@@ -313,6 +313,7 @@ const {
     height: 100%;
     align-items: center;
     animation: scroll var(--scroll-duration) linear infinite;
+    color: var(--color-neutral-900); // Ensure text is black
 
     // Smooth font rendering during animation
     will-change: transform;
@@ -326,6 +327,7 @@ const {
     white-space: nowrap;
     flex-shrink: 0;
     padding-right: var(--space-xl);
+    color: var(--color-neutral-900); // Ensure text is black
 
     // Adjust spacing on mobile - using direct media query since breakpoint mixin only supports min-width
     @media (max-width: 480px) {
@@ -373,5 +375,9 @@ const {
     }
   }
 
-  // Dark mode adjustments handled automatically via CSS custom properties
+  // Ensure black text in all modes (including dark mode)
+  :global(.darkmode) .scrolling-text,
+  :global(.darkmode) .scrolling-text__item {
+    color: var(--color-neutral-900) !important;
+  }
 </style>

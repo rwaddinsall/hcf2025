@@ -5,7 +5,7 @@ import {
   BreadcrumbsItem,
 } from 'accessible-astro-components';
 import { Image } from 'astro:assets';
-import sanitizeHtml from 'sanitize-html';
+import { renderSafeContent } from '../utils/renderContent';
 
 /**
  * PageHeader Component
@@ -62,13 +62,7 @@ const {
 
 // Sanitize subtitle HTML if present
 const sanitizedSubtitle: string = subtitle
-  ? sanitizeHtml(subtitle, {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'span', 'br'],
-      allowedAttributes: {
-        a: ['href', 'title', 'target', 'rel'],
-        span: ['class'],
-      },
-    })
+  ? renderSafeContent(subtitle)
   : '';
 ---
 

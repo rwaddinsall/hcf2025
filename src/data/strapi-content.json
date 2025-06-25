@@ -1,22 +1,22 @@
 {
-  "fetchedAt": "2025-06-25T12:01:41.302Z",
+  "fetchedAt": "2025-06-25T14:11:08.180Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
-      "id": 22,
+      "id": 24,
       "documentId": "i3jd5wv2lnaayub65ccbr73i",
       "createdAt": "2025-06-25T04:24:47.109Z",
-      "updatedAt": "2025-06-25T11:05:25.444Z",
-      "publishedAt": "2025-06-25T11:05:25.503Z",
+      "updatedAt": "2025-06-25T12:32:13.248Z",
+      "publishedAt": "2025-06-25T12:32:13.331Z",
       "heading": "Accessibility",
       "subheading": "Hopkins Creek is committed to creating an inclusive and accessible event for all attendees. We’re currently working on making the festival experience safer, easier and more enjoyable for everyone.",
       "slug": "accessibility",
       "accordion": [
         {
-          "id": 97,
+          "id": 104,
           "category": "general",
           "title": "Accessibility Information",
-          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\n- Accessible parking close to entry\n- Accessible camping (location, terrain, quiet zones)\n- Stage and viewing accessibility\n- Accessible toilets\n- Charging stations for mobility devices\n- Guide dog access\n- Low sensory areas\n- Local accommodation recommendations\n- Dietary needs and clear food labelling\n- Large print or plain text versions of materials\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com"
+          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\n**- Accessible parking close to entry\n- Accessible camping (location, terrain, quiet zones)\n- Stage and viewing accessibility\n- Accessible toilets\n- Charging stations for mobility devices\n- Guide dog access\n- Low sensory areas\n- Local accommodation recommendations\n- Dietary needs and clear food labelling\n- Large print or plain text versions of materials**\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com"
         }
       ]
     },
@@ -247,17 +247,17 @@
       "image": null
     },
     {
-      "id": 12,
+      "id": 126,
       "documentId": "y8efijmlidtl5jo4ua6vl8ek",
       "name": "Bait Shop Boys",
       "isLive": false,
       "country": null,
       "bio": null,
-      "socialLink": null,
+      "socialLink": "https://www.instagram.com/lunaticmusiccc/?hl=en",
       "displayOrder": 5,
       "createdAt": "2025-06-18T20:48:18.383Z",
-      "updatedAt": "2025-06-18T20:48:18.383Z",
-      "publishedAt": "2025-06-18T20:48:18.421Z",
+      "updatedAt": "2025-06-25T13:19:09.929Z",
+      "publishedAt": "2025-06-25T13:19:09.971Z",
       "image": null
     },
     {
@@ -583,20 +583,6 @@
       "image": null
     },
     {
-      "id": 66,
-      "documentId": "laqhujle0geahm1s31l6f64z",
-      "name": "Magda Bytnerowicz",
-      "isLive": false,
-      "country": null,
-      "bio": null,
-      "socialLink": null,
-      "displayOrder": 29,
-      "createdAt": "2025-06-18T21:04:25.498Z",
-      "updatedAt": "2025-06-18T21:04:26.772Z",
-      "publishedAt": "2025-06-18T21:04:26.816Z",
-      "image": null
-    },
-    {
       "id": 64,
       "documentId": "nhr7w6r8re15xd9us2yx7nat",
       "name": "Lunatic Music DJ's",
@@ -608,6 +594,20 @@
       "createdAt": "2025-06-18T21:02:56.380Z",
       "updatedAt": "2025-06-18T21:02:57.649Z",
       "publishedAt": "2025-06-18T21:02:57.670Z",
+      "image": null
+    },
+    {
+      "id": 66,
+      "documentId": "laqhujle0geahm1s31l6f64z",
+      "name": "Magda Bytnerowicz",
+      "isLive": false,
+      "country": null,
+      "bio": null,
+      "socialLink": null,
+      "displayOrder": 29,
+      "createdAt": "2025-06-18T21:04:25.498Z",
+      "updatedAt": "2025-06-18T21:04:26.772Z",
+      "publishedAt": "2025-06-18T21:04:26.816Z",
       "image": null
     },
     {
@@ -737,20 +737,6 @@
       "image": null
     },
     {
-      "id": 90,
-      "documentId": "bipytceor15je8vsn8rxo1i8",
-      "name": "PLO Man & Hashman Deejay",
-      "isLive": false,
-      "country": "CAN",
-      "bio": null,
-      "socialLink": null,
-      "displayOrder": 39,
-      "createdAt": "2025-06-18T21:10:15.006Z",
-      "updatedAt": "2025-06-18T21:10:16.283Z",
-      "publishedAt": "2025-06-18T21:10:16.314Z",
-      "image": null
-    },
-    {
       "id": 86,
       "documentId": "vpovck2g3djnf17wutinoz4v",
       "name": "Ones ",
@@ -762,6 +748,20 @@
       "createdAt": "2025-06-18T21:09:32.138Z",
       "updatedAt": "2025-06-18T21:09:34.429Z",
       "publishedAt": "2025-06-18T21:09:34.465Z",
+      "image": null
+    },
+    {
+      "id": 90,
+      "documentId": "bipytceor15je8vsn8rxo1i8",
+      "name": "PLO Man & Hashman Deejay",
+      "isLive": false,
+      "country": "CAN",
+      "bio": null,
+      "socialLink": null,
+      "displayOrder": 39,
+      "createdAt": "2025-06-18T21:10:15.006Z",
+      "updatedAt": "2025-06-18T21:10:16.283Z",
+      "publishedAt": "2025-06-18T21:10:16.314Z",
       "image": null
     },
     {
@@ -1009,7 +1009,7 @@
   "applicationsPage": null,
   "infoPagesForNavigation": [
     {
-      "id": 22,
+      "id": 24,
       "documentId": "i3jd5wv2lnaayub65ccbr73i",
       "slug": "accessibility",
       "heading": "Accessibility"

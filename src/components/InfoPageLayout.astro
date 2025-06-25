@@ -4,7 +4,7 @@ import PageHeader from './PageHeader.astro';
 import { Accordion, AccordionItem } from 'accessible-astro-components';
 import { Icon } from 'astro-icon/components';
 import { getInfoPageBySlug } from '../utils/static-content';
-import sanitizeHtml from 'sanitize-html';
+import { renderSafeContent } from '../utils/renderContent';
 
 interface AccordionSection {
   title: string;
@@ -45,14 +45,15 @@ if (pageData) {
   if (pageData.accordion && pageData.accordion.length > 0) {
     accordionSections = pageData.accordion.map((section) => ({
       ...section,
-      details: sanitizeHtml(section.details, {
-        allowedTags: ['h2', 'h3', 'b', 'i', 'em', 'strong', 'p', 'ul', 'li', 'a'],
-        allowedAttributes: {
-          a: ['href', 'title', 'target', 'rel'],
-        },
-      }),
+      details: renderSafeContent(section.details),
     }));
   }
+} else if (fallbackAccordion.length > 0) {
+  // Also process fallback accordion sections
+  accordionSections = fallbackAccordion.map((section) => ({
+    ...section,
+    details: renderSafeContent(section.details),
+  }));
 }
 ---
 

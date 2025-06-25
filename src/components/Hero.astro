@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import HeroHeading from '@assets/images/projects/HeroHeading.svg';
-// import HeroGallery from '@components/HeroGallery.astro';
+import HeroGallery from '@components/HeroGallery.astro';
 
 /**
  * Hero Section Component
@@ -11,7 +11,7 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
 ---
 
 <section class="hero-section">
-  <div class="container hero-container">
+  <div class="hero-container">
     <Image
       src={HeroHeading}
       alt="Hopkins Creek Festival logo"
@@ -19,61 +19,64 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
       quality="high"
       class="hero-heading"
     />
-    <!-- <HeroGallery /> -->
+    <HeroGallery />
   </div>
 
   <style lang="scss">
     @use "../assets/scss/base/breakpoint" as *;
 
     .hero-section {
-      // Use design system container pattern
+      // Simplified container pattern
       max-width: var(--grid-max-width);
       margin: 0 auto;
       width: 100%;
-      // Responsive padding - mobile first approach
-      padding-inline: var(--space-s); // Minimum padding for very small screens
-      padding-top: var(--space-s); // or a custom value like 1rem
-      padding-bottom: var(--space-l); // keep as is or adjust as needed
+      
+      // Reduced top padding to move hero up, maintain bottom padding for proper spacing
+      padding-inline: var(--space-s);
+      padding-block-start: var(--space-xs);
+      padding-block-end: var(--space-l);
 
       @include breakpoint("xs") {
-        padding-inline: var(--space-m); // Slightly more padding on 320px+
-        padding-top: var(--space-m);
-        padding-bottom: var(--space-xl);
+        padding-inline: var(--space-m);
+        padding-block-start: var(--space-s);
+        padding-block-end: var(--space-xl);
       }
 
       @include breakpoint("s") {
-        padding-inline: var(--grid-gutter); // Use grid gutter on larger screens
+        padding-inline: var(--grid-gutter);
+        padding-block-start: var(--space-m);
       }
 
       @include breakpoint("m") {
-        padding-top: var(--space-l);
-        padding-bottom: var(--space-2xl);
+        padding-block-start: var(--space-l);
+        padding-block-end: var(--space-2xl);
       }
 
       @include breakpoint("l") {
-        padding-top: var(--space-xl);
-        padding-bottom: var(--space-3xl);
+        padding-block-start: var(--space-xl);
+        padding-block-end: var(--space-3xl);
       }
     }
 
-    .container hero-container {
-      // Layout using design system patterns
+    .hero-container {
+      // Clean flexbox layout
       display: flex;
       flex-direction: column;
       align-items: center;
-      // Responsive gap - smaller on very small screens
-      gap: var(--space-m);
+      
+      // Consistent gap system - more balanced progression
+      gap: var(--space-l);
 
       @include breakpoint("xs") {
-        gap: var(--space-l); // 320px+ more gap
+        gap: var(--space-xl);
       }
 
       @include breakpoint("s") {
-        gap: var(--space-xl); // 480px+ normal gap
+        gap: var(--space-2xl);
       }
 
       @include breakpoint("l") {
-        gap: var(--space-2xl); // 1024px+ maximum gap
+        gap: var(--space-2xl);
       }
     }
 
@@ -81,19 +84,18 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
       width: 100%;
       height: auto;
       display: block;
-      margin-inline: auto;
+      
+      // Match the gallery's container width and gutter for perfect alignment
+      max-width: var(--container-max-width);
+      margin: 0 auto;
+      padding-inline: var(--container-gutter);
+      padding-block: var(--space-m);
+      padding-top: var(--space-l);
       
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
       animation: fadeInUp var(--animation-speed-medium) var(--cubic-bezier);
       animation-fill-mode: both;
-      // Larger on small screens
-      @include breakpoint("xs") {
-        max-width: 90vw;
-      }
-      @include breakpoint("s") {
-        max-width: 80vw;
-      }
     }
 
     // Animations using design system spacing

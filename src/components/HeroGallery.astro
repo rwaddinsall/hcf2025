@@ -1,5 +1,6 @@
 ---
-import heroGalleryVideo from "@assets/HC25-Pokie-No-Shadows-1.mp4";
+// Video served from public directory for better performance with large files
+const heroGalleryVideo = '/video/HC25-Pokie-2.0.mp4';
 
 /**
  * Hero Gallery Component
@@ -31,44 +32,46 @@ interface Props {
   /**
    * Loading strategy for the video
    */
-  loading?: "lazy" | "eager";
+  loading?: 'lazy' | 'eager';
 }
 
 const {
-  class: className = "",
+  class: className = '',
   autoplay = true,
   muted = true,
   loop = true,
-  title = "Hopkins Creek Festival showcase video",
-  loading = "lazy",
+  title = 'Hopkins Creek Festival showcase video',
+  loading = 'lazy',
 } = Astro.props;
 ---
 
-<section class={`hero-gallery ${className}`} aria-labelledby="gallery-heading">
-  <div class="hero-gallery__container">
-    <h2 id="gallery-heading" class="visually-hidden">Festival Video Gallery</h2>
+<div class={`hero-gallery-wrapper ${className}`}>
+  <section class="hero-gallery" aria-labelledby="gallery-heading">
+    <div class="hero-gallery__container">
+      <h2 id="gallery-heading" class="visually-hidden">Festival Video Gallery</h2>
 
-    <div class="hero-gallery__video-wrapper">
-      <video
-        src={heroGalleryVideo}
-        autoplay={autoplay && muted}
-        muted={muted}
-        loop={loop}
-        playsinline
-        preload={loading === "eager" ? "auto" : "metadata"}
-        class="hero-gallery__video"
-        aria-label={title}
-        title={title}
-      >
-        <source src={heroGalleryVideo} type="video/mp4" />
-        <p>
-          Your browser does not support the video tag.
-          <a href={heroGalleryVideo} download>Download the video</a> instead.
-        </p>
-      </video>
+      <div class="hero-gallery__video-wrapper">
+        <video
+          src={heroGalleryVideo}
+          autoplay={autoplay && muted}
+          muted={muted}
+          loop={loop}
+          playsinline
+          preload={loading === 'eager' ? 'auto' : 'metadata'}
+          class="hero-gallery__video"
+          aria-label={title}
+          title={title}
+        >
+          <source src={heroGalleryVideo} type="video/mp4" />
+          <p>
+            Your browser does not support the video tag.
+            <a href={heroGalleryVideo} download>Download the video</a> instead.
+          </p>
+        </video>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</div>
 
 <script>
   // Accessibility enhancement for reduced motion preference
@@ -116,27 +119,45 @@ const {
     @include sr-only;
   }
 
+  .hero-gallery-wrapper {
+    // Wrapper provides consistent container behavior
+    width: 100%;
+    max-width: var(--grid-max-width);
+    margin: 0 auto;
+  }
+
   .hero-gallery {
-    padding: var(--space-lg) var(--space-md);
+    // Remove padding - let parent Hero component control spacing
+    // This ensures equal spacing around the gallery as controlled by Hero's gap system
+    width: 100%;
 
     &__container {
-      max-width: var(--container-max-width);
-      margin: 0 auto;
       width: 100%;
-      padding-inline: var(--container-gutter);
+      // Use design system variables instead of undefined container variables
+      padding-inline: calc(var(--grid-gutter) + var(--space-l));
+      
+      // Responsive padding adjustments
+      @media (max-width: 767px) {
+        padding-inline: var(--grid-gutter);
+      }
+      
+      @media (max-width: 479px) {
+        padding-inline: var(--space-m);
+      }
     }
 
     &__video-wrapper {
       position: relative;
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-large);
       overflow: hidden;
-
+      
+      // Enhanced responsive border radius using design system
       @media (max-width: 767px) {
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-large);
       }
 
       @media (max-width: 479px) {
-        border-radius: var(--radius-sm);
+        border-radius: var(--radius-small);
       }
     }
 
@@ -151,12 +172,12 @@ const {
 
   // Large screens optimization
   @media (min-width: 1024px) {
-    .hero-gallery {
-      padding: var(--space-xl) var(--space-lg);
-    }
-
     .hero-gallery__video-wrapper {
-      border-radius: var(--radius-xl);
+      border-radius: var(--radius-large);
+    }
+    
+    .hero-gallery__container {
+      padding-inline: calc(var(--grid-gutter) + var(--space-2xl));
     }
   }
 </style>

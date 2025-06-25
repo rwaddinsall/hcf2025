@@ -32,11 +32,13 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
       width: 100%;
       // Responsive padding - mobile first approach
       padding-inline: var(--space-s); // Minimum padding for very small screens
-      padding-block: var(--space-l); // Reduced padding for small screens
+      padding-top: var(--space-s); // or a custom value like 1rem
+      padding-bottom: var(--space-l); // keep as is or adjust as needed
 
       @include breakpoint("xs") {
         padding-inline: var(--space-m); // Slightly more padding on 320px+
-        padding-block: var(--space-xl);
+        padding-top: var(--space-m);
+        padding-bottom: var(--space-xl);
       }
 
       @include breakpoint("s") {
@@ -44,11 +46,13 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
       }
 
       @include breakpoint("m") {
-        padding-block: var(--space-2xl);
+        padding-top: var(--space-l);
+        padding-bottom: var(--space-2xl);
       }
 
       @include breakpoint("l") {
-        padding-block: var(--space-3xl);
+        padding-top: var(--space-xl);
+        padding-bottom: var(--space-3xl);
       }
     }
 

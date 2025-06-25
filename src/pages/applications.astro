@@ -1,19 +1,143 @@
 ---
-// import DefaultLayout from '../../layouts/DefaultLayout.astro'
-// Update the import path below if the layout file exists elsewhere:
+/**
+ * Applications Page
+ *
+ * @description Applications information page that fetches content from Strapi
+ * with comprehensive fallbacks for when content is not available
+ */
 import PageHeader from "../components/PageHeader.astro";
 import DefaultLayout from "../layouts/DefaultLayout.astro";
 import { Icon } from "astro-icon/components";
-
 import { Accordion, AccordionItem } from "accessible-astro-components";
+import { getApplicationsPage } from "../utils/static-content";
+
+// Fetch applications page content from Strapi
+let applicationsPageData = null;
+
+try {
+  applicationsPageData = getApplicationsPage();
+} catch (error) {
+  console.warn(
+    "Failed to fetch applications page content from static content. Using fallback content.",
+    error instanceof Error ? error.message : String(error)
+  );
+  // Gracefully handle error - component will use fallback content
+}
+
+// Comprehensive fallback content
+const fallbackContent = {
+  Header: {
+    title: "Applications",
+    subheading:
+      "Information about workshop applications, visual artist applications, and volunteer opportunities.",
+  },
+  Body: {
+    Content:
+      "Find information about applying for workshops, visual arts exhibitions, and volunteer opportunities at Hopkins Creek Festival.",
+  },
+  FAQ: [
+    {
+      accordions: [
+        {
+          title: "Workshops (Deadline: Sept 23)",
+          details: `<div class="space-content">
+            <p>Apply to lead workshops and educational sessions at Hopkins Creek Festival.</p>
+            <h4>Workshop Types:</h4>
+            <ul class="list-disc list-inside">
+              <li>Music production and recording</li>
+              <li>Instrument building and repair</li>
+              <li>Songwriting and composition</li>
+              <li>Performance techniques</li>
+              <li>Music business and industry</li>
+            </ul>
+            <h4>Application Requirements:</h4>
+            <ul class="list-disc list-inside">
+              <li>Detailed workshop description and objectives</li>
+              <li>Biography and relevant experience</li>
+              <li>Equipment and space requirements</li>
+              <li>Expected participant capacity</li>
+            </ul>
+            <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
+              <p class="text-red-800">
+                <strong>Deadline:</strong> All workshop applications must be submitted by September 23, 2025.
+              </p>
+            </div>
+          </div>`,
+          category: "applications",
+        },
+        {
+          title: "Visual Artists (Deadline: Sept 23)",
+          details: `<div class="space-content">
+            <p>Join our visual arts program and showcase your work at the festival.</p>
+            <h4>Art Categories:</h4>
+            <ul class="list-disc list-inside">
+              <li>Paintings and drawings</li>
+              <li>Sculptures and installations</li>
+              <li>Photography exhibitions</li>
+              <li>Digital and multimedia art</li>
+              <li>Craft and handmade goods</li>
+            </ul>
+            <h4>What We Provide:</h4>
+            <ul class="list-disc list-inside">
+              <li>Exhibition space in art village</li>
+              <li>Basic display materials</li>
+              <li>Security for artwork</li>
+              <li>Promotional support</li>
+            </ul>
+            <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
+              <p class="text-red-800">
+                <strong>Deadline:</strong> Visual artist applications close September 23, 2025.
+              </p>
+            </div>
+          </div>`,
+          category: "applications",
+        },
+        {
+          title: "Volunteers (Closed)",
+          details: `<div class="space-content">
+            <p>Thank you for your interest in volunteering at Hopkins Creek Festival.</p>
+            <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+              <p class="text-gray-800">
+                <strong>Status:</strong> Volunteer applications for this year's festival are now closed. We have received an overwhelming response and have filled all available positions.
+              </p>
+            </div>
+            <h4>Next Year:</h4>
+            <ul class="list-disc list-inside">
+              <li>Volunteer applications for 2026 will open in early 2025</li>
+              <li>Join our mailing list to be notified when applications open</li>
+              <li>Follow us on social media for updates</li>
+            </ul>
+            <h4>Volunteer Benefits (for future reference):</h4>
+            <ul class="list-disc list-inside">
+              <li>Free festival entry</li>
+              <li>Volunteer t-shirt and merchandise</li>
+              <li>Access to volunteer-only areas</li>
+              <li>Meals during shifts</li>
+              <li>Post-festival volunteer party</li>
+            </ul>
+          </div>`,
+          category: "applications",
+        },
+      ],
+    },
+  ],
+};
+
+// Use Strapi content if available, otherwise use fallback
+const pageContent = applicationsPageData || fallbackContent;
+const headerData = pageContent.Header || fallbackContent.Header;
+const faqData = pageContent.FAQ || fallbackContent.FAQ;
+
+// Ensure we have valid data with proper types
+const pageTitle = headerData.title || "Applications";
+const pageSubtitle =
+  headerData.subheading ||
+  "Information about workshop applications, visual artist applications, and volunteer opportunities.";
 ---
 
 <DefaultLayout title="Applications - Hopkins Creek Festival">
   <section class="my-12">
-    <PageHeader
-      title="Applications"
-      subtitle="Information about workshop applications, visual artist applications, and volunteer opportunities."
-    />
+    <PageHeader title={pageTitle} subtitle={pageSubtitle} />
   </section>
 
   <section class="my-12">
@@ -30,97 +154,15 @@ import { Accordion, AccordionItem } from "accessible-astro-components";
         </div>
 
         <Accordion>
-          <AccordionItem title="Workshops (Deadline: Sept 23)">
-            <div class="space-content">
-              <p>
-                Apply to lead workshops and educational sessions at Hopkins
-                Creek Festival.
-              </p>
-              <h4>Workshop Types:</h4>
-              <ul class="list-disc list-inside">
-                <li>Music production and recording</li>
-                <li>Instrument building and repair</li>
-                <li>Songwriting and composition</li>
-                <li>Performance techniques</li>
-                <li>Music business and industry</li>
-              </ul>
-              <h4>Application Requirements:</h4>
-              <ul class="list-disc list-inside">
-                <li>Detailed workshop description and objectives</li>
-                <li>Biography and relevant experience</li>
-                <li>Equipment and space requirements</li>
-                <li>Expected participant capacity</li>
-              </ul>
-              <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
-                <p class="text-red-800">
-                  <strong>Deadline:</strong> All workshop applications must be submitted
-                  by September 23, 2024.
-                </p>
-              </div>
-            </div>
-          </AccordionItem>
-
-          <AccordionItem title="Visual Artists (Deadline: Sept 23)">
-            <div class="space-content">
-              <p>
-                Join our visual arts program and showcase your work at the
-                festival.
-              </p>
-              <h4>Art Categories:</h4>
-              <ul class="list-disc list-inside">
-                <li>Paintings and drawings</li>
-                <li>Sculptures and installations</li>
-                <li>Photography exhibitions</li>
-                <li>Digital and multimedia art</li>
-                <li>Craft and handmade goods</li>
-              </ul>
-              <h4>What We Provide:</h4>
-              <ul class="list-disc list-inside">
-                <li>Exhibition space in art village</li>
-                <li>Basic display materials</li>
-                <li>Security for artwork</li>
-                <li>Promotional support</li>
-              </ul>
-              <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
-                <p class="text-red-800">
-                  <strong>Deadline:</strong> Visual artist applications close September
-                  23, 2024.
-                </p>
-              </div>
-            </div>
-          </AccordionItem>
-
-          <AccordionItem title="Volunteers (Closed)">
-            <div class="space-content">
-              <p>
-                Thank you for your interest in volunteering at Hopkins Creek
-                Festival.
-              </p>
-              <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
-                <p class="text-gray-800">
-                  <strong>Status:</strong> Volunteer applications for this year's
-                  festival are now closed. We have received an overwhelming response
-                  and have filled all available positions.
-                </p>
-              </div>
-              <h4>Next Year:</h4>
-              <ul class="list-disc list-inside">
-                <li>Volunteer applications for 2026 will open in early 2025</li>
-                <li>
-                  Join our mailing list to be notified when applications open
-                </li>
-                <li>Follow us on social media for updates</li>
-              </ul>
-              <h4>Volunteer Benefits (for future reference):</h4>
-              <ul class="list-disc list-inside">
-                <li>Free festival entry</li>
-                <li>Volunteer t-shirt and merchandise</li>
-                <li>Access to volunteer-only areas</li>
-                <li>Meals during shifts</li>
-                <li>Post-festival volunteer party</li>
-              </ul>
-            </div>
-          </AccordionItem>
+          {
+            faqData.flatMap((section) =>
+              (section.accordions || []).map((accordion) => (
+                <AccordionItem title={accordion.title}>
+                  <div set:html={accordion.details} />
+                </AccordionItem>
+              ))
+            )
+          }
         </Accordion>
       </div>
     </div>

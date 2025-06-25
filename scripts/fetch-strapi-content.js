@@ -81,6 +81,7 @@ async function fetchAllContent() {
     scrollingHeaderText: null,
     acknowledgementOfCountry: null,
     bigLink: null,
+    applicationsPage: null, // Add applications page
 
     // Navigation helpers
     infoPagesForNavigation: [],
@@ -140,7 +141,17 @@ async function fetchAllContent() {
       content.bigLink = bigLink.data
     }
 
-    // 7. General Pages (known to return 404, but included for compatibility)
+    // 7. Applications Page
+    const applicationsPage = await fetchFromStrapi('applications-page', {
+      'populate[Header]': '*',
+      'populate[Body]': '*',
+      'populate[FAQ][populate][accordions]': '*',
+    })
+    if (applicationsPage?.data) {
+      content.applicationsPage = applicationsPage.data
+    }
+
+    // 8. General Pages (known to return 404, but included for compatibility)
     const generalPages = await fetchFromStrapi('general-pages', {
       'filters[publishedAt][$notNull]': 'true',
       fields: 'slug,title',
@@ -178,6 +189,7 @@ function saveContent(content) {
     console.log(`   Scrolling Header: ${content.scrollingHeaderText ? '✅' : '❌'}`)
     console.log(`   Acknowledgement: ${content.acknowledgementOfCountry ? '✅' : '❌'}`)
     console.log(`   Big Link: ${content.bigLink ? '✅' : '❌'}`)
+    console.log(`   Applications Page: ${content.applicationsPage ? '✅' : '❌'}`)
     console.log(`   General Pages: ${content.generalPagesForFooter.length}`)
   } catch (error) {
     console.error('\n❌ Error saving content:', error)

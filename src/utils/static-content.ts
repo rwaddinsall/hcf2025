@@ -16,6 +16,7 @@ import type {
   Artist,
   ScrollingHeaderText,
   AcknowledgementOfCountry,
+  ApplicationsPage,
 } from "../interfaces/strapi";
 
 // Type-safe access to static content
@@ -27,6 +28,7 @@ const content = staticContent as {
   scrollingHeaderText: ScrollingHeaderText | null;
   acknowledgementOfCountry: AcknowledgementOfCountry | null;
   bigLink: any | null;
+  applicationsPage?: ApplicationsPage | null;
   infoPagesForNavigation: Pick<
     InfoPage,
     "id" | "documentId" | "slug" | "heading"
@@ -94,6 +96,14 @@ export function getAcknowledgementOfCountry(): AcknowledgementOfCountry | null {
 
 export function getBigLinkData(): any | null {
   return content.bigLink;
+}
+
+/**
+ * Applications Page Functions
+ */
+
+export function getApplicationsPage(): ApplicationsPage | null {
+  return content.applicationsPage || null;
 }
 
 /**

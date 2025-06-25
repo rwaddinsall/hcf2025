@@ -32,29 +32,29 @@ import HeroGallery from '@components/HeroGallery.astro';
       width: 100%;
       
       // Reduced top padding to move hero up, maintain bottom padding for proper spacing
-      padding-inline: var(--space-s);
-      padding-block-start: var(--space-xs);
-      padding-block-end: var(--space-l);
+      padding-inline: var(--space-xs);
+      padding-block-start: 0; // Remove top padding for tighter spacing with nav
+      padding-block-end: var(--space-m);
 
       @include breakpoint("xs") {
         padding-inline: var(--space-m);
-        padding-block-start: var(--space-s);
+        padding-block-start: 0; // Keep minimal top spacing
         padding-block-end: var(--space-xl);
       }
 
       @include breakpoint("s") {
         padding-inline: var(--grid-gutter);
-        padding-block-start: var(--space-m);
+        padding-block-start: var(--space-xs); // Minimal top spacing
       }
 
       @include breakpoint("m") {
-        padding-block-start: var(--space-l);
+        padding-block-start: var(--space-s); // Reduced from space-l
         padding-block-end: var(--space-2xl);
       }
 
       @include breakpoint("l") {
-        padding-block-start: var(--space-xl);
-        padding-block-end: var(--space-3xl);
+        padding-block-start: var(--space-m); // Reduced from space-xl
+        padding-block-end: var(--space-2xl);
       }
     }
 
@@ -64,19 +64,19 @@ import HeroGallery from '@components/HeroGallery.astro';
       flex-direction: column;
       align-items: center;
       
-      // Consistent gap system - more balanced progression
-      gap: var(--space-l);
+      // Consistent gap system - reduced for tighter spacing between heading and video
+      gap: var(--space-m); // Reduced from space-l
 
       @include breakpoint("xs") {
-        gap: var(--space-xl);
+        gap: var(--space-l); // Reduced from space-xl
       }
 
       @include breakpoint("s") {
-        gap: var(--space-2xl);
+        gap: var(--space-xl); // Reduced from space-2xl
       }
 
       @include breakpoint("l") {
-        gap: var(--space-2xl);
+        gap: var(--space-xl); // Reduced from space-2xl
       }
     }
 
@@ -89,8 +89,8 @@ import HeroGallery from '@components/HeroGallery.astro';
       max-width: var(--container-max-width);
       margin: 0 auto;
       padding-inline: var(--container-gutter);
-      padding-block: var(--space-m);
-      padding-top: var(--space-l);
+      padding-block: var(--space-xs); // Reduced from space-m
+      padding-top: var(--space-m); // Reduced from space-l
       
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;

@@ -10,9 +10,6 @@ import { SkipLink } from 'accessible-astro-components';
 import ScrollingText from './ScrollingText.astro';
 import { getAllInfoPages } from '../utils/static-content';
 
-// Check if we're on the home page
-const isHomePage = Astro.url.pathname === '/';
-
 // Get info pages for navigation from static content
 const infoPages = getAllInfoPages();
 ---
@@ -21,7 +18,7 @@ const infoPages = getAllInfoPages();
   <SkipLink />
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container launch-version">
-      <ScrollingText strapiType="header" variant="nav" isVisible={isHomePage} />
+      <ScrollingText strapiType="header" variant="nav" />
 
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-list">
@@ -165,7 +162,7 @@ const infoPages = getAllInfoPages();
     <script>
       class HopkinsNavigation {
         private nav: HTMLElement;
-        private mobileToggle: HTMLButtonElement;
+        private mobileToggles: NodeListOf<HTMLButtonElement>;
         private mobileOverlay: HTMLElement;
         private dropdownTriggers: NodeListOf<HTMLButtonElement>;
         private lastScrollY = 0;
@@ -173,9 +170,9 @@ const infoPages = getAllInfoPages();
 
         constructor() {
           this.nav = document.querySelector(".hopkins-nav") as HTMLElement;
-          this.mobileToggle = document.querySelector(
+          this.mobileToggles = document.querySelectorAll(
             "[data-mobile-toggle]"
-          ) as HTMLButtonElement;
+          ) as NodeListOf<HTMLButtonElement>;
           this.mobileOverlay = document.querySelector(
             "[data-mobile-overlay]"
           ) as HTMLElement;
@@ -265,8 +262,10 @@ const infoPages = getAllInfoPages();
         }
 
         private setupMobileMenu(): void {
-          this.mobileToggle.addEventListener("click", () => {
-            this.toggleMobileMenu();
+          this.mobileToggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+              this.toggleMobileMenu();
+            });
           });
 
           // Mobile dropdown functionality
@@ -324,15 +323,19 @@ const infoPages = getAllInfoPages();
 
         private openMobileMenu(): void {
           this.mobileOverlay.classList.add("active");
-          this.mobileToggle.classList.add("active");
-          this.mobileToggle.setAttribute("aria-expanded", "true");
+          this.mobileToggles.forEach((toggle) => {
+            toggle.classList.add("active");
+            toggle.setAttribute("aria-expanded", "true");
+          });
           document.body.style.overflow = "hidden";
         }
 
         private closeMobileMenu(): void {
           this.mobileOverlay.classList.remove("active");
-          this.mobileToggle.classList.remove("active");
-          this.mobileToggle.setAttribute("aria-expanded", "false");
+          this.mobileToggles.forEach((toggle) => {
+            toggle.classList.remove("active");
+            toggle.setAttribute("aria-expanded", "false");
+          });
           document.body.style.overflow = "";
         }
 
@@ -464,25 +467,22 @@ const infoPages = getAllInfoPages();
       box-shadow: var(--nav-shadow-scrolled);
       border-bottom-color: transparent;
 
-      // Apply hover state styling to nav links when scrolled
+      // Nav links go to hover state when scrolled
       .nav-link:not(.nav-cta) {
-        background: var(--brand-secondary);
-        color: var(--nav-text-hover);
-      }
-
-      // Keep CTA button styling consistent
-      .nav-cta {
-        background: var(--nav-accent);
+        background: black;
         color: white;
+        border-color: rgba(255, 255, 255, 0.1);
+      }
+      .nav-link:not(.nav-cta):hover,
+      .nav-link:not(.nav-cta):focus-visible {
+        background: black;
+        color: white;
+        border-color: rgba(255, 255, 255, 0.1);
       }
 
-      // Hide scrolling text when scrolled - optimized for nav variant
-      .nav-container .scrolling-text-container--nav {
-        opacity: 0 !important;
-        visibility: hidden !important;
-        transform: translateY(-50%) translateY(-10px) !important;
-        pointer-events: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      // Fully hide scrolling text when scrolled
+      .scrolling-text-container--nav {
+        display: none !important;
       }
     }
   }

@@ -81,10 +81,19 @@ import HeroHeading from '@assets/images/projects/HeroHeading.svg';
       width: 100%;
       height: auto;
       display: block;
+      margin-inline: auto;
+      
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
       animation: fadeInUp var(--animation-speed-medium) var(--cubic-bezier);
       animation-fill-mode: both;
+      // Larger on small screens
+      @include breakpoint("xs") {
+        max-width: 90vw;
+      }
+      @include breakpoint("s") {
+        max-width: 80vw;
+      }
     }
 
     // Animations using design system spacing

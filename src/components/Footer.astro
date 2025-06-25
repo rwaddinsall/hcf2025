@@ -1,7 +1,7 @@
 ---
 import ScrollingText from './ScrollingText.astro';
 import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
-import { Icon } from 'astro-icon/components';
+// import { Icon } from 'astro-icon/components';
 
 /**
  * Footer Component
@@ -22,7 +22,7 @@ const generalPages = getAllGeneralPages();
     <div class="container mx-auto">
       <!-- Footer Navigation Grid -->
       <div
-        class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-start gap-8 justify-items-start sm:gap-12 lg:gap-16"
+        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-center sm:gap-12 lg:gap-16"
       >
         <!-- Column 1: Main Navigation -->
         <div class="flex flex-col gap-4">
@@ -80,8 +80,9 @@ const generalPages = getAllGeneralPages();
     </div>
   </section>
 
-  <!-- Social Icons Row (lower portion) -->
-  <div class="flex gap-6 justify-center pb-8 mt-8">
+  <!-- Social Icons Row (lower portion) - COMMENTED OUT -->
+  <!-- 
+  <div class="flex justify-center gap-6 pb-8 mt-8">
     <a href="https://instagram.com/hopkinscreek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <Icon name="lucide:instagram" size="28" />
     </a>
@@ -92,6 +93,7 @@ const generalPages = getAllGeneralPages();
       <Icon name="lucide:mail" size="28" />
     </a>
   </div>
+  -->
 
   <style>
     .acknowledgement-section {

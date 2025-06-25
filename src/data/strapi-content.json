@@ -1,67 +1,67 @@
 {
-  "fetchedAt": "2025-06-25T10:22:10.377Z",
+  "fetchedAt": "2025-06-25T11:17:38.848Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
-      "id": 10,
+      "id": 22,
       "documentId": "i3jd5wv2lnaayub65ccbr73i",
       "createdAt": "2025-06-25T04:24:47.109Z",
-      "updatedAt": "2025-06-25T04:24:48.520Z",
-      "publishedAt": "2025-06-25T04:24:48.636Z",
+      "updatedAt": "2025-06-25T11:05:25.444Z",
+      "publishedAt": "2025-06-25T11:05:25.503Z",
       "heading": "Accessibility",
       "subheading": "Hopkins Creek is committed to creating an inclusive and accessible event for all attendees. We’re currently working on making the festival experience safer, easier and more enjoyable for everyone.",
       "slug": "accessibility",
       "accordion": [
         {
-          "id": 23,
+          "id": 97,
           "category": "general",
-          "title": "Accordion: Accessibility Information",
-          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\nAccessible parking close to entry\n\nAccessible camping (location, terrain, quiet zones)\n\nStage and viewing accessibility\n\nAccessible toilets\n\nCharging stations for mobility devices\n\nGuide dog access\n\nBreastfeeding and rest areas\n\nLocal accommodation recommendations\n\nDietary needs and clear food labelling\n\nLarge print or plain text versions of materials\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com"
+          "title": "Accessibility Information",
+          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\n- Accessible parking close to entry\n- Accessible camping (location, terrain, quiet zones)\n- Stage and viewing accessibility\n- Accessible toilets\n- Charging stations for mobility devices\n- Guide dog access\n- Low sensory areas\n- Local accommodation recommendations\n- Dietary needs and clear food labelling\n- Large print or plain text versions of materials\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com"
         }
       ]
     },
     {
-      "id": 14,
+      "id": 23,
       "documentId": "qo0ufcz4lvighw4jb3gkgui3",
       "createdAt": "2025-06-23T12:13:21.392Z",
-      "updatedAt": "2025-06-25T10:12:50.028Z",
-      "publishedAt": "2025-06-25T10:12:50.150Z",
+      "updatedAt": "2025-06-25T11:07:00.419Z",
+      "publishedAt": "2025-06-25T11:07:00.532Z",
       "heading": "Arrival, Weather, Food & Safety",
-      "subheading": null,
+      "subheading": " ",
       "slug": "arrival",
       "accordion": [
         {
-          "id": 41,
+          "id": 98,
           "category": "transport",
           "title": "Arrival & Parking",
           "details": "Camping and parking are separate unless you’ve purchased a car camping pass.\n\nThere’s no overnight loitering in the car park — once you’ve arrived, head to the campgrounds and get set up.\n\nIt’s a short walk from the car park to the campsites — a good chance to stretch your legs, haul your gear, and ease into it.\n\nIf you’re bringing a couch or marquee, you’ll need to leave a $50 deposit at check-in. Bring it back out with you and you’ll get the money back.\n\nLeave junk behind and will be banned from future events."
         },
         {
-          "id": 42,
+          "id": 99,
           "category": "general",
           "title": "Weather",
           "details": " Hopkins Creek weather is committed to the bit. Sun, hail, dust, mud — sometimes all in one day.\n\nCheck the forecast, but don’t trust it. Bring gear for every scenario. We’ve seen it all and we’re still standing."
         },
         {
-          "id": 43,
+          "id": 100,
           "category": "general",
           "title": "Food & Drink",
           "details": "There’ll be food vendors onsite all weekend serving up hot meals, snacks and caffeinated things.\n\nIce is available at the event.\n\nThere are no cash-out facilities on site, so get your cash sorted on Friday.\n\nHopkins is BYO-friendly — but pace yourself, and no glass.\n\nGrab a cocktail at Barry’s Bait Shop or swing past our newest bar, yet to be announced, if you’re feeling fancy.\n\nPlastic water bottles are banned. Bring your own reusable bottle or pick one up from the General Store. (Soft drinks and alcohol in plastic bottles are still allowed.)"
         },
         {
-          "id": 44,
+          "id": 101,
           "category": "general",
           "title": "Prohibited Items",
           "details": "You bring these, we take them:\n\n- Illegal substances\n- Nitrous oxide (nangs), Generators\n- Sound systems\n- Pets (service animals are allowed)\n- Fires\n- Fireworks\n- Gas cookers\n- Mini bikes\n- Glass containers\n- Plastic water bottles\n- Doof sticks\n- Walking sticks as fashion items - please respect those with accesibility requirements and leave these at home\n\nWe’re a small event. You don’t need a 2-metre totem to find your mates. We will confiscate all doof sticks and totems at the event. "
         },
         {
-          "id": 45,
+          "id": 102,
           "category": "general",
           "title": "Safety & Inclusivity",
           "details": "Hopkins Creek is an inclusive space — zero judgement, zero harassment, zero discrimination.\n\nIf you see something off — say something. Chat to a staff member or head to the Info Tent. We’ll handle it.\n\nIf you're feeling unwell — physically, mentally, emotionally — visit the Wellbeing Tent. Our care crew is here for you, no questions asked. \n\nAt Hopkins, everyone’s your mate — whether you’ve met them yet or not."
         },
         {
-          "id": 46,
+          "id": 103,
           "category": "general",
           "title": "Breath Testing",
           "details": "Back again doing the Lord’s work is Blow Me First — offering free breath testing, info and advice to all drivers.\n \nIf you’re unsure, don’t guess. \n\nGo see them. You’d be daft not to."
@@ -69,44 +69,92 @@
       ]
     },
     {
-      "id": 8,
+      "id": 19,
       "documentId": "plg5fc75a0wc7tc4vpylms31",
       "createdAt": "2025-06-25T04:11:18.201Z",
-      "updatedAt": "2025-06-25T04:16:30.110Z",
-      "publishedAt": "2025-06-25T04:16:30.207Z",
+      "updatedAt": "2025-06-25T10:39:04.914Z",
+      "publishedAt": "2025-06-25T10:39:04.964Z",
       "heading": "Camping & Accomodation",
       "subheading": "There’s nothing like the great outdoors. Come get acquainted with the stars, the gumtrees, and the quiet hum of tents settling in. Hopkins Creek offers two main camping areas: Uptown and Downtown.",
       "slug": "camping-accomodation",
       "accordion": [
         {
-          "id": 17,
+          "id": 84,
           "category": "general",
           "title": "Uptown",
           "details": "Ideal for vans, rooftop rigs, or anyone chasing a sunrise. First in, best dressed. Uptown offers more space and stunning views closer to the action, perfect if you’re keen on a little serenity before the bass kicks in."
         },
         {
-          "id": 18,
+          "id": 85,
           "category": "general",
           "title": "Downtown",
           "details": "Further from the action. A classic camp zone for those who like to be a little further from the heartbeat. Tents pop up shoulder-to-shoulder, creating a community vibe that's always buzzing with movement and music."
         },
         {
-          "id": 19,
+          "id": 86,
           "category": "general",
           "title": "Vehicle Camping",
           "details": "A limited number of vehicle camping spots are available. These sell out fast and are strictly limited. If you're planning to camp in or near your car, make sure you grab a valid car camping pass. But remember: every vehicle on site needs a car pass — whether you’re sleeping in it or not."
         },
         {
-          "id": 20,
+          "id": 87,
           "category": "general",
           "title": "Pack It In, Pack It Out",
           "details": "Some festivals end in a landfill. We do not. If your neighbour’s ghosting their gear, let us know. If it’s yours — sort it out. Bringing a couch or marquee? You’ll need to leave a $50 deposit with the ticketing crew. You’ll get it back when you leave with that same item. This place doesn’t clean itself — and we want to keep coming back.\nRespect the land. Leave no trace."
         },
         {
-          "id": 21,
+          "id": 88,
           "category": "general",
           "title": "Car Passes",
           "details": "Every car needs a pass to enter the site. No pass, no entry. Car passes help us manage traffic and reduce our environmental impact — and 100% of proceeds go back into sustainability projects like composting, reusable systems, and emissions offsets."
+        },
+        {
+          "id": 89,
+          "category": "general",
+          "title": "The Motor Inn",
+          "details": "**Luxury Package – Executive Suite\n**\nA 5m water-resistant canvas bell tent that feels like a bushland hotel suite. Includes a foam or air camp mattress, fresh linen and quality bedding, cushions, rugs, furnishings, plus thoughtful extras: lantern, mirror, front doormat, and outdoor solar light.\nAvailable in 2, 3 and 4-person options.\n\nPerfect if you want to arrive, drop your bag, and start dancing.\n\n**Simple Package – Standard Suite\n**\nSame sturdy 5m tent — just stripped back. Comes with self-inflating mattresses and a solar light. The rest is up to you: BYO linen, cushions, and vibes.\n\nA solid option if you want convenience but don’t mind rolling your own swag.\n\n**Good In-Tent-ions – Enviro Saver Suite\n**\nIn partnership with Good Intentions Camping — legends who rescue and reuse abandoned gear. Pre-loved, low-impact, and ready for another spin.\n\nPerfect for fly-ins, light packers, or landfill avoiders. Not fancy, but functional — and doing good while you're at it.\n"
+        }
+      ]
+    },
+    {
+      "id": 18,
+      "documentId": "hfv8pmdi6eu2s46iw3ai9u4k",
+      "createdAt": "2025-06-25T10:34:06.745Z",
+      "updatedAt": "2025-06-25T10:35:36.311Z",
+      "publishedAt": "2025-06-25T10:35:36.420Z",
+      "heading": "Ticketing Info",
+      "subheading": null,
+      "slug": "ticketing-info",
+      "accordion": [
+        {
+          "id": 78,
+          "category": "general",
+          "title": "Ticketing & Entry",
+          "details": "You’ll need a digital ticket and valid photo ID. No ID, no entry.\n \nDon’t print your ticket — just save the PDF or a screenshot to your phone, and make sure your screen brightness is up.\n\nEvery ticket is scanned at the gate. If your ticket has already been scanned, entry will be denied.\n\nDon’t share your ticket or screenshot it for your mate — it won’t work for them, and it won’t work for you either.\n\nWristbands must be worn at all times while on site.\n"
+        },
+        {
+          "id": 79,
+          "category": "general",
+          "title": "Ticket Resale",
+          "details": "The only official resale platform is Humanitix.\n\nYou cannot list your ticket on Tixel or other resale platforms. We can’t help with name changes outside of Humanitix, either.\n\nThis is for your safety and to prevent scams.\n"
+        },
+        {
+          "id": 80,
+          "category": "general",
+          "title": "Car Passes",
+          "details": "Every car entering the site needs a valid car pass — unless you’re bringing 3 or more people in the same car.\n\nPasses are available through Humanitix and help us reduce traffic and offset carbon emissions.\n\n100% of car pass revenue goes toward sustainability projects.\n"
+        },
+        {
+          "id": 81,
+          "category": "general",
+          "title": "Accessibility",
+          "details": "If you have accessibility requirements, you can let us know during checkout using the Accessibility Needs field. You’re also welcome to email us at info@hopkins-creek.com and we’ll make sure your needs are communicated to our crew ahead of the event."
+        },
+        {
+          "id": 82,
+          "category": "general",
+          "title": "Birthday Tickets",
+          "details": "Hopkins Creek runs on equal access—one price, one ticket, no early birds, no VIPs, no back doors. This keeps the experience intimate, fair, and grounded.\n\nThat means we don’t offer birthday tickets or special discounts — even for those celebrating something special.\n\nIf you do end up marking your birthday out there with us, swing past the info tent and let us know — we’ll sort you out with a drink on the house."
         }
       ]
     },
@@ -942,12 +990,12 @@
     }
   ],
   "scrollingHeaderText": {
-    "id": 6,
+    "id": 7,
     "documentId": "nrc63ufcvdexv11xqcbicq6l",
-    "Text": "Welcome to MAGNIFICENT SEVEN. A celebration of music & mateship on Taungurung Country - Tickets on sale 7pm Thursday, 26 June",
+    "Text": "Welcome to Hopkins Creek Magnificent Seven. A celebration of music & mateship on Taungurung Country - Tickets on sale 7pm Thursday, 26 June",
     "createdAt": "2025-06-18T17:13:50.625Z",
-    "updatedAt": "2025-06-18T21:39:29.536Z",
-    "publishedAt": "2025-06-18T21:39:29.614Z"
+    "updatedAt": "2025-06-25T11:10:16.462Z",
+    "publishedAt": "2025-06-25T11:10:16.481Z"
   },
   "acknowledgementOfCountry": {
     "id": 4,
@@ -961,22 +1009,28 @@
   "applicationsPage": null,
   "infoPagesForNavigation": [
     {
-      "id": 10,
+      "id": 22,
       "documentId": "i3jd5wv2lnaayub65ccbr73i",
       "slug": "accessibility",
       "heading": "Accessibility"
     },
     {
-      "id": 14,
+      "id": 23,
       "documentId": "qo0ufcz4lvighw4jb3gkgui3",
       "slug": "arrival",
       "heading": "Arrival, Weather, Food & Safety"
     },
     {
-      "id": 8,
+      "id": 19,
       "documentId": "plg5fc75a0wc7tc4vpylms31",
       "slug": "camping-accomodation",
       "heading": "Camping & Accomodation"
+    },
+    {
+      "id": 18,
+      "documentId": "hfv8pmdi6eu2s46iw3ai9u4k",
+      "slug": "ticketing-info",
+      "heading": "Ticketing Info"
     },
     {
       "id": 12,

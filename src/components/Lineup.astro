@@ -58,7 +58,7 @@ artists.sort((a, b) => {
 ---
 
 <section id='lineup' class='lineup-section'>
-  <div class="lineup-container">
+  <div class="container lineup-container">
     {
       artists.length > 0 ? (
         <div
@@ -118,23 +118,33 @@ artists.sort((a, b) => {
   </div>
 </section>
 
-<style>
+<style lang="scss">
+  @use "../assets/scss/base/breakpoint" as *;
+
   /* Lineup Section - Modern CSS with Design System Tokens */
   .lineup-section {
-    padding: var(--space-m) var(--space-s);
+    // Mobile-first responsive padding
+    padding: var(--space-s) var(--space-2xs); // Minimal padding for very small screens
 
-    @media (min-width: 48rem) {
-      padding: var(--space-l) var(--space-m);
+    @include breakpoint("xs") {
+      padding: var(--space-m) var(--space-xs); // 320px+ gets more padding
     }
 
-    @media (min-width: 64rem) {
-      padding: var(--space-xl) var(--space-l);
+    @include breakpoint("s") {
+      padding: var(--space-m) var(--space-s); // 480px+ normal padding
+    }
+
+    @include breakpoint("m") {
+      padding: var(--space-l) var(--space-m); // 768px+ generous padding
+    }
+
+    @include breakpoint("l") {
+      padding: var(--space-xl) var(--space-l); // 1024px+ maximum padding
     }
   }
 
   .lineup-container {
-    max-inline-size: var(--grid-max-width);
-    margin-inline: auto;
+    // Only keep lineup-specific overrides here if needed
   }
 
   /* Lineup Grid - Flexible Layout */
@@ -143,23 +153,31 @@ artists.sort((a, b) => {
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    gap: var(--space-5xs) var(--space-s);
+    // Very small screen gaps - minimal spacing
+    gap: var(--space-5xs) var(--space-2xs);
     text-align: center;
 
-    @media (min-width: 48rem) {
-      gap: var(--space-3xs) var(--space-m);
+    @include breakpoint("xs") {
+      gap: var(--space-5xs) var(--space-xs); // 320px+ slightly more spacing
     }
 
-    @media (min-width: 64rem) {
-      gap: var(--space-2xs) var(--space-l);
+    @include breakpoint("s") {
+      gap: var(--space-5xs) var(--space-s); // 480px+ normal spacing
+    }
+
+    @include breakpoint("m") {
+      gap: var(--space-3xs) var(--space-m); // 768px+ generous spacing
+    }
+
+    @include breakpoint("l") {
+      gap: var(--space-2xs) var(--space-l); // 1024px+ maximum spacing
     }
   }
 
   /* Artist Item - Base Styling */
   .lineup-artist {
     position: relative;
-    white-space: nowrap;
-    /* width: 100%; */
+    white-space: normal; // allow wrapping
     opacity: 0;
     animation: fadeInUp 0.6s var(--cubic-bezier, ease) forwards;
     padding: var(--space-4xs) var(--space-3xs);
@@ -169,6 +187,10 @@ artists.sort((a, b) => {
       transform var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
       background-color var(--animation-speed-fast, 0.2s)
         var(--cubic-bezier, ease);
+
+    @include breakpoint('xs') {
+      white-space: normal;
+    }
   }
 
   /* Grid Hover Effects */
@@ -185,15 +207,24 @@ artists.sort((a, b) => {
   /* Artist Name Typography */
   .artist-name {
     margin: 0;
-    font-size: var(--font-size-6);
+    // Mobile-first typography sizing
+    font-size: var(--font-size-4);
     font-family: var(--font-heading);
     line-height: 1.2;
 
-    @media (min-width: 48rem) {
+    @include breakpoint("xs") {
       font-size: var(--font-size-5);
     }
 
-    @media (min-width: 64rem) {
+    @include breakpoint("s") {
+      font-size: var(--font-size-6);
+    }
+
+    @include breakpoint("m") {
+      font-size: var(--font-size-6);
+    }
+
+    @include breakpoint("l") {
       font-size: var(--font-size-6);
     }
   }
@@ -253,12 +284,12 @@ artists.sort((a, b) => {
     transition: opacity var(--animation-speed-fast, 0.2s)
       var(--cubic-bezier, ease);
 
-    @media (min-width: 48rem) {
+    @include breakpoint("m") {
       font-size: 0.55em;
       margin-inline-start: var(--space-3xs);
     }
 
-    @media (min-width: 64rem) {
+    @include breakpoint("l") {
       font-size: 0.5em;
       margin-inline-start: var(--space-2xs);
     }

@@ -4,6 +4,7 @@ import PageHeader from './PageHeader.astro';
 import { Accordion, AccordionItem } from 'accessible-astro-components';
 import { Icon } from 'astro-icon/components';
 import { getInfoPageBySlug } from '../utils/static-content';
+import sanitizeHtml from 'sanitize-html';
 
 interface AccordionSection {
   title: string;
@@ -42,7 +43,15 @@ if (pageData) {
 
   // Use accordion data directly from static content
   if (pageData.accordion && pageData.accordion.length > 0) {
-    accordionSections = pageData.accordion;
+    accordionSections = pageData.accordion.map((section) => ({
+      ...section,
+      details: sanitizeHtml(section.details, {
+        allowedTags: ['h2', 'h3', 'b', 'i', 'em', 'strong', 'p', 'ul', 'li', 'a'],
+        allowedAttributes: {
+          a: ['href', 'title', 'target', 'rel'],
+        },
+      }),
+    }));
   }
 }
 ---
@@ -59,22 +68,6 @@ if (pageData) {
   <section class='my-12'>
     <div class='container'>
       <div class='space-content'>
-        {
-          accordionSections && accordionSections.length > 0 && (
-            <Accordion class='custom-accordion'>
-              {accordionSections.map((section: AccordionSection) => (
-                <AccordionItem title={section.title}>
-                  <div class='space-content accordion-panel-content'>
-                    <div set:html={section.details} />
-                  </div>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          )
-        }
-
-        <slot />
-
         <div class='mb-8'>
           <a
             href={backLink.href}
@@ -84,6 +77,16 @@ if (pageData) {
             {backLink.text}
           </a>
         </div>
+
+        <Accordion>
+          {accordionSections.map((section: AccordionSection) => (
+            <AccordionItem title={section.title}>
+              <div set:html={section.details} />
+            </AccordionItem>
+          ))}
+        </Accordion>
+
+        <slot />
       </div>
     </div>
   </section>
@@ -135,40 +138,29 @@ if (pageData) {
     }
   }
 
-  .custom-accordion {
+  // Ensure consistent accordion width
+  :global(.accordion) {
     width: 100%;
-    text-align: left;
-    // Style the default trigger button (assume it is a button inside the accordion)
-    button {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-5xs) var(--space-s);
-      cursor: pointer;
-      border-radius: var(--radius-l);
-      border: 1px solid transparent;
-      background: transparent;
-      transition: var(--nav-transition);
-      color: var(--nav-text);
-      font-weight: 500;
-      font-size: inherit;
-      font-family: inherit;
-      margin: var(--space-2xs) 0;
-      gap: var(--space-s);
-      text-align: left;
-      &:hover,
-      &:focus-visible {
-        background: black;
-        color: white;
-        border-color: rgba(255,255,255,0.1);
-        outline: 2px solid var(--nav-accent);
-        outline-offset: 2px;
-      }
-    }
-    .accordion-panel-content {
-      padding: 1.5rem;
-      text-align: left;
-    }
+    max-width: 100%;
+  }
+
+  :global(.accordion details) {
+    width: 100%;
+  }
+
+  :global(.accordion details summary) {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  :global(.accordion details[open] summary) {
+    width: 100%;
+  }
+
+  :global(.accordion details div) {
+    width: 100%;
+    box-sizing: border-box;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 </style>

@@ -2,7 +2,6 @@
 import "../styles/tailwind.css";
 import "../assets/scss/index.scss";
 import SiteMeta from "../components/SiteMeta.astro";
-import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import Navigation from "@components/Navigation.astro";
 
@@ -47,16 +46,14 @@ const {
       body {
         display: flex;
         flex-direction: column;
-        padding-inline: var(--grid-gutter); // Uses responsive gutter spacing
+        // Removed conflicting padding - let components handle their own spacing
 
         main {
           flex: 1 0 auto;
           max-width: var(--grid-max-width);
           margin: var(--space-l) auto 0; // Add top margin for spacing from nav
-          padding-inline: var(--space-s); // Additional inner padding
-          padding-block: var(
-            --space-m
-          ); // Add vertical padding for better content spacing
+          // Removed conflicting padding-inline - components handle their own horizontal spacing
+          // Removed vertical padding - components handle their own vertical spacing
         }
 
         footer {

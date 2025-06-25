@@ -1,7 +1,7 @@
 ---
-import { Image } from "astro:assets";
-import HeroHeading from "@assets/images/projects/HeroHeading.svg";
-import HeroGallery from "@components/HeroGallery.astro";
+import { Image } from 'astro:assets';
+import HeroHeading from '@assets/images/projects/HeroHeading.svg';
+// import HeroGallery from '@components/HeroGallery.astro';
 
 /**
  * Hero Section Component
@@ -11,7 +11,7 @@ import HeroGallery from "@components/HeroGallery.astro";
 ---
 
 <section class="hero-section">
-  <div class="hero-container">
+  <div class="container hero-container">
     <Image
       src={HeroHeading}
       alt="Hopkins Creek Festival logo"
@@ -19,7 +19,7 @@ import HeroGallery from "@components/HeroGallery.astro";
       quality="high"
       class="hero-heading"
     />
-    <HeroGallery />
+    <!-- <HeroGallery /> -->
   </div>
 
   <style lang="scss">
@@ -30,8 +30,18 @@ import HeroGallery from "@components/HeroGallery.astro";
       max-width: var(--grid-max-width);
       margin: 0 auto;
       width: 100%;
-      padding-inline: var(--grid-gutter);
-      padding-block: var(--space-xl);
+      // Responsive padding - mobile first approach
+      padding-inline: var(--space-s); // Minimum padding for very small screens
+      padding-block: var(--space-l); // Reduced padding for small screens
+
+      @include breakpoint("xs") {
+        padding-inline: var(--space-m); // Slightly more padding on 320px+
+        padding-block: var(--space-xl);
+      }
+
+      @include breakpoint("s") {
+        padding-inline: var(--grid-gutter); // Use grid gutter on larger screens
+      }
 
       @include breakpoint("m") {
         padding-block: var(--space-2xl);
@@ -42,41 +52,35 @@ import HeroGallery from "@components/HeroGallery.astro";
       }
     }
 
-    .hero-container {
+    .container hero-container {
       // Layout using design system patterns
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: var(--space-xl);
+      // Responsive gap - smaller on very small screens
+      gap: var(--space-m);
+
+      @include breakpoint("xs") {
+        gap: var(--space-l); // 320px+ more gap
+      }
+
+      @include breakpoint("s") {
+        gap: var(--space-xl); // 480px+ normal gap
+      }
 
       @include breakpoint("l") {
-        gap: var(--space-2xl);
+        gap: var(--space-2xl); // 1024px+ maximum gap
       }
     }
 
     .hero-heading {
-      // Constrain maximum width using design system
       width: 100%;
-      max-width: 37.5rem; // 600px in rem
       height: auto;
       display: block;
-
-      // Optimize SVG rendering
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
-
-      // Add subtle animation on load using design system timing
       animation: fadeInUp var(--animation-speed-medium) var(--cubic-bezier);
       animation-fill-mode: both;
-
-      // Responsive sizing
-      @include breakpoint("m") {
-        max-width: 43.75rem; // 700px in rem
-      }
-
-      @include breakpoint("l") {
-        max-width: 50rem; // 800px in rem
-      }
     }
 
     // Animations using design system spacing
@@ -104,7 +108,7 @@ import HeroGallery from "@components/HeroGallery.astro";
         padding-block: var(--space-m);
       }
 
-      .hero-container {
+      .container hero-container {
         gap: var(--space-m);
       }
     }

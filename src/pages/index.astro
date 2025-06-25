@@ -8,39 +8,9 @@ import Lineup from "@components/Lineup.astro";
 <DefaultLayout title="Hopkins Creek Festival">
   <Hero />
   <Lineup />
-  
-
 </DefaultLayout>
 
 <style lang="scss">
-  .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: var(--space-l);
-    margin-top: var(--space-xl);
-
-    @media (max-width: 768px) {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  :global(.feature-link) {
-    display: inline-flex;
-    align-items: center;
-    margin-top: var(--space-s);
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: var(--font-weight-medium);
-    transition: all var(--animation-speed-fast) var(--cubic-bezier);
-
-    &:hover {
-      color: var(--color-primary-dark);
-      transform: translateX(4px);
-    }
-
-    &:focus {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-  }
+  // Removed unused styles - this page only contains Hero and Lineup components
+  // All responsive behavior is handled by the individual components
 </style>

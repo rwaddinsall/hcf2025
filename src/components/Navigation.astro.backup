@@ -8,13 +8,30 @@
 import { Icon } from "astro-icon/components";
 import { SkipLink } from "accessible-astro-components";
 import ScrollingText from "./ScrollingText.astro";
-import { getAllInfoPages } from "../utils/static-content";
+import { fetchInfoPagesForNavigation } from "../lib/strapi";
 
 // Check if we're on the home page
 const isHomePage = Astro.url.pathname === "/";
 
-// Get info pages for navigation from static content
-const infoPages = getAllInfoPages();
+// Fetch info pages for navigation
+let infoPages: any[] = [];
+try {
+  const response = await fetchInfoPagesForNavigation();
+  infoPages = Array.isArray(response) ? response : [];
+  console.log("Fetched info pages for navigation:", infoPages);
+} catch (error) {
+  console.warn("Failed to fetch info pages for navigation:", error);
+
+  // Fallback navigation items
+  infoPages = [
+    { slug: "tickets", heading: "Tickets" },
+    { slug: "camping", heading: "Camping & Accommodation" },
+    { slug: "motor-inn", heading: "The Motor Inn" },
+    { slug: "accessibility", heading: "Accessibility" },
+    { slug: "getting-there", heading: "Travel & Entry" },
+    { slug: "food-beverages", heading: "Food & Beverages" },
+  ];
+}
 ---
 
 <header class="hopkins-header">

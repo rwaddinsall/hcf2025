@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getBigLinkData } from "../utils/static-content";
+import { fetchCTAData } from "../lib/strapi";
 
 /**
  * CallToAction Component
@@ -38,8 +38,15 @@ const {
   useCMS = false,
 } = Astro.props;
 
-// Get CMS data from static content if requested
-const cmsData = useCMS ? getBigLinkData() : null;
+// Fetch CMS data if requested
+let cmsData = null;
+if (useCMS) {
+  try {
+    cmsData = await fetchCTAData();
+  } catch (error) {
+    console.error("CTA fetch failed:", error);
+  }
+}
 
 // Use CMS data or fallback to props
 const displayTitle = cmsData?.title || title;

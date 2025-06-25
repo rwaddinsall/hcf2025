@@ -1,7 +1,10 @@
 ---
-import Logo from './Logo.astro';
-import ScrollingText from './ScrollingText.astro';
-import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
+import Logo from "./Logo.astro";
+import ScrollingText from "./ScrollingText.astro";
+import {
+  fetchInfoPagesForNavigation,
+  fetchGeneralPagesForFooter,
+} from "../lib/strapi";
 
 /**
  * Footer Component
@@ -9,11 +12,41 @@ import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
  * @description A component that displays the footer of the website
  */
 
-// Get info pages for Information column from static content
-const infoPages = getAllInfoPages();
+// Fetch info pages for Information column
+let infoPages: any[] = [];
+try {
+  const response = await fetchInfoPagesForNavigation();
+  infoPages = Array.isArray(response) ? response : [];
+  console.log("Fetched info pages for footer:", infoPages);
+} catch (error) {
+  console.warn("Failed to fetch info pages for footer:", error);
 
-// Get general pages for Legal column from static content  
-const generalPages = getAllGeneralPages();
+  // Fallback navigation items
+  infoPages = [
+    { slug: "tickets", heading: "Tickets" },
+    { slug: "camping", heading: "Camping & Accommodation" },
+    { slug: "motor-inn", heading: "The Motor Inn" },
+    { slug: "accessibility", heading: "Accessibility" },
+    { slug: "getting-there", heading: "Travel & Entry" },
+    { slug: "food-beverages", heading: "Food & Beverages" },
+  ];
+}
+
+// Fetch general pages for Legal column
+let generalPages: any[] = [];
+try {
+  const response = await fetchGeneralPagesForFooter();
+  generalPages = Array.isArray(response) ? response : [];
+  console.log("Fetched general pages for footer:", generalPages);
+} catch (error) {
+  console.warn("Failed to fetch general pages for footer:", error);
+
+  // Fallback legal items
+  generalPages = [
+    { slug: "privacy-policy", title: "Privacy Policy" },
+    { slug: "terms-conditions", title: "Terms & Conditions" },
+  ];
+}
 ---
 
 <footer>

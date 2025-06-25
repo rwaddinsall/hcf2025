@@ -1,46 +1,41 @@
 ---
 import InfoPageLayout from "../../components/InfoPageLayout.astro";
-import { getAllInfoPages } from "../../utils/static-content";
+import { fetchAllInfoPages } from "../../lib/strapi";
 
-// Static generation: Get all possible slugs from static content
+// Static generation: Get all possible slugs
 export async function getStaticPaths() {
   try {
-    const infoPages = getAllInfoPages();
+    const response = await fetchAllInfoPages();
+    
+    // Check if response and response.data exist
+    if (!response || !response.data || !Array.isArray(response.data)) {
+      console.warn('Invalid API response structure, using fallback routes');
+      throw new Error('Invalid API response');
+    }
+    
+    const infoPages = response.data;
 
     // Filter out pages with null or invalid slugs
     const validPages = infoPages.filter(
       (page: any) =>
         page.slug &&
-        typeof page.slug === "string" &&
+        typeof page.slug === 'string' &&
         page.slug.trim().length > 0
     );
 
     // If no valid pages found, use fallbacks
     if (validPages.length === 0) {
-      console.warn(
-        "No valid info pages found with slugs, using fallback routes"
-      );
-      return [
-        { params: { slug: "camping" } },
-        { params: { slug: "accessibility" } },
-        { params: { slug: "tickets" } },
-        { params: { slug: "getting-there" } },
-        { params: { slug: "motor-inn" } },
-        { params: { slug: "food-beverages" } },
-        { params: { slug: "applications" } },
-      ];
+      console.warn('No valid info pages found with slugs, using fallback routes');
+      throw new Error('No valid pages');
     }
 
-    console.log(
-      `Found ${validPages.length} valid info pages:`,
-      validPages.map((p) => p.slug)
-    );
-
+    console.log(`Found ${validPages.length} valid info pages:`, validPages.map(p => p.slug));
+    
     return validPages.map((page: any) => ({
       params: { slug: page.slug },
     }));
   } catch (error) {
-    console.warn("Failed to get info pages for static generation:", error);
+    console.warn("Failed to fetch info pages for static generation:", error);
 
     // Fallback slugs for development/backup
     return [

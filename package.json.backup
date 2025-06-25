@@ -6,10 +6,9 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "fetch-content": "node scripts/fetch-strapi-content.js",
-    "dev": "npm run fetch-content && astro dev",
+    "dev": "astro dev",
     "start": "astro dev",
-    "build": "npm run fetch-content && astro build",
+    "build": "astro build",
     "build:check": "astro check",
     "preview": "astro preview",
     "format": "prettier --write \"**/*.{astro,js,ts,json,scss,css}\"",

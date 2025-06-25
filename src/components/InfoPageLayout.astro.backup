@@ -3,7 +3,7 @@ import DefaultLayout from "../layouts/DefaultLayout.astro";
 import PageHeader from "./PageHeader.astro";
 import { Accordion, AccordionItem } from "accessible-astro-components";
 import { Icon } from "astro-icon/components";
-import { getInfoPageBySlug } from "../utils/static-content";
+import { fetchInfoPageBySlug } from "../lib/strapi";
 
 interface AccordionSection {
   title: string;
@@ -30,27 +30,45 @@ const {
   fallbackAccordion = [],
 } = Astro.props;
 
-// Get data from static content
-const pageData = getInfoPageBySlug(slug);
+// Fetch data from Strapi
+let pageData: any = null;
 let pageHeading = fallbackHeading || "Information";
 let pageSubheading = fallbackSubheading || "";
 let accordionSections = fallbackAccordion;
 
-if (pageData) {
-  pageHeading = pageData.heading || fallbackHeading || "Information";
-  pageSubheading = pageData.subheading || fallbackSubheading || "";
+try {
+  pageData = await fetchInfoPageBySlug(slug);
+  console.log(
+    "API Response for slug:",
+    slug,
+    "Data:",
+    JSON.stringify(pageData, null, 2)
+  );
 
-  // Use accordion data directly from static content
-  if (pageData.accordion && pageData.accordion.length > 0) {
-    accordionSections = pageData.accordion;
+  if (pageData) {
+    pageHeading = pageData.heading || fallbackHeading || "Information";
+    pageSubheading = pageData.subheading || fallbackSubheading || "";
+
+    // Use accordion data directly from CMS
+    if (pageData.accordion && pageData.accordion.length > 0) {
+      accordionSections = pageData.accordion;
+      console.log("Using CMS accordion data:", accordionSections);
+    } else {
+      console.log("No accordion data found in CMS response, using fallback");
+    }
+  } else {
+    console.log("No pageData returned from API, using fallback");
   }
+} catch (error) {
+  console.warn(`Failed to fetch info page data for slug "${slug}":`, error);
+  console.log("Using fallback accordion data:", fallbackAccordion);
+  // Use fallback data
 }
 ---
 
 <DefaultLayout
   title={`${pageHeading} - Hopkins Creek Festival`}
-  description={pageSubheading ||
-    `${pageHeading} information for Hopkins Creek Festival`}
+  description={pageData?.metaDescription}
 >
   <section class="my-12">
     <PageHeader title={pageHeading} subtitle={pageSubheading} />

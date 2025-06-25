@@ -1,6 +1,6 @@
 ---
 // Lineup component for Hopkins Creek Festival
-import { getAllArtists } from "../utils/static-content";
+import { fetchArtists } from "../lib/strapi";
 
 interface ArtistData {
   name: string;
@@ -9,13 +9,13 @@ interface ArtistData {
   socialLink?: string; // URL for artist's social media or website
 }
 
-// Get artists from static content
+// Fetch artists from Strapi CMS
 let strapiArtists: import("../interfaces/strapi").Artist[] = [];
 
 try {
-  strapiArtists = getAllArtists();
+  strapiArtists = await fetchArtists();
 } catch (error) {
-  console.error("Failed to get artists from static content:", error);
+  console.error("Failed to fetch artists from Strapi:", error);
   // Gracefully handle error - component will show empty lineup
 }
 

@@ -6,9 +6,9 @@
  * Inspired by traditional acknowledgment scrollers but built for modern web
  */
 import {
-  getScrollingHeaderText,
-  getAcknowledgementOfCountry,
-} from '../utils/static-content';
+  fetchScrollingHeaderText,
+  fetchAcknowledgementOfCountry,
+} from '../lib/strapi';
 
 interface Props {
   /**
@@ -70,13 +70,13 @@ const defaultTexts = {
 if (Astro.props.strapiType) {
   try {
     if (Astro.props.strapiType === 'header') {
-      strapiScrollingText = getScrollingHeaderText();
+      strapiScrollingText = await fetchScrollingHeaderText();
     } else if (Astro.props.strapiType === 'acknowledgement-of-country') {
-      strapiScrollingText = getAcknowledgementOfCountry();
+      strapiScrollingText = await fetchAcknowledgementOfCountry();
     }
   } catch (error) {
     console.warn(
-      `Failed to fetch ${Astro.props.strapiType} scrolling text from static content. Using fallback text.`,
+      `Failed to fetch ${Astro.props.strapiType} scrolling text from Strapi. Using fallback text.`,
       error instanceof Error ? error.message : String(error)
     );
     // Gracefully handle error - component will use fallback text

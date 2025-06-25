@@ -244,3 +244,35 @@ export async function fetchGeneralPagesForFooter() {
     wrappedByKey: "data",
   });
 }
+
+/**
+ * Fetches applications page content from Strapi
+ */
+export async function fetchApplicationsPage() {
+  return fetchApi<import("../interfaces/strapi").ApplicationsPageResponse>({
+    endpoint: "applications-page",
+    query: {
+      "filters[publishedAt][$notNull]": "true",
+      "populate[Header]": "*",
+      "populate[Body]": "*",
+      "populate[FAQ][populate][accordions]": "*",
+    },
+    wrappedByKey: "data",
+  });
+}
+
+/**
+ * Fetches sustainability page content from Strapi
+ */
+export async function fetchSustainabilityPage() {
+  return fetchApi<import("../interfaces/strapi").SustainabilityPageResponse>({
+    endpoint: "sustainability-page",
+    query: {
+      "filters[publishedAt][$notNull]": "true",
+      "populate[Header]": "*",
+      "populate[Body]": "*",
+      "populate[Accordion]": "*",
+    },
+    wrappedByKey: "data",
+  });
+}

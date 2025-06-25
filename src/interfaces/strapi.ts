@@ -192,3 +192,54 @@ export interface StrapiMedia {
   createdAt: string;
   updatedAt: string;
 }
+
+// Page Header component interface
+export interface PageHeaderComponent {
+  id: number;
+  title?: string;
+  subheading?: string;
+}
+
+// Text Block component interface
+export interface TextBlockComponent {
+  id: number;
+  Content: any; // Strapi blocks content
+}
+
+// Accordion component interface
+export interface AccordionComponent {
+  id: number;
+  title: string;
+  details: string;
+  category?:
+    | "general"
+    | "lineup"
+    | "tickets"
+    | "transport"
+    | "sustainability"
+    | "accessibility";
+}
+
+// Info Section component interface
+export interface InfoSectionComponent {
+  id: number;
+  accordions?: AccordionComponent[];
+}
+
+// Applications Page interfaces
+export interface ApplicationsPage extends StrapiEntity {
+  Header?: PageHeaderComponent;
+  Body?: TextBlockComponent;
+  FAQ?: InfoSectionComponent[];
+}
+
+export type ApplicationsPageResponse = StrapiResponse<ApplicationsPage>;
+
+// Sustainability Page interfaces
+export interface SustainabilityPage extends StrapiEntity {
+  Header?: PageHeaderComponent[];
+  Body?: TextBlockComponent;
+  Accordion?: AccordionComponent[];
+}
+
+export type SustainabilityPageResponse = StrapiResponse<SustainabilityPage>;

@@ -9,16 +9,16 @@ import PageHeader from '../components/PageHeader.astro';
 import DefaultLayout from '../layouts/DefaultLayout.astro';
 import { Icon } from 'astro-icon/components';
 import { Accordion, AccordionItem } from 'accessible-astro-components';
-import { getApplicationsPage } from '../utils/static-content';
+import { fetchSustainabilityPage } from '../lib/strapi';
 
-// Fetch applications page content from Strapi
-let applicationsPageData = null;
+// Fetch sustainability page content from Strapi
+let sustainabilityPageData = null;
 
 try {
-  applicationsPageData = getApplicationsPage();
+  sustainabilityPageData = await fetchSustainabilityPage();
 } catch (error) {
   console.warn(
-    "Failed to fetch applications page content from static content. Using fallback content.",
+    'Failed to fetch sustainability page content from static content. Using fallback content.',
     error instanceof Error ? error.message : String(error)
   );
   // Gracefully handle error - component will use fallback content
@@ -27,19 +27,19 @@ try {
 // Comprehensive fallback content
 const fallbackContent = {
   Header: {
-    title: "Applications",
+    title: 'Sustainability',
     subheading:
-      "Information about workshop applications, visual artist applications, and volunteer opportunities.",
+      'Information about sustainability initiatives, eco-friendly practices, and community engagement.',
   },
   Body: {
     Content:
-      "Find information about applying for workshops, visual arts exhibitions, and volunteer opportunities at Hopkins Creek Festival.",
+      'Find information about sustainability initiatives, eco-friendly practices, and community engagement at Hopkins Creek Festival.',
   },
   FAQ: [
     {
       accordions: [
         {
-          title: "Workshops (Deadline: Sept 23)",
+          title: 'Workshops (Deadline: Sept 23)',
           details: `<div class="space-content">
             <p>Apply to lead workshops and educational sessions at Hopkins Creek Festival.</p>
             <h4>Workshop Types:</h4>
@@ -57,16 +57,16 @@ const fallbackContent = {
               <li>Equipment and space requirements</li>
               <li>Expected participant capacity</li>
             </ul>
-            <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
+            <div class="p-4 mt-4 bg-red-50 rounded-lg border border-red-200">
               <p class="text-red-800">
                 <strong>Deadline:</strong> All workshop applications must be submitted by September 23, 2025.
               </p>
             </div>
           </div>`,
-          category: "applications",
+          category: 'applications',
         },
         {
-          title: "Visual Artists (Deadline: Sept 23)",
+          title: 'Visual Artists (Deadline: Sept 23)',
           details: `<div class="space-content">
             <p>Join our visual arts program and showcase your work at the festival.</p>
             <h4>Art Categories:</h4>
@@ -84,19 +84,19 @@ const fallbackContent = {
               <li>Security for artwork</li>
               <li>Promotional support</li>
             </ul>
-            <div class="p-4 mt-4 border border-red-200 rounded-lg bg-red-50">
+            <div class="p-4 mt-4 bg-red-50 rounded-lg border border-red-200">
               <p class="text-red-800">
                 <strong>Deadline:</strong> Visual artist applications close September 23, 2025.
               </p>
             </div>
           </div>`,
-          category: "applications",
+          category: 'applications',
         },
         {
-          title: "Volunteers (Closed)",
+          title: 'Volunteers (Closed)',
           details: `<div class="space-content">
             <p>Thank you for your interest in volunteering at Hopkins Creek Festival.</p>
-            <div class="p-4 border border-gray-200 rounded-lg bg-gray-50">
+            <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
               <p class="text-gray-800">
                 <strong>Status:</strong> Volunteer applications for this year's festival are now closed. We have received an overwhelming response and have filled all available positions.
               </p>
@@ -116,7 +116,7 @@ const fallbackContent = {
               <li>Post-festival volunteer party</li>
             </ul>
           </div>`,
-          category: "applications",
+          category: 'applications',
         },
       ],
     },
@@ -124,18 +124,18 @@ const fallbackContent = {
 };
 
 // Use Strapi content if available, otherwise use fallback
-const pageContent = applicationsPageData || fallbackContent;
+const pageContent = sustainabilityPageData || fallbackContent;
 const headerData = pageContent.Header || fallbackContent.Header;
 const faqData = pageContent.FAQ || fallbackContent.FAQ;
 
 // Ensure we have valid data with proper types
-const pageTitle = headerData.title || "Applications";
+const pageTitle = headerData.title || "Sustainability";
 const pageSubtitle =
   headerData.subheading ||
-  "Information about workshop applications, visual artist applications, and volunteer opportunities.";
+  "Information about sustainability initiatives and practices at Hopkins Creek Festival.";
 ---
 
-<DefaultLayout title="Applications - Hopkins Creek Festival">
+<DefaultLayout title="Sustainability - Hopkins Creek Festival">
   <section class="my-12">
     <PageHeader title={pageTitle} subtitle={pageSubtitle} />
   </section>
@@ -146,7 +146,7 @@ const pageSubtitle =
         <div class="mb-8">
           <a
             href="/info"
-            class="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600"
+            class="inline-flex gap-2 items-center text-primary-500 hover:text-primary-600"
           >
             <Icon name="lucide:arrow-left" size="20" />
             Back to Festival Info

@@ -1,0 +1,20 @@
+---FILEPATH .prettierignore
+---FIND
+```
+```
+---REPLACE
+```
+# Ignore artifacts:
+build
+dist
+node_modules
+
+# Ignore specific files:
+*.min.js
+*.bundle.js
+*.map
+
+# Ensure Astro files are not ignored
+!**/*.astro
+```
+---COMPLETE

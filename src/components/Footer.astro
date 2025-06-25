@@ -1,7 +1,7 @@
 ---
-import Logo from './Logo.astro';
 import ScrollingText from './ScrollingText.astro';
 import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
+import { Icon } from 'astro-icon/components';
 
 /**
  * Footer Component
@@ -22,7 +22,7 @@ const generalPages = getAllGeneralPages();
     <div class="container mx-auto">
       <!-- Footer Navigation Grid -->
       <div
-        class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 sm:gap-12 lg:gap-16 justify-items-center "
+        class="grid grid-cols-1 gap-8 justify-items-center sm:grid-cols-2 lg:grid-cols-3 sm:gap-12 lg:gap-16"
       >
         <!-- Column 1: Main Navigation -->
         <div class="flex flex-col gap-4">
@@ -43,27 +43,11 @@ const generalPages = getAllGeneralPages();
                 <li>
                   <a href={`/info/${page.slug}`}>{page.heading}</a>
                 </li>
-                <li>
-                  <a href={`/info/${page.slug}`}>{page.heading}</a>
-                </li>
-                <li>
-                  <a href={`/info/${page.slug}`}>{page.heading}</a>
-                </li>
-      
-                <li>
-                  Camping & Accommodation
-                </li>
-                <li>
-                  Accessibility
-                </li>
-                <li>
-                  Camping & Accommodation
-                </li>
-                <li>
-                  Camping & Accommodation
-                </li>
               ))
             }
+            <li>
+              <a href="/sustainability">Sustainability</a>
+            </li>
           </ul>
         </div>
 
@@ -82,25 +66,33 @@ const generalPages = getAllGeneralPages();
         </div>
       </div>
 
-      <!-- Logo Section - Better positioned for all screen sizes -->
-      <div class="flex justify-center mt-12 sm:mt-16">
-        <Logo loading="lazy" />
-      </div>
+      <!-- Acknowledgement of Country - Prominent placement at top -->
+      <section class="acknowledgement-section">
+        <div class="container">
+          <ScrollingText
+            strapiType="acknowledgement-of-country"
+            duration={30}
+            ariaLabel="Acknowledgement of Country"
+            width="100%"
+            variant="acknowledgement-of-country"
+          />
+        </div>
+      </section>
     </div>
-
-    <!-- Acknowledgement of Country - Prominent placement at top -->
-    <section class="acknowledgement-section">
-      <div class="container">
-        <ScrollingText
-          strapiType="acknowledgement-of-country"
-          duration={30}
-          ariaLabel="Acknowledgement of Country"
-          width="100%"
-          variant="acknowledgement-of-country"
-        />
-      </div>
-    </section>
   </section>
+
+  <!-- Social Icons Row (lower portion) -->
+  <div class="flex gap-6 justify-center pb-8 mt-8">
+    <a href="https://instagram.com/hopkinscreek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+      <Icon name="lucide:instagram" size="28" />
+    </a>
+    <a href="https://facebook.com/hopkinscreekfestival" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+      <Icon name="lucide:facebook" size="28" />
+    </a>
+    <a href="mailto:info@hopkinscreek.com.au" aria-label="Email">
+      <Icon name="lucide:mail" size="28" />
+    </a>
+  </div>
 
   <style>
     .acknowledgement-section {

@@ -1,0 +1,9 @@
+{
+  // Prettier configuration for Astro files
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "editor.formatOnSave": true,
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

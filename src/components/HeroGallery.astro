@@ -1,62 +1,115 @@
 ---
-import { Image } from "astro:assets";
-import heroGalleryImage from "@assets/images/projects/HeroGallery.jpg";
+import heroGalleryVideo from "@assets/HC25-Pokie-No-Shadows-1.mp4";
 
 /**
  * Hero Gallery Component
  *
- * @description A component that displays the main hero gallery image with optimized loading and responsive design
+ * @description A component that displays the main hero gallery video with optimized loading and responsive design
  */
 
 interface Props {
-  /**
-   * Alternative text for the hero gallery image
-   */
-  alt?: string;
   /**
    * Additional CSS classes to apply to the gallery container
    */
   class?: string;
   /**
-   * Loading strategy for the image
+   * Whether the video should autoplay (requires muted=true)
+   */
+  autoplay?: boolean;
+  /**
+   * Whether the video should be muted
+   */
+  muted?: boolean;
+  /**
+   * Whether the video should loop
+   */
+  loop?: boolean;
+  /**
+   * Title for the video (required for accessibility)
+   */
+  title?: string;
+  /**
+   * Loading strategy for the video
    */
   loading?: "lazy" | "eager";
-  /**
-   * Image quality (0-100 or preset)
-   */
-  quality?: number | "low" | "mid" | "high" | "max";
 }
 
 const {
-  alt = "Hopkins Creek Festival gallery showcase",
   class: className = "",
-  loading = "eager",
-  quality = "high",
+  autoplay = true,
+  muted = true,
+  loop = true,
+  title = "Hopkins Creek Festival showcase video",
+  loading = "lazy",
 } = Astro.props;
 ---
 
 <section class={`hero-gallery ${className}`} aria-labelledby="gallery-heading">
   <div class="hero-gallery__container">
-    <h2 id="gallery-heading" class="visually-hidden">Festival Gallery</h2>
+    <h2 id="gallery-heading" class="visually-hidden">Festival Video Gallery</h2>
 
-    <div class="hero-gallery__image-wrapper">
-      <Image
-        src={heroGalleryImage}
-        alt={alt}
-        loading={loading}
-        quality={quality}
-        widths={[320, 640, 768, 1024, 1280, 1600]}
-        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 1200px"
-        class="hero-gallery__image"
-        format="webp"
-      />
+    <div class="hero-gallery__video-wrapper">
+      <video
+        src={heroGalleryVideo}
+        autoplay={autoplay && muted}
+        muted={muted}
+        loop={loop}
+        playsinline
+        preload={loading === "eager" ? "auto" : "metadata"}
+        class="hero-gallery__video"
+        aria-label={title}
+        title={title}
+      >
+        <source src={heroGalleryVideo} type="video/mp4" />
+        <p>
+          Your browser does not support the video tag.
+          <a href={heroGalleryVideo} download>Download the video</a> instead.
+        </p>
+      </video>
     </div>
   </div>
 </section>
 
+<script>
+  // Accessibility enhancement for reduced motion preference
+  function initVideoAccessibility() {
+    const videos = document.querySelectorAll(
+      ".hero-gallery__video"
+    ) as NodeListOf<HTMLVideoElement>;
+
+    videos.forEach((video: HTMLVideoElement) => {
+      // Respect user's reduced motion preference
+      const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)"
+      );
+
+      function handleMotionPreference() {
+        if (prefersReducedMotion.matches) {
+          video.pause();
+          video.removeAttribute("autoplay");
+          // Optionally show controls for manual playback
+          video.controls = true;
+        }
+      }
+
+      // Check preference on load
+      handleMotionPreference();
+
+      // Listen for changes
+      prefersReducedMotion.addEventListener("change", handleMotionPreference);
+    });
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initVideoAccessibility);
+  } else {
+    initVideoAccessibility();
+  }
+</script>
+
 <style lang="scss">
-  @use "../assets/scss/base/mixins" as *;
-  @use "../assets/scss/base/breakpoint" as *;
+  @use "../assets/scss/base/_mixins" as *;
 
   // Screen reader utility using design system mixin
   .visually-hidden {
@@ -73,155 +126,36 @@ const {
       padding-inline: var(--container-gutter);
     }
 
-    &__image-wrapper {
+    &__video-wrapper {
       position: relative;
       border-radius: var(--radius-lg);
       overflow: hidden;
-      box-shadow: var(--elevation-md);
-      transition: var(--transition-smooth);
-      background-color: var(--color-neutral-100);
 
-      // Focus styles for accessibility
-      &:focus-within {
-        outline: 3px solid var(--color-primary-500);
-        outline-offset: var(--space-xs);
-        box-shadow: var(--elevation-lg);
-      }
-
-      // Hover effects
-      &:hover {
-        transform: translateY(calc(var(--space-xs) * -1));
-        box-shadow: var(--elevation-lg);
-      }
-
-      @include bp(tablet-down) {
+      @media (max-width: 767px) {
         border-radius: var(--radius-md);
-
-        &:hover {
-          transform: translateY(calc(var(--space-2xs) * -1));
-        }
       }
 
-      @include bp(mobile-down) {
+      @media (max-width: 479px) {
         border-radius: var(--radius-sm);
-
-        &:hover {
-          transform: none;
-          box-shadow: var(--elevation-sm);
-        }
       }
     }
 
-    &__image {
+    &__video {
       width: 100%;
       height: auto;
       display: block;
-      transition: var(--transition-smooth);
-
-      // Ensure crisp rendering
-      image-rendering: -webkit-optimize-contrast;
-      image-rendering: crisp-edges;
-
-      // Aspect ratio container for consistent layout
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
+      object-fit: contain;
       object-position: center;
-
-      @include bp(tablet-down) {
-        aspect-ratio: 4 / 3;
-      }
-
-      @include bp(mobile-down) {
-        aspect-ratio: 3 / 2;
-      }
-
-      // Loading state using design system colors
-      &[data-loading] {
-        background: linear-gradient(
-          90deg,
-          var(--color-neutral-100) 25%,
-          var(--color-neutral-200) 50%,
-          var(--color-neutral-100) 75%
-        );
-        background-size: 200% 100%;
-        animation: shimmer var(--duration-slow) infinite;
-      }
-    }
-  }
-
-  // Animations
-  @keyframes shimmer {
-    0% {
-      background-position: -200% 0;
-    }
-    100% {
-      background-position: 200% 0;
-    }
-  }
-
-  // Reduced motion support
-  @media (prefers-reduced-motion: reduce) {
-    .hero-gallery__image-wrapper {
-      transition: none;
-
-      &:hover {
-        transform: none;
-      }
-    }
-
-    .hero-gallery__image {
-      transition: none;
-
-      &[data-loading] {
-        animation: none;
-      }
-    }
-  }
-
-  // High contrast mode support
-  @media (prefers-contrast: high) {
-    .hero-gallery__image-wrapper {
-      border: 2px solid var(--color-text-primary);
-    }
-  }
-
-  // Dark mode support using design system
-  @media (prefers-color-scheme: dark) {
-    .hero-gallery__image-wrapper {
-      background-color: var(--color-neutral-800);
-      box-shadow: var(--elevation-dark-md);
-
-      &:hover {
-        box-shadow: var(--elevation-dark-lg);
-      }
-
-      &:focus-within {
-        box-shadow: var(--elevation-dark-lg);
-      }
-    }
-  }
-
-  // Print styles
-  @media print {
-    .hero-gallery {
-      break-inside: avoid;
-      page-break-inside: avoid;
-      padding: var(--space-md) 0;
-    }
-
-    .hero-gallery__image-wrapper {
-      box-shadow: none;
-      transform: none !important;
     }
   }
 
   // Large screens optimization
-  @include bp(desktop-up) {
+  @media (min-width: 1024px) {
     .hero-gallery {
       padding: var(--space-xl) var(--space-lg);
     }
 
-    .hero-gallery__image-wrapper {
+    .hero-gallery__video-wrapper {
       border-radius: var(--radius-xl);
     }
   }

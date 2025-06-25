@@ -1,0 +1,14 @@
+{
+  "folders": [
+    {
+      "path": "..",
+    },
+    {
+      "path": "../../hopkins-creek-festival/cms",
+    },
+  ],
+  "settings": {
+    "editor.wordWrap": "on",
+    "editor.fontFamily": "'Jet Brains Mono NF'",
+  },
+}

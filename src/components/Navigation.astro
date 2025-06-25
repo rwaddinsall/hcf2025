@@ -703,11 +703,11 @@ try {
     display: flex;
     align-items: center;
     gap: var(--space-s);
-    padding: var(--space-xs) var(--space-m); // Slightly more horizontal padding
+    padding: var(--space-5xs) var(--space-s); // Slightly more horizontal padding
     color: var(--nav-text);
     text-decoration: none;
     font-weight: 500;
-    border-radius: 9999px; // True pill shape instead of 50px
+    border-radius: var(--radius-l); // True pill shape instead of 50px
     transition: var(--nav-transition);
     background: transparent;
     border: 1px solid transparent; // Prevents size jumping on hover
@@ -724,8 +724,8 @@ try {
     // Improved hover states
     &:hover,
     &:focus-visible {
-      color: var(--nav-text-hover);
-      background: var(--brand-secondary);
+      color: white; // Ensure text is readable);
+      background: black; // Subtle background change);
       border-color: rgba(255, 255, 255, 0.1); // Subtle border
     }
 
@@ -1380,12 +1380,12 @@ try {
     margin-left: 0.5rem;
   }
 
-  // Base nav link styling - MINIMAL PILLS
+  // Base nav link styling - TIGHT PILLS
   .nav-link {
     display: flex;
     align-items: center;
-    gap: var(--space-2xs); // Reduced gap
-    padding: var(--space-2xs) var(--space-s); // Reduced padding for shorter pills
+    gap: var(--space-5xs); // Reduced gap
+    padding: var(--space-5xs) var(--space-5xs); // Extra tight vertical padding
     color: var(--nav-text);
     text-decoration: none;
     font-weight: 500;
@@ -1403,12 +1403,12 @@ try {
       position: relative;
     }
 
-    // Default hover states - subtle
+    // Default hover states - black and white
     &:hover,
     &:focus-visible {
-      color: var(--nav-text-hover);
-      background: rgba(0, 0, 0, 0.05);
-      border-color: rgba(0, 0, 0, 0.1);
+      color: white;
+      background: rgba(0, 0, 0, 0.9);
+      border-color: rgba(0, 0, 0, 0.9);
     }
 
     // Active state with underline (keeping original behavior)
@@ -1482,9 +1482,9 @@ try {
     &:hover,
     &.active {
       .dropdown-trigger {
-        color: var(--nav-accent);
-        background: rgba(0, 0, 0, 0.05); // Minimal hover state
-        border-color: rgba(0, 0, 0, 0.1);
+        color: white;
+        background: rgba(0, 0, 0, 0.9);
+        border-color: rgba(0, 0, 0, 0.9);
       }
 
       .dropdown-icon {
@@ -1528,12 +1528,12 @@ try {
     padding: var(--space-xs); // Use design system spacing
   }
 
-  // Improved dropdown links - MINIMAL DESIGN
+  // Improved dropdown links - TIGHT DESIGN
   .dropdown-link {
     display: flex;
     align-items: center;
     gap: var(--space-2xs); // Reduced gap to match nav links
-    padding: var(--space-2xs) var(--space-s); // Reduced padding for shorter pills
+    padding: var(--space-3xs) var(--space-s); // Extra tight vertical padding
     color: var(--nav-text);
     text-decoration: none;
     border-radius: 9999px; // True pill shape
@@ -1543,9 +1543,9 @@ try {
 
     &:hover,
     &:focus-visible {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
-      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      border-color: rgba(0, 0, 0, 0.9);
     }
 
     &:focus-visible {
@@ -1709,7 +1709,8 @@ try {
     }
 
     &:hover {
-      background: rgba(0, 0, 0, 0.05);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
     }
   }
 
@@ -1717,12 +1718,12 @@ try {
     padding: var(--space-m); // Use design system spacing
   }
 
-  // Improved mobile links - MINIMAL DESIGN
+  // Improved mobile links - TIGHT DESIGN
   .mobile-link {
     display: flex;
     align-items: center;
     gap: var(--space-2xs); // Reduced gap to match desktop nav
-    padding: var(--space-2xs) var(--space-s); // Consistent with desktop nav
+    padding: var(--space-3xs) var(--space-s); // Extra tight vertical padding
     color: var(--nav-text);
     text-decoration: none;
     border-radius: 9999px; // True pill shape
@@ -1733,17 +1734,17 @@ try {
 
     &:hover,
     &:focus-visible {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
-      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      border-color: rgba(0, 0, 0, 0.9);
     }
 
     // Better active state
     &.active {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
       font-weight: 600;
-      border-color: rgba(0, 0, 0, 0.1);
+      border-color: rgba(0, 0, 0, 0.9);
     }
   }
 
@@ -1752,14 +1753,14 @@ try {
     margin-bottom: var(--space-xs); // Design system spacing
   }
 
-  // Improved mobile dropdown elements - MINIMAL DESIGN
+  // Improved mobile dropdown elements - TIGHT DESIGN
   .mobile-dropdown-trigger {
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     gap: var(--space-2xs); // Design system spacing - reduced
-    padding: var(--space-2xs) var(--space-s); // Consistent padding - reduced
+    padding: var(--space-3xs) var(--space-s); // Extra tight vertical padding
     color: var(--nav-text);
     background: none;
     border: 1px solid transparent;
@@ -1775,17 +1776,17 @@ try {
     }
 
     &:hover {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
-      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      border-color: rgba(0, 0, 0, 0.9);
     }
   }
 
   // Active dropdown state
   .mobile-dropdown.active {
     .mobile-dropdown-trigger {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
 
       .mobile-dropdown-icon {
         transform: rotate(180deg);
@@ -1806,7 +1807,7 @@ try {
 
   .mobile-dropdown-link {
     display: block;
-    padding: var(--space-2xs) var(--space-s); // Design system spacing - reduced
+    padding: var(--space-3xs) var(--space-s); // Extra tight vertical padding
     color: var(--nav-text);
     text-decoration: none;
     border-radius: 9999px; // True pill shape
@@ -1816,9 +1817,9 @@ try {
 
     &:hover,
     &:focus-visible {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--nav-accent);
-      border-color: rgba(0, 0, 0, 0.1);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      border-color: rgba(0, 0, 0, 0.9);
     }
   }
 

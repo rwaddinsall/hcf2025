@@ -88,7 +88,7 @@ artists.sort((a, b) => {
                         class="artist-annotation"
                         aria-label={`Additional info: ${artist.annotation}`}
                       >
-                        [{artist.annotation}]
+                        ({artist.annotation})
                       </span>
                     )}
                   </a>
@@ -100,7 +100,7 @@ artists.sort((a, b) => {
                         class="artist-annotation"
                         aria-label={`Additional info: ${artist.annotation}`}
                       >
-                        [{artist.annotation}]
+                        ({artist.annotation})
                       </span>
                     )}
                   </>
@@ -143,7 +143,7 @@ artists.sort((a, b) => {
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
-    gap: var(--space-4xs) var(--space-s);
+    gap: var(--space-5xs) var(--space-s);
     text-align: center;
 
     @media (min-width: 48rem) {
@@ -161,34 +161,39 @@ artists.sort((a, b) => {
     white-space: nowrap;
     opacity: 0;
     animation: fadeInUp 0.6s var(--cubic-bezier, ease) forwards;
+    padding: var(--space-4xs) var(--space-3xs);
+    border-radius: var(--radius-xs);
     transition:
       opacity var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
-      transform var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
+      transform var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
+      background-color var(--animation-speed-fast, 0.2s)
+        var(--cubic-bezier, ease);
   }
 
   /* Grid Hover Effects */
   .lineup-grid:hover .lineup-artist {
-    opacity: 0.6;
+    opacity: 0.3;
   }
 
   .lineup-grid:hover .lineup-artist:hover {
     opacity: 1;
     transform: translateY(-2px) scale(1.02);
+    background-color: var(--color-neutral-200);
   }
 
   /* Artist Name Typography */
   .artist-name {
     margin: 0;
-    font-size: var(--font-size-2);
+    font-size: var(--font-size-6);
     font-family: var(--font-heading);
     line-height: 1.2;
 
     @media (min-width: 48rem) {
-      font-size: var(--font-size-3);
+      font-size: var(--font-size-5);
     }
 
     @media (min-width: 64rem) {
-      font-size: var(--font-size-4);
+      font-size: var(--font-size-6);
     }
   }
 
@@ -231,22 +236,23 @@ artists.sort((a, b) => {
 
   /* Artist Annotation - Metadata Styling */
   .artist-annotation {
-    font-size: 0.75em;
+    font-size: 0.6em;
     font-weight: 300;
-    font-family: var(--font-body);
+    font-family: var(--font-heading);
     margin-inline-start: var(--space-4xs);
     opacity: 0.8;
     color: var(--foreground-color);
+    vertical-align: super;
     transition: opacity var(--animation-speed-fast, 0.2s)
       var(--cubic-bezier, ease);
 
     @media (min-width: 48rem) {
-      font-size: 0.7em;
+      font-size: 0.55em;
       margin-inline-start: var(--space-3xs);
     }
 
     @media (min-width: 64rem) {
-      font-size: 0.65em;
+      font-size: 0.5em;
       margin-inline-start: var(--space-2xs);
     }
   }
@@ -254,6 +260,11 @@ artists.sort((a, b) => {
   /* Hover Enhancement for Annotations */
   .artist-link:where(:hover, :focus-visible) .artist-annotation {
     opacity: 1;
+  }
+
+  /* Dark Mode Support for Hover Effects */
+  :global(.darkmode) .lineup-grid:hover .lineup-artist:hover {
+    background-color: var(--color-neutral-800);
   }
 
   /* Animation Keyframes */

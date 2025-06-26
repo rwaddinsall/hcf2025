@@ -17,6 +17,7 @@ import type {
   ScrollingHeaderText,
   AcknowledgementOfCountry,
   ApplicationsPage,
+  GeneralPage,
 } from "../interfaces/strapi";
 
 // Type-safe access to static content
@@ -24,7 +25,7 @@ const content = staticContent as {
   fetchedAt: string;
   strapiUrl: string;
   infoPages: InfoPage[];
-  artists: Artist[];
+  artists: any[];
   scrollingHeaderText: ScrollingHeaderText | null;
   acknowledgementOfCountry: AcknowledgementOfCountry | null;
   bigLink: any | null;
@@ -33,7 +34,7 @@ const content = staticContent as {
     InfoPage,
     "id" | "documentId" | "slug" | "heading"
   >[];
-  generalPagesForFooter: any[];
+  generalPagesForFooter: GeneralPage[];
 };
 
 /**
@@ -57,8 +58,13 @@ export function getInfoPagesForNavigation() {
  * General Pages Functions
  */
 
-export function getAllGeneralPages() {
+export function getAllGeneralPages(): GeneralPage[] {
   return content.generalPagesForFooter || [];
+}
+
+export function getGeneralPageBySlug(slug: string): GeneralPage | null {
+  const pages = getAllGeneralPages();
+  return pages.find((page) => page.slug === slug) || null;
 }
 
 /**
@@ -73,7 +79,7 @@ export function getArtistBySlug(slug: string): Artist | null {
   const artists = getAllArtists();
   return (
     artists.find(
-      (artist) => artist.name?.toLowerCase().replace(/\s+/g, "-") === slug,
+      (artist) => artist.name?.toLowerCase().replace(/\s+/g, "-") === slug
     ) || null
   );
 }
@@ -134,6 +140,14 @@ export function getContentMetadata() {
 
 export function getInfoPageStaticPaths() {
   const pages = getAllInfoPages();
+  return pages.map((page) => ({
+    params: { slug: page.slug },
+    props: { page },
+  }));
+}
+
+export function getGeneralPageStaticPaths() {
+  const pages = getAllGeneralPages();
   return pages.map((page) => ({
     params: { slug: page.slug },
     props: { page },

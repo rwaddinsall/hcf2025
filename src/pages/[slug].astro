@@ -1,0 +1,33 @@
+---
+import GeneralPageLayout from '../components/GeneralPageLayout.astro';
+import { getAllGeneralPages, getGeneralPageBySlug } from '../utils/static-content';
+
+// Static generation: Get all possible slugs from static content
+export async function getStaticPaths() {
+  const generalPages = getAllGeneralPages();
+  // Only return valid slugs
+  return generalPages
+    .filter(
+      (page) =>
+        page.slug &&
+        typeof page.slug === 'string' &&
+        page.slug.trim().length > 0
+    )
+    .map((page) => ({
+      params: { slug: page.slug },
+    }));
+}
+
+// Get the slug from the URL
+const { slug } = Astro.params;
+const pageData = getGeneralPageBySlug(slug);
+---
+
+{pageData && (
+  <GeneralPageLayout
+    slug={slug}
+    fallbackTitle={pageData.title}
+    fallbackSubtitle={pageData.subtitle}
+    fallbackContent={pageData.content}
+  />
+)}

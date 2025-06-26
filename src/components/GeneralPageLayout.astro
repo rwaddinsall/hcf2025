@@ -1,0 +1,100 @@
+---
+import DefaultLayout from '../layouts/DefaultLayout.astro';
+import PageHeader from './PageHeader.astro';
+import { getGeneralPageBySlug } from '../utils/static-content';
+import { renderSafeContent } from '../utils/renderContent';
+
+interface Props {
+  slug: string;
+  fallbackTitle?: string;
+  fallbackSubtitle?: string;
+  fallbackContent?: string;
+}
+
+const {
+  slug,
+  fallbackTitle,
+  fallbackSubtitle,
+  fallbackContent = '',
+} = Astro.props;
+
+// Get data from static content
+const pageData = getGeneralPageBySlug(slug);
+let pageTitle = fallbackTitle || 'Page';
+let pageSubtitle = fallbackSubtitle || '';
+let pageContent = fallbackContent;
+
+if (pageData) {
+  pageTitle = pageData.title || fallbackTitle || 'Page';
+  pageSubtitle = pageData.subtitle || fallbackSubtitle || '';
+  
+  // Render safe content from Strapi
+  if (pageData.content) {
+    pageContent = renderSafeContent(pageData.content);
+  }
+} else if (fallbackContent) {
+  // Process fallback content
+  pageContent = renderSafeContent(fallbackContent);
+}
+---
+
+<DefaultLayout
+  title={`${pageTitle} - Hopkins Creek Festival`}
+  description={pageSubtitle || `${pageTitle} - Hopkins Creek Festival`}
+>
+  <PageHeader
+    title={pageTitle}
+    subtitle={pageSubtitle}
+  />
+  
+  <section class="container my-16 narrow">
+    <div class="space-content">
+      <div set:html={pageContent} />
+      <slot />
+    </div>
+  </section>
+</DefaultLayout>
+
+<style lang="scss">
+  .space-content {
+    h2 {
+      font-weight: bold;
+      margin-top: var(--space-l);
+      margin-bottom: var(--space-m);
+    }
+
+    h3 {
+      font-weight: bold;
+      margin-top: var(--space-m);
+      margin-bottom: var(--space-s);
+    }
+
+    p {
+      margin-bottom: var(--space-m);
+      line-height: 1.6;
+    }
+
+    ul, ol {
+      margin-bottom: var(--space-m);
+      padding-left: var(--space-m);
+
+      li {
+        margin-bottom: var(--space-xs);
+        line-height: 1.6;
+      }
+    }
+
+    strong {
+      font-weight: 600;
+    }
+
+    a {
+      color: var(--color-primary);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--color-primary-dark);
+      }
+    }
+  }
+</style>

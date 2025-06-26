@@ -55,11 +55,22 @@ const generalPages = getAllGeneralPages();
           <h3 class="mb-2 text-lg font-semibold">Legal</h3>
           <ul class="flex flex-col gap-2">
             {
-              generalPages.map((page) => (
-                <li>
-                  <a href={`/${page.slug}`}>{page.title}</a>
-                </li>
-              ))
+              generalPages.length > 0 ? 
+                generalPages.map((page) => (
+                  <li>
+                    <a href={`/${page.slug}`}>{page.title}</a>
+                  </li>
+                ))
+              : (
+                <>
+                  <li>
+                    <a href="/privacy-policy">Privacy Policy</a>
+                  </li>
+                  <li>
+                    <a href="/terms">Terms & Conditions</a>
+                  </li>
+                </>
+              )
             }
           </ul>
         </div>

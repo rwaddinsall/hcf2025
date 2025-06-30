@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-06-26T05:39:59.020Z",
+  "fetchedAt": "2025-06-30T02:06:09.054Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -117,50 +117,50 @@
       ]
     },
     {
-      "id": 27,
+      "id": 29,
       "documentId": "hfv8pmdi6eu2s46iw3ai9u4k",
       "createdAt": "2025-06-25T10:34:06.745Z",
-      "updatedAt": "2025-06-26T04:09:09.104Z",
-      "publishedAt": "2025-06-26T04:09:09.209Z",
+      "updatedAt": "2025-06-26T06:58:18.813Z",
+      "publishedAt": "2025-06-26T06:58:18.952Z",
       "heading": "Ticketing Info",
       "subheading": null,
       "slug": "ticketing-info",
       "accordion": [
         {
-          "id": 113,
+          "id": 125,
           "category": "general",
           "title": "Ticketing & Entry",
           "details": "You’ll need a digital ticket and valid photo ID. No ID, no entry.\n \nDon’t print your ticket — just save the PDF or a screenshot to your phone, and make sure your screen brightness is up.\n\nEvery ticket is scanned at the gate. If your ticket has already been scanned, entry will be denied.\n\nDon’t share your ticket or screenshot it for your mate — it won’t work for them, and it won’t work for you either.\n\nWristbands must be worn at all times while on site.\n"
         },
         {
-          "id": 114,
+          "id": 126,
           "category": "general",
           "title": "Ticket Resale",
           "details": "The only official resale platform is Humanitix.\n\nYou cannot list your ticket on Tixel or other resale platforms. We can’t help with name changes outside of Humanitix, either.\n\nThis is for your safety and to prevent scams.\n"
         },
         {
-          "id": 115,
+          "id": 127,
           "category": "general",
           "title": "Car Passes",
           "details": "Every car entering the site needs a valid car pass — unless you’re bringing 3 or more people in the same car.\n\nPasses are available through Humanitix and help us reduce traffic and offset carbon emissions.\n\n100% of car pass revenue goes toward sustainability projects.\n"
         },
         {
-          "id": 116,
+          "id": 128,
           "category": "general",
           "title": "Accessibility",
           "details": "If you have accessibility requirements, you can let us know during checkout using the Accessibility Needs field. You’re also welcome to email us at info@hopkins-creek.com and we’ll make sure your needs are communicated to our crew ahead of the event."
         },
         {
-          "id": 117,
+          "id": 129,
           "category": "general",
           "title": "Birthday Tickets",
           "details": "Hopkins Creek runs on equal access—one price, one ticket, no early birds, no VIPs, no back doors. This keeps the experience intimate, fair, and grounded.\n\nThat means we don’t offer birthday tickets or special discounts — even for those celebrating something special.\n\nIf you do end up marking your birthday out there with us, swing past the info tent and let us know — we’ll sort you out with a drink on the house."
         },
         {
-          "id": 118,
+          "id": 130,
           "category": "general",
           "title": "First Nations Tickets",
-          "details": "We gather on Taungurung Country.\n\nLong before sound systems and scaff towers,\nthis land held stories.\nIt still does.\n\nThese hills, these winds, this dirt —\nbelong to the Taungurung people.\n\nIt always has. It always will.\n\nWe pay our respects to their Elders — past and present —\nand to the mob who carry culture forward,\ndespite everything.\n\nHopkins stands in solidarity with First Nations people.\nAlways.\n\nTo support access:\n\n- Free tickets for Taungurung people\n- $200 +BF tickets for all other Aboriginal and Torres Strait Islanders\n\nOne per person.\nSpots are limited — apply early.\n\n\nApplications close 15 July\nWe’ll be in touch by 30 July\n\n\nThese tickets are separate from general release —\na dedicated allocation has been set aside to support community access,\nregardless of whether the event sells out."
+          "details": "We’re currently developing a First Nations ticketing policy in consultation with community. Thanks for your patience while we work through the right approach. A limited allocation of tickets will be available via application in mid-July — completely separate from the main release and unaffected by a sell-out."
         }
       ]
     },
@@ -1033,7 +1033,7 @@
       "heading": "Camping & Accomodation"
     },
     {
-      "id": 27,
+      "id": 29,
       "documentId": "hfv8pmdi6eu2s46iw3ai9u4k",
       "slug": "ticketing-info",
       "heading": "Ticketing Info"

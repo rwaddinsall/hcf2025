@@ -485,6 +485,8 @@ const infoPages = getAllInfoPages();
     min-height: var(--nav-height);
     position: relative;
     z-index: 2;
+    container-type: inline-size; // Enable container queries
+    container-name: nav-container;
 
     // Responsive margin adjustments using design system breakpoints
     @media (min-width: 768px) {
@@ -842,6 +844,35 @@ const infoPages = getAllInfoPages();
     transform: translateY(-8px);
     transition: var(--nav-transition);
     z-index: 1000;
+
+    // Ensure dropdown stays within viewport bounds
+    max-width: calc(100vw - 2rem);
+    
+    // Auto-position for right-side nav items to prevent cutoff
+    // Target the last nav items (typically Info and Tickets)
+    .nav-item:nth-last-child(-n+2) & {
+      left: auto;
+      right: 0;
+    }
+    
+    // Small screen adjustments
+    @media (max-width: 600px) {
+      min-width: 260px;
+      left: auto;
+      right: 0;
+    }
+    
+    // Very small screens - center the dropdown
+    @media (max-width: 400px) {
+      min-width: calc(100vw - 3rem);
+      left: 50%;
+      right: auto;
+      transform: translateX(-50%) translateY(-8px);
+      
+      .nav-dropdown.active & {
+        transform: translateX(-50%) translateY(0);
+      }
+    }
   }
 
   .dropdown-content {

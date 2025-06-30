@@ -25,7 +25,6 @@
 # Handle trailing slashes consistently
 
 /info/ /info 301
-/program/ /program 301
 /applications/ /applications 301
 
 # ================================

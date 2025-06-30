@@ -1,4 +1,4 @@
-@use 'breakpoint' as *;
+@use "breakpoint" as *;
 
 ul:not([class]),
 ol:not([class]) {
@@ -44,7 +44,7 @@ ol.incremented li {
 
 ol.incremented li::before {
   counter-increment: item;
-  content: counters(item, '.') '. ';
+  content: counters(item, ".") ". ";
 }
 
 ol.incremented li:last-child {
@@ -56,5 +56,5 @@ ol.incremented li p {
 }
 
 ol.incremented ul li::before {
-  content: '';
+  content: "";
 }

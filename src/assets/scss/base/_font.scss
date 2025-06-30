@@ -7,51 +7,10 @@
   src:
     local("ABC Diatype Semi Mono Regular"),
     local("ABCDiatypeSemi-Mono-Regular"),
-    url("/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf") format("opentype");
-  font-family: "ABC Diatype Semi Mono";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 300;
-  src:
-    local("ABC Diatype Semi Mono Light"),
-    local("ABCDiatypeSemi-Mono-Light"),
-    url("/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf") format("opentype");
-  font-family: "ABC Diatype Semi Mono";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 500;
-  src:
-    local("ABC Diatype Semi Mono Medium"),
-    local("ABCDiatypeSemi-Mono-Medium"),
-    url("/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf") format("opentype");
-  font-family: "ABC Diatype Semi Mono";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 600;
-  src:
-    local("ABC Diatype Semi Mono SemiBold"),
-    local("ABCDiatypeSemi-Mono-SemiBold"),
-    url("/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf") format("opentype");
-  font-family: "ABC Diatype Semi Mono";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: normal;
-  font-weight: 700;
-  src:
-    local("ABC Diatype Semi Mono Bold"),
-    local("ABCDiatypeSemi-Mono-Bold"),
-    url("/fonts/ABCDiatypeSemi-Mono-Regular-Trial.otf") format("opentype");
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff")
+      format("woff"),
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.otf")
+      format("opentype");
   font-family: "ABC Diatype Semi Mono";
   font-display: swap;
 }
@@ -63,51 +22,9 @@
   src:
     local("ABC Marist Book Italic"),
     local("ABCMarist-BookItalic"),
-    url("/fonts/ABCMarist-BookItalic-Trial.otf") format("opentype");
-  font-family: "ABC Marist";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: italic;
-  font-weight: 300;
-  src:
-    local("ABC Marist Light Italic"),
-    local("ABCMarist-LightItalic"),
-    url("/fonts/ABCMarist-BookItalic-Trial.otf") format("opentype");
-  font-family: "ABC Marist";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: italic;
-  font-weight: 500;
-  src:
-    local("ABC Marist Medium Italic"),
-    local("ABCMarist-MediumItalic"),
-    url("/fonts/ABCMarist-BookItalic-Trial.otf") format("opentype");
-  font-family: "ABC Marist";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: italic;
-  font-weight: 600;
-  src:
-    local("ABC Marist SemiBold Italic"),
-    local("ABCMarist-SemiBoldItalic"),
-    url("/fonts/ABCMarist-BookItalic-Trial.otf") format("opentype");
-  font-family: "ABC Marist";
-  font-display: swap;
-}
-
-@font-face {
-  font-style: italic;
-  font-weight: 700;
-  src:
-    local("ABC Marist Bold Italic"),
-    local("ABCMarist-BoldItalic"),
-    url("/fonts/ABCMarist-BookItalic-Trial.otf") format("opentype");
+    url("/fonts/Marist/ABCMarist-BookItalic.woff2") format("woff2"),
+    url("/fonts/Marist/ABCMarist-BookItalic.woff") format("woff"),
+    url("/fonts/Marist/ABCMarist-BookItalic.otf") format("opentype");
   font-family: "ABC Marist";
   font-display: swap;
 }

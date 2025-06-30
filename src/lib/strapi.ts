@@ -41,11 +41,11 @@ export default async function fetchApi<T>({
         "URL:",
         url.toString(),
         "Response:",
-        errorText,
+        errorText
       );
 
       throw new Error(
-        `Failed to fetch from Strapi: ${res.status} ${res.statusText}`,
+        `Failed to fetch from Strapi: ${res.status} ${res.statusText}`
       );
     }
 
@@ -73,7 +73,7 @@ export default async function fetchApi<T>({
     }
     // Handle other errors
     throw new Error(
-      `Network error while fetching from Strapi: ${String(error)}`,
+      `Network error while fetching from Strapi: ${String(error)}`
     );
   }
 }

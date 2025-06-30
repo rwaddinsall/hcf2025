@@ -56,7 +56,7 @@
     letter-spacing: inherit;
   }
 
-  input[type='text'],
+  input[type="text"],
   textarea {
     inline-size: 100%;
   }
@@ -116,7 +116,7 @@
     margin-block-end: 1em;
   }
 
-  [tabindex='-1'] {
+  [tabindex="-1"] {
     outline: none !important;
     box-shadow: none !important;
   }

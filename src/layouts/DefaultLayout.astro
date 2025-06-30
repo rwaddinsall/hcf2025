@@ -5,6 +5,7 @@ import SiteMeta from "../components/SiteMeta.astro";
 import Footer from "../components/Footer.astro";
 import Navigation from "@components/Navigation.astro";
 
+
 const {
   title = "Hopkins Creek Festival",
   description = "Hopkins Creek Music Festival - A celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists and good vibes.",
@@ -34,7 +35,9 @@ const {
   <body>
     <Navigation />
     <main id="main-content">
-      <slot />
+      <div class="container mx-auto px-6 md:px-8 py-12 md:py-20 flex flex-col items-center">
+        <slot />
+      </div>
     </main>
     <Footer />
     <style lang="scss" is:global>
@@ -54,7 +57,7 @@ const {
         main {
           flex: 1 0 auto;
           max-width: var(--grid-max-width);
-          margin: var(--space-xs) auto 0; // Reduced top margin for tighter spacing from nav
+          margin: var(--space-s) auto 0; // Reduced top margin for tighter spacing from nav
           // Removed conflicting padding-inline - components handle their own horizontal spacing
           // Removed vertical padding - components handle their own vertical spacing
         }
@@ -73,5 +76,6 @@ const {
         padding: 1rem;
       }
     </style>
+    <script is:inline src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
   </body>
 </html>

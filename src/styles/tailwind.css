@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@plugin "flowbite/plugin";
+@plugin 'daisyui';
+@source "../../node_modules/flowbite";

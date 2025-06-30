@@ -1,8 +1,6 @@
 ---
 import {
   Avatar,
-  Breadcrumbs,
-  BreadcrumbsItem,
 } from 'accessible-astro-components';
 import { Image } from 'astro:assets';
 import { renderSafeContent } from '../utils/renderContent';
@@ -66,97 +64,83 @@ const sanitizedSubtitle: string = subtitle
   : '';
 ---
 
-<section class:list={[className, 'page-header']}>
-  <div class="container my-3">
-    {
-      showBreadcrumbs &&
-        (() => {
-          const path = Astro.url.pathname;
-          const segments = path.split('/').filter(Boolean);
-
-          if (segments.length === 0) {
-            return null; // No breadcrumbs on homepage
-          }
-
-          return (
-            <Breadcrumbs>
-              <BreadcrumbsItem href="/" label="Home" />
-              {segments.map((segment, index) => {
-                const url = `/${segments.slice(0, index + 1).join('/')}`;
-                const isLast = index === segments.length - 1;
-                const formattedName = segment
-                  .split('-')
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(' ');
-
-                return (
-                  <BreadcrumbsItem
-                    href={isLast ? undefined : url}
-                    label={formattedName}
-                    currentPage={isLast}
-                  />
-                );
-              })}
-            </Breadcrumbs>
-          );
-        })()
-    }
-  </div>
-  <div class:list={['py-16', bgType && `bg-${bgType}`]}>
-    <div class="container space-content">
-      {
-        featuredImage && (
-          <div class="mb-8 featured-image-container">
-            <Image
-              src={featuredImage}
-              alt=""
-              width={1200}
-              height={250}
-              class="h-[250px] w-full rounded-lg object-cover"
-            />
-          </div>
-        )
-      }
-      <h1>{title}</h1>
-      {sanitizedSubtitle && <p class="text-2xl" set:html={sanitizedSubtitle} />}
-      {
-        author && (
-          <div class="flex items-center mt-6">
-            <Avatar
-              title={author.name}
-              image={author.image}
-              subtitle={author.bio}
-            />
-          </div>
-        )
-      }
-    </div>
+<section class:list={[className, 'page-header', 'mb-4', 'flex', 'flex-col', 'items-center', 'w-full', 'max-w-4xl', 'mx-auto', 'px-4', 'md:px-8']}>
+  {showBreadcrumbs && (() => {
+    const path = Astro.url.pathname;
+    const segments = path.split('/').filter(Boolean);
+    if (segments.length === 0) return null;
+    return (
+      <div class="breadcrumbs text-sm mb-6 w-full">
+        <ul>
+          <li><a href="/">Home</a></li>
+          {segments.map((segment, index) => {
+            const url = `/${segments.slice(0, index + 1).join('/')}`;
+            const isLast = index === segments.length - 1;
+            const formattedName = segment
+              .split('-')
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(' ');
+            return (
+              <li>
+                {isLast ? (
+                  <span aria-current="page">{formattedName}</span>
+                ) : (
+                  <a href={url}>{formattedName}</a>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+    );
+  })()}
+  <div class:list={[bgType && `bg-${bgType}`, 'py-8', 'w-full', 'rounded-xl', 'mb-6', 'flex', 'flex-col', 'items-center']}>
+    {featuredImage && (
+      <div class="mb-8 featured-image-container w-full">
+        <Image
+          src={featuredImage}
+          alt=""
+          width={1200}
+          height={250}
+          class="h-[250px] w-full rounded-lg object-cover"
+        />
+      </div>
+    )}
+    <h1 class="text-7xl md:text-7xl font-bold mb-4 text-center w-full">{title}</h1>
+    {sanitizedSubtitle && <p class="text-5xl leading-relaxed text-neutral-700 dark:text-neutral-200 mb-6 text-center px-4" set:html={sanitizedSubtitle} />}
+    {author && (
+      <div class="flex items-center mt-4">
+        <Avatar src={author.image} alt={author.name} class="mr-4" />
+        <div>
+          <h2 class="text-2xl font-bold">{author.name}</h2>
+          <p class="text-sm text-neutral-600 dark:text-neutral-400">{author.bio}</p>
+        </div>
+      </div>
+    )}
   </div>
 </section>
 
 <style>
   .page-header {
+    /* Remove border and box-shadow from header */
     .bg-primary {
       background-color: light-dark(
         var(--color-primary-100),
         var(--color-primary-500)
       );
     }
-
     .bg-secondary {
       background-color: light-dark(
         var(--color-secondary-100),
         var(--color-secondary-500)
       );
     }
-
     .bg-neutral {
       background-color: light-dark(
         var(--color-neutral-300),
         var(--color-neutral-800)
       );
     }
-
     .bg-gradient {
       background-image: linear-gradient(
         315deg,
@@ -165,15 +149,9 @@ const sanitizedSubtitle: string = subtitle
       );
       color: var(--color-neutral-900);
     }
-
     .bg-bordered {
       border: 1px solid var(--border-color-subtle);
       border-inline: 0;
-    }
-
-    .featured-image-container {
-      max-height: 500px;
-      /* overflow: hidden; */
     }
   }
 </style>

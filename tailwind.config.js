@@ -1,14 +1,10 @@
-import { heroui } from '@heroui/react'
+import daisyui from 'daisyui'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
-  ],
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {},
   },
-  plugins: [heroui()],
-  darkMode: 'class',
+  plugins: [daisyui],
 }

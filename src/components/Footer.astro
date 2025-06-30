@@ -12,62 +12,59 @@ import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
 // Get info pages for Information column from static content
 const infoPages = getAllInfoPages();
 
-// Get general pages for Legal column from static content  
+// Get general pages for Legal column from static content
 const generalPages = getAllGeneralPages();
 ---
 
-<footer>
-  <section class="py-20">
+<footer class="site-footer">
+  <section class="footer-main">
     <h2 class="sr-only">Footer</h2>
-    <div class="container mx-auto">
-      <!-- Footer Navigation Grid -->
-      <div
-        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-center sm:gap-12 lg:gap-16"
-      >
-        <!-- Column 1: Main Navigation -->
-        <div class="flex flex-col gap-4">
-          <h3 class="mb-2 text-lg font-semibold">Festival</h3>
-          <ul class="flex flex-col gap-2">
-            <li><a href="/">Home</a></li>
-            <li><a href="/">Artists</a></li>
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-column">
+          <h3 class="footer-heading">Festival</h3>
+          <ul class="footer-links">
+            <li><a href="/" class="footer-link">Home</a></li>
+            <li><a href="https://events.humanitix.com/hopkins-creek-2025" class="footer-link" target="_blank" rel="noopener noreferrer">Tickets</a></li>
+            <!-- <li><a href="/" class="footer-link">Artists</a></li> -->
           </ul>
         </div>
 
-        <!-- Column 2: Info & Services -->
-        <div class="flex flex-col gap-4">
-          <h3 class="mb-2 text-lg font-semibold">Information</h3>
-          <ul class="flex flex-col gap-2">
+        <div class="footer-column">
+          <h3 class="footer-heading">Information</h3>
+          <ul class="footer-links">
             {
               infoPages.map((page) => (
                 <li>
-                  <a href={`/info/${page.slug}`}>{page.heading}</a>
+                  <a href={`/info/${page.slug}`} class="footer-link">{page.heading}</a>
                 </li>
               ))
             }
             <li>
-              <a href="/sustainability">Sustainability</a>
+              <a href="/sustainability" class="footer-link">Sustainability</a>
             </li>
           </ul>
         </div>
 
         <!-- Column 3: Legal -->
-        <div class="flex flex-col gap-4">
-          <h3 class="mb-2 text-lg font-semibold">Legal</h3>
-          <ul class="flex flex-col gap-2">
+        <div class="footer-column">
+          <h3 class="footer-heading">Legal</h3>
+          <ul class="footer-links">
             {
-              generalPages.length > 0 ? 
+              generalPages.length > 0 ?
                 generalPages.map((page) => (
                   <li>
-                    <a href={`/${page.slug}`}>{page.title}</a>
+                    <a href={`/${page.slug}`} class="footer-link">{page.title}</a>
                   </li>
                 ))
               : (
                 <>
                   <li>
-                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
                   </li>
                   {/* <li>
-                    <a href="/terms">Terms & Conditions</a>
+                    <a href="/terms" class="footer-link">Terms & Conditions</a>
                   </li> */}
                 </>
               )
@@ -76,55 +73,126 @@ const generalPages = getAllGeneralPages();
         </div>
       </div>
 
-      <!-- Acknowledgement of Country - Prominent placement at top -->
-      <section class="acknowledgement-section">
-        <div class="container">
-          <ScrollingText
-            strapiType="acknowledgement-of-country"
-            duration={30}
-            ariaLabel="Acknowledgement of Country"
-            width="100%"
-            variant="acknowledgement-of-country"
-          />
-        </div>
-      </section>
+      <!-- Acknowledgement of Country - Prominent placement -->
+      <div class="footer-acknowledgement">
+        <ScrollingText
+          strapiType="acknowledgement-of-country"
+          class="acknowledgement-text"
+          duration={45}
+          ariaLabel="Acknowledgement of Country"
+          width="75%"
+          variant="acknowledgement-of-country"
+        />
+      </div>
     </div>
   </section>
-
-  <!-- Social Icons Row (lower portion) - COMMENTED OUT -->
-  <!-- 
-  <div class="flex justify-center gap-6 pb-8 mt-8">
-    <a href="https://instagram.com/hopkinscreek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <Icon name="lucide:instagram" size="28" />
-    </a>
-    <a href="https://facebook.com/hopkinscreekfestival" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-      <Icon name="lucide:facebook" size="28" />
-    </a>
-    <a href="mailto:info@hopkinscreek.com.au" aria-label="Email">
-      <Icon name="lucide:mail" size="28" />
-    </a>
-  </div>
-  -->
-
-  <style>
-    .acknowledgement-section {
-      padding: var(--space-l);
-      margin-top: var(--space-xl);
-    }
-
-    footer a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    footer a:hover, footer a:focus {
-      color: inherit;
-      text-decoration: underline;
-    }
-
-    footer h3 {
-      color: var(--neutral-900, #1a1a1a);
-      font-family: var(--font-body);
-    }
-  </style>
 </footer>
+
+<style lang="scss">
+  @use "../assets/scss/base/mixins" as *;
+
+  .site-footer {
+    background-color: var(--color-neutral-100);
+    border-top: 0.5px solid var(--border-color-subtle);
+    margin-top: auto;
+  }
+
+  .footer-main {
+    margin-top: var(--space-xl);
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-xl);
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-2xl);
+    }
+  }
+
+  .footer-column {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-s);
+  }
+
+  .footer-heading {
+    color: var(--foreground-color);
+    font-family: var(--font-body);
+    font-size: var(--font-size-1);
+    font-weight: 600;
+    margin: 0;
+    line-height: 0.5;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3xs);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer-link {
+    color: var(--foreground-color);
+    font-family: var(--font-body);
+    font-size: var(--font-size-0);
+    transition: all var(--animation-speed-fast) var(--cubic-bezier);
+
+    @include text-decoration(
+      var(--border-color-subtle),
+      var(--link-hover-color),
+      1px,
+      2px,
+      3px,
+      2px
+    );
+
+    &:hover,
+    &:focus-visible {
+      color: var(--link-hover-color);
+      transform: translateX(2px);
+    }
+
+    &:focus-visible {
+      @include outline;
+    }
+  }
+
+  .footer-acknowledgement {
+    margin-top: var(--space-xl);
+    padding-top: var(--space-xl);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+
+  }
+
+  .acknowledgement-text {
+    font-size: var(--font-size-);
+    font-weight: 600;
+    text-align: center;
+    color: var(--foreground-color);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-link {
+      transition: none;
+
+      &:hover,
+      &:focus-visible {
+        transform: none;
+      }
+    }
+  }
+</style>

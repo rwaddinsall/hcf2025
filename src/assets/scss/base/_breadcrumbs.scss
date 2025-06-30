@@ -1,0 +1,78 @@
+// Breadcrumbs styling to ensure accessible-astro-components work with DaisyUI
+// This ensures the accessible-astro-components breadcrumbs have proper styling
+// and override any conflicting DaisyUI breadcrumb styles
+
+.breadcrumbs {
+  // Reset any DaisyUI breadcrumb styling that might interfere
+  ol,
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child)::after {
+      content: "/";
+      margin-left: 0.5rem;
+      color: var(--color-neutral-500);
+      opacity: 0.7;
+    }
+  }
+
+  a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover,
+    &:focus {
+      color: var(--color-primary-dark);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  }
+
+  // Current page styling
+  [aria-current="page"] {
+    color: var(--color-text);
+    font-weight: 500;
+  }
+
+  // Ensure proper spacing and typography
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+
+  // Dark mode support
+  @media (prefers-color-scheme: dark) {
+    a {
+      color: var(--color-primary-light);
+
+      &:hover,
+      &:focus {
+        color: var(--color-primary);
+      }
+    }
+  }
+}
+
+// Ensure DaisyUI breadcrumb classes don't interfere
+.breadcrumb {
+  // Override DaisyUI breadcrumb if it's being applied
+  &.breadcrumbs {
+    // Use our custom styling instead
+    @extend .breadcrumbs;
+  }
+}

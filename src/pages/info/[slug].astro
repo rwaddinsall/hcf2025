@@ -2,6 +2,7 @@
 import InfoPageLayout from '../../components/InfoPageLayout.astro';
 import { getAllInfoPages, getInfoPageBySlug } from '../../utils/static-content';
 
+
 // Static generation: Get all possible slugs from static content
 export async function getStaticPaths() {
   const infoPages = getAllInfoPages();
@@ -23,10 +24,13 @@ const { slug } = Astro.params;
 const pageData = getInfoPageBySlug(slug);
 ---
 
-{pageData && (
-  <InfoPageLayout
-    slug={slug}
-    fallbackHeading={pageData.heading}
-    fallbackAccordion={pageData.accordion}
-  />
-)}
+<div class="w-full">
+  {pageData && (
+    <InfoPageLayout
+      slug={slug}
+      fallbackHeading={pageData.heading}
+      fallbackAccordion={pageData.accordion}
+    />
+  )}
+</div>
+

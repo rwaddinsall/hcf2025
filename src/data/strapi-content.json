@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-08-09T11:35:28.892Z",
+  "fetchedAt": "2025-08-09T12:10:04.892Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -1113,7 +1113,19 @@
     },
     "FAQ": [
       {
-        "id": 4
+        "id": 4,
+        "accordions": [
+          {
+            "id": 132,
+            "category": "applications",
+            "title": "Volunteer Applications",
+            "details": "Keen to volunteer? You can do anything, from washing dishes to picking up rubbish.",
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSd8yNAHy1WA-XDqfLFRygtB_TJNBvqAZHuY6ahnpW6sI0flIg/viewform?usp=dialog",
+            "deadline": "2025-08-28",
+            "is_closed": false,
+            "closed_message": null
+          }
+        ]
       }
     ]
   },

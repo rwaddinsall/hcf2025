@@ -7,9 +7,12 @@ import { renderSafeContent } from '../utils/renderContent';
 // Get applications page data from static content
 const applicationsPageData = getApplicationsPage();
 
-const pageTitle = applicationsPageData?.Header?.title;
 const pageSubtitle = applicationsPageData?.Header?.subheading;
 const bodyContent = applicationsPageData?.Body?.Content;
+
+// Get configurable text from Strapi, with fallbacks
+const submitApplicationText = applicationsPageData?.link_label || 'Submit Application';
+const deadlineLabel = applicationsPageData?.deadline_label || 'Deadline:';
 
 const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
   (section.accordions || []).map(accordion => {
@@ -30,12 +33,12 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add form button if not closed and has form URL
     if (!accordion.is_closed && accordion.form_url) {
       fullDetails += `
-        <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+        <div class="mt-6 p-4 border rounded-lg">
           <a href="${accordion.form_url}"
              target="_blank"
              rel="noopener noreferrer"
-             class="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-            📝 Submit Application
+             class="inline-block px-6 py-3 border rounded-lg hover:opacity-75 transition-opacity font-medium">
+            ${submitApplicationText}
           </a>
         </div>
       `;
@@ -44,9 +47,9 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add deadline if exists
     if (deadlineText) {
       fullDetails += `
-        <div class="mt-4 p-4 border border-red-200 rounded-lg bg-red-50">
-          <p class="text-red-800">
-            <strong>Deadline:</strong> ${deadlineText}
+        <div class="mt-4 p-4 border rounded-lg">
+          <p>
+            <strong>${deadlineLabel}</strong> ${deadlineText}
           </p>
         </div>
       `;
@@ -55,7 +58,7 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add closed message if closed
     if (accordion.is_closed && accordion.closed_message) {
       fullDetails += `
-        <div class="mt-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+        <div class="mt-4 p-4 border rounded-lg">
           ${renderSafeContent(accordion.closed_message)}
         </div>
       `;
@@ -77,13 +80,11 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
   fallbackAccordion={accordionSections}
 >
   {bodyContent && (
-    <div class="mt-8 prose prose-lg max-w-none">
-      <Fragment set:html={renderSafeContent(bodyContent)} />
-    </div>
+    <div class="mt-8 prose prose-lg max-w-none" set:html={renderSafeContent(bodyContent)} />
   )}
 
-  <div class="mt-8 p-4 border border-blue-200 rounded-lg bg-blue-50">
-    <p class="text-blue-800">
+  <div class="mt-8 p-4 border rounded-lg">
+    <p>
       <strong>Questions?</strong> For all application enquiries, contact us at
       <a href="mailto:info@hopkins-creek.com" class="underline">info@hopkins-creek.com</a>
     </p>

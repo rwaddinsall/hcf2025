@@ -237,6 +237,8 @@ export interface ApplicationsPage extends StrapiEntity {
   Header?: PageHeaderComponent;
   Body?: TextBlockComponent;
   FAQ?: InfoSectionComponent[];
+  link_label?: string;
+  deadline_label?: string;
 }
 
 export type ApplicationsPageResponse = StrapiResponse<ApplicationsPage>;

@@ -141,9 +141,10 @@ async function fetchAllContent() {
       content.bigLink = bigLink.data
     }
 
-    // 7. Applications Page (simplified fetch to avoid 400 errors)
+    // 7. Applications Page (with proper nested population for FAQ accordions)
     const applicationsPage = await fetchFromStrapi('applications-page', {
-      populate: '*',
+      'populate[Header]': '*',
+      'populate[FAQ][populate][accordions]': '*',
     })
     if (applicationsPage?.data) {
       content.applicationsPage = applicationsPage.data

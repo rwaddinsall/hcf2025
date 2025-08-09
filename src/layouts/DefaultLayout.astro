@@ -4,10 +4,11 @@ import "../assets/scss/index.scss";
 import SiteMeta from "../components/SiteMeta.astro";
 import Footer from "../components/Footer.astro";
 import Navigation from "@components/Navigation.astro";
+import { ClientRouter } from 'astro:transitions';
 
 const {
   title = "Hopkins Creek Festival",
-  description = "Hopkins Creek Music Festival - A celebration of music, art, and community in the heart of nature. Join us for an unforgettable weekend of incredible artists and good vibes.",
+  description = "A celebration of music & mateship on Taungurung Country - Tickets on sale 7pm Thursday, 26 June. Welcome to Hopkins Creek Magnificent Seven.",
   url = Astro.site,
   image = "social-preview-image.png",
   author = "Hopkins Creek Festival",
@@ -30,15 +31,17 @@ const {
       image={image}
       author={author}
     />
+
+    <!-- Enable Astro View Transitions for all browsers -->
+    <ClientRouter />
   </head>
   <body>
     <Navigation />
-    <main id="main-content">
+    <main id="main-content" transition:animate="fade">
       <slot />
     </main>
     <Footer />
     <style lang="scss" is:global>
-      // sticky footer on low content pages
       html,
       body {
         height: 100%;
@@ -47,24 +50,19 @@ const {
       body {
         display: flex;
         flex-direction: column;
-        overflow-x: hidden; // Prevent horizontal scroll
+        overflow-x: clip; // Prevent horizontal scroll
         max-width: 100vw; // Ensure body doesn't exceed viewport width
-        // Removed conflicting padding - let components handle their own spacing
+      }
 
-        main {
-          flex: 1 0 auto;
-          max-width: var(--grid-max-width);
-          margin: var(--space-xs) auto 0; // Reduced top margin for tighter spacing from nav
-          // Removed conflicting padding-inline - components handle their own horizontal spacing
-          // Removed vertical padding - components handle their own vertical spacing
-        }
+      .accordion-content {
+        overflow: hidden; // Prevent abrupt horizontal shifts
+        transition: height 0.3s ease, padding 0.3s ease; // Smooth transitions
+        max-width: 100%; // Ensure content stays within the container
+        word-wrap: break-word; // Prevent long words from causing overflow
+      }
 
-        footer {
-          flex-shrink: 0;
-          margin-top: var(
-            --space-xl
-          ); // Add top margin for separation from content
-        }
+      footer {
+        flex-shrink: 0;
       }
 
       pre {

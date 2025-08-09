@@ -70,7 +70,7 @@ if (pageData) {
 
         <Accordion>
           {accordionSections.map((section: AccordionSection) => (
-            <AccordionItem title={section.title}>
+            <AccordionItem title={section.title} variant="chevron">
               <div set:html={section.details} />
             </AccordionItem>
           ))}

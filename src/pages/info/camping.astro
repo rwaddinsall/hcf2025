@@ -1,46 +1,40 @@
 ---
-import InfoPageLayout from "../../components/InfoPageLayout.astro";
+import InfoPageLayout from '../../components/InfoPageLayout.astro';
 
 // Fallback content if Strapi is unavailable
 const fallbackSections = [
   {
-    title: "Camping Information",
-    content: [
+    title: 'Camping Information',
+    details: [
       {
-        type: "paragraph",
+        type: 'paragraph',
         children: [
           {
-            text: "Hopkins Creek Festival offers a variety of camping options to suit all preferences and budgets. From basic unpowered sites to luxury glamping, we have something for everyone.",
+            text: 'Hopkins Creek Festival offers a variety of camping options to suit all preferences and budgets. From basic unpowered sites to luxury glamping, we have something for everyone.',
           },
         ],
-      },
-    ],
-    links: [
-      {
-        text: "Book Camping Online",
-        url: "https://example.com/camping-booking",
       },
     ],
   },
   {
-    title: "Campsite Facilities",
-    content: [
+    title: 'Campsite Facilities',
+    details: [
       {
-        type: "paragraph",
+        type: 'paragraph',
         children: [
           {
-            text: "Our campsites include modern amenities to ensure your comfort:",
+            text: 'Our campsites include modern amenities to ensure your comfort:',
           },
         ],
       },
       {
-        type: "list",
+        type: 'list',
         children: [
-          { children: [{ text: "Clean toilet and shower blocks" }] },
-          { children: [{ text: "Drinking water stations" }] },
-          { children: [{ text: "Food preparation areas" }] },
-          { children: [{ text: "Fire pits (where permitted)" }] },
-          { children: [{ text: "24/7 security patrol" }] },
+          { children: [{ text: 'Clean toilet and shower blocks' }] },
+          { children: [{ text: 'Drinking water stations' }] },
+          { children: [{ text: 'Food preparation areas' }] },
+          { children: [{ text: 'Fire pits (where permitted)' }] },
+          { children: [{ text: '24/7 security patrol' }] },
         ],
       },
     ],
@@ -50,7 +44,7 @@ const fallbackSections = [
 
 <InfoPageLayout
   slug="camping"
-  fallbackTitle="Camping & Accommodation"
-  fallbackSubtitle="Find the perfect place to stay during Hopkins Creek Festival"
-  fallbackSections={fallbackSections}
+  fallbackHeading="Camping & Accommodation"
+  fallbackSubheading="Find the perfect place to stay during Hopkins Creek Festival"
+  fallbackAccordion={fallbackSections}
 />

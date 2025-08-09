@@ -26,11 +26,14 @@ import HeroGallery from '@components/HeroGallery.astro';
     @use "../assets/scss/base/breakpoint" as *;
 
     .hero-section {
+      // DEBUG: Temporary border for layout visualization
+      border: 2px solid red;
+
       // Simplified container pattern
       max-width: var(--grid-max-width);
       margin: 0 auto;
       width: 100%;
-      
+
       // Reduced top padding to move hero up, maintain bottom padding for proper spacing
       padding-inline: var(--space-xs);
       padding-block-start: 0; // Remove top padding for tighter spacing with nav
@@ -59,11 +62,14 @@ import HeroGallery from '@components/HeroGallery.astro';
     }
 
     .hero-container {
+      // DEBUG: Temporary border for layout visualization
+      border: 2px solid blue;
+
       // Clean flexbox layout
       display: flex;
       flex-direction: column;
       align-items: center;
-      
+
       // Consistent gap system - reduced for tighter spacing between heading and video
       gap: var(--space-m); // Reduced from space-l
 
@@ -81,17 +87,20 @@ import HeroGallery from '@components/HeroGallery.astro';
     }
 
     .hero-heading {
+      // DEBUG: Temporary border for layout visualization
+      border: 2px solid green;
+
       width: 100%;
       height: auto;
       display: block;
-      
+
       // Match the gallery's container width and gutter for perfect alignment
       max-width: var(--container-max-width);
       margin: 0 auto;
       padding-inline: var(--container-gutter);
       padding-block: var(--space-xs); // Reduced from space-m
       padding-top: var(--space-m); // Reduced from space-l
-      
+
       image-rendering: -webkit-optimize-contrast;
       image-rendering: crisp-edges;
       animation: fadeInUp var(--animation-speed-medium) var(--cubic-bezier);

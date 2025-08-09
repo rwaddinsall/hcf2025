@@ -27,7 +27,7 @@ let pageContent = fallbackContent;
 if (pageData) {
   pageTitle = pageData.title || fallbackTitle || 'Page';
   pageSubtitle = pageData.subtitle || fallbackSubtitle || '';
-  
+
   // Render safe content from Strapi
   if (pageData.content) {
     pageContent = renderSafeContent(pageData.content);
@@ -46,12 +46,10 @@ if (pageData) {
     title={pageTitle}
     subtitle={pageSubtitle}
   />
-  
-  <section class="container my-16 narrow">
-    <div class="space-content">
-      <div set:html={pageContent} />
-      <slot />
-    </div>
+
+  <section class="space-content mb-12 w-full max-w-4xl mx-auto">
+    <div set:html={pageContent} />
+    <slot />
   </section>
 </DefaultLayout>
 

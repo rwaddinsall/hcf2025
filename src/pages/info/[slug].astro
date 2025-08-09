@@ -24,13 +24,11 @@ const { slug } = Astro.params;
 const pageData = getInfoPageBySlug(slug);
 ---
 
-<div class="w-full">
-  {pageData && (
-    <InfoPageLayout
-      slug={slug}
-      fallbackHeading={pageData.heading}
-      fallbackAccordion={pageData.accordion}
-    />
-  )}
-</div>
+{pageData && (
+  <InfoPageLayout
+    slug={slug}
+    fallbackHeading={pageData.heading}
+    fallbackAccordion={pageData.accordion}
+  />
+)}
 

@@ -37,10 +37,10 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
               aria-expanded="false"
               aria-controls={bodyId}
             >
-              <span class={`group-hover:text-white group-hover:bg-black transition-colors duration-150 w-full text-left text-base md:text-lg ${titleClass}`}>{section.title}</span>
+              <span class={`text-left text-base md:text-lg ${titleClass}`}>{section.title}</span>
               {/* Minimal + icon, rotates to × when open */}
               <span
-                class="ml-2 text-lg transition-transform duration-200 accordion-plus group-hover:text-white group-hover:bg-black"
+                class="ml-2 text-lg transition-transform duration-200 accordion-plus flex-shrink-0"
                 aria-hidden="true"
               >
                 +

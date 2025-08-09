@@ -58,7 +58,7 @@ artists.sort((a, b) => {
 ---
 
 <section id='lineup' class='lineup-section'>
-  <div class="container lineup-container">
+  <div class="lineup-container">
     {
       artists.length > 0 ? (
         <div
@@ -123,6 +123,9 @@ artists.sort((a, b) => {
 
   /* Lineup Section - Modern CSS with Design System Tokens */
   .lineup-section {
+    // DEBUG: Temporary border for layout visualization
+    border: 2px solid red;
+
     // Mobile-first responsive padding
     padding: var(--space-s) var(--space-2xs); // Minimal padding for very small screens
 
@@ -144,11 +147,17 @@ artists.sort((a, b) => {
   }
 
   .lineup-container {
+    // DEBUG: Temporary border for layout visualization
+    border: 2px solid blue;
+
     // Only keep lineup-specific overrides here if needed
   }
 
   /* Lineup Grid - Flexible Layout */
   .lineup-grid {
+    // DEBUG: Temporary border for layout visualization
+    border: 2px solid green;
+
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -176,6 +185,9 @@ artists.sort((a, b) => {
 
   /* Artist Item - Base Styling */
   .lineup-artist {
+    // DEBUG: Temporary border for layout visualization
+    border: 2px solid orange;
+
     position: relative;
     white-space: normal;
     opacity: 0;
@@ -195,13 +207,13 @@ artists.sort((a, b) => {
     // Hover effects for ALL artists (whether they have links or not)
     &:hover {
       transform: translateY(-2px) scale(1.02);
-      
+
       .artist-text {
         color: var(--link-hover-color);
         font-weight: 600;
         text-shadow: 0 2px 8px rgba(0,0,0,0.08);
       }
-      
+
       .artist-annotation {
         opacity: 1;
         color: var(--link-hover-color);
@@ -214,7 +226,7 @@ artists.sort((a, b) => {
         color: var(--link-hover-color);
         font-weight: 600;
       }
-      
+
       .artist-annotation {
         opacity: 1;
         color: var(--link-hover-color);
@@ -235,7 +247,7 @@ artists.sort((a, b) => {
   .artist-text {
     display: inline-block;
     color: var(--foreground-color);
-    transition: 
+    transition:
       color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
       font-weight 0.2s var(--cubic-bezier, ease),
       text-shadow 0.2s var(--cubic-bezier, ease);
@@ -274,7 +286,7 @@ artists.sort((a, b) => {
     opacity: 0.8;
     color: var(--foreground-color);
     vertical-align: super;
-    transition: 
+    transition:
       opacity var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease),
       color var(--animation-speed-fast, 0.2s) var(--cubic-bezier, ease);
 

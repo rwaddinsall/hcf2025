@@ -1,0 +1,18 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../hopkins-creek-festival/cms"
+		}
+	],
+	"settings": {
+		"prettier.documentSelectors": [
+			"**/*.astro"
+		],
+		"files.associations": {
+			"*.astro": "astro"
+		}
+	}
+}

@@ -11,7 +11,7 @@ const pageSubtitle = applicationsPageData?.Header?.subheading;
 const bodyContent = applicationsPageData?.Body?.Content;
 
 // Get configurable text from Strapi, with fallbacks
-const submitApplicationText = applicationsPageData?.link_label || 'Submit Application';
+const submitApplicationText = applicationsPageData?.link_label || 'Apply';
 const deadlineLabel = applicationsPageData?.deadline_label || 'Deadline:';
 
 const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>

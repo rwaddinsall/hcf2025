@@ -141,11 +141,9 @@ async function fetchAllContent() {
       content.bigLink = bigLink.data
     }
 
-    // 7. Applications Page
+    // 7. Applications Page (simplified fetch to avoid 400 errors)
     const applicationsPage = await fetchFromStrapi('applications-page', {
-      'populate[Header]': '*',
-      'populate[Body]': '*',
-      'populate[FAQ][populate][accordions]': '*',
+      populate: '*',
     })
     if (applicationsPage?.data) {
       content.applicationsPage = applicationsPage.data

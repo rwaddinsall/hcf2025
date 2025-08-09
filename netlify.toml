@@ -4,10 +4,10 @@
 [build]
   # Build command - Astro static site generation
   command = "npm run build"
-  
+
   # Output directory after build
   publish = "dist"
-  
+
   # Node.js version (use LTS for stability)
   node_version = "20"
 
@@ -15,6 +15,26 @@
   # Enable legacy bundle for compatibility
   NODE_VERSION = "20"
   NPM_FLAGS = "--production=false"
+
+  # Default environment variables for all deployments
+  PUBLIC_STRAPI_URL = "https://healing-dance-c1ea66b091.strapiapp.com"
+
+# Production environment
+[context.production.environment]
+  PUBLIC_SITE_URL = "https://hopkins-creek-festival.netlify.app"
+  NODE_ENV = "production"
+  DEBUG_MODE = "false"
+
+# Branch deploys for testing (applications-update branch)
+[context.branch-deploy.environment]
+  PUBLIC_SITE_URL = "https://applications-update--hopkins-creek-festival.netlify.app"
+  NODE_ENV = "staging"
+  DEBUG_MODE = "true"
+
+# Deploy previews (Pull Requests)
+[context.deploy-preview.environment]
+  NODE_ENV = "preview"
+  DEBUG_MODE = "true"
 
 # Build processing settings
 [build.processing]
@@ -44,10 +64,10 @@
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
     Referrer-Policy = "strict-origin-when-cross-origin"
-    
+
     # Performance headers
     Cache-Control = "public, max-age=31536000, immutable"
-    
+
     # Content Security Policy - adjust based on your needs
     Content-Security-Policy = """
       default-src 'self';
@@ -110,14 +130,14 @@
 [functions]
   # Directory for serverless functions
   directory = "netlify/functions"
-  
+
   # Node.js runtime for functions
   node_bundler = "esbuild"
 
 # Plugin settings
 [[plugins]]
   package = "@netlify/plugin-lighthouse"
-  
+
   [plugins.inputs.thresholds]
     performance = 0.8
     accessibility = 0.9
@@ -127,7 +147,7 @@
 # Preview settings
 [context.deploy-preview]
   command = "npm run build"
-  
+
 [context.branch-deploy]
   command = "npm run build"
 

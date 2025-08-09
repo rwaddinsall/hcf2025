@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-08-09T09:46:52.943Z",
+  "fetchedAt": "2025-08-09T11:35:28.892Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -16,7 +16,11 @@
           "id": 105,
           "category": "general",
           "title": "Accessibility Information",
-          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\n- Accessible parking close to entry\n- Accessible camping (location, terrain, quiet zones)\n- Stage and viewing accessibility\n- Accessible toilets\n- Charging stations for mobility devices\n- Guide dog access\n- Low sensory areas\n- Local accommodation recommendations\n- Dietary needs and clear food labelling\n- Large print or plain text versions of materials\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com"
+          "details": "If you have any accessibility needs, let us know in advance by using the accessibility field at checkout or by emailing us directly. We’ll do our best to support you — and having this info early makes a huge difference.\n\nThings we’re working to support:\n\n- Accessible parking close to entry\n- Accessible camping (location, terrain, quiet zones)\n- Stage and viewing accessibility\n- Accessible toilets\n- Charging stations for mobility devices\n- Guide dog access\n- Low sensory areas\n- Local accommodation recommendations\n- Dietary needs and clear food labelling\n- Large print or plain text versions of materials\n\nA full accessibility map will be made available closer to the event. If you have specific questions or ideas for how we can make the event more comfortable for all please reach out: info@hopkins-creek.com",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         }
       ]
     },
@@ -34,37 +38,61 @@
           "id": 98,
           "category": "transport",
           "title": "Arrival & Parking",
-          "details": "Camping and parking are separate unless you’ve purchased a car camping pass.\n\nThere’s no overnight loitering in the car park — once you’ve arrived, head to the campgrounds and get set up.\n\nIt’s a short walk from the car park to the campsites — a good chance to stretch your legs, haul your gear, and ease into it.\n\nIf you’re bringing a couch or marquee, you’ll need to leave a $50 deposit at check-in. Bring it back out with you and you’ll get the money back.\n\nLeave junk behind and will be banned from future events."
+          "details": "Camping and parking are separate unless you’ve purchased a car camping pass.\n\nThere’s no overnight loitering in the car park — once you’ve arrived, head to the campgrounds and get set up.\n\nIt’s a short walk from the car park to the campsites — a good chance to stretch your legs, haul your gear, and ease into it.\n\nIf you’re bringing a couch or marquee, you’ll need to leave a $50 deposit at check-in. Bring it back out with you and you’ll get the money back.\n\nLeave junk behind and will be banned from future events.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 99,
           "category": "general",
           "title": "Weather",
-          "details": " Hopkins Creek weather is committed to the bit. Sun, hail, dust, mud — sometimes all in one day.\n\nCheck the forecast, but don’t trust it. Bring gear for every scenario. We’ve seen it all and we’re still standing."
+          "details": " Hopkins Creek weather is committed to the bit. Sun, hail, dust, mud — sometimes all in one day.\n\nCheck the forecast, but don’t trust it. Bring gear for every scenario. We’ve seen it all and we’re still standing.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 100,
           "category": "general",
           "title": "Food & Drink",
-          "details": "There’ll be food vendors onsite all weekend serving up hot meals, snacks and caffeinated things.\n\nIce is available at the event.\n\nThere are no cash-out facilities on site, so get your cash sorted on Friday.\n\nHopkins is BYO-friendly — but pace yourself, and no glass.\n\nGrab a cocktail at Barry’s Bait Shop or swing past our newest bar, yet to be announced, if you’re feeling fancy.\n\nPlastic water bottles are banned. Bring your own reusable bottle or pick one up from the General Store. (Soft drinks and alcohol in plastic bottles are still allowed.)"
+          "details": "There’ll be food vendors onsite all weekend serving up hot meals, snacks and caffeinated things.\n\nIce is available at the event.\n\nThere are no cash-out facilities on site, so get your cash sorted on Friday.\n\nHopkins is BYO-friendly — but pace yourself, and no glass.\n\nGrab a cocktail at Barry’s Bait Shop or swing past our newest bar, yet to be announced, if you’re feeling fancy.\n\nPlastic water bottles are banned. Bring your own reusable bottle or pick one up from the General Store. (Soft drinks and alcohol in plastic bottles are still allowed.)",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 101,
           "category": "general",
           "title": "Prohibited Items",
-          "details": "You bring these, we take them:\n\n- Illegal substances\n- Nitrous oxide (nangs), Generators\n- Sound systems\n- Pets (service animals are allowed)\n- Fires\n- Fireworks\n- Gas cookers\n- Mini bikes\n- Glass containers\n- Plastic water bottles\n- Doof sticks\n- Walking sticks as fashion items - please respect those with accesibility requirements and leave these at home\n\nWe’re a small event. You don’t need a 2-metre totem to find your mates. We will confiscate all doof sticks and totems at the event. "
+          "details": "You bring these, we take them:\n\n- Illegal substances\n- Nitrous oxide (nangs), Generators\n- Sound systems\n- Pets (service animals are allowed)\n- Fires\n- Fireworks\n- Gas cookers\n- Mini bikes\n- Glass containers\n- Plastic water bottles\n- Doof sticks\n- Walking sticks as fashion items - please respect those with accesibility requirements and leave these at home\n\nWe’re a small event. You don’t need a 2-metre totem to find your mates. We will confiscate all doof sticks and totems at the event. ",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 102,
           "category": "general",
           "title": "Safety & Inclusivity",
-          "details": "Hopkins Creek is an inclusive space — zero judgement, zero harassment, zero discrimination.\n\nIf you see something off — say something. Chat to a staff member or head to the Info Tent. We’ll handle it.\n\nIf you're feeling unwell — physically, mentally, emotionally — visit the Wellbeing Tent. Our care crew is here for you, no questions asked. \n\nAt Hopkins, everyone’s your mate — whether you’ve met them yet or not."
+          "details": "Hopkins Creek is an inclusive space — zero judgement, zero harassment, zero discrimination.\n\nIf you see something off — say something. Chat to a staff member or head to the Info Tent. We’ll handle it.\n\nIf you're feeling unwell — physically, mentally, emotionally — visit the Wellbeing Tent. Our care crew is here for you, no questions asked. \n\nAt Hopkins, everyone’s your mate — whether you’ve met them yet or not.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 103,
           "category": "general",
           "title": "Breath Testing",
-          "details": "Back again doing the Lord’s work is Blow Me First — offering free breath testing, info and advice to all drivers.\n \nIf you’re unsure, don’t guess. \n\nGo see them. You’d be daft not to."
+          "details": "Back again doing the Lord’s work is Blow Me First — offering free breath testing, info and advice to all drivers.\n \nIf you’re unsure, don’t guess. \n\nGo see them. You’d be daft not to.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         }
       ]
     },
@@ -82,37 +110,61 @@
           "id": 106,
           "category": "general",
           "title": "Uptown",
-          "details": "Ideal for vans, rooftop rigs, or anyone chasing a sunrise. First in, best dressed. Uptown offers more space and stunning views closer to the action, perfect if you’re keen on a little serenity before the bass kicks in."
+          "details": "Ideal for vans, rooftop rigs, or anyone chasing a sunrise. First in, best dressed. Uptown offers more space and stunning views closer to the action, perfect if you’re keen on a little serenity before the bass kicks in.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 107,
           "category": "general",
           "title": "Downtown",
-          "details": "Further from the action. A classic camp zone for those who like to be a little further from the heartbeat. Tents pop up shoulder-to-shoulder, creating a community vibe that's always buzzing with movement and music."
+          "details": "Further from the action. A classic camp zone for those who like to be a little further from the heartbeat. Tents pop up shoulder-to-shoulder, creating a community vibe that's always buzzing with movement and music.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 108,
           "category": "general",
           "title": "The Motor Inn",
-          "details": "**Luxury Package – Executive Suite\n**\nA 5m water-resistant canvas bell tent that feels like a bushland hotel suite. Includes a foam or air camp mattress, fresh linen and quality bedding, cushions, rugs, furnishings, plus thoughtful extras: lantern, mirror, front doormat, and outdoor solar light.\nAvailable in 2, 3 and 4-person options.\n\nPerfect if you want to arrive, drop your bag, and start dancing.\n\n**Simple Package – Standard Suite\n**\nSame sturdy 5m tent — just stripped back. Comes with self-inflating mattresses and a solar light. The rest is up to you: BYO linen, cushions, and vibes.\n\nA solid option if you want convenience but don’t mind rolling your own swag.\n\n**Good In-Tent-ions – Enviro Saver Suite\n**\nIn partnership with Good Intentions Camping — legends who rescue and reuse abandoned gear. Pre-loved, low-impact, and ready for another spin.\n\nPerfect for fly-ins, light packers, or landfill avoiders. Not fancy, but functional — and doing good while you're at it.\n"
+          "details": "**Luxury Package – Executive Suite\n**\nA 5m water-resistant canvas bell tent that feels like a bushland hotel suite. Includes a foam or air camp mattress, fresh linen and quality bedding, cushions, rugs, furnishings, plus thoughtful extras: lantern, mirror, front doormat, and outdoor solar light.\nAvailable in 2, 3 and 4-person options.\n\nPerfect if you want to arrive, drop your bag, and start dancing.\n\n**Simple Package – Standard Suite\n**\nSame sturdy 5m tent — just stripped back. Comes with self-inflating mattresses and a solar light. The rest is up to you: BYO linen, cushions, and vibes.\n\nA solid option if you want convenience but don’t mind rolling your own swag.\n\n**Good In-Tent-ions – Enviro Saver Suite\n**\nIn partnership with Good Intentions Camping — legends who rescue and reuse abandoned gear. Pre-loved, low-impact, and ready for another spin.\n\nPerfect for fly-ins, light packers, or landfill avoiders. Not fancy, but functional — and doing good while you're at it.\n",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 109,
           "category": "general",
           "title": "Vehicle Camping",
-          "details": "A limited number of vehicle camping spots are available. These sell out fast and are strictly limited. If you're planning to camp in or near your car, make sure you grab a valid car camping pass. But remember: every vehicle on site needs a car pass — whether you’re sleeping in it or not."
+          "details": "A limited number of vehicle camping spots are available. These sell out fast and are strictly limited. If you're planning to camp in or near your car, make sure you grab a valid car camping pass. But remember: every vehicle on site needs a car pass — whether you’re sleeping in it or not.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 110,
           "category": "general",
           "title": "Pack It In, Pack It Out",
-          "details": "Some festivals end in a landfill. We do not. If your neighbour’s ghosting their gear, let us know. If it’s yours — sort it out. Bringing a couch or marquee? You’ll need to leave a $50 deposit with the ticketing crew. You’ll get it back when you leave with that same item. This place doesn’t clean itself — and we want to keep coming back.\nRespect the land. Leave no trace."
+          "details": "Some festivals end in a landfill. We do not. If your neighbour’s ghosting their gear, let us know. If it’s yours — sort it out. Bringing a couch or marquee? You’ll need to leave a $50 deposit with the ticketing crew. You’ll get it back when you leave with that same item. This place doesn’t clean itself — and we want to keep coming back.\nRespect the land. Leave no trace.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 111,
           "category": "general",
           "title": "Car Passes",
-          "details": "Every car needs a pass to enter the site. No pass, no entry. Car passes help us manage traffic and reduce our environmental impact — and 100% of proceeds go back into sustainability projects like composting, reusable systems, and emissions offsets."
+          "details": "Every car needs a pass to enter the site. No pass, no entry. Car passes help us manage traffic and reduce our environmental impact — and 100% of proceeds go back into sustainability projects like composting, reusable systems, and emissions offsets.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         }
       ]
     },
@@ -130,37 +182,61 @@
           "id": 125,
           "category": "general",
           "title": "Ticketing & Entry",
-          "details": "You’ll need a digital ticket and valid photo ID. No ID, no entry.\n \nDon’t print your ticket — just save the PDF or a screenshot to your phone, and make sure your screen brightness is up.\n\nEvery ticket is scanned at the gate. If your ticket has already been scanned, entry will be denied.\n\nDon’t share your ticket or screenshot it for your mate — it won’t work for them, and it won’t work for you either.\n\nWristbands must be worn at all times while on site.\n"
+          "details": "You’ll need a digital ticket and valid photo ID. No ID, no entry.\n \nDon’t print your ticket — just save the PDF or a screenshot to your phone, and make sure your screen brightness is up.\n\nEvery ticket is scanned at the gate. If your ticket has already been scanned, entry will be denied.\n\nDon’t share your ticket or screenshot it for your mate — it won’t work for them, and it won’t work for you either.\n\nWristbands must be worn at all times while on site.\n",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 126,
           "category": "general",
           "title": "Ticket Resale",
-          "details": "The only official resale platform is Humanitix.\n\nYou cannot list your ticket on Tixel or other resale platforms. We can’t help with name changes outside of Humanitix, either.\n\nThis is for your safety and to prevent scams.\n"
+          "details": "The only official resale platform is Humanitix.\n\nYou cannot list your ticket on Tixel or other resale platforms. We can’t help with name changes outside of Humanitix, either.\n\nThis is for your safety and to prevent scams.\n",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 127,
           "category": "general",
           "title": "Car Passes",
-          "details": "Every car entering the site needs a valid car pass — unless you’re bringing 3 or more people in the same car.\n\nPasses are available through Humanitix and help us reduce traffic and offset carbon emissions.\n\n100% of car pass revenue goes toward sustainability projects.\n"
+          "details": "Every car entering the site needs a valid car pass — unless you’re bringing 3 or more people in the same car.\n\nPasses are available through Humanitix and help us reduce traffic and offset carbon emissions.\n\n100% of car pass revenue goes toward sustainability projects.\n",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 128,
           "category": "general",
           "title": "Accessibility",
-          "details": "If you have accessibility requirements, you can let us know during checkout using the Accessibility Needs field. You’re also welcome to email us at info@hopkins-creek.com and we’ll make sure your needs are communicated to our crew ahead of the event."
+          "details": "If you have accessibility requirements, you can let us know during checkout using the Accessibility Needs field. You’re also welcome to email us at info@hopkins-creek.com and we’ll make sure your needs are communicated to our crew ahead of the event.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 129,
           "category": "general",
           "title": "Birthday Tickets",
-          "details": "Hopkins Creek runs on equal access—one price, one ticket, no early birds, no VIPs, no back doors. This keeps the experience intimate, fair, and grounded.\n\nThat means we don’t offer birthday tickets or special discounts — even for those celebrating something special.\n\nIf you do end up marking your birthday out there with us, swing past the info tent and let us know — we’ll sort you out with a drink on the house."
+          "details": "Hopkins Creek runs on equal access—one price, one ticket, no early birds, no VIPs, no back doors. This keeps the experience intimate, fair, and grounded.\n\nThat means we don’t offer birthday tickets or special discounts — even for those celebrating something special.\n\nIf you do end up marking your birthday out there with us, swing past the info tent and let us know — we’ll sort you out with a drink on the house.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 130,
           "category": "general",
           "title": "First Nations Tickets",
-          "details": "We’re currently developing a First Nations ticketing policy in consultation with community. Thanks for your patience while we work through the right approach. A limited allocation of tickets will be available via application in mid-July — completely separate from the main release and unaffected by a sell-out."
+          "details": "We’re currently developing a First Nations ticketing policy in consultation with community. Thanks for your patience while we work through the right approach. A limited allocation of tickets will be available via application in mid-July — completely separate from the main release and unaffected by a sell-out.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         }
       ]
     },
@@ -178,19 +254,31 @@
           "id": 27,
           "category": "general",
           "title": "Community Bus Service",
-          "details": "Hopkins Creek buses depart and return from Spencer Street, on the corner of Spencer & Collins Streets in Melbourne. You must board the exact bus time listed on your ticket — no swaps.\n\nReturn buses leave Monday and head straight back to Melbourne.\n\nYou’re allowed one suitcase or equivalent camping load per person.\n\nPack smart. Travel light. Thank yourself later."
+          "details": "Hopkins Creek buses depart and return from Spencer Street, on the corner of Spencer & Collins Streets in Melbourne. You must board the exact bus time listed on your ticket — no swaps.\n\nReturn buses leave Monday and head straight back to Melbourne.\n\nYou’re allowed one suitcase or equivalent camping load per person.\n\nPack smart. Travel light. Thank yourself later.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 28,
           "category": "general",
           "title": "Private Charter Buses",
-          "details": "If you’re organising a bus for mates, please register your arrival time and vehicle details in advance with info@hopkins-creek.com. This helps us coordinate safely and smoothly on site."
+          "details": "If you’re organising a bus for mates, please register your arrival time and vehicle details in advance with info@hopkins-creek.com. This helps us coordinate safely and smoothly on site.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         },
         {
           "id": 29,
           "category": "general",
           "title": "Driving to Site",
-          "details": "Hopkins Creek 2025 will take place around 1.5 hours north of Melbourne CBD.\n\nGate times:\nFriday: 12pm – Midnight\n\nSaturday & Sunday: 9am – 10pm\nNo entry is permitted outside these times.\n\nImportant:\nCar Pass required for every vehicle (unless 3+ people onboard)\n\nNo passouts between 8pm–8am\n\nAll patrons must leave by 12pm Monday\n\nPolice drug and alcohol testing will be in operation on the way out. Blow Me First will be onsite offering breath tests to help you make the right call before you hit the road."
+          "details": "Hopkins Creek 2025 will take place around 1.5 hours north of Melbourne CBD.\n\nGate times:\nFriday: 12pm – Midnight\n\nSaturday & Sunday: 9am – 10pm\nNo entry is permitted outside these times.\n\nImportant:\nCar Pass required for every vehicle (unless 3+ people onboard)\n\nNo passouts between 8pm–8am\n\nAll patrons must leave by 12pm Monday\n\nPolice drug and alcohol testing will be in operation on the way out. Blow Me First will be onsite offering breath tests to help you make the right call before you hit the road.",
+          "form_url": null,
+          "deadline": null,
+          "is_closed": null,
+          "closed_message": null
         }
       ]
     }
@@ -1012,7 +1100,23 @@
     "publishedAt": "2025-06-25T05:09:21.268Z"
   },
   "bigLink": null,
-  "applicationsPage": null,
+  "applicationsPage": {
+    "id": 2,
+    "documentId": "wamiafevesyuk8vz9quc7wlh",
+    "createdAt": "2025-08-09T11:27:36.801Z",
+    "updatedAt": "2025-08-09T11:27:36.801Z",
+    "publishedAt": "2025-08-09T11:27:36.848Z",
+    "Header": {
+      "id": 4,
+      "title": "Applications",
+      "subheading": "Keen to get involved?\n\nApply to volunteer below."
+    },
+    "FAQ": [
+      {
+        "id": 4
+      }
+    ]
+  },
   "infoPagesForNavigation": [
     {
       "id": 25,

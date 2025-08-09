@@ -217,7 +217,13 @@ export interface AccordionComponent {
     | "tickets"
     | "transport"
     | "sustainability"
-    | "accessibility";
+    | "accessibility"
+    | "applications"; // Added this
+  // New fields for applications
+  form_url?: string;
+  deadline?: string; // Date field comes as string from Strapi
+  is_closed?: boolean;
+  closed_message?: string;
 }
 
 // Info Section component interface

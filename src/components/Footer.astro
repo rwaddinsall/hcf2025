@@ -12,7 +12,7 @@ import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
 // Get info pages for Information column from static content
 const infoPages = getAllInfoPages();
 
-// Get general pages for Legal column from static content  
+// Get general pages for Legal column from static content
 const generalPages = getAllGeneralPages();
 ---
 
@@ -22,7 +22,7 @@ const generalPages = getAllGeneralPages();
     <div class="container mx-auto">
       <!-- Footer Navigation Grid -->
       <div
-        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-center sm:gap-12 lg:gap-16"
+        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-start md:justify-items-center sm:gap-12 lg:gap-16"
       >
         <!-- Column 1: Main Navigation -->
         <div class="flex flex-col gap-4">
@@ -55,7 +55,7 @@ const generalPages = getAllGeneralPages();
           <h3 class="mb-2 text-lg font-semibold">Legal</h3>
           <ul class="flex flex-col gap-2">
             {
-              generalPages.length > 0 ? 
+              generalPages.length > 0 ?
                 generalPages.map((page) => (
                   <li>
                     <a href={`/${page.slug}`}>{page.title}</a>
@@ -92,7 +92,7 @@ const generalPages = getAllGeneralPages();
   </section>
 
   <!-- Social Icons Row (lower portion) - COMMENTED OUT -->
-  <!-- 
+  <!--
   <div class="flex justify-center gap-6 pb-8 mt-8">
     <a href="https://instagram.com/hopkinscreek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <Icon name="lucide:instagram" size="28" />

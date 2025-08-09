@@ -249,18 +249,16 @@ export async function fetchGeneralPagesForFooter() {
  * Fetches applications page content from Strapi
  */
 export async function fetchApplicationsPage() {
-  return fetchApi<import("../interfaces/strapi").ApplicationsPageResponse>({
+  return fetchApi<ApplicationsPageResponse>({
     endpoint: "applications-page",
     query: {
       "filters[publishedAt][$notNull]": "true",
       "populate[Header]": "*",
-      "populate[Body]": "*",
       "populate[FAQ][populate][accordions]": "*",
     },
     wrappedByKey: "data",
   });
 }
-
 /**
  * Fetches sustainability page content from Strapi
  */

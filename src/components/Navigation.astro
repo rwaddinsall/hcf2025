@@ -430,19 +430,12 @@ const infoPages = getAllInfoPages();
     --dropdown-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
   }
 
-  // DEBUG BORDERS - REMOVE WHEN DONE
-  * {
-    outline: 1px solid rgba(255, 0, 0, 0.3) !important;
-  }
-
   // Sticky header container
   .hopkins-header {
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    border: 3px solid red !important;
-    background: rgba(255, 0, 0, 0.1) !important;
   }
 
   // Main navigation bar with scroll effects
@@ -453,8 +446,6 @@ const infoPages = getAllInfoPages();
     transition: var(--nav-transition);
     min-height: var(--nav-height);
     position: relative;
-    border: 3px solid blue !important;
-    background: rgba(0, 0, 255, 0.1) !important;
 
     // Scrolled state styling - maintain transparency
     &.nav-scrolled {
@@ -496,8 +487,6 @@ const infoPages = getAllInfoPages();
     z-index: 2;
     container-type: inline-size; // Enable container queries
     container-name: nav-container;
-    border: 3px solid green !important;
-    background: rgba(0, 255, 0, 0.1) !important;
 
     // Responsive margin adjustments using design system breakpoints
     @media (min-width: 768px) {
@@ -522,8 +511,6 @@ const infoPages = getAllInfoPages();
       width: calc(100% - var(--space-2xl)); // Proper responsive width
       max-width: 400px; // Prevent overlap with nav items
       margin-right: var(--space-xl); // Ensure clearance from nav menu
-      border: 3px solid orange !important;
-      background: rgba(255, 165, 0, 0.1) !important;
 
       // Responsive positioning adjustments
       @media (min-width: 768px) {
@@ -651,9 +638,6 @@ const infoPages = getAllInfoPages();
     position: relative;
     z-index: 3; // Above ScrollingText
     margin-left: auto; // Ensure right alignment
-    border: 3px solid purple !important;
-    background: rgba(128, 0, 128, 0.1) !important;
-    padding: 5px !important;
   }
 
   // Desktop navigation list - hidden on mobile

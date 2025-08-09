@@ -33,11 +33,11 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add form button if not closed and has form URL
     if (!accordion.is_closed && accordion.form_url) {
       fullDetails += `
-        <div class="mt-6 p-4 border rounded-lg">
+        <div class="mt-6">
           <a href="${accordion.form_url}"
              target="_blank"
              rel="noopener noreferrer"
-             class="inline-block px-6 py-3 border rounded-lg hover:opacity-75 transition-opacity font-medium">
+             class="button color-secondary">
             ${submitApplicationText}
           </a>
         </div>
@@ -47,7 +47,7 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add deadline if exists
     if (deadlineText) {
       fullDetails += `
-        <div class="mt-4 p-4 border rounded-lg">
+        <div class="mt-4">
           <p>
             <strong>${deadlineLabel}</strong> ${deadlineText}
           </p>
@@ -58,7 +58,7 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     // Add closed message if closed
     if (accordion.is_closed && accordion.closed_message) {
       fullDetails += `
-        <div class="mt-4 p-4 border rounded-lg">
+        <div class="mt-4 p-4">
           ${renderSafeContent(accordion.closed_message)}
         </div>
       `;
@@ -83,7 +83,7 @@ const accordionSections = applicationsPageData?.FAQ?.flatMap(section =>
     <div class="mt-8 prose prose-lg max-w-none" set:html={renderSafeContent(bodyContent)} />
   )}
 
-  <div class="mt-8 p-4 border rounded-lg">
+  <div class="mt-8 p-4">
     <p>
       <strong>Questions?</strong> For all application enquiries, contact us at
       <a href="mailto:info@hopkins-creek.com" class="underline">info@hopkins-creek.com</a>

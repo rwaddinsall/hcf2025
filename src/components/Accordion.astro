@@ -32,7 +32,7 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
           <h2 id={headingId}>
             <button
               type="button"
-              class={`flex items-center justify-between w-full py-4 px-5 border border-black border-b-0 text-base md:text-lg font-medium font-sans text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-colors duration-150 bg-transparent group ${index === sections.length - 1 ? '' : ''}`}
+              class={`flex items-center justify-between w-full py-4 px-5 border border-black border-b-0 text-base md:text-lg text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-colors duration-150 bg-transparent group ${index === sections.length - 1 ? '' : ''}`}
               data-accordion-target={`#${bodyId}`}
               aria-expanded="false"
               aria-controls={bodyId}
@@ -95,6 +95,10 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
 [data-accordion] button.group:focus-visible span {
   color: white !important;
 }
-
+[data-accordion] h2 > button {
+  /* Use Diatype Semi Mono Medium for accordion titles */
+  font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  font-weight: 500 !important;
+}
 
 </style>

@@ -687,7 +687,7 @@ const infoPages = getAllInfoPages();
     padding: var(--space-5xs) var(--space-s);
     color: var(--nav-text);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400; // Changed from 500 to 400 for regular weight
     border-radius: 9999px;
     transition: var(--nav-transition);
     border: 1px solid transparent;
@@ -720,7 +720,7 @@ const infoPages = getAllInfoPages();
       background: transparent !important;
       color: var(--nav-text) !important;
       border-color: black !important;
-      font-weight: 500 !important;
+      font-weight: 400 !important; // Keep regular weight for active state too
       // Remove underline and other effects
       span::after {
         content: none !important;
@@ -744,7 +744,7 @@ const infoPages = getAllInfoPages();
     padding: var(--space-5xs) var(--space-s); // Slightly more horizontal padding
     color: var(--nav-text);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 400; // Changed from 500 to 400 for regular weight
     border-radius: var(--radius-l); // True pill shape instead of 50px
     transition: var(--nav-transition);
     background: transparent;
@@ -770,7 +770,7 @@ const infoPages = getAllInfoPages();
     // Active state with underline (keeping original behavior)
     &.active {
       color: var(--nav-accent);
-      font-weight: 600;
+      font-weight: 400; // Changed from 500 to 400 for regular weight
       span::after {
         content: "";
         position: absolute;
@@ -794,7 +794,7 @@ const infoPages = getAllInfoPages();
   .nav-cta {
     background: var(--nav-accent);
     color: white;
-    font-weight: 600;
+    font-weight: 400; // Changed from 500 to 400 for regular weight
     border-radius: 9999px; // True pill shape
     padding: var(--space-xs) var(--space-l) !important; // More generous padding
     flex-shrink: 0;
@@ -901,7 +901,7 @@ const infoPages = getAllInfoPages();
     text-decoration: none;
     border-radius: 9999px; // True pill shape
     transition: var(--nav-transition);
-    font-weight: 500;
+    font-weight: 400; // Changed from 500 to 400 for regular weight
     border: 1px solid transparent; // Prevents jumping
 
     &:hover,

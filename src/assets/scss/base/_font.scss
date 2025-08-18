@@ -74,9 +74,13 @@
     text-wrap: balance;
   }
 
-  h1,
-  h2 {
+  h1 {
     font-weight: 600;
+  }
+
+  h2 {
+    /* h2 should use normal font weight unless specifically overridden */
+    font-weight: 500;
   }
 
   h3 {
@@ -127,5 +131,26 @@
   h6 {
     font-size: var(--font-size-1);
     line-height: var(--font-size-2);
+  }
+
+  // Accordion title styling - should use Diatype Semi Mono Medium
+  // Covers both custom Accordion.astro (h2 > button) and accessible-astro-components (h3)
+  .accordion-title,
+  [data-accordion] h2 > button,
+  .accordion-item-title,
+  .accordion h3,
+  .accordion .title h3,
+  .accordion summary h3,
+  ul.accordion h3 {
+    font-family:
+      "ABC Diatype Semi Mono",
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif !important;
+    font-weight: 500 !important;
   }
 }

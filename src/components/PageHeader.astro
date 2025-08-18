@@ -1,8 +1,6 @@
 ---
 import {
   Avatar,
-  Breadcrumbs,
-  BreadcrumbsItem,
 } from 'accessible-astro-components';
 import { Image } from 'astro:assets';
 import { renderSafeContent } from '../utils/renderContent';
@@ -13,17 +11,11 @@ import { renderSafeContent } from '../utils/renderContent';
  * @description PageHeader description
  */
 interface Props {
-  /**
-   * Additional classes to apply to the PageHeader
-   */
+
   class?: string;
-  /**
-   * The featured image of the page
-   */
+
   featuredImage?: string;
-  /**
-   * The title of the page
-   */
+
   title: string;
   /**
    * The subtitle of the page
@@ -44,10 +36,6 @@ interface Props {
     bio: string;
   };
   bgType?: 'primary' | 'secondary' | 'neutral' | 'gradient' | 'bordered';
-  /**
-   * Whether to show the breadcrumbs
-   */
-  showBreadcrumbs?: boolean;
 }
 
 const {
@@ -55,7 +43,6 @@ const {
   title,
   subtitle,
   bgType,
-  showBreadcrumbs = true,
   featuredImage,
   author,
 } = Astro.props;
@@ -67,41 +54,6 @@ const sanitizedSubtitle: string = subtitle
 ---
 
 <section class:list={[className, 'page-header']}>
-  <div class="container my-3">
-    {
-      showBreadcrumbs &&
-        (() => {
-          const path = Astro.url.pathname;
-          const segments = path.split('/').filter(Boolean);
-
-          if (segments.length === 0) {
-            return null; // No breadcrumbs on homepage
-          }
-
-          return (
-            <Breadcrumbs>
-              <BreadcrumbsItem href="/" label="Home" />
-              {segments.map((segment, index) => {
-                const url = `/${segments.slice(0, index + 1).join('/')}`;
-                const isLast = index === segments.length - 1;
-                const formattedName = segment
-                  .split('-')
-                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                  .join(' ');
-
-                return (
-                  <BreadcrumbsItem
-                    href={isLast ? undefined : url}
-                    label={formattedName}
-                    currentPage={isLast}
-                  />
-                );
-              })}
-            </Breadcrumbs>
-          );
-        })()
-    }
-  </div>
   <div class:list={['py-16', bgType && `bg-${bgType}`]}>
     <div class="container space-content">
       {
@@ -136,6 +88,9 @@ const sanitizedSubtitle: string = subtitle
 
 <style>
   .page-header {
+    border-top: 1px solid var(--border-color-subtle);
+    border-bottom: 1px solid var(--border-color-subtle);
+
     .bg-primary {
       background-color: light-dark(
         var(--color-primary-100),

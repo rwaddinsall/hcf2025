@@ -85,7 +85,7 @@ if (pageData) {
 <style lang='scss'>
   .space-content {
     h4 {
-      font-weight: bold;
+      font-weight: 500; // Use medium weight instead of bold to match design system
       margin-top: var(--space-m);
       margin-bottom: var(--space-s);
       color: var(--foreground-color);
@@ -112,7 +112,7 @@ if (pageData) {
     .content-link {
       color: var(--link-color);
       text-decoration: underline;
-      font-weight: 500;
+
 
       &:hover,
       &:focus-visible {
@@ -121,8 +121,18 @@ if (pageData) {
     }
 
     .accordion-item-title {
-      font-weight: bold; // Make titles stronger
       font-size: var(--font-size-1); // Use design system font size (slightly bigger)
+      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      font-weight: 500 !important;
+    }
+
+    // Target accessible-astro-components accordion titles specifically
+    :global(.accordion h3),
+    :global(.accordion .title h3),
+    :global(.accordion summary h3),
+    :global(ul.accordion h3) {
+      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+      font-weight: 500 !important;
     }
   }
 

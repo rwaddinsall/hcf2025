@@ -1,0 +1,100 @@
+---
+interface AccordionSection {
+  title: string;
+  details: any;
+  category?: string;
+}
+
+interface Props {
+  sections: AccordionSection[];
+  name: string;
+  alwaysOpen?: boolean;
+  titleClass?: string;
+}
+
+const { sections = [], name = 'accordion', alwaysOpen = false, titleClass = '' } = Astro.props;
+const accordionId = `accordion-${name}`;
+const accordionMode = alwaysOpen ? 'open' : 'collapse';
+---
+
+{sections.length > 0 && (
+  <div
+    id={accordionId}
+    data-accordion={accordionMode}
+    class="w-full"
+  >
+    {sections.map((section, index) => {
+      const headingId = `${accordionId}-heading-${index + 1}`;
+      const bodyId = `${accordionId}-body-${index + 1}`;
+
+      return (
+        <Fragment>
+          <h2 id={headingId}>
+            <button
+              type="button"
+              class={`flex items-center justify-between w-full py-4 px-5 border border-black border-b-0 text-base md:text-lg font-medium font-sans text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-colors duration-150 bg-transparent group ${index === sections.length - 1 ? '' : ''}`}
+              data-accordion-target={`#${bodyId}`}
+              aria-expanded="false"
+              aria-controls={bodyId}
+            >
+              <span class={`group-hover:text-white group-hover:bg-black transition-colors duration-150 w-full text-left text-base md:text-lg ${titleClass}`}>{section.title}</span>
+              {/* Minimal + icon, rotates to × when open */}
+              <span
+                class="ml-2 text-lg transition-transform duration-200 accordion-plus group-hover:text-white group-hover:bg-black"
+                aria-hidden="true"
+              >
+                +
+              </span>
+            </button>
+          </h2>
+          <div
+            id={bodyId}
+            class="hidden border border-black border-t-0 "
+            aria-labelledby={headingId}
+          >
+            <div class="py-4 px-5">
+              <div class="prose dark:prose-invert max-w-none">
+                <Fragment set:html={section.details} />
+              </div>
+            </div>
+          </div>
+        </Fragment>
+      );
+    })}
+  </div>
+)}
+
+{sections.length === 0 && (
+  <div class="text-center py-8">
+    <p class="text-gray-500 dark:text-gray-400">No information available at this time.</p>
+  </div>
+)}
+
+<style>
+[data-accordion] {
+  border-bottom: none;
+  overflow: hidden;
+}
+[data-accordion] [data-accordion-target] {
+  outline: none;
+  background: transparent;
+}
+[data-accordion] .accordion-plus {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+[data-accordion] [aria-expanded="true"] .accordion-plus {
+  transform: rotate(45deg); /* + becomes × (close) */
+}
+[data-accordion] button.group:hover,
+[data-accordion] button.group:focus-visible {
+  background: black !important;
+  color: white !important;
+}
+[data-accordion] button.group:hover span,
+[data-accordion] button.group:focus-visible span {
+  color: white !important;
+}
+
+
+</style>

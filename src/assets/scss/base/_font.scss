@@ -7,9 +7,43 @@
   src:
     local("ABC Diatype Semi Mono Regular"),
     local("ABCDiatypeSemi-Mono-Regular"),
-    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff")
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff2")
+      format("woff2"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff")
       format("woff"),
-    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.otf")
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.otf")
+      format("opentype");
+  font-family: "ABC Diatype Semi Mono";
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 500;
+  src:
+    local("ABC Diatype Semi Mono Medium"),
+    local("ABCDiatypeSemi-Mono-Medium"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff2")
+      format("woff2"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff")
+      format("woff"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.otf")
+      format("opentype");
+  font-family: "ABC Diatype Semi Mono";
+  font-display: swap;
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: 700;
+  src:
+    local("ABC Diatype Semi Mono Bold"),
+    local("ABCDiatypeSemi-Mono-Bold"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff2")
+      format("woff2"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff")
+      format("woff"),
+    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.otf")
       format("opentype");
   font-family: "ABC Diatype Semi Mono";
   font-display: swap;
@@ -45,7 +79,20 @@
     font-weight: 600;
   }
 
-  h3,
+  h3 {
+    /* use Diatype Semi Mono Medium (500) */
+    font-family:
+      "ABC Diatype Semi Mono",
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      Arial,
+      sans-serif;
+    font-weight: 500;
+  }
+
   h4,
   h5,
   h6 {

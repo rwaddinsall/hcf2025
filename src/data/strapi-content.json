@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-08-09T12:44:31.491Z",
+  "fetchedAt": "2025-08-18T01:03:45.144Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -1145,27 +1145,27 @@
   },
   "bigLink": null,
   "applicationsPage": {
-    "id": 4,
+    "id": 6,
     "documentId": "wamiafevesyuk8vz9quc7wlh",
     "createdAt": "2025-08-09T11:27:36.801Z",
-    "updatedAt": "2025-08-09T12:27:22.006Z",
-    "publishedAt": "2025-08-09T12:27:22.111Z",
+    "updatedAt": "2025-08-16T22:56:05.734Z",
+    "publishedAt": "2025-08-16T22:56:05.859Z",
     "Header": {
-      "id": 6,
+      "id": 8,
       "title": "Applications",
-      "subheading": "A subheading below the main page title."
+      "subheading": "Throw your hat in the ring for this year’s edition below"
     },
     "FAQ": [
       {
-        "id": 7,
+        "id": 9,
         "accordions": [
           {
-            "id": 137,
+            "id": 141,
             "category": "applications",
             "title": "Volunteering",
-            "details": "Update test",
-            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSd8yNAHy1WA-XDqfLFRygtB_TJNBvqAZHuY6ahnpW6sI0flIg/viewform?usp=dialog",
-            "deadline": "2025-08-28",
+            "details": "Hopkins Creek runs on the love, sweat and sweet vibes of our friends, fam and extended community. We couldn’t do it without you — and we wouldn’t want to.\n\nVolunteer applications are now open and will close sharply at 6pm on Wednesday 27 August 2025. No latecomers, no double dips — one application per person only, please.",
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeG_VF9JybS8llllSerIvb3O3lg7_FZaM0slNdyYarLa0YmKw/viewform?usp=header",
+            "deadline": "2025-09-03",
             "is_closed": false,
             "closed_message": "Sorry! Volunteer applications have closed.",
             "link_label": "Apply here",

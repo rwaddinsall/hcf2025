@@ -32,7 +32,7 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
           <h2 id={headingId}>
             <button
               type="button"
-              class={`flex items-center justify-between w-full py-6 px-6 border border-gray-200 border-b-0 text-base md:text-lg text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-all duration-200 bg-transparent group ${index === sections.length - 1 ? '' : ''}`}
+              class={`flex items-center justify-between w-full py-6 px-6 border border-gray-200 ${index !== 0 ? 'border-t-0' : ''} text-base md:text-lg text-black dark:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 transition-all duration-200 bg-transparent group`}
               data-accordion-target={`#${bodyId}`}
               aria-expanded="false"
               aria-controls={bodyId}
@@ -49,7 +49,7 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
           </h2>
           <div
             id={bodyId}
-            class="hidden border border-gray-200 border-t-0"
+            class={`hidden border border-gray-200 border-t-0 ${index === sections.length - 1 ? '' : 'border-b-0'}`}
             aria-labelledby={headingId}
           >
             <div class="py-4 px-5">
@@ -92,20 +92,7 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
 
 [data-accordion] button[data-accordion-target]:hover,
 [data-accordion] button[data-accordion-target]:focus-visible {
-  background: black !important;
-  color: white !important;
-  border-radius: var(--radius-l) !important;
-  border-color: rgba(0, 0, 0, 0.1) !important;
-}
-
-[data-accordion] button[data-accordion-target]:hover span,
-[data-accordion] button[data-accordion-target]:focus-visible span {
-  color: white !important;
-}
-
-[data-accordion] button[data-accordion-target]:hover .accordion-plus,
-[data-accordion] button[data-accordion-target]:focus-visible .accordion-plus {
-  color: white !important;
+  text-decoration: underline;
 }
 
 [data-accordion] h2 > button {

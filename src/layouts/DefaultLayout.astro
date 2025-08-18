@@ -70,6 +70,35 @@ const {
         border-radius: 0.35rem;
         padding: 1rem;
       }
+
+      // Global accordion styling for accessible-astro-components
+      .accordion {
+        border-top: 1px solid var(--border-color-subtle);
+        border-bottom: 1px solid var(--border-color-subtle);
+      }
+
+      .accordion details {
+        border-bottom: 1px solid var(--border-color-subtle);
+      }
+
+      .accordion details:last-child {
+        border-bottom: none; // Remove double border on last item
+      }
+
+      // Hover styling - just underline, maintain typography
+      .accordion summary:hover,
+      .accordion summary:focus-visible {
+        text-decoration: underline;
+        background: transparent !important;
+        color: inherit !important;
+      }
+
+      // Apply Diatype Semi Mono font to accordion titles
+      .accordion h3,
+      .accordion summary h3 {
+        font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+        font-weight: 500 !important;
+      }
     </style>
   </body>
 </html>

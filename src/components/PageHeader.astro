@@ -1,8 +1,5 @@
 ---
-import {
-  Avatar,
-} from 'accessible-astro-components';
-import { Image } from 'astro:assets';
+
 import { renderSafeContent } from '../utils/renderContent';
 
 /**
@@ -56,32 +53,10 @@ const sanitizedSubtitle: string = subtitle
 <section class:list={[className, 'page-header']}>
   <div class:list={['py-16', bgType && `bg-${bgType}`]}>
     <div class="container space-content">
-      {
-        featuredImage && (
-          <div class="mb-8 featured-image-container">
-            <Image
-              src={featuredImage}
-              alt=""
-              width={1200}
-              height={250}
-              class="h-[250px] w-full rounded-lg object-cover"
-            />
-          </div>
-        )
-      }
+
       <h1>{title}</h1>
-      {sanitizedSubtitle && <p class="text-2xl" set:html={sanitizedSubtitle} />}
-      {
-        author && (
-          <div class="flex items-center mt-6">
-            <Avatar
-              title={author.name}
-              image={author.image}
-              subtitle={author.bio}
-            />
-          </div>
-        )
-      }
+      {sanitizedSubtitle && <p class="text-xs" set:html={sanitizedSubtitle} />}
+
     </div>
   </div>
 </section>

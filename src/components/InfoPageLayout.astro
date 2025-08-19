@@ -134,6 +134,14 @@ if (pageData) {
       font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
       font-weight: 500 !important;
     }
+        // First and last accordion item borders
+    :global(.accordion > :first-child) {
+      border-top: 2px solid black;
+    }
+
+    :global(.accordion > :last-child) {
+      border-bottom: 2px solid black;
+    }
   }
 
   // Responsive adjustments

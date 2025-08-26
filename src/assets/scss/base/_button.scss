@@ -5,53 +5,39 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  transition: all var(--animation-speed-fast) var(--cubic-bezier);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  border: 3px solid
-    light-dark(var(--color-primary-200), var(--color-primary-100));
-  border-radius: var(--radius-s);
-  background-color: light-dark(
-    var(--color-primary-200),
-    var(--color-primary-100)
-  );
-  padding: var(--space-xs) var(--space-s);
-  inline-size: fit-content;
+  border: 1px solid black;
+  border-radius: 9999px;
+  background-color: transparent;
+  padding: var(--space-xs) var(--space-l);
+  width: fit-content;
   color: var(--color-neutral-900);
-  font-weight: 700;
-
-  @include text-decoration(transparent, currentColor);
+  font-family: "ABC Diatype Semi Mono", serif;
+  font-weight: 400;
+  font-size: 17.71px;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  margin: 9px 0;
 
   &:where(:hover, :focus-visible) {
-    border-color: light-dark(
-      var(--color-primary-300),
-      var(--color-primary-300)
-    );
-    background-color: light-dark(
-      var(--color-primary-300),
-      var(--color-primary-300)
-    );
-    text-decoration-thickness: 2px;
+    background-color: black;
+    color: white;
+    border-color: rgba(255, 255, 255, 0.1);
   }
 
   &.color-secondary {
-    border-color: light-dark(
-      var(--color-secondary-100),
-      var(--color-secondary-100)
-    );
-    background-color: light-dark(
-      var(--color-secondary-100),
-      var(--color-secondary-100)
-    );
+    // Same styling as base button - keeping for compatibility
+    border-color: black;
+    background-color: transparent;
+    font-family: "ABC Diatype Semi Mono", serif;
+    font-size: 17.71px;
 
     &:where(:hover, :focus-visible) {
-      border-color: light-dark(
-        var(--color-secondary-300),
-        var(--color-secondary-300)
-      );
-      background-color: light-dark(
-        var(--color-secondary-300),
-        var(--color-secondary-300)
-      );
+      background-color: black;
+      color: white;
+      border-color: rgba(255, 255, 255, 0.1);
     }
   }
 
@@ -61,8 +47,8 @@
     gap: var(--space-2xs);
 
     [data-icon] {
-      inline-size: 30px;
-      block-size: auto;
+      width: 30px;
+      height: auto;
     }
 
     &:where(:hover, :focus-visible) {

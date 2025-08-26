@@ -65,13 +65,15 @@ if (pageData) {
 
     <div class='container'>
       <div class='space-content'>
-        <Accordion>
-          {accordionSections.map((section: AccordionSection) => (
-            <AccordionItem title={section.title} variant="chevron">
-              <div set:html={section.details} />
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div class='accordion-container'>
+          <Accordion>
+            {accordionSections.map((section: AccordionSection) => (
+              <AccordionItem title={section.title} variant="chevron">
+                <div set:html={section.details} />
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         <slot />
       </div>
     </div>
@@ -105,13 +107,40 @@ if (pageData) {
       }
     }
 
-        // First and last accordion item borders
-    :global(.accordion > :first-child) {
-      border-top: 1px solid black;
+    // Accordion container styling
+    .accordion-container {
+      // No borders on container itself
     }
 
-    :global(.accordion > :last-child) {
-      border-bottom: 1px solid black;
+    // Style accordion container's first and last children with global technique
+    :global(.accordion-container > *:first-child) {
+      border-top: 2px solid black !important;
+    }
+
+    :global(.accordion-container > *:last-child) {
+      border-bottom: 2px solid black !important;
+    }
+
+    // Accordion items with consistent 2px black borders
+    :global(.accordion) {
+      border: none;
+    }
+
+    :global(.accordion > .accordion-item) {
+      border-left: 2px solid black !important;
+      border-right: 2px solid black !important;
+      border-top: 2px solid black !important;
+      border-bottom: none !important;
+    }
+
+    // First accordion item gets top border
+    :global(.accordion > .accordion-item:first-child) {
+      border-top: 2px solid black !important;
+    }
+
+    // Last accordion item gets bottom border
+    :global(.accordion > .accordion-item:last-child) {
+      border-bottom: 2px solid black !important;
     }
   }
 </style>

@@ -22,10 +22,10 @@ const generalPages = getAllGeneralPages();
     <div class="container mx-auto">
       <!-- Footer Navigation Grid -->
       <div
-        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-start md:justify-items-center sm:gap-12 lg:gap-16"
+        class="grid items-start w-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 justify-items-start  sm:gap-12 lg:gap-16"
       >
         <!-- Column 1: Main Navigation -->
-        <div class="flex flex-col gap-4">
+        <div class="flex justify-between flex-col gap-4">
           <h3 class="mb-2 text-lg font-semibold">Festival</h3>
           <ul class="flex flex-col gap-2">
             <li><a href="/">Home</a></li>
@@ -44,9 +44,7 @@ const generalPages = getAllGeneralPages();
                 </li>
               ))
             }
-            <li>
-              <a href="/sustainability">Sustainability</a>
-            </li>
+
           </ul>
         </div>
 

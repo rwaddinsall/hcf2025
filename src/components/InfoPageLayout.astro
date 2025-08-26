@@ -65,17 +65,15 @@ if (pageData) {
 
     <div class='container'>
       <div class='space-content'>
-
-
-
-        <Accordion>
-          {accordionSections.map((section: AccordionSection) => (
-            <AccordionItem title={section.title} variant="chevron">
-              <div set:html={section.details} />
-            </AccordionItem>
-          ))}
-        </Accordion>
-
+        <div class='accordion-container'>
+          <Accordion>
+            {accordionSections.map((section: AccordionSection) => (
+              <AccordionItem title={section.title} variant="chevron">
+                <div set:html={section.details} />
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
         <slot />
       </div>
     </div>
@@ -92,7 +90,7 @@ if (pageData) {
     }
 
     ul {
-      margin-bottom: var(--space-m);
+      margin-bottom: var(--space-l);
     }
 
     li {
@@ -109,48 +107,40 @@ if (pageData) {
       }
     }
 
-    .content-link {
-      color: var(--link-color);
-      text-decoration: underline;
-
-
-      &:hover,
-      &:focus-visible {
-        color: var(--link-hover-color);
-      }
+    // Accordion container styling
+    .accordion-container {
+      // No borders on container itself
     }
 
-    .accordion-item-title {
-      font-size: var(--font-size-1); // Use design system font size (slightly bigger)
-      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-      font-weight: 500 !important;
+    // Style accordion container's first and last children with global technique
+    :global(.accordion-container > *:first-child) {
+      border-top: 2px solid black !important;
     }
 
-    // Target accessible-astro-components accordion titles specifically
-    :global(.accordion h3),
-    :global(.accordion .title h3),
-    :global(.accordion summary h3),
-    :global(ul.accordion h3) {
-      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-      font-weight: 500 !important;
-    }
-        // First and last accordion item borders
-    :global(.accordion > :first-child) {
-      border-top: 2px solid black;
+    :global(.accordion-container > *:last-child) {
+      border-bottom: 2px solid black !important;
     }
 
-    :global(.accordion > :last-child) {
-      border-bottom: 2px solid black;
+    // Accordion items with consistent 2px black borders
+    :global(.accordion) {
+      border: none;
+    }
+
+    :global(.accordion > .accordion-item) {
+      border-left: 2px solid black !important;
+      border-right: 2px solid black !important;
+      border-top: 2px solid black !important;
+      border-bottom: none !important;
+    }
+
+    // First accordion item gets top border
+    :global(.accordion > .accordion-item:first-child) {
+      border-top: 2px solid black !important;
+    }
+
+    // Last accordion item gets bottom border
+    :global(.accordion > .accordion-item:last-child) {
+      border-bottom: 2px solid black !important;
     }
   }
-
-  // Responsive adjustments
-
-
-  // :global(.accordion details div) {
-  //   width: 100%;
-  //   box-sizing: border-box;
-  //   word-wrap: break-word;
-  //   overflow-wrap: break-word;
-  // }
 </style>

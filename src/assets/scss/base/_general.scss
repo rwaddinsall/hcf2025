@@ -59,3 +59,29 @@ footer a {
   outline: none;
   box-shadow: none;
 }
+
+// Accordion spacing styles
+// Applies to both custom Accordion.astro and accessible-astro-components
+[data-accordion] button[data-accordion-target],
+.accordion-item .title,
+.accordion summary {
+  padding-block: var(--space-m) !important; // More generous top/bottom spacing
+}
+
+// Ensure consistent padding for accordion content areas
+[data-accordion] [id*="body"],
+.accordion-item .content {
+  padding: var(--space-m) var(--space-s);
+}
+
+// Special handling for first and last accordion items to ensure borders align properly
+[data-accordion] h2:first-child button,
+.accordion .accordion-item:first-child .title,
+.accordion .accordion-item:first-child summary {
+  padding-block-start: var(--space-m) !important;
+}
+
+[data-accordion] h2:last-of-type + div,
+.accordion .accordion-item:last-child .content {
+  padding-block-end: var(--space-m) !important;
+}

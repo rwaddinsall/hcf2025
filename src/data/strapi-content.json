@@ -1,5 +1,5 @@
 {
-  "fetchedAt": "2025-08-19T06:27:40.715Z",
+  "fetchedAt": "2025-08-26T05:31:01.290Z",
   "strapiUrl": "https://healing-dance-c1ea66b091.strapiapp.com",
   "infoPages": [
     {
@@ -1145,31 +1145,43 @@
   },
   "bigLink": null,
   "applicationsPage": {
-    "id": 6,
+    "id": 7,
     "documentId": "wamiafevesyuk8vz9quc7wlh",
     "createdAt": "2025-08-09T11:27:36.801Z",
-    "updatedAt": "2025-08-16T22:56:05.734Z",
-    "publishedAt": "2025-08-16T22:56:05.859Z",
+    "updatedAt": "2025-08-25T10:48:17.365Z",
+    "publishedAt": "2025-08-25T10:48:17.448Z",
     "Header": {
-      "id": 8,
+      "id": 9,
       "title": "Applications",
       "subheading": "Throw your hat in the ring for this year’s edition below"
     },
     "FAQ": [
       {
-        "id": 9,
+        "id": 10,
         "accordions": [
           {
-            "id": 141,
+            "id": 144,
             "category": "applications",
             "title": "Volunteering",
             "details": "Hopkins Creek runs on the love, sweat and sweet vibes of our friends, fam and extended community. We couldn’t do it without you — and we wouldn’t want to.\n\nVolunteer applications are now open and will close sharply at 6pm on Wednesday 27 August 2025. No latecomers, no double dips — one application per person only, please.",
             "form_url": "https://docs.google.com/forms/d/e/1FAIpQLSeG_VF9JybS8llllSerIvb3O3lg7_FZaM0slNdyYarLa0YmKw/viewform?usp=header",
-            "deadline": "2025-09-03",
+            "deadline": "2025-07-31",
             "is_closed": false,
             "closed_message": "Sorry! Volunteer applications have closed.",
             "link_label": "Apply here",
             "deadline_label": "Applications will close on"
+          },
+          {
+            "id": 145,
+            "category": "general",
+            "title": "First Nations Tickets",
+            "details": "Hopkins Creek takes place on Taungurung Country and we’re honoured to gather here. As part of our commitment to making space for First Nations voices, we’ve set aside a dedicated ticket allocation for mob.\n\nFirst Nations registration is now open — everyone who registers will receive a ticket. This allocation is separate from the main ticket release. One registration per person only\n\nWe won’t ask for ID or verification — we trust community to self-identify. Your details will only be seen by the Hopkins crew and won’t be shared.",
+            "form_url": "https://docs.google.com/forms/d/e/1FAIpQLScTa5LmBPisFCP-O8iES6Sa8A2qhNle9qz7D500beqxsvHVrA/viewform?usp=header",
+            "deadline": null,
+            "is_closed": false,
+            "closed_message": null,
+            "link_label": null,
+            "deadline_label": null
           }
         ]
       }

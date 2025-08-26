@@ -7,11 +7,10 @@
   src:
     local("ABC Diatype Semi Mono Regular"),
     local("ABCDiatypeSemi-Mono-Regular"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff2")
-      format("woff2"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff")
+    /* No woff2 file exists for Regular weight; listing it first causes Safari to fail to load and not fallback. */
+      url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.woff")
       format("woff"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Regular.otf")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Regular.otf")
       format("opentype");
   font-family: "ABC Diatype Semi Mono";
   font-display: swap;
@@ -23,11 +22,11 @@
   src:
     local("ABC Diatype Semi Mono Medium"),
     local("ABCDiatypeSemi-Mono-Medium"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff2")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff2")
       format("woff2"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Medium.woff")
       format("woff"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Medium.otf")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Medium.otf")
       format("opentype");
   font-family: "ABC Diatype Semi Mono";
   font-display: swap;
@@ -39,11 +38,10 @@
   src:
     local("ABC Diatype Semi Mono Bold"),
     local("ABCDiatypeSemi-Mono-Bold"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff2")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff2")
       format("woff2"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff")
-      format("woff"),
-    url("/fonts/Diatype%20Semi-Mono/ABCDiatypeSemi-Mono-Bold.otf")
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Bold.woff") format("woff"),
+    url("/fonts/Diatype Semi-Mono/ABCDiatypeSemi-Mono-Bold.otf")
       format("opentype");
   font-family: "ABC Diatype Semi Mono";
   font-display: swap;
@@ -71,6 +69,8 @@
   h1,
   h6 {
     font-family: var(--font-heading);
+    /* Only ABC Marist Book Italic is provided, so request italic to match the available face */
+    font-style: italic;
     text-wrap: balance;
   }
 

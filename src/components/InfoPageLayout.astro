@@ -109,31 +109,6 @@ if (pageData) {
       }
     }
 
-    .content-link {
-      color: var(--link-color);
-      text-decoration: underline;
-
-
-      &:hover,
-      &:focus-visible {
-        color: var(--link-hover-color);
-      }
-    }
-
-    .accordion-item-title {
-      font-size: var(--font-size-1); // Use design system font size (slightly bigger)
-      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-      font-weight: 500 !important;
-    }
-
-    // Target accessible-astro-components accordion titles specifically
-    :global(.accordion h3),
-    :global(.accordion .title h3),
-    :global(.accordion summary h3),
-    :global(ul.accordion h3) {
-      font-family: "ABC Diatype Semi Mono", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-      font-weight: 500 !important;
-    }
         // First and last accordion item borders
     :global(.accordion > :first-child) {
       border-top: 2px solid black;
@@ -143,14 +118,4 @@ if (pageData) {
       border-bottom: 2px solid black;
     }
   }
-
-  // Responsive adjustments
-
-
-  // :global(.accordion details div) {
-  //   width: 100%;
-  //   box-sizing: border-box;
-  //   word-wrap: break-word;
-  //   overflow-wrap: break-word;
-  // }
 </style>

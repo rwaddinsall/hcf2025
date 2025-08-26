@@ -10,9 +10,10 @@ import DefaultLayout from '../layouts/DefaultLayout.astro';
 import { Icon } from 'astro-icon/components';
 import { Accordion, AccordionItem } from 'accessible-astro-components';
 import { fetchSustainabilityPage } from '../lib/strapi';
+import type { SustainabilityPage, AccordionComponent, PageHeaderComponent } from '../interfaces/strapi';
 
 // Fetch sustainability page content from Strapi
-let sustainabilityPageData = null;
+let sustainabilityPageData: SustainabilityPage | null = null;
 
 try {
   sustainabilityPageData = await fetchSustainabilityPage();
@@ -25,8 +26,13 @@ try {
 }
 
 // Comprehensive fallback content
-const fallbackContent = {
+const fallbackContent: {
+  Header: PageHeaderComponent;
+  Body: { Content: string };
+  Accordion: { accordions: { title: string; details: string; category: string }[] }[];
+} = {
   Header: {
+    id: 0,
     title: 'Sustainability',
     subheading:
       'Information about sustainability initiatives, eco-friendly practices, and community engagement.',
@@ -35,7 +41,7 @@ const fallbackContent = {
     Content:
       'Find information about sustainability initiatives, eco-friendly practices, and community engagement at Hopkins Creek Festival.',
   },
-  FAQ: [
+  Accordion: [
     {
       accordions: [
         {
@@ -124,15 +130,27 @@ const fallbackContent = {
 };
 
 // Use Strapi content if available, otherwise use fallback
-const pageContent = sustainabilityPageData || fallbackContent;
-const headerData = pageContent.Header || fallbackContent.Header;
-const faqData = pageContent.FAQ || fallbackContent.FAQ;
+const pageContent: SustainabilityPage | typeof fallbackContent = sustainabilityPageData || fallbackContent;
+// SustainabilityPage.Header is optional and typed as an array in interfaces; handle both shapes
+const headerData: PageHeaderComponent = Array.isArray((pageContent as SustainabilityPage).Header)
+  ? ((pageContent as SustainabilityPage).Header?.[0] as PageHeaderComponent) || fallbackContent.Header
+  : ((pageContent as any).Header as PageHeaderComponent) || fallbackContent.Header;
+
+// SustainabilityPage uses Accordion (flat) in the interfaces, but our fallback uses grouped sections with accordions list
+// Normalize to an array of sections with { accordions: AccordionComponent[] }
+const faqData: { accordions: AccordionComponent[] }[] = ((): { accordions: AccordionComponent[] }[] => {
+  if ((pageContent as SustainabilityPage).Accordion) {
+    const acc = (pageContent as SustainabilityPage).Accordion as AccordionComponent[];
+    return acc.length ? [{ accordions: acc }] : [];
+  }
+  return fallbackContent.Accordion as { accordions: AccordionComponent[] }[];
+})();
 
 // Ensure we have valid data with proper types
-const pageTitle = headerData.title || "Sustainability";
+const pageTitle = headerData.title || 'Sustainability';
 const pageSubtitle =
   headerData.subheading ||
-  "Information about sustainability initiatives and practices at Hopkins Creek Festival.";
+  'Information about sustainability initiatives and practices at Hopkins Creek Festival.';
 ---
 
 <DefaultLayout title="Sustainability - Hopkins Creek Festival">
@@ -154,15 +172,13 @@ const pageSubtitle =
         </div>
 
         <Accordion>
-          {
-            faqData.flatMap((section) =>
-              (section.accordions || []).map((accordion) => (
-                <AccordionItem title={accordion.title}>
-                  <div set:html={accordion.details} />
-                </AccordionItem>
-              ))
-            )
-          }
+          {faqData.flatMap((section) =>
+            (section.accordions || []).map((accordion: AccordionComponent) => (
+              <AccordionItem title={accordion.title}>
+                <div set:html={accordion.details} />
+              </AccordionItem>
+            ))
+          )}
         </Accordion>
       </div>
     </div>

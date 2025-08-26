@@ -14,11 +14,18 @@ interface AccordionSection {
 
 interface Props {
   slug: string;
-
-
+  // Existing optional props
   fallbackHeading?: string;
   fallbackSubheading?: string;
   fallbackAccordion?: AccordionSection[];
+  // New aliases used by some pages
+  fallbackTitle?: string;
+  fallbackSubtitle?: string;
+  fallbackSections?: {
+    title: string;
+    content: any;
+    links?: { text: string; url: string }[];
+  }[];
 }
 
 const {
@@ -26,13 +33,25 @@ const {
   fallbackHeading,
   fallbackSubheading,
   fallbackAccordion = [],
-} = Astro.props;
+  fallbackTitle,
+  fallbackSubtitle,
+  fallbackSections = [],
+} = Astro.props as Props;
 
 // Get data from static content
 const pageData = getInfoPageBySlug(slug);
-let pageHeading = fallbackHeading || 'Information';
-let pageSubheading = fallbackSubheading || '';
-let accordionSections = fallbackAccordion;
+let pageHeading = fallbackHeading || fallbackTitle || 'Information';
+let pageSubheading = fallbackSubheading || fallbackSubtitle || '';
+let accordionSections: AccordionSection[] = fallbackAccordion;
+
+// If provided fallbackSections (title + rich content array), convert to AccordionSection
+if (!accordionSections.length && fallbackSections.length) {
+  accordionSections = fallbackSections.map((s) => ({
+    title: s.title,
+    details: renderSafeContent(s.content),
+    category: undefined,
+  }));
+}
 
 if (pageData) {
   pageHeading = pageData.heading || fallbackHeading || 'Information';
@@ -45,9 +64,9 @@ if (pageData) {
       details: renderSafeContent(section.details),
     }));
   }
-} else if (fallbackAccordion.length > 0) {
+} else if (accordionSections.length > 0) {
   // Also process fallback accordion sections
-  accordionSections = fallbackAccordion.map((section) => ({
+  accordionSections = accordionSections.map((section) => ({
     ...section,
     details: renderSafeContent(section.details),
   }));
@@ -107,35 +126,9 @@ if (pageData) {
       }
     }
 
-    // Accordion container styling
-    .accordion-container {
-      // No borders on container itself
-    }
-
-    // Style accordion container's first and last children with global technique
-    :global(.accordion-container > *:first-child) {
-      border-top: 2px solid black !important;
-    }
-
-    :global(.accordion-container > *:last-child) {
-      border-bottom: 2px solid black !important;
-    }
-
-    // Accordion items with consistent 2px black borders
-    :global(.accordion) {
-      border: none;
-    }
-
-    :global(.accordion > .accordion-item) {
-      border-left: 2px solid black !important;
-      border-right: 2px solid black !important;
-      border-top: 2px solid black !important;
-      border-bottom: none !important;
-    }
-
-    // First accordion item gets top border
-    :global(.accordion > .accordion-item:first-child) {
-      border-top: 2px solid black !important;
+        // First and last accordion item borders
+    :global(.accordion > :first-child) {
+      border-top: 2px solid black;
     }
 
     // Last accordion item gets bottom border

@@ -249,7 +249,7 @@ export async function fetchGeneralPagesForFooter() {
  * Fetches applications page content from Strapi
  */
 export async function fetchApplicationsPage() {
-  return fetchApi<import("../interfaces/strapi").ApplicationsPageResponse>({
+  return fetchApi<import("../interfaces/strapi").ApplicationsPage>({
     endpoint: "applications-page",
     query: {
       "filters[publishedAt][$notNull]": "true",
@@ -265,7 +265,7 @@ export async function fetchApplicationsPage() {
  * Fetches sustainability page content from Strapi
  */
 export async function fetchSustainabilityPage() {
-  return fetchApi<import("../interfaces/strapi").SustainabilityPageResponse>({
+  return fetchApi<import("../interfaces/strapi").SustainabilityPage>({
     endpoint: "sustainability-page",
     query: {
       "filters[publishedAt][$notNull]": "true",

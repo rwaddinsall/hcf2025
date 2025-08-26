@@ -31,15 +31,19 @@ const sanitizedSubtitle: string = subtitle
 
 <section class:list={[className, 'page-header']}>
   <div class="py-16">
-    <div class="container space-content">
+    <div class="container space-content mb-12">
 
-      <h1>{title}</h1>
-      {sanitizedSubtitle && <p class="text-xs" set:html={sanitizedSubtitle} />}
+      <!-- Constrain both heading and subtitle so the subtitle wraps with the H1 -->
+      <div class="max-w-3xl">
+        <h1 class="text-8xl mb-6">{title}</h1>
+        {sanitizedSubtitle && (
+          <h2
+            class="text-base md:text-lg text-neutral-600 dark:text-neutral-400 font-normal leading-relaxed"
+            set:html={sanitizedSubtitle}
+          />
+        )}
+      </div>
 
     </div>
   </div>
 </section>
-
-<style>
-
-</style>

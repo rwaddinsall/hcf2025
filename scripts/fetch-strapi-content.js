@@ -150,10 +150,12 @@ async function fetchAllContent() {
       content.applicationsPage = applicationsPage.data
     }
 
-    // 8. General Pages (known to return 404, but included for compatibility)
+    // 8. General Pages (legal/static pages like Terms & Conditions, Privacy Policy)
+    // Include fields required by GeneralPageLayout (title, slug, subtitle, content, meta)
     const generalPages = await fetchFromStrapi('general-pages', {
       'filters[publishedAt][$notNull]': 'true',
-      fields: 'slug,title',
+      // Strapi v5: comma-separated list for fields
+      fields: 'slug,title,subtitle,content,metaTitle,metaDescription',
       sort: 'title:asc',
     })
     if (generalPages?.data) {

@@ -7,12 +7,12 @@ interface AccordionSection {
 
 interface Props {
   sections: AccordionSection[];
-  name: string;
+  name?: string;
   alwaysOpen?: boolean;
   titleClass?: string;
 }
 
-const { sections = [], name = 'accordion', alwaysOpen = false, titleClass = '' } = Astro.props;
+const { sections = [], name = 'accordion', alwaysOpen = false, titleClass = '' } = Astro.props as Props;
 const accordionId = `accordion-${name}`;
 const accordionMode = alwaysOpen ? 'open' : 'collapse';
 ---
@@ -106,24 +106,8 @@ const accordionMode = alwaysOpen ? 'open' : 'collapse';
   font-weight: 500 !important;
 }
 </style>
----
-interface AccordionSection {
-  title: string;
-  details: any;
-  category?: string;
-}
 
-interface Props {
-  sections: AccordionSection[];
-  name: string;
-  alwaysOpen?: boolean;
-  titleClass?: string;
-}
-
-const { sections = [], name = 'accordion', alwaysOpen = false, titleClass = '' } = Astro.props;
-const accordionId = `accordion-${name}`;
-const accordionMode = alwaysOpen ? 'open' : 'collapse';
----
+<!-- Duplicate interface definitions removed - using the ones at the top of the file -->
 
 {sections.length > 0 && (
   <div

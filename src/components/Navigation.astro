@@ -8,18 +8,21 @@
 import { Icon } from 'astro-icon/components';
 import { SkipLink } from 'accessible-astro-components';
 import ScrollingText from './ScrollingText.astro';
-import { getAllInfoPages } from '../utils/static-content';
+import { getAllInfoPages, getScrollingHeaderText } from '../utils/static-content';
 import HeroHeading from '../assets/images/projects/HeroHeading.svg';
 
 // Get info pages for navigation from static content
 const infoPages = getAllInfoPages();
+
+// Resolve header scrolling text once at render time
+const headerText = getScrollingHeaderText()?.Text;
 ---
 
 <header class="hopkins-header">
   <SkipLink />
   <nav class="hopkins-nav" role="navigation" aria-label="Main navigation">
     <div class="nav-container launch-version">
-      <ScrollingText strapiType="header" variant="nav" />
+  <ScrollingText text={headerText} variant="nav" />
 
       <div class="nav-menu" id="nav-menu">
         <ul class="nav-list">
@@ -63,11 +66,6 @@ const infoPages = getAllInfoPages();
             </a>
           </li>
 
-          <!-- <li class="nav-item">
-            <a href="/#lineup" class="nav-link" aria-label="View festival lineup">
-              <span>Lineup</span>
-            </a>
-          </li> -->
 
           <li class="nav-item">
             <div class="launch-cta">
@@ -157,8 +155,7 @@ const infoPages = getAllInfoPages();
       </div>
     </div>
 
-    <script>
-      class HopkinsNavigation {
+    <script>      class HopkinsNavigation {
         private nav: HTMLElement;
         private mobileToggles: NodeListOf<HTMLButtonElement>;
         private mobileOverlay: HTMLElement;
@@ -231,24 +228,12 @@ const infoPages = getAllInfoPages();
           if (currentScrollY > 150) {
             this.nav.classList.add("nav-scrolled");
             // Debug: Log when nav-scrolled class is added
-            console.log("Nav scrolled class added at scrollY:", currentScrollY);
-            if (scrollingTextElement) {
-              console.log(
-                "ScrollingText nav element found:",
-                scrollingTextElement
-              );
-              console.log(
-                "ScrollingText computed style:",
-                window.getComputedStyle(scrollingTextElement)
-              );
-            }
+
+
           } else {
             this.nav.classList.remove("nav-scrolled");
             // Debug: Log when nav-scrolled class is removed
-            console.log(
-              "Nav scrolled class removed at scrollY:",
-              currentScrollY
-            );
+
           }
 
           // Close dropdowns when scrolling significantly
@@ -509,45 +494,6 @@ const infoPages = getAllInfoPages();
     @media (min-width: 1024px) {
       padding-inline: var(--space-xl); // Maximum space on desktop
       padding-block: var(--space-m);
-    }
-
-    // Fix ScrollingText positioning in nav context with proper margins
-    .scrolling-text-container--nav {
-      position: absolute;
-      top: 50%;
-      left: var(--space-l); // Use design system spacing
-      transform: translateY(-50%);
-      z-index: 1; // Behind nav items but above background
-      pointer-events: none;
-      opacity: 0.6;
-      width: calc(100% - var(--space-2xl)); // Proper responsive width
-      max-width: 400px; // Prevent overlap with nav items
-      margin-right: var(--space-xl); // Ensure clearance from nav menu
-
-      // Responsive positioning adjustments
-      @media (min-width: 768px) {
-        left: var(--space-xl);
-        width: calc(100% - var(--space-3xl));
-        margin-right: var(--space-2xl);
-      }
-
-      @media (min-width: 1024px) {
-        left: var(--space-2xl);
-        width: calc(100% - var(--space-4xl));
-        margin-right: var(--space-3xl);
-      }
-
-      // Override the default nav variant styles for better integration
-      &:not(.hopkins-nav.nav-scrolled &) {
-        // Only apply when not scrolled
-        opacity: 0.6;
-        visibility: visible;
-      }
-
-      // Hide on mobile to prevent overlap with hamburger menu
-      @media (max-width: 900px) {
-        display: none;
-      }
     }
   }
 

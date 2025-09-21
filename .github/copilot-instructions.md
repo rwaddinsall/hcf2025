@@ -49,7 +49,6 @@
 ### BEFORE Making Styling Decisions
 
 1. **Check for existing design system files:**
-
    - Look for `/styles/`, `/css/`, `/scss/`, `/design-system/` directories
    - Check for `tokens.css`, `variables.css`, `design-tokens.json`, or similar
    - Review component libraries in `/components/` or `/ui/`
@@ -59,7 +58,6 @@
    - **Leverage existing mixins and functions before creating new ones**
 
 2. **Identify existing patterns:**
-
    - Tailwind utility classes and custom configurations
    - Sass variables, mixins, and functions
    - Color variables and themes
@@ -68,9 +66,8 @@
    - Component naming conventions
 
 3. **When adding new styles:**
-
-   - **FIRST**: Use Tailwind utilities when possible
-   - **SECOND**: Check existing Sass variables/mixins
+   - **FIRST**: Check existing Sass variables/mixins
+   - **SECOND**: Use Tailwind utilities if they fit the need
    - **THIRD**: Follow established naming conventions
    - **LAST**: Only create new styles if truly necessary
 
@@ -79,15 +76,6 @@
    - Reference which existing patterns influenced new styles
    - Suggest where new styles should be documented
 
-### Example Approach:
-
-```
-"I notice you need a button component. Let me check:
-- Existing button styles in `/components/Button/`
-- Tailwind config for custom colors/spacing
-- Sass variables in `/styles/_variables.scss`
-
-Based on the existing system, I'll use Tailwind's `bg-primary-500` and the existing `$button-padding` Sass variable rather than hardcoding values."
 ```
 
 ## TECHNOLOGY STANDARDS
@@ -202,3 +190,4 @@ Based on the existing system, I'll use Tailwind's `bg-primary-500` and the exist
 - Explain changes in Markdown outside code blocks
 - **When making styling changes, explain which existing patterns were referenced**
 - **Specify whether using Tailwind utilities, Sass, or combination**
+```

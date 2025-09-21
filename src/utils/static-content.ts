@@ -21,21 +21,7 @@ import type {
 } from "../interfaces/strapi";
 
 // Type-safe access to static content
-const content = staticContent as {
-  fetchedAt: string;
-  strapiUrl: string;
-  infoPages: InfoPage[];
-  artists: any[];
-  scrollingHeaderText: ScrollingHeaderText | null;
-  acknowledgementOfCountry: AcknowledgementOfCountry | null;
-  bigLink: any | null;
-  applicationsPage?: ApplicationsPage | null;
-  infoPagesForNavigation: Pick<
-    InfoPage,
-    "id" | "documentId" | "slug" | "heading"
-  >[];
-  generalPagesForFooter: GeneralPage[];
-};
+const content = staticContent as any;
 
 /**
  * Info Pages Functions

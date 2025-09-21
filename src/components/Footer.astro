@@ -1,7 +1,7 @@
 ---
 import ScrollingText from './ScrollingText.astro';
-import { getAllInfoPages, getAllGeneralPages } from '../utils/static-content';
-// import { Icon } from 'astro-icon/components';
+import { getAllInfoPages, getAllGeneralPages, getAcknowledgementOfCountry } from '../utils/static-content';
+import { Icon } from 'astro-icon/components';
 
 /**
  * Footer Component
@@ -14,6 +14,9 @@ const infoPages = getAllInfoPages();
 
 // Get general pages for Legal column from static content
 const generalPages = getAllGeneralPages();
+
+// Resolve acknowledgement of country text at render time
+const acknowledgementText = getAcknowledgementOfCountry()?.Text;
 ---
 
 <footer>
@@ -72,26 +75,8 @@ const generalPages = getAllGeneralPages();
             }
           </ul>
         </div>
-      </div>
 
-      <!-- Acknowledgement of Country - Prominent placement at top -->
-      <section class="acknowledgement-section">
-        <div class="container">
-          <ScrollingText
-            strapiType="acknowledgement-of-country"
-            duration={30}
-            ariaLabel="Acknowledgement of Country"
-            width="100%"
-            variant="acknowledgement-of-country"
-          />
-        </div>
-      </section>
-    </div>
-  </section>
-
-  <!-- Social Icons Row (lower portion) - COMMENTED OUT -->
-  <!--
-  <div class="flex justify-center gap-6 pb-8 mt-8">
+                <div class="flex justify-center gap-6 pb-8 mt-8">
     <a href="https://instagram.com/hopkinscreek" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <Icon name="lucide:instagram" size="28" />
     </a>
@@ -102,11 +87,33 @@ const generalPages = getAllGeneralPages();
       <Icon name="lucide:mail" size="28" />
     </a>
   </div>
-  -->
+      </div>
+
+
+
+      <!-- Acknowledgement of Country - Prominent placement at top -->
+      <section class="acknowledgement-section">
+        <div class="container">
+          <ScrollingText
+            text={acknowledgementText}
+            duration={50}
+            ariaLabel="Acknowledgement of Country"
+            width="100%"
+            variant="acknowledgement-of-country"
+          />
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <!-- Social Icons Row (lower portion) - COMMENTED OUT -->
+
+
+
 
   <style>
     .acknowledgement-section {
-      padding: var(--space-l);
+
       margin-top: var(--space-xl);
     }
 

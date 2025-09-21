@@ -37,7 +37,7 @@ const sanitizedSubtitle: string = subtitle
       <h1 class="text-8xl mb-12">{title}</h1>
       {sanitizedSubtitle && (
         <h2
-          class="text-base md:text-lg text-neutral-700 dark:text-neutral-400 font-normal leading-relaxed"
+          class="text-base md:text-lg font-normal leading-relaxed"
           set:html={sanitizedSubtitle}
         />
       )}

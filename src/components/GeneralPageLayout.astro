@@ -27,7 +27,7 @@ let pageContent = fallbackContent;
 if (pageData) {
   pageTitle = pageData.title || fallbackTitle || 'Page';
   pageSubtitle = pageData.subtitle || fallbackSubtitle || '';
-  
+
   // Render safe content from Strapi
   if (pageData.content) {
     pageContent = renderSafeContent(pageData.content);
@@ -46,7 +46,7 @@ if (pageData) {
     title={pageTitle}
     subtitle={pageSubtitle}
   />
-  
+
   <section class="container my-16 narrow">
     <div class="space-content">
       <div set:html={pageContent} />
@@ -56,45 +56,49 @@ if (pageData) {
 </DefaultLayout>
 
 <style lang="scss">
+  /*
+    Note: Content is injected via set:html and does NOT receive Astro's scoped
+    attributes. Use :global() on descendants so spacing/typography rules apply.
+  */
   .space-content {
-    h2 {
+    :global(h2) {
       font-weight: bold;
       margin-top: var(--space-l);
       margin-bottom: var(--space-m);
     }
 
-    h3 {
+    :global(h3) {
       font-weight: bold;
       margin-top: var(--space-m);
       margin-bottom: var(--space-s);
     }
 
-    p {
+    :global(p) {
       margin-bottom: var(--space-m);
       line-height: 1.6;
     }
 
-    ul, ol {
+    :global(ul), :global(ol) {
       margin-bottom: var(--space-m);
       padding-left: var(--space-m);
-
-      li {
-        margin-bottom: var(--space-xs);
-        line-height: 1.6;
-      }
     }
 
-    strong {
+    :global(ul li), :global(ol li) {
+      margin-bottom: var(--space-xs);
+      line-height: 1.6;
+    }
+
+    :global(strong) {
       font-weight: 600;
     }
 
-    a {
+    :global(a) {
       color: var(--color-primary);
       text-decoration: underline;
+    }
 
-      &:hover {
-        color: var(--color-primary-dark);
-      }
+    :global(a:hover) {
+      color: var(--color-primary-dark);
     }
   }
 </style>
